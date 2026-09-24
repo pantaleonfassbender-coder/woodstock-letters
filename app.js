@@ -265,6 +265,187 @@ async function viewSearch(params) {
   ${res}`;
 }
 
+/* ----------------------------------------------------------- concordance */
+
+// accent-insensitive: "Algue" finds "Algué", "Jette" finds "Jetté"
+const ACC = { a: "aàáâä", e: "eèéêë", i: "iìíîï", o: "oòóôö", u: "uùúûü", n: "nñ", c: "cç" };
+const fold = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+const rxTerm = t => fold(t).split("").map(ch => ACC[ch.toLowerCase()] ? `[${ACC[ch.toLowerCase()]}]`
+  : ch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("");
+const STOP = new Set(("the a an and or but of to in on at by for with from as is are was were be been being it its " +
+  "this that these those he she they we you i his her their our your my me him them us not no nor so such then than " +
+  "there here which who whom whose what when where while if all any both each one two had has have having would could " +
+  "should shall will may might must can did does done upon into unto also very more most much many other some only " +
+  "even about after before over under again once said made came went being") .split(" "));
+const allVols = () => Promise.all(S.man.volumes.map(m => vol(m.vol)));
+const WIN = 64;  // characters of context on each side
+
+async function viewConcordance(params) {
+  const q = (params.get("q") || "").trim();
+  const sort = params.get("sort") || "text";
+  const only = new Set((params.get("v") || "").split(",").filter(Boolean).map(Number));
+  const link = (o = {}) => "#/concordance?" + new URLSearchParams(Object.fromEntries(Object.entries(
+    { q, sort, v: [...only].join(","), ...o }).filter(([, x]) => x))).toString();
+  const starts = ["sodality", "retreat", "novices", "Indians", "cholera", "observatory", "Immaculate Conception", "Georgetown"];
+  let res = "";
+  if (q.length >= 3) {
+    const vs = await allVols();
+    const rx = new RegExp(`(?<![\\p{L}])(${q.split(/\s+/).map(rxTerm).join("\\s+")})`, "giu");
+    const rows = [], counts = new Map(), coll = new Map();
+    const qwords = new Set(fold(q.toLowerCase()).split(/\s+/));
+    for (const v of vs) {
+      let n = 0;
+      for (const pg of v.pages) {
+        if (pg.kind !== "text") continue;
+        for (const p of pg.paras) {
+          if (!p.a) continue;
+          rx.lastIndex = 0;
+          let m;
+          while ((m = rx.exec(p.t))) {
+            n++;
+            if (only.size && !only.has(v.vol)) continue;
+            const l = p.t.slice(Math.max(0, m.index - WIN), m.index), r = p.t.slice(m.index + m[0].length, m.index + m[0].length + WIN);
+            rows.push({ v, pg, a: v.byId.get(p.a), l, k: m[0], r });
+            // collocates: content words within five words either side
+            const near = [...l.trim().split(/\s+/).slice(-5), ...r.trim().split(/\s+/).slice(0, 5)];
+            for (const x of near) {
+              const w = fold(x.toLowerCase()).replace(/[^a-z']/g, "");
+              if (w.length >= 4 && !STOP.has(w) && !qwords.has(w)) coll.set(w, (coll.get(w) || 0) + 1);
+            }
+          }
+        }
+      }
+      counts.set(v.vol, n);
+    }
+    // sort on the words only: ", and the" sorts under "and"
+    const key = s => fold(s.toLowerCase()).replace(/[^a-z]+/g, " ").trim();
+    // a hit that ends (or opens) its paragraph has no context word: those go last
+    const cmp = (a, b) => (!a) - (!b) || a.localeCompare(b);
+    if (sort === "left") rows.sort((x, y) => cmp(key(x.l).split(" ").reverse().join(" "), key(y.l).split(" ").reverse().join(" ")));
+    if (sort === "right") rows.sort((x, y) => cmp(key(x.r), key(y.r)));
+    const total = [...counts.values()].reduce((s, x) => s + x, 0);
+    const words = new Map(S.man.volumes.map(m => [m.vol, m.words]));
+    const rates = new Map([...counts].map(([v, n]) => [v, n / words.get(v) * 1e4]));
+    const maxRate = Math.max(1e-9, ...rates.values());
+    const cap = 1000;
+    res = `<div class="grid2">
+      <div class="card"><h3>Distribution</h3>
+        <table class="dist">${vs.map(v => `<tr>
+          <td><a href="${link({ v: only.size === 1 && only.has(v.vol) ? "" : String(v.vol) })}">WL ${v.vol} (${v.year})</a></td>
+          <td class="num">${counts.get(v.vol)}</td>
+          <td class="num">${rates.get(v.vol).toFixed(2)}</td>
+          <td style="width:45%"><div class="bar"><i style="width:${Math.round(100 * rates.get(v.vol) / maxRate)}%"></i></div></td></tr>`).join("")}
+        </table>
+        <p class="fine" style="margin:.5rem 0 0">Hits, and hits per 10,000 words. Click a volume to restrict the lines to it.</p></div>
+      <div class="card"><h3>Collocates <span class="fine">± 5 words</span></h3>
+        <p>${[...coll].sort((a, b) => b[1] - a[1]).slice(0, 24).map(([w, n]) =>
+          `<a class="chip" href="#/concordance?q=${encodeURIComponent(w)}">${esc(w)}<span class="n">${n}</span></a>`).join("") || '<span class="fine">none</span>'}</p></div>
+    </div>
+    <div class="tools">${total} hit${total === 1 ? "" : "s"} in ${S.man.volumes.length} volumes${only.size ? `; showing vol. ${[...only].join(", ")} (<a href="${link({ v: "" })}">all</a>)` : ""}.
+      Sort by <select id="csort" aria-label="Sort lines">${[["text", "order in the text"], ["left", "word to the left"], ["right", "word to the right"]]
+        .map(([k, t]) => `<option value="${k}" ${k === sort ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+    <div class="scroll"><table class="conc"><tbody>${rows.slice(0, cap).map(x => `<tr>
+      <td class="l">${x.l.length >= WIN ? "…" : ""}${esc(x.l)}</td><td class="k">${esc(x.k)}</td><td class="r">${esc(x.r)}${x.r.length >= WIN ? "…" : ""}</td>
+      <td class="ref"><a href="#/a/${x.a.id}?${x.pg.insert ? "" : `p=${x.pg.p}&`}q=${encodeURIComponent(q)}" title="${esc(x.a.title)}">WL ${x.v.vol}: ${esc(String(plab(x.pg)))}</a></td></tr>`).join("")}</tbody></table></div>
+    ${rows.length > cap ? `<p class="fine">First ${cap} of ${rows.length} lines shown. Restrict to a volume for the rest.</p>` : ""}`;
+  } else if (q) res = `<p class="fine">Type at least three characters.</p>`;
+  return {
+    html: `<h1>Concordance</h1>
+    <p class="lede">Keyword in context across every volume in full text, each line cited to its printed page and linked to it.
+    Phrases work (<a href="#/concordance?q=Sacred%20Heart">Sacred Heart</a>); accents are ignored.</p>
+    <form class="searchbar" id="cform"><input id="cq" type="search" value="${esc(q)}" placeholder="Word or phrase …" aria-label="Word or phrase"><button class="btn" type="submit">Search</button></form>
+    ${q ? "" : `<p>${starts.map(t => `<a class="chip" href="#/concordance?q=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</p>`}
+    ${res}`,
+    init() {
+      $("#cform").addEventListener("submit", ev => { ev.preventDefault(); location.hash = link({ q: $("#cq").value.trim() }); });
+      $("#csort")?.addEventListener("change", ev => { location.hash = link({ sort: ev.target.value }); });
+    },
+  };
+}
+
+/* ----------------------------------------------------------------- atlas */
+
+const SECTION_LABEL = { Articles: "articles", Varia: "Varia", Obituary: "obituaries", Supplement: "supplements" };
+
+async function viewAtlas(params) {
+  S.atlas = S.atlas || await getJSON("data/atlas.json");
+  const A = S.atlas;
+  const nb = new Map(A.nodes.map(n => [n.id, []]));
+  for (const e of A.edges) { nb.get(e.s).push([e.t, e]); nb.get(e.t).push([e.s, e]); }
+  const node = new Map(A.nodes.map(n => [n.id, n]));
+  // terms whose neighbours reach into the most sections, then the best connected
+  const bridges = A.nodes.map(n => ({ id: n.id, span: new Set(nb.get(n.id).map(([m]) => node.get(m).sec)).size, deg: nb.get(n.id).length }))
+    .filter(b => b.deg >= 4).sort((a, b) => b.span - a.span || b.deg - a.deg).slice(0, 18);
+  const words = new Map(S.man.volumes.map(m => [m.vol, m.words]));
+
+  function panel(id) {
+    const n = node.get(id);
+    if (!n) return `<h3>Selection</h3><p class="fine">Click a term for its neighbours and its spread across the volumes.</p>`;
+    const rates = A.vols.map((v, i) => n.dist[i] / (words.get(v) || 1) * 1e4), mx = Math.max(...rates, 1e-9);
+    return `<h3>${esc(n.id)}</h3>
+      <p class="fine">${n.f} occurrences · centre of gravity in the ${SECTION_LABEL[n.sec]}</p>
+      <table class="dist">${A.vols.map((v, i) => `<tr><td>WL ${v}</td><td class="num">${n.dist[i]}</td>
+        <td style="width:50%"><div class="bar"><i style="width:${Math.round(100 * rates[i] / mx)}%"></i></div></td></tr>`).join("")}</table>
+      <p class="fine" style="margin:.3rem 0 .8rem">Bars: occurrences per 10,000 words of each volume.</p>
+      <h3 style="font-size:.95rem">Strongest neighbours</h3>
+      <p>${nb.get(id).sort((a, b) => b[1].pmi * Math.log(1 + b[1].f) - a[1].pmi * Math.log(1 + a[1].f)).slice(0, 16)
+        .map(([m, e]) => `<button class="chip" type="button" data-n="${esc(m)}" title="${e.f} shared sentences · PMI ${e.pmi}">${esc(m)}</button>`).join("")}</p>
+      <a class="btn" href="#/concordance?q=${encodeURIComponent(id)}">Concordance →</a>`;
+  }
+
+  return {
+    html: `<h1>Atlas</h1>
+    <p class="lede">What stands next to what. Two terms are joined when they occur in the same sentence more often than chance
+    allows. The terms are the journal's own vocabulary: words the Letters use far more often than English at large.
+    Colour marks the section in which a term is most at home. Scroll or double-click to zoom, drag to pan.</p>
+    <div class="chartbox">
+      <div class="tools">
+        <label>Density <select id="dens">${[[80, "sparse (80 terms)"], [140, "medium (140 terms)"], [200, "dense (200 terms)"], [999, "everything"]]
+          .map(([k, t]) => `<option value="${k}" ${k === 140 ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+        <button class="btn" id="reheat" type="button">Re-arrange</button>
+        <button class="btn" id="zin" type="button" aria-label="Zoom in">+</button>
+        <button class="btn" id="zout" type="button" aria-label="Zoom out">−</button>
+        <button class="btn" id="zreset" type="button">Reset</button>
+      </div>
+      <canvas id="net" aria-label="Co-occurrence network of the journal's vocabulary"></canvas>
+      <div class="legend" style="margin-top:.6rem">${A.sections.map(s =>
+        `<span><i class="sec" style="background:var(--sec-${s.toLowerCase()})"></i>${SECTION_LABEL[s]}</span>`).join("")}</div>
+    </div>
+    <div class="grid2">
+      <div class="card" id="sel">${panel(params.get("t"))}</div>
+      <div class="card"><h3>Terms that bridge the sections</h3>
+        <p class="fine">Terms whose neighbours reach into the most sections: the vocabulary that holds the journal together.</p>
+        <p>${bridges.map(b => `<button class="chip" type="button" data-n="${esc(b.id)}">${esc(b.id)}<span class="n">${b.deg}</span></button>`).join("")}</p></div>
+    </div>
+    <p class="fine">${A.nodes.length} terms and ${A.edges.length} links from ${A.sentences.toLocaleString("en")} sentences in vols.
+    ${A.vols[0]}–${A.vols.at(-1)}. Built by <span class="mono">tools/build_atlas.py</span>; derived data, CC0.</p>`,
+    init() {
+      const show = id => {
+        $("#sel").innerHTML = panel(id);
+        bind($("#sel"));
+      };
+      const bind = root => root.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { S.net.select(b.dataset.n); show(b.dataset.n); });
+      const build = () => {
+        S.net?.stop();
+        const lim = +$("#dens").value;
+        const keep = new Set(A.nodes.slice().sort((a, b) => b.f - a.f).slice(0, lim).map(n => n.id));
+        S.net = network($("#net"), {
+          nodes: A.nodes.filter(n => keep.has(n.id)),
+          edges: A.edges.filter(e => keep.has(e.s) && keep.has(e.t)),
+        }, { h: Math.min(600, Math.max(380, innerHeight * .62)), onSelect: show });
+        if (params.get("t")) S.net.select(params.get("t"));
+      };
+      $("#dens").onchange = build;
+      $("#reheat").onclick = () => S.net.reheat();
+      $("#zin").onclick = () => S.net.zoomBy(1.4);
+      $("#zout").onclick = () => S.net.zoomBy(1 / 1.4);
+      $("#zreset").onclick = () => S.net.resetView();
+      bind(document);
+      build();
+    },
+  };
+}
+
 function viewAbout() {
   return `<div class="prose">
   <h1>About &amp; rights</h1>
@@ -285,6 +466,13 @@ function viewAbout() {
     <li><b>Repair.</b> Two things are repaired: line-end hyphenation, and recurrent OCR confusions such as the <i>ct</i>
     ligature read as “6l” or “dl”. A repair is made only when the word is unknown and the repaired form is a common English word.
     Every repair is logged.</li>
+    <li><b>Concordance.</b> Keyword in context over the full-text volumes, in the browser. Accents are ignored, a
+    match must begin a word, and each line is cited to its printed page. Collocates are the content words within five words of a hit.</li>
+    <li><b>Atlas.</b> The terms are the journal's own vocabulary: content words the Letters use at least four times more
+    often than English at large (the <i>wordfreq</i> list), ranked by keyness. Two terms are joined when they share at
+    least six sentences and occur together more often than chance (positive pointwise mutual information). Each term keeps
+    its eight strongest links. A term's colour is the section (articles, Varia, obituaries, supplements) in which it is
+    relatively most frequent. The network is rebuilt with every batch of volumes, so it describes the volumes in full text, not the whole run.</li>
   </ol>
   <p>The QA reports are published: ${S.man.volumes.map(v => `<a href="docs/qa/vol${pad3(v.vol)}.md">vol. ${v.vol}</a>`).join(", ")}.</p>
   <h2>Rights: three tiers</h2>
@@ -317,16 +505,21 @@ async function route() {
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("active",
     a.dataset.r === r || (a.dataset.r === "volumes" && (r === "vol" || r === "a"))));
   const view = $("#view");
+  S.net?.stop(); S.net = null;
   try {
-    let html;
-    if (r === "home") html = viewHome();
-    else if (r === "volumes") html = viewVolumes();
-    else if (r === "vol") html = await viewVolume(+seg[1]);
-    else if (r === "a") html = await viewArticle(seg[1], params);
-    else if (r === "search") html = await viewSearch(params);
-    else if (r === "about") html = viewAbout();
-    else html = `<h1>Not found</h1>`;
-    view.innerHTML = html;
+    // a view returns its HTML, or { html, init } when it wires itself up after rendering
+    let out;
+    if (r === "home") out = viewHome();
+    else if (r === "volumes") out = viewVolumes();
+    else if (r === "vol") out = await viewVolume(+seg[1]);
+    else if (r === "a") out = await viewArticle(seg[1], params);
+    else if (r === "search") out = await viewSearch(params);
+    else if (r === "concordance") out = await viewConcordance(params);
+    else if (r === "atlas") out = await viewAtlas(params);
+    else if (r === "about") out = viewAbout();
+    else out = `<h1>Not found</h1>`;
+    view.innerHTML = typeof out === "string" ? out : out.html;
+    out.init?.();
   } catch (e) {
     view.innerHTML = `<h1>Something went wrong</h1><p class="mono">${esc(e.message)}</p>`;
   }
@@ -347,6 +540,7 @@ $("#theme").addEventListener("click", () => {
   const light = document.documentElement.getAttribute("data-theme") !== "light";
   document.documentElement.setAttribute("data-theme", light ? "light" : "dark");
   try { localStorage.setItem("wlTheme", light ? "light" : "dark"); } catch (e) {}
+  S.net?.redraw();  // the atlas canvas reads its colours from the theme
 });
 window.addEventListener("hashchange", route);
 boot().then(route).catch(e => { $("#view").innerHTML = `<h1>Could not load the catalogue</h1><p class="mono">${esc(e.message)}</p>`; });

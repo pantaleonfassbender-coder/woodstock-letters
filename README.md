@@ -15,12 +15,18 @@ Volumes 29–34 (1900–1905) are in full text.
   volume index, and authors are taken from the index.
 - **Full text for the public-domain volumes**, repaired conservatively. Every
   repair is logged in a QA report.
+- **Concordance.** Keyword in context across the full-text volumes, every line cited
+  to its page, with its distribution by volume and its collocates.
+- **Atlas.** A network of the journal's own vocabulary: terms joined when they share
+  sentences more often than chance, coloured by the section they belong to.
 - **Rights tiers.** See [RIGHTS.md](RIGHTS.md).
 
 ## Layout
 
 ```
 index.html, app.js, style.css   the static site (no build step, no framework)
+net.js                          the atlas network renderer (canvas, no library)
+data/atlas.json                 term co-occurrence network for the atlas
 data/catalogue.json             every issue 1872–1969 (metadata only)
 data/manifest.json              volumes built with full text
 data/vol/NNN.json               one volume: articles, pages, paragraphs, index
@@ -36,6 +42,7 @@ pip install -r requirements.txt
 python tools/fetch_catalogue.py          # refresh the catalogue (rarely needed)
 python tools/fetch_ia.py --vol 29        # fetch OCR for one volume (or --from 1 --to 59)
 python tools/build_volume.py 29          # build data/vol/029.json + docs/qa/vol029.md
+python tools/build_atlas.py              # rebuild data/atlas.json over all full-text volumes
 python -m http.server 8765               # preview at http://localhost:8765
 ```
 
