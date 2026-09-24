@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Woodstock Letters · A Research Edition</title>
+<meta name="description" content="A searchable, citable research edition of the Woodstock Letters (1872–1969), the private house journal of the Jesuits in North America printed at Woodstock College, Maryland: article catalogue, page-exact citations linked to the scans, and full text for the public-domain volumes.">
+<script>
+  // theme before first paint; storage may be unavailable
+  (function(){ var t=null; try{ t=localStorage.getItem("wlTheme"); }catch(e){}
+    if(!t && window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches) t="light";
+    if(t==="light") document.documentElement.setAttribute("data-theme","light"); })();
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#/">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 7l13 10L29 7" fill="none" stroke="var(--acc)" stroke-width="1.8"/></svg>
+    <span class="brandtext"><strong>Woodstock Letters</strong><em>A research edition · 1872–1969</em></span>
+  </a>
+  <nav id="nav">
+    <a href="#/" data-r="home">Overview</a>
+    <a href="#/volumes" data-r="volumes">Volumes</a>
+    <a href="#/search" data-r="search">Search</a>
+    <a href="#/about" data-r="about">About &amp; rights</a>
+  </nav>
+  <button class="iconbtn" id="theme" type="button" aria-label="Toggle light and dark theme">◐</button>
+</header>
+<main id="view" tabindex="-1"></main>
+<footer>
+  Woodstock Letters research edition · Pantaleon Fassbender · Scans and OCR: Boston College Libraries via the Internet Archive ·
+  Code MIT · editorial texts CC BY 4.0 · derived data CC0 · <a href="#/about">rights and sources</a>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

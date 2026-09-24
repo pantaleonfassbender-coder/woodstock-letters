@@ -1,0 +1,68 @@
+# Woodstock Letters: A Research Edition
+
+A searchable, citable edition of the *Woodstock Letters* (1872–1969), the private
+house journal of the Jesuits in North America, printed at Woodstock College,
+Maryland. It is a companion to [Ignatiana](https://ignatian-research.netlify.app/).
+
+**Status: pilot.** The catalogue covers the full run (316 issues, 98 volumes).
+Volume 29 (1900) is in full text as the pilot.
+
+## What it offers
+
+- **Page-exact citation.** Every paragraph sits on its printed page (`WL 29 (1900): 46`)
+  and links to the scan of that page in the Internet Archive viewer.
+- **Article catalogue.** Articles are delimited from the running heads and the
+  volume index, and authors are taken from the index.
+- **Full text for the public-domain volumes**, repaired conservatively. Every
+  repair is logged in a QA report.
+- **Rights tiers.** See [RIGHTS.md](RIGHTS.md).
+
+## Layout
+
+```
+index.html, app.js, style.css   the static site (no build step, no framework)
+data/catalogue.json             every issue 1872–1969 (metadata only)
+data/manifest.json              volumes built with full text
+data/vol/NNN.json               one volume: articles, pages, paragraphs, index
+docs/qa/volNNN.md               QA report per volume
+tools/                          the pipeline (Python 3.11+)
+data/raw/                       downloaded OCR, git-ignored
+```
+
+## Pipeline
+
+```bash
+pip install -r requirements.txt
+python tools/fetch_catalogue.py          # refresh the catalogue (rarely needed)
+python tools/fetch_ia.py --vol 29        # fetch OCR for one volume (or --from 1 --to 59)
+python tools/build_volume.py 29          # build data/vol/029.json + docs/qa/vol029.md
+python -m http.server 8765               # preview at http://localhost:8765
+```
+
+How the build works, briefly:
+
+1. **Pages.** The build reads the IA hOCR page by page. Running heads are
+   stripped, and printed page numbers are recomputed by consensus over
+   neighbouring pages. They are cross-checked against the Internet Archive's own
+   page labels (vol. 29: 534 of 534 agree).
+2. **Articles.** An article starts at a title page, at a mid-page heading that the
+   following running heads repeat, or at a start page named in the volume index.
+3. **Repair.** Line-end hyphenation is resolved, and recurrent misreadings are
+   fixed: the *ct* ligature read as `6l`/`dl`, `é` read as `6`, years such as
+   `i898`. Other repairs are gated by an English frequency list (`wordfreq`).
+   Every change is listed in the QA report.
+
+## Scanning the whole run
+
+The pipeline is written to run unattended in Claude Code cloud sessions. See
+[docs/CLOUD.md](docs/CLOUD.md).
+
+## Licences
+
+Code: MIT ([LICENSE](LICENSE)). Editorial texts: CC BY 4.0 ([LICENSE-CONTENT](LICENSE-CONTENT)).
+Derived data: CC0 1.0 ([LICENSE-DATA](LICENSE-DATA)). The public-domain text is not claimed.
+
+## Sources
+
+Scans and OCR: Boston College Libraries, Internet Archive collection `woodstockletters`
+(scanned 2015, sponsor: Boston Library Consortium).

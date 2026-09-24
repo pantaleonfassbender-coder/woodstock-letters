@@ -1,0 +1,32 @@
+CC0 1.0 Universal — Public Domain Dedication
+
+To the extent possible under law, Pantaleon Fassbender has waived all copyright
+and related or neighbouring rights to the derived datasets of this repository.
+
+  Summary:     https://creativecommons.org/publicdomain/zero/1.0/
+  Legal code:  https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+WHY
+
+These files are compilations of facts: which issue holds which volume, on which
+printed page a scan leaf stands, where an article begins and ends, who the
+volume index names as its author, which OCR misreading was corrected to what.
+Declaring them free removes any doubt. A citation apparatus is of little use if
+others cannot build on it.
+
+WHICH FILES
+
+  data/catalogue.json    the run 1872–1969 as held by the Internet Archive
+  data/manifest.json     the volumes built with full text
+  data/vol/*.json        pagination, article delimitation, authors, volume
+                         index, and the editorial repairs of the OCR
+  docs/qa/*.md           the QA reports listing every repair and override
+
+Attribution is not required, and is appreciated.
+
+WHAT IT DOES NOT COVER
+
+The text of the Woodstock Letters inside data/vol/*.json is in the public
+domain in the United States in its own right (see RIGHTS.md) and is not the
+licensor's to dedicate. The code is licensed separately (LICENSE), the
+editorial texts separately (LICENSE-CONTENT).

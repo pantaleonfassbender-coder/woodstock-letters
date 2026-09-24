@@ -1,0 +1,2857 @@
+{
+ "source": "Internet Archive, collection woodstockletters (Boston College Libraries)",
+ "issues": [
+  {
+   "id": "woodstockletters1118unse",
+   "vol": 1,
+   "printedVol": null,
+   "no": "1",
+   "year": 1872,
+   "season": null,
+   "leaves": 84
+  },
+  {
+   "id": "woodstockletters1218unse",
+   "vol": 1,
+   "printedVol": null,
+   "no": "2",
+   "year": 1872,
+   "season": null,
+   "leaves": 90
+  },
+  {
+   "id": "woodstockletters1318unse",
+   "vol": 1,
+   "printedVol": null,
+   "no": "3",
+   "year": 1872,
+   "season": null,
+   "leaves": 78
+  },
+  {
+   "id": "woodstockletters2118unse",
+   "vol": 2,
+   "printedVol": null,
+   "no": "1",
+   "year": 1873,
+   "season": null,
+   "leaves": 104
+  },
+  {
+   "id": "woodstockletters2218unse",
+   "vol": 2,
+   "printedVol": null,
+   "no": "2",
+   "year": 1873,
+   "season": null,
+   "leaves": 98
+  },
+  {
+   "id": "woodstockletters2318unse",
+   "vol": 2,
+   "printedVol": null,
+   "no": "3",
+   "year": 1873,
+   "season": null,
+   "leaves": 94
+  },
+  {
+   "id": "woodstockletters3118unse",
+   "vol": 3,
+   "printedVol": null,
+   "no": "1",
+   "year": 1874,
+   "season": null,
+   "leaves": 94
+  },
+  {
+   "id": "woodstockletters3218unse",
+   "vol": 3,
+   "printedVol": null,
+   "no": "2",
+   "year": 1874,
+   "season": null,
+   "leaves": 88
+  },
+  {
+   "id": "woodstockletters3318unse",
+   "vol": 3,
+   "printedVol": null,
+   "no": "3",
+   "year": 1874,
+   "season": null,
+   "leaves": 76
+  },
+  {
+   "id": "woodstockletters4118unse",
+   "vol": 4,
+   "printedVol": null,
+   "no": "1",
+   "year": 1875,
+   "season": null,
+   "leaves": 90
+  },
+  {
+   "id": "woodstockletters4218unse",
+   "vol": 4,
+   "printedVol": null,
+   "no": "2",
+   "year": 1875,
+   "season": null,
+   "leaves": 142
+  },
+  {
+   "id": "woodstockletters5118unse",
+   "vol": 5,
+   "printedVol": null,
+   "no": "1",
+   "year": 1876,
+   "season": null,
+   "leaves": 90
+  },
+  {
+   "id": "woodstockletters5218unse",
+   "vol": 5,
+   "printedVol": null,
+   "no": "2",
+   "year": 1876,
+   "season": null,
+   "leaves": 88
+  },
+  {
+   "id": "woodstockletters5318unse",
+   "vol": 5,
+   "printedVol": null,
+   "no": "3",
+   "year": 1876,
+   "season": null,
+   "leaves": 84
+  },
+  {
+   "id": "woodstockletters6118unse",
+   "vol": 6,
+   "printedVol": null,
+   "no": "1",
+   "year": 1877,
+   "season": null,
+   "leaves": 80
+  },
+  {
+   "id": "woodstockletters6218unse",
+   "vol": 6,
+   "printedVol": null,
+   "no": "2",
+   "year": 1877,
+   "season": null,
+   "leaves": 68
+  },
+  {
+   "id": "woodstockletters6318unse",
+   "vol": 6,
+   "printedVol": null,
+   "no": "3",
+   "year": 1878,
+   "season": null,
+   "leaves": 82
+  },
+  {
+   "id": "woodstockletters7118unse",
+   "vol": 7,
+   "printedVol": null,
+   "no": "1",
+   "year": 1878,
+   "season": null,
+   "leaves": 78
+  },
+  {
+   "id": "woodstockletters7218unse",
+   "vol": 7,
+   "printedVol": null,
+   "no": "2",
+   "year": 1878,
+   "season": null,
+   "leaves": 74
+  },
+  {
+   "id": "woodstockletters7318unse",
+   "vol": 7,
+   "printedVol": null,
+   "no": "3",
+   "year": 1878,
+   "season": null,
+   "leaves": 70
+  },
+  {
+   "id": "woodstockletters8118unse",
+   "vol": 8,
+   "printedVol": null,
+   "no": "1",
+   "year": 1879,
+   "season": null,
+   "leaves": 74
+  },
+  {
+   "id": "woodstockletters8218unse",
+   "vol": 8,
+   "printedVol": null,
+   "no": "2",
+   "year": 1879,
+   "season": null,
+   "leaves": 72
+  },
+  {
+   "id": "woodstockletters8318unse",
+   "vol": 8,
+   "printedVol": null,
+   "no": "3",
+   "year": 1879,
+   "season": null,
+   "leaves": 80
+  },
+  {
+   "id": "woodstockletters9118unse",
+   "vol": 9,
+   "printedVol": null,
+   "no": "1",
+   "year": 1880,
+   "season": null,
+   "leaves": 84
+  },
+  {
+   "id": "woodstockletters9218unse",
+   "vol": 9,
+   "printedVol": null,
+   "no": "2",
+   "year": 1880,
+   "season": null,
+   "leaves": 92
+  },
+  {
+   "id": "woodstockletters9318unse",
+   "vol": 9,
+   "printedVol": null,
+   "no": "3",
+   "year": 1880,
+   "season": null,
+   "leaves": 88
+  },
+  {
+   "id": "woodstockletters1011unse",
+   "vol": 10,
+   "printedVol": null,
+   "no": "1",
+   "year": 1881,
+   "season": null,
+   "leaves": 96
+  },
+  {
+   "id": "woodstockletters1021unse",
+   "vol": 10,
+   "printedVol": null,
+   "no": "2",
+   "year": 1881,
+   "season": null,
+   "leaves": 128
+  },
+  {
+   "id": "woodstockletters1031unse",
+   "vol": 10,
+   "printedVol": null,
+   "no": "3",
+   "year": 1881,
+   "season": null,
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters1111unse",
+   "vol": 11,
+   "printedVol": null,
+   "no": "1",
+   "year": 1882,
+   "season": null,
+   "leaves": 126
+  },
+  {
+   "id": "woodstockletters1121unse",
+   "vol": 11,
+   "printedVol": null,
+   "no": "2",
+   "year": 1882,
+   "season": null,
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters1131unse",
+   "vol": 11,
+   "printedVol": null,
+   "no": "3",
+   "year": 1882,
+   "season": null,
+   "leaves": 106
+  },
+  {
+   "id": "woodstockletters1211unse",
+   "vol": 12,
+   "printedVol": null,
+   "no": "1",
+   "year": 1883,
+   "season": null,
+   "leaves": 140
+  },
+  {
+   "id": "woodstockletters1221unse",
+   "vol": 12,
+   "printedVol": null,
+   "no": "2",
+   "year": 1883,
+   "season": null,
+   "leaves": 136
+  },
+  {
+   "id": "woodstockletters1231unse",
+   "vol": 12,
+   "printedVol": null,
+   "no": "3",
+   "year": 1883,
+   "season": null,
+   "leaves": 118
+  },
+  {
+   "id": "woodstockletters1311unse",
+   "vol": 13,
+   "printedVol": null,
+   "no": "1",
+   "year": 1884,
+   "season": null,
+   "leaves": 106
+  },
+  {
+   "id": "woodstockletters1321unse",
+   "vol": 13,
+   "printedVol": null,
+   "no": "2",
+   "year": 1884,
+   "season": null,
+   "leaves": 160
+  },
+  {
+   "id": "woodstockletters1331unse",
+   "vol": 13,
+   "printedVol": null,
+   "no": "3",
+   "year": 1884,
+   "season": null,
+   "leaves": 190
+  },
+  {
+   "id": "woodstockletters1411unse",
+   "vol": 14,
+   "printedVol": null,
+   "no": "1",
+   "year": 1885,
+   "season": null,
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters1421unse",
+   "vol": 14,
+   "printedVol": null,
+   "no": "2",
+   "year": 1885,
+   "season": null,
+   "leaves": 164
+  },
+  {
+   "id": "woodstockletters1431unse",
+   "vol": 14,
+   "printedVol": null,
+   "no": "3",
+   "year": 1885,
+   "season": null,
+   "leaves": 126
+  },
+  {
+   "id": "woodstockletters1511unse",
+   "vol": 15,
+   "printedVol": null,
+   "no": "1",
+   "year": 1886,
+   "season": null,
+   "leaves": 148
+  },
+  {
+   "id": "woodstockletters1521unse",
+   "vol": 15,
+   "printedVol": null,
+   "no": "2",
+   "year": 1886,
+   "season": null,
+   "leaves": 112
+  },
+  {
+   "id": "woodstockletters1531unse",
+   "vol": 15,
+   "printedVol": null,
+   "no": "3",
+   "year": 1886,
+   "season": null,
+   "leaves": 124
+  },
+  {
+   "id": "woodstockletters1611unse",
+   "vol": 16,
+   "printedVol": null,
+   "no": "1",
+   "year": 1887,
+   "season": null,
+   "leaves": 136
+  },
+  {
+   "id": "woodstockletters1621unse",
+   "vol": 16,
+   "printedVol": null,
+   "no": "2",
+   "year": 1887,
+   "season": null,
+   "leaves": 100
+  },
+  {
+   "id": "woodstockletters1631unse",
+   "vol": 16,
+   "printedVol": null,
+   "no": "3",
+   "year": 1887,
+   "season": null,
+   "leaves": 136
+  },
+  {
+   "id": "woodstockletters1711unse",
+   "vol": 17,
+   "printedVol": null,
+   "no": "1",
+   "year": 1888,
+   "season": null,
+   "leaves": 144
+  },
+  {
+   "id": "woodstockletters1721unse",
+   "vol": 17,
+   "printedVol": null,
+   "no": "2",
+   "year": 1888,
+   "season": null,
+   "leaves": 144
+  },
+  {
+   "id": "woodstockletters1731unse",
+   "vol": 17,
+   "printedVol": null,
+   "no": "3",
+   "year": 1888,
+   "season": null,
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters1811unse",
+   "vol": 18,
+   "printedVol": null,
+   "no": "1",
+   "year": 1889,
+   "season": null,
+   "leaves": 136
+  },
+  {
+   "id": "woodstockletters1821unse",
+   "vol": 18,
+   "printedVol": null,
+   "no": "2",
+   "year": 1889,
+   "season": null,
+   "leaves": 148
+  },
+  {
+   "id": "woodstockletters1831unse",
+   "vol": 18,
+   "printedVol": null,
+   "no": "3",
+   "year": 1889,
+   "season": null,
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters1911unse",
+   "vol": 19,
+   "printedVol": null,
+   "no": "1",
+   "year": 1890,
+   "season": null,
+   "leaves": 154
+  },
+  {
+   "id": "woodstockletters1921unse",
+   "vol": 19,
+   "printedVol": null,
+   "no": "2",
+   "year": 1890,
+   "season": null,
+   "leaves": 158
+  },
+  {
+   "id": "woodstockletters1931unse",
+   "vol": 19,
+   "printedVol": null,
+   "no": "3",
+   "year": 1890,
+   "season": null,
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters2011unse",
+   "vol": 20,
+   "printedVol": null,
+   "no": "1",
+   "year": 1891,
+   "season": null,
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters2021unse",
+   "vol": 20,
+   "printedVol": null,
+   "no": "2",
+   "year": 1891,
+   "season": null,
+   "leaves": 172
+  },
+  {
+   "id": "woodstockletters2031unse",
+   "vol": 20,
+   "printedVol": null,
+   "no": "3",
+   "year": 1891,
+   "season": null,
+   "leaves": 182
+  },
+  {
+   "id": "woodstockletters2111unse",
+   "vol": 21,
+   "printedVol": null,
+   "no": "1",
+   "year": 1892,
+   "season": null,
+   "leaves": 170
+  },
+  {
+   "id": "woodstockletters2121unse",
+   "vol": 21,
+   "printedVol": null,
+   "no": "2",
+   "year": 1892,
+   "season": null,
+   "leaves": 146
+  },
+  {
+   "id": "woodstockletters2131unse",
+   "vol": 21,
+   "printedVol": null,
+   "no": "3",
+   "year": 1892,
+   "season": null,
+   "leaves": 184
+  },
+  {
+   "id": "woodstockletters2211unse",
+   "vol": 22,
+   "printedVol": null,
+   "no": "1",
+   "year": 1893,
+   "season": null,
+   "leaves": 192
+  },
+  {
+   "id": "woodstockletters2221unse",
+   "vol": 22,
+   "printedVol": null,
+   "no": "2",
+   "year": 1893,
+   "season": null,
+   "leaves": 188
+  },
+  {
+   "id": "woodstockletters2231unse",
+   "vol": 22,
+   "printedVol": null,
+   "no": "3",
+   "year": 1893,
+   "season": null,
+   "leaves": 240
+  },
+  {
+   "id": "woodstockletters2311unse",
+   "vol": 23,
+   "printedVol": null,
+   "no": "1",
+   "year": 1894,
+   "season": null,
+   "leaves": 214
+  },
+  {
+   "id": "woodstockletters2321unse",
+   "vol": 23,
+   "printedVol": null,
+   "no": "2",
+   "year": 1894,
+   "season": null,
+   "leaves": 282
+  },
+  {
+   "id": "woodstockletters2411unse",
+   "vol": 24,
+   "printedVol": null,
+   "no": "1",
+   "year": 1895,
+   "season": null,
+   "leaves": 198
+  },
+  {
+   "id": "woodstockletters2421unse",
+   "vol": 24,
+   "printedVol": null,
+   "no": "2",
+   "year": 1895,
+   "season": null,
+   "leaves": 174
+  },
+  {
+   "id": "woodstockletters2431unse",
+   "vol": 24,
+   "printedVol": null,
+   "no": "3",
+   "year": 1895,
+   "season": null,
+   "leaves": 190
+  },
+  {
+   "id": "woodstockletters2511unse",
+   "vol": 25,
+   "printedVol": null,
+   "no": "1",
+   "year": 1896,
+   "season": null,
+   "leaves": 220
+  },
+  {
+   "id": "woodstockletters2521unse",
+   "vol": 25,
+   "printedVol": null,
+   "no": "2",
+   "year": 1896,
+   "season": null,
+   "leaves": 180
+  },
+  {
+   "id": "woodstockletters2531unse",
+   "vol": 25,
+   "printedVol": null,
+   "no": "3",
+   "year": 1896,
+   "season": null,
+   "leaves": 208
+  },
+  {
+   "id": "woodstockletters2611unse",
+   "vol": 26,
+   "printedVol": null,
+   "no": "1",
+   "year": 1897,
+   "season": null,
+   "leaves": 216
+  },
+  {
+   "id": "woodstockletters2621unse",
+   "vol": 26,
+   "printedVol": null,
+   "no": "2",
+   "year": 1897,
+   "season": null,
+   "leaves": 168
+  },
+  {
+   "id": "woodstockletters2631unse",
+   "vol": 26,
+   "printedVol": null,
+   "no": "3",
+   "year": 1897,
+   "season": null,
+   "leaves": 184
+  },
+  {
+   "id": "woodstockletters2711unse",
+   "vol": 27,
+   "printedVol": null,
+   "no": "1",
+   "year": 1898,
+   "season": null,
+   "leaves": 164
+  },
+  {
+   "id": "woodstockletters2721unse",
+   "vol": 27,
+   "printedVol": null,
+   "no": "2",
+   "year": 1898,
+   "season": null,
+   "leaves": 122
+  },
+  {
+   "id": "woodstockletters2731unse",
+   "vol": 27,
+   "printedVol": null,
+   "no": "3",
+   "year": 1898,
+   "season": null,
+   "leaves": 154
+  },
+  {
+   "id": "woodstockletters2811unse",
+   "vol": 28,
+   "printedVol": null,
+   "no": "1",
+   "year": 1899,
+   "season": null,
+   "leaves": 198
+  },
+  {
+   "id": "woodstockletters2821unse",
+   "vol": 28,
+   "printedVol": null,
+   "no": "2",
+   "year": 1899,
+   "season": null,
+   "leaves": 216
+  },
+  {
+   "id": "woodstockletters2911unse",
+   "vol": 29,
+   "printedVol": null,
+   "no": "1",
+   "year": 1900,
+   "season": null,
+   "leaves": 222
+  },
+  {
+   "id": "woodstockletters2921unse",
+   "vol": 29,
+   "printedVol": null,
+   "no": "2",
+   "year": 1900,
+   "season": null,
+   "leaves": 200
+  },
+  {
+   "id": "woodstockletters2931unse",
+   "vol": 29,
+   "printedVol": null,
+   "no": "3",
+   "year": 1900,
+   "season": null,
+   "leaves": 180
+  },
+  {
+   "id": "woodstockletters3011unse",
+   "vol": 30,
+   "printedVol": null,
+   "no": "1",
+   "year": 1901,
+   "season": null,
+   "leaves": 210
+  },
+  {
+   "id": "woodstockletters3021unse",
+   "vol": 30,
+   "printedVol": null,
+   "no": "2",
+   "year": 1901,
+   "season": null,
+   "leaves": 180
+  },
+  {
+   "id": "woodstockletters3031unse",
+   "vol": 30,
+   "printedVol": null,
+   "no": "3",
+   "year": 1901,
+   "season": null,
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters3111unse",
+   "vol": 31,
+   "printedVol": null,
+   "no": "1",
+   "year": 1902,
+   "season": "June",
+   "leaves": 174
+  },
+  {
+   "id": "woodstockletters3121unse",
+   "vol": 31,
+   "printedVol": null,
+   "no": "2",
+   "year": 1902,
+   "season": "Oct",
+   "leaves": 168
+  },
+  {
+   "id": "woodstockletter3121unse_0",
+   "vol": 31,
+   "printedVol": null,
+   "no": "3",
+   "year": 1903,
+   "season": "Mar",
+   "leaves": 174
+  },
+  {
+   "id": "woodstockletters3211unse",
+   "vol": 32,
+   "printedVol": null,
+   "no": "1",
+   "year": 1903,
+   "season": "Sept",
+   "leaves": 164
+  },
+  {
+   "id": "woodstockletters3332unse",
+   "vol": 32,
+   "printedVol": 33,
+   "no": "2",
+   "year": 1903,
+   "season": null,
+   "leaves": 150
+  },
+  {
+   "id": "woodstockletters3311unse",
+   "vol": 33,
+   "printedVol": null,
+   "no": "1",
+   "year": 1904,
+   "season": null,
+   "leaves": 148
+  },
+  {
+   "id": "woodstockletters3321unse",
+   "vol": 33,
+   "printedVol": null,
+   "no": "2",
+   "year": 1904,
+   "season": null,
+   "leaves": 146
+  },
+  {
+   "id": "woodstockletters3331unse",
+   "vol": 33,
+   "printedVol": null,
+   "no": "3",
+   "year": 1904,
+   "season": null,
+   "leaves": 176
+  },
+  {
+   "id": "woodstockletters3411unse",
+   "vol": 34,
+   "printedVol": null,
+   "no": "1",
+   "year": 1905,
+   "season": null,
+   "leaves": 214
+  },
+  {
+   "id": "woodstockletters3421unse",
+   "vol": 34,
+   "printedVol": null,
+   "no": "2",
+   "year": 1905,
+   "season": null,
+   "leaves": 122
+  },
+  {
+   "id": "woodstockletters3431unse",
+   "vol": 34,
+   "printedVol": null,
+   "no": "3",
+   "year": 1905,
+   "season": null,
+   "leaves": 160
+  },
+  {
+   "id": "woodstockletters3511unse",
+   "vol": 35,
+   "printedVol": null,
+   "no": "1",
+   "year": 1906,
+   "season": null,
+   "leaves": 194
+  },
+  {
+   "id": "woodstockletters3521unse",
+   "vol": 35,
+   "printedVol": null,
+   "no": "2",
+   "year": 1906,
+   "season": null,
+   "leaves": 170
+  },
+  {
+   "id": "woodstockletters3531unse",
+   "vol": 35,
+   "printedVol": null,
+   "no": "3",
+   "year": 1906,
+   "season": null,
+   "leaves": 102
+  },
+  {
+   "id": "woodstockletters3611unse",
+   "vol": 36,
+   "printedVol": null,
+   "no": "1",
+   "year": 1907,
+   "season": null,
+   "leaves": 220
+  },
+  {
+   "id": "woodstockletters3623unse",
+   "vol": 36,
+   "printedVol": 37,
+   "no": "2/3",
+   "year": 1907,
+   "season": null,
+   "leaves": 238
+  },
+  {
+   "id": "woodstockletters3711unse",
+   "vol": 37,
+   "printedVol": null,
+   "no": "1",
+   "year": 1908,
+   "season": null,
+   "leaves": 196
+  },
+  {
+   "id": "woodstockletters3721unse",
+   "vol": 37,
+   "printedVol": null,
+   "no": "2",
+   "year": 1908,
+   "season": null,
+   "leaves": 146
+  },
+  {
+   "id": "woodstockletters3731unse",
+   "vol": 37,
+   "printedVol": null,
+   "no": "3",
+   "year": 1908,
+   "season": null,
+   "leaves": 164
+  },
+  {
+   "id": "woodstockletters3811unse",
+   "vol": 38,
+   "printedVol": null,
+   "no": "1",
+   "year": 1909,
+   "season": null,
+   "leaves": 180
+  },
+  {
+   "id": "woodstockletters3821unse",
+   "vol": 38,
+   "printedVol": null,
+   "no": "2",
+   "year": 1909,
+   "season": null,
+   "leaves": 172
+  },
+  {
+   "id": "woodstockletters3831unse",
+   "vol": 38,
+   "printedVol": null,
+   "no": "3",
+   "year": 1909,
+   "season": null,
+   "leaves": 146
+  },
+  {
+   "id": "woodstockletters3911unse",
+   "vol": 39,
+   "printedVol": null,
+   "no": "1",
+   "year": 1910,
+   "season": null,
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters3921unse",
+   "vol": 39,
+   "printedVol": null,
+   "no": "2",
+   "year": 1910,
+   "season": null,
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters3931unse",
+   "vol": 39,
+   "printedVol": null,
+   "no": "3",
+   "year": 1910,
+   "season": null,
+   "leaves": 146
+  },
+  {
+   "id": "woodstockletters4011unse",
+   "vol": 40,
+   "printedVol": null,
+   "no": "1",
+   "year": 1911,
+   "season": null,
+   "leaves": 176
+  },
+  {
+   "id": "woodstockletters4021unse",
+   "vol": 40,
+   "printedVol": null,
+   "no": "2",
+   "year": 1911,
+   "season": null,
+   "leaves": 138
+  },
+  {
+   "id": "woodstockletters4031unse",
+   "vol": 40,
+   "printedVol": null,
+   "no": "3",
+   "year": 1911,
+   "season": null,
+   "leaves": 160
+  },
+  {
+   "id": "woodstockletters4111unse",
+   "vol": 41,
+   "printedVol": null,
+   "no": "1",
+   "year": 1912,
+   "season": null,
+   "leaves": 150
+  },
+  {
+   "id": "woodstockletters4121unse",
+   "vol": 41,
+   "printedVol": null,
+   "no": "2",
+   "year": 1912,
+   "season": null,
+   "leaves": 144
+  },
+  {
+   "id": "woodstockletters4131unse",
+   "vol": 41,
+   "printedVol": null,
+   "no": "3",
+   "year": 1912,
+   "season": null,
+   "leaves": 150
+  },
+  {
+   "id": "woodstockletters4211unse",
+   "vol": 42,
+   "printedVol": null,
+   "no": "1",
+   "year": 1913,
+   "season": null,
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters4221unse",
+   "vol": 42,
+   "printedVol": null,
+   "no": "2",
+   "year": 1913,
+   "season": null,
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters4231unse",
+   "vol": 42,
+   "printedVol": null,
+   "no": "3",
+   "year": 1913,
+   "season": null,
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters4311unse",
+   "vol": 43,
+   "printedVol": null,
+   "no": "1",
+   "year": 1914,
+   "season": null,
+   "leaves": 164
+  },
+  {
+   "id": "woodstockletters4321unse",
+   "vol": 43,
+   "printedVol": null,
+   "no": "2",
+   "year": 1914,
+   "season": null,
+   "leaves": 150
+  },
+  {
+   "id": "woodstockletters4331unse",
+   "vol": 43,
+   "printedVol": null,
+   "no": "3",
+   "year": 1914,
+   "season": null,
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters4411unse",
+   "vol": 44,
+   "printedVol": null,
+   "no": "1",
+   "year": 1915,
+   "season": null,
+   "leaves": 154
+  },
+  {
+   "id": "woodstockletters4421unse",
+   "vol": 44,
+   "printedVol": null,
+   "no": "2",
+   "year": 1915,
+   "season": null,
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters4431unse",
+   "vol": 44,
+   "printedVol": null,
+   "no": "3",
+   "year": 1915,
+   "season": null,
+   "leaves": 174
+  },
+  {
+   "id": "woodstockletters4511unse",
+   "vol": 45,
+   "printedVol": null,
+   "no": "1",
+   "year": 1916,
+   "season": null,
+   "leaves": 178
+  },
+  {
+   "id": "woodstockletters4521unse",
+   "vol": 45,
+   "printedVol": null,
+   "no": "2",
+   "year": 1916,
+   "season": null,
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters4531unse",
+   "vol": 45,
+   "printedVol": null,
+   "no": "3",
+   "year": 1916,
+   "season": null,
+   "leaves": 174
+  },
+  {
+   "id": "woodstockletters4611unse",
+   "vol": 46,
+   "printedVol": null,
+   "no": "1",
+   "year": 1917,
+   "season": null,
+   "leaves": 160
+  },
+  {
+   "id": "woodstockletters4621unse",
+   "vol": 46,
+   "printedVol": null,
+   "no": "2",
+   "year": 1917,
+   "season": null,
+   "leaves": 168
+  },
+  {
+   "id": "woodstockletters4631unse",
+   "vol": 46,
+   "printedVol": null,
+   "no": "3",
+   "year": 1917,
+   "season": null,
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters4711unse",
+   "vol": 47,
+   "printedVol": null,
+   "no": "1",
+   "year": 1918,
+   "season": null,
+   "leaves": 158
+  },
+  {
+   "id": "woodstockletters4721unse",
+   "vol": 47,
+   "printedVol": null,
+   "no": "2",
+   "year": 1918,
+   "season": null,
+   "leaves": 148
+  },
+  {
+   "id": "woodstockletters4731unse",
+   "vol": 47,
+   "printedVol": null,
+   "no": "3",
+   "year": 1918,
+   "season": null,
+   "leaves": 198
+  },
+  {
+   "id": "woodstockletters4811unse",
+   "vol": 48,
+   "printedVol": null,
+   "no": "1",
+   "year": 1919,
+   "season": null,
+   "leaves": 180
+  },
+  {
+   "id": "woodstockletters4821unse",
+   "vol": 48,
+   "printedVol": null,
+   "no": "2",
+   "year": 1919,
+   "season": null,
+   "leaves": 146
+  },
+  {
+   "id": "woodstockletters4831unse",
+   "vol": 48,
+   "printedVol": null,
+   "no": "3",
+   "year": 1919,
+   "season": null,
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters4911unse",
+   "vol": 49,
+   "printedVol": null,
+   "no": "1",
+   "year": 1920,
+   "season": null,
+   "leaves": 188
+  },
+  {
+   "id": "woodstockletters4921unse",
+   "vol": 49,
+   "printedVol": null,
+   "no": "2",
+   "year": 1920,
+   "season": null,
+   "leaves": 132
+  },
+  {
+   "id": "woodstockletters4931unse",
+   "vol": 49,
+   "printedVol": null,
+   "no": "3",
+   "year": 1920,
+   "season": null,
+   "leaves": 144
+  },
+  {
+   "id": "woodstockletters5011unse",
+   "vol": 50,
+   "printedVol": null,
+   "no": "1",
+   "year": 1921,
+   "season": null,
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters5021unse",
+   "vol": 50,
+   "printedVol": null,
+   "no": "2",
+   "year": 1921,
+   "season": null,
+   "leaves": 168
+  },
+  {
+   "id": "woodstockletters5031unse",
+   "vol": 50,
+   "printedVol": null,
+   "no": "3",
+   "year": 1921,
+   "season": null,
+   "leaves": 138
+  },
+  {
+   "id": "woodstockletters5111unse",
+   "vol": 51,
+   "printedVol": null,
+   "no": "1",
+   "year": 1922,
+   "season": null,
+   "leaves": 232
+  },
+  {
+   "id": "woodstockletters5121unse",
+   "vol": 51,
+   "printedVol": null,
+   "no": "2",
+   "year": 1922,
+   "season": null,
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters5131unse",
+   "vol": 51,
+   "printedVol": null,
+   "no": "3",
+   "year": 1922,
+   "season": null,
+   "leaves": 158
+  },
+  {
+   "id": "woodstockletters5211unse",
+   "vol": 52,
+   "printedVol": null,
+   "no": "1",
+   "year": 1923,
+   "season": null,
+   "leaves": 188
+  },
+  {
+   "id": "woodstockletters5221unse",
+   "vol": 52,
+   "printedVol": null,
+   "no": "2",
+   "year": 1923,
+   "season": null,
+   "leaves": 142
+  },
+  {
+   "id": "woodstockletters5231unse",
+   "vol": 52,
+   "printedVol": null,
+   "no": "3",
+   "year": 1923,
+   "season": null,
+   "leaves": 138
+  },
+  {
+   "id": "woodstockletters5311unse",
+   "vol": 53,
+   "printedVol": null,
+   "no": "1",
+   "year": 1924,
+   "season": null,
+   "leaves": 176
+  },
+  {
+   "id": "woodstockletters5321unse",
+   "vol": 53,
+   "printedVol": null,
+   "no": "2",
+   "year": 1924,
+   "season": null,
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters5331unse",
+   "vol": 53,
+   "printedVol": null,
+   "no": "3",
+   "year": 1924,
+   "season": null,
+   "leaves": 154
+  },
+  {
+   "id": "woodstockletters5411unse",
+   "vol": 54,
+   "printedVol": null,
+   "no": "1",
+   "year": 1925,
+   "season": null,
+   "leaves": 180
+  },
+  {
+   "id": "woodstockletters5421unse",
+   "vol": 54,
+   "printedVol": null,
+   "no": "2",
+   "year": 1925,
+   "season": null,
+   "leaves": 124
+  },
+  {
+   "id": "woodstockletters5431unse",
+   "vol": 54,
+   "printedVol": null,
+   "no": "3",
+   "year": 1925,
+   "season": null,
+   "leaves": 178
+  },
+  {
+   "id": "woodstockletters5511unse",
+   "vol": 55,
+   "printedVol": null,
+   "no": "1",
+   "year": 1926,
+   "season": null,
+   "leaves": 190
+  },
+  {
+   "id": "woodstockletters5521unse",
+   "vol": 55,
+   "printedVol": null,
+   "no": "2",
+   "year": 1926,
+   "season": null,
+   "leaves": 158
+  },
+  {
+   "id": "woodstockletters5531unse",
+   "vol": 55,
+   "printedVol": null,
+   "no": "3",
+   "year": 1926,
+   "season": "Oct",
+   "leaves": 216
+  },
+  {
+   "id": "woodstockletters5611unse",
+   "vol": 56,
+   "printedVol": null,
+   "no": "1",
+   "year": 1927,
+   "season": null,
+   "leaves": 242
+  },
+  {
+   "id": "woodstockletters5621unse",
+   "vol": 56,
+   "printedVol": null,
+   "no": "2",
+   "year": 1927,
+   "season": null,
+   "leaves": 142
+  },
+  {
+   "id": "woodstockletters5631unse",
+   "vol": 56,
+   "printedVol": null,
+   "no": "3",
+   "year": 1927,
+   "season": null,
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters5711unse",
+   "vol": 57,
+   "printedVol": null,
+   "no": "1",
+   "year": 1928,
+   "season": null,
+   "leaves": 198
+  },
+  {
+   "id": "woodstockletters5721unse",
+   "vol": 57,
+   "printedVol": null,
+   "no": "2",
+   "year": 1928,
+   "season": null,
+   "leaves": 170
+  },
+  {
+   "id": "woodstockletters5731unse",
+   "vol": 57,
+   "printedVol": null,
+   "no": "3",
+   "year": 1928,
+   "season": null,
+   "leaves": 244
+  },
+  {
+   "id": "woodstockletters5811unse",
+   "vol": 58,
+   "printedVol": null,
+   "no": "1",
+   "year": 1929,
+   "season": null,
+   "leaves": 344
+  },
+  {
+   "id": "woodstockletters5821unse",
+   "vol": 58,
+   "printedVol": null,
+   "no": "2",
+   "year": 1929,
+   "season": null,
+   "leaves": 184
+  },
+  {
+   "id": "woodstockletters5831unse",
+   "vol": 58,
+   "printedVol": null,
+   "no": "3",
+   "year": 1929,
+   "season": null,
+   "leaves": 236
+  },
+  {
+   "id": "woodstockletters5911unse",
+   "vol": 59,
+   "printedVol": null,
+   "no": "1",
+   "year": 1930,
+   "season": null,
+   "leaves": 216
+  },
+  {
+   "id": "woodstockletters5921unse",
+   "vol": 59,
+   "printedVol": null,
+   "no": "2",
+   "year": 1930,
+   "season": null,
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters5931unse",
+   "vol": 59,
+   "printedVol": null,
+   "no": "3",
+   "year": 1930,
+   "season": null,
+   "leaves": 172
+  },
+  {
+   "id": "woodstockletters6011unse",
+   "vol": 60,
+   "printedVol": null,
+   "no": "1",
+   "year": 1931,
+   "season": null,
+   "leaves": 234
+  },
+  {
+   "id": "woodstockletters6021unse",
+   "vol": 60,
+   "printedVol": null,
+   "no": "2",
+   "year": 1931,
+   "season": null,
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters6031unse",
+   "vol": 60,
+   "printedVol": null,
+   "no": "3",
+   "year": 1931,
+   "season": null,
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters6111unse",
+   "vol": 61,
+   "printedVol": null,
+   "no": "1",
+   "year": 1932,
+   "season": null,
+   "leaves": 216
+  },
+  {
+   "id": "woodstockletters6121unse",
+   "vol": 61,
+   "printedVol": null,
+   "no": "2",
+   "year": 1932,
+   "season": null,
+   "leaves": 172
+  },
+  {
+   "id": "woodstockletters6131unse",
+   "vol": 61,
+   "printedVol": null,
+   "no": "3",
+   "year": 1932,
+   "season": null,
+   "leaves": 224
+  },
+  {
+   "id": "woodstockletters6211unse",
+   "vol": 62,
+   "printedVol": null,
+   "no": "1",
+   "year": 1933,
+   "season": "Feb",
+   "leaves": 192
+  },
+  {
+   "id": "woodstockletters6221unse",
+   "vol": 62,
+   "printedVol": null,
+   "no": "2",
+   "year": 1933,
+   "season": null,
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters6231unse",
+   "vol": 62,
+   "printedVol": null,
+   "no": "3",
+   "year": 1933,
+   "season": null,
+   "leaves": 160
+  },
+  {
+   "id": "woodstockletters6311unse",
+   "vol": 63,
+   "printedVol": null,
+   "no": "1",
+   "year": 1934,
+   "season": null,
+   "leaves": 194
+  },
+  {
+   "id": "woodstockletters6321unse",
+   "vol": 63,
+   "printedVol": null,
+   "no": "2",
+   "year": 1934,
+   "season": null,
+   "leaves": 188
+  },
+  {
+   "id": "woodstockletters6331unse",
+   "vol": 63,
+   "printedVol": null,
+   "no": "3",
+   "year": 1934,
+   "season": null,
+   "leaves": 192
+  },
+  {
+   "id": "woodstockletters6411unse",
+   "vol": 64,
+   "printedVol": null,
+   "no": "1",
+   "year": 1935,
+   "season": null,
+   "leaves": 206
+  },
+  {
+   "id": "woodstockletters6421unse",
+   "vol": 64,
+   "printedVol": null,
+   "no": "2",
+   "year": 1935,
+   "season": null,
+   "leaves": 160
+  },
+  {
+   "id": "woodstockletters6431unse",
+   "vol": 64,
+   "printedVol": null,
+   "no": "3",
+   "year": 1935,
+   "season": null,
+   "leaves": 174
+  },
+  {
+   "id": "woodstockletters6511unse",
+   "vol": 65,
+   "printedVol": null,
+   "no": "1",
+   "year": 1936,
+   "season": null,
+   "leaves": 218
+  },
+  {
+   "id": "woodstockletters6521unse",
+   "vol": 65,
+   "printedVol": null,
+   "no": "2",
+   "year": 1936,
+   "season": null,
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters6531unse",
+   "vol": 65,
+   "printedVol": null,
+   "no": "3",
+   "year": 1936,
+   "season": null,
+   "leaves": 148
+  },
+  {
+   "id": "woodstockletters6611unse",
+   "vol": 66,
+   "printedVol": null,
+   "no": "1",
+   "year": 1937,
+   "season": null,
+   "leaves": 210
+  },
+  {
+   "id": "woodstockletters6621unse",
+   "vol": 66,
+   "printedVol": null,
+   "no": "2",
+   "year": 1937,
+   "season": null,
+   "leaves": 172
+  },
+  {
+   "id": "woodstockletters6631unse",
+   "vol": 66,
+   "printedVol": null,
+   "no": "3",
+   "year": 1937,
+   "season": null,
+   "leaves": 110
+  },
+  {
+   "id": "woodstockletters6711unse",
+   "vol": 67,
+   "printedVol": null,
+   "no": "1",
+   "year": 1938,
+   "season": null,
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters6721unse",
+   "vol": 67,
+   "printedVol": null,
+   "no": "2",
+   "year": 1938,
+   "season": null,
+   "leaves": 140
+  },
+  {
+   "id": "woodstockletters6731unse",
+   "vol": 67,
+   "printedVol": null,
+   "no": "3",
+   "year": 1938,
+   "season": null,
+   "leaves": 104
+  },
+  {
+   "id": "woodstockletters6811unse",
+   "vol": 68,
+   "printedVol": null,
+   "no": "1",
+   "year": 1939,
+   "season": null,
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters6821unse",
+   "vol": 68,
+   "printedVol": null,
+   "no": "2",
+   "year": 1939,
+   "season": null,
+   "leaves": 158
+  },
+  {
+   "id": "woodstockletters6831unse",
+   "vol": 68,
+   "printedVol": null,
+   "no": "3",
+   "year": 1939,
+   "season": null,
+   "leaves": 160
+  },
+  {
+   "id": "woodstockletters6911unse",
+   "vol": 69,
+   "printedVol": null,
+   "no": "1",
+   "year": 1940,
+   "season": null,
+   "leaves": 150
+  },
+  {
+   "id": "woodstockletters6921unse",
+   "vol": 69,
+   "printedVol": null,
+   "no": "2",
+   "year": 1940,
+   "season": null,
+   "leaves": 172
+  },
+  {
+   "id": "woodstockletters6931unse",
+   "vol": 69,
+   "printedVol": null,
+   "no": "3",
+   "year": 1940,
+   "season": null,
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters7011unse",
+   "vol": 70,
+   "printedVol": null,
+   "no": "1",
+   "year": 1941,
+   "season": null,
+   "leaves": 200
+  },
+  {
+   "id": "woodstockletters7021unse",
+   "vol": 70,
+   "printedVol": null,
+   "no": "2",
+   "year": 1941,
+   "season": "June",
+   "leaves": 174
+  },
+  {
+   "id": "woodstockletters7031unse",
+   "vol": 70,
+   "printedVol": null,
+   "no": "3",
+   "year": 1941,
+   "season": "Oct",
+   "leaves": 166
+  },
+  {
+   "id": "woodstockletters7111unse",
+   "vol": 71,
+   "printedVol": null,
+   "no": "1",
+   "year": 1942,
+   "season": "Feb",
+   "leaves": 144
+  },
+  {
+   "id": "woodstockletters7121unse",
+   "vol": 71,
+   "printedVol": null,
+   "no": "2",
+   "year": 1942,
+   "season": "June",
+   "leaves": 140
+  },
+  {
+   "id": "woodstockletters7131unse",
+   "vol": 71,
+   "printedVol": null,
+   "no": "3",
+   "year": 1942,
+   "season": "Oct",
+   "leaves": 112
+  },
+  {
+   "id": "woodstockletters7211unse",
+   "vol": 72,
+   "printedVol": null,
+   "no": "1",
+   "year": 1943,
+   "season": "Mar",
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters7221unse",
+   "vol": 72,
+   "printedVol": null,
+   "no": "2",
+   "year": 1943,
+   "season": "June",
+   "leaves": 106
+  },
+  {
+   "id": "woodstockletters7231unse",
+   "vol": 72,
+   "printedVol": null,
+   "no": "3",
+   "year": 1943,
+   "season": "Oct",
+   "leaves": 96
+  },
+  {
+   "id": "woodstockletters7241unse",
+   "vol": 72,
+   "printedVol": null,
+   "no": "4",
+   "year": 1943,
+   "season": "Dec",
+   "leaves": 76
+  },
+  {
+   "id": "woodstockletters7311unse",
+   "vol": 73,
+   "printedVol": null,
+   "no": "1",
+   "year": 1944,
+   "season": "Mar",
+   "leaves": 96
+  },
+  {
+   "id": "woodstockletters7321unse",
+   "vol": 73,
+   "printedVol": null,
+   "no": "2",
+   "year": 1944,
+   "season": "June",
+   "leaves": 96
+  },
+  {
+   "id": "woodstockletters7331unse",
+   "vol": 73,
+   "printedVol": null,
+   "no": "3",
+   "year": 1944,
+   "season": "Oct",
+   "leaves": 88
+  },
+  {
+   "id": "woodstockletters7341unse",
+   "vol": 73,
+   "printedVol": null,
+   "no": "4",
+   "year": 1944,
+   "season": "Dec",
+   "leaves": 102
+  },
+  {
+   "id": "woodstockletters7411unse",
+   "vol": 74,
+   "printedVol": null,
+   "no": "1",
+   "year": 1945,
+   "season": "Mar",
+   "leaves": 92
+  },
+  {
+   "id": "woodstockletters7421unse",
+   "vol": 74,
+   "printedVol": null,
+   "no": "2",
+   "year": 1945,
+   "season": "June",
+   "leaves": 96
+  },
+  {
+   "id": "woodstockletters7431unse",
+   "vol": 74,
+   "printedVol": null,
+   "no": "3",
+   "year": 1945,
+   "season": "Oct",
+   "leaves": 122
+  },
+  {
+   "id": "woodstockletters7441unse",
+   "vol": 74,
+   "printedVol": null,
+   "no": "4",
+   "year": 1945,
+   "season": "Dec",
+   "leaves": 102
+  },
+  {
+   "id": "woodstockletters7511unse",
+   "vol": 75,
+   "printedVol": null,
+   "no": "1",
+   "year": 1946,
+   "season": "Mar",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters7521unse",
+   "vol": 75,
+   "printedVol": null,
+   "no": "2",
+   "year": 1946,
+   "season": "June",
+   "leaves": 96
+  },
+  {
+   "id": "woodstockletters7531unse",
+   "vol": 75,
+   "printedVol": null,
+   "no": "3",
+   "year": 1946,
+   "season": "Oct",
+   "leaves": 102
+  },
+  {
+   "id": "woodstockletters7541unse",
+   "vol": 75,
+   "printedVol": null,
+   "no": "4",
+   "year": 1946,
+   "season": "Dec",
+   "leaves": 112
+  },
+  {
+   "id": "woodstockletters7611unse",
+   "vol": 76,
+   "printedVol": null,
+   "no": "1",
+   "year": 1947,
+   "season": "Mar",
+   "leaves": 132
+  },
+  {
+   "id": "woodstockletters7621unse",
+   "vol": 76,
+   "printedVol": null,
+   "no": "2",
+   "year": 1947,
+   "season": "June",
+   "leaves": 96
+  },
+  {
+   "id": "woodstockletters7631unse",
+   "vol": 76,
+   "printedVol": null,
+   "no": "3",
+   "year": 1947,
+   "season": "Oct",
+   "leaves": 104
+  },
+  {
+   "id": "woodstockletters7641unse",
+   "vol": 76,
+   "printedVol": null,
+   "no": "4",
+   "year": 1947,
+   "season": "Dec",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters7711unse",
+   "vol": 77,
+   "printedVol": null,
+   "no": "1",
+   "year": 1948,
+   "season": "Feb",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters7721unse",
+   "vol": 77,
+   "printedVol": null,
+   "no": "2",
+   "year": 1948,
+   "season": "May",
+   "leaves": 94
+  },
+  {
+   "id": "woodstockletters7731unse",
+   "vol": 77,
+   "printedVol": null,
+   "no": "3",
+   "year": 1948,
+   "season": "July",
+   "leaves": 88
+  },
+  {
+   "id": "woodstockletters7741unse",
+   "vol": 77,
+   "printedVol": null,
+   "no": "4",
+   "year": 1948,
+   "season": "Nov",
+   "leaves": 112
+  },
+  {
+   "id": "woodstockletters7811unse",
+   "vol": 78,
+   "printedVol": null,
+   "no": "1",
+   "year": 1949,
+   "season": "Feb",
+   "leaves": 110
+  },
+  {
+   "id": "woodstockletters7821unse",
+   "vol": 78,
+   "printedVol": null,
+   "no": "2",
+   "year": 1949,
+   "season": "May",
+   "leaves": 104
+  },
+  {
+   "id": "woodstockletters7831unse",
+   "vol": 78,
+   "printedVol": null,
+   "no": "3",
+   "year": 1949,
+   "season": "July",
+   "leaves": 104
+  },
+  {
+   "id": "woodstockletters7841unse",
+   "vol": 78,
+   "printedVol": null,
+   "no": "4",
+   "year": 1949,
+   "season": "Nov",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters7911unse",
+   "vol": 79,
+   "printedVol": null,
+   "no": "1",
+   "year": 1950,
+   "season": "Feb",
+   "leaves": 118
+  },
+  {
+   "id": "woodstockletters7921unse",
+   "vol": 79,
+   "printedVol": null,
+   "no": "2",
+   "year": 1950,
+   "season": "May",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters7931unse",
+   "vol": 79,
+   "printedVol": null,
+   "no": "3",
+   "year": 1950,
+   "season": "July",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters7941unse",
+   "vol": 79,
+   "printedVol": null,
+   "no": "4",
+   "year": 1950,
+   "season": "Nov",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8011unse",
+   "vol": 80,
+   "printedVol": null,
+   "no": "1",
+   "year": 1951,
+   "season": "Feb",
+   "leaves": 118
+  },
+  {
+   "id": "woodstockletters8021unse",
+   "vol": 80,
+   "printedVol": null,
+   "no": "2",
+   "year": 1951,
+   "season": "May",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters8031unse",
+   "vol": 80,
+   "printedVol": null,
+   "no": "3",
+   "year": 1951,
+   "season": "July",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters8041unse",
+   "vol": 80,
+   "printedVol": null,
+   "no": "4",
+   "year": 1951,
+   "season": "Nov",
+   "leaves": 150
+  },
+  {
+   "id": "woodstockletters8111unse",
+   "vol": 81,
+   "printedVol": null,
+   "no": "1",
+   "year": 1952,
+   "season": "Feb",
+   "leaves": 130
+  },
+  {
+   "id": "woodstockletters8121unse",
+   "vol": 81,
+   "printedVol": null,
+   "no": "2",
+   "year": 1952,
+   "season": "May",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8131unse",
+   "vol": 81,
+   "printedVol": null,
+   "no": "3",
+   "year": 1952,
+   "season": "July",
+   "leaves": 124
+  },
+  {
+   "id": "woodstockletters8141unse",
+   "vol": 81,
+   "printedVol": null,
+   "no": "4",
+   "year": 1952,
+   "season": "Nov",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8211unse",
+   "vol": 82,
+   "printedVol": null,
+   "no": "1",
+   "year": 1953,
+   "season": "Feb",
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters8221unse",
+   "vol": 82,
+   "printedVol": null,
+   "no": "2",
+   "year": 1953,
+   "season": "May",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8231unse",
+   "vol": 82,
+   "printedVol": null,
+   "no": "3",
+   "year": 1953,
+   "season": "July",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8241unse",
+   "vol": 82,
+   "printedVol": null,
+   "no": "4",
+   "year": 1953,
+   "season": "Nov",
+   "leaves": 116
+  },
+  {
+   "id": "woodstockletters8311unse",
+   "vol": 83,
+   "printedVol": null,
+   "no": "1",
+   "year": 1954,
+   "season": "Feb",
+   "leaves": 146
+  },
+  {
+   "id": "woodstockletters8321unse",
+   "vol": 83,
+   "printedVol": null,
+   "no": "2",
+   "year": 1954,
+   "season": "May",
+   "leaves": 116
+  },
+  {
+   "id": "woodstockletters8331unse",
+   "vol": 83,
+   "printedVol": null,
+   "no": "3",
+   "year": 1954,
+   "season": "July",
+   "leaves": 126
+  },
+  {
+   "id": "woodstockletters8341unse",
+   "vol": 83,
+   "printedVol": null,
+   "no": "4",
+   "year": 1954,
+   "season": "Nov",
+   "leaves": 136
+  },
+  {
+   "id": "woodstockletters8411unse",
+   "vol": 84,
+   "printedVol": null,
+   "no": "1",
+   "year": 1955,
+   "season": "Feb",
+   "leaves": 118
+  },
+  {
+   "id": "woodstockletters8421unse",
+   "vol": 84,
+   "printedVol": null,
+   "no": "2",
+   "year": 1955,
+   "season": "Apr",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters8431unse",
+   "vol": 84,
+   "printedVol": null,
+   "no": "3",
+   "year": 1955,
+   "season": "July",
+   "leaves": 110
+  },
+  {
+   "id": "woodstockletters8441unse",
+   "vol": 84,
+   "printedVol": null,
+   "no": "4",
+   "year": 1955,
+   "season": "Nov",
+   "leaves": 128
+  },
+  {
+   "id": "woodstockletters8511unse",
+   "vol": 85,
+   "printedVol": null,
+   "no": "1",
+   "year": 1956,
+   "season": "Feb",
+   "leaves": 138
+  },
+  {
+   "id": "woodstockletters8521unse",
+   "vol": 85,
+   "printedVol": null,
+   "no": "2",
+   "year": 1956,
+   "season": "Apr",
+   "leaves": 162
+  },
+  {
+   "id": "woodstockletters8531unse",
+   "vol": 85,
+   "printedVol": null,
+   "no": "3",
+   "year": 1956,
+   "season": "July",
+   "leaves": 126
+  },
+  {
+   "id": "woodstockletters8541unse",
+   "vol": 85,
+   "printedVol": null,
+   "no": "4",
+   "year": 1956,
+   "season": "Nov",
+   "leaves": 144
+  },
+  {
+   "id": "woodstockletters8611unse",
+   "vol": 86,
+   "printedVol": null,
+   "no": "1",
+   "year": 1957,
+   "season": "Feb",
+   "leaves": 128
+  },
+  {
+   "id": "woodstockletters8621unse",
+   "vol": 86,
+   "printedVol": null,
+   "no": "2",
+   "year": 1957,
+   "season": "Apr",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8631unse",
+   "vol": 86,
+   "printedVol": null,
+   "no": "3",
+   "year": 1957,
+   "season": "July",
+   "leaves": 110
+  },
+  {
+   "id": "woodstockletters8641unse",
+   "vol": 86,
+   "printedVol": null,
+   "no": "4",
+   "year": 1957,
+   "season": "Nov",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8711unse",
+   "vol": 87,
+   "printedVol": null,
+   "no": "1",
+   "year": 1958,
+   "season": "Feb",
+   "leaves": 130
+  },
+  {
+   "id": "woodstockletters8721unse",
+   "vol": 87,
+   "printedVol": null,
+   "no": "2",
+   "year": 1958,
+   "season": "Apr",
+   "leaves": 112
+  },
+  {
+   "id": "woodstockletters8731unse",
+   "vol": 87,
+   "printedVol": null,
+   "no": "3",
+   "year": 1958,
+   "season": "July",
+   "leaves": 140
+  },
+  {
+   "id": "woodstockletters8741unse",
+   "vol": 87,
+   "printedVol": null,
+   "no": "4",
+   "year": 1958,
+   "season": "Nov",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters8811unse",
+   "vol": 88,
+   "printedVol": null,
+   "no": "1",
+   "year": 1959,
+   "season": "Feb",
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters8821unse",
+   "vol": 88,
+   "printedVol": null,
+   "no": "2",
+   "year": 1959,
+   "season": "Apr",
+   "leaves": 108
+  },
+  {
+   "id": "woodstockletters8831unse",
+   "vol": 88,
+   "printedVol": null,
+   "no": "3",
+   "year": 1959,
+   "season": "July",
+   "leaves": 144
+  },
+  {
+   "id": "woodstockletters8841unse",
+   "vol": 88,
+   "printedVol": null,
+   "no": "4",
+   "year": 1959,
+   "season": "Nov",
+   "leaves": 126
+  },
+  {
+   "id": "woodstockletters8911unse",
+   "vol": 89,
+   "printedVol": null,
+   "no": "1",
+   "year": 1960,
+   "season": "Feb",
+   "leaves": 122
+  },
+  {
+   "id": "woodstockletters8921unse",
+   "vol": 89,
+   "printedVol": null,
+   "no": "2",
+   "year": 1960,
+   "season": "Apr",
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters8931unse",
+   "vol": 89,
+   "printedVol": null,
+   "no": "3",
+   "year": 1960,
+   "season": "July",
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters8941unse",
+   "vol": 89,
+   "printedVol": null,
+   "no": "4",
+   "year": 1960,
+   "season": "Nov",
+   "leaves": 188
+  },
+  {
+   "id": "woodstockletters9011unse",
+   "vol": 90,
+   "printedVol": null,
+   "no": "1",
+   "year": 1961,
+   "season": "Feb",
+   "leaves": 114
+  },
+  {
+   "id": "woodstockletters9021unse",
+   "vol": 90,
+   "printedVol": null,
+   "no": "2",
+   "year": 1961,
+   "season": "Apr",
+   "leaves": 104
+  },
+  {
+   "id": "woodstockletters9031unse",
+   "vol": 90,
+   "printedVol": null,
+   "no": "3",
+   "year": 1961,
+   "season": "July",
+   "leaves": 104
+  },
+  {
+   "id": "woodstockletters9041unse",
+   "vol": 90,
+   "printedVol": null,
+   "no": "4",
+   "year": 1961,
+   "season": "Nov",
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters9111unse",
+   "vol": 91,
+   "printedVol": null,
+   "no": "1",
+   "year": 1962,
+   "season": "Feb",
+   "leaves": 120
+  },
+  {
+   "id": "woodstockletters9121unse",
+   "vol": 91,
+   "printedVol": null,
+   "no": "2",
+   "year": 1962,
+   "season": "Apr",
+   "leaves": 112
+  },
+  {
+   "id": "woodstockletters9131unse",
+   "vol": 91,
+   "printedVol": null,
+   "no": "3",
+   "year": 1962,
+   "season": "July",
+   "leaves": 122
+  },
+  {
+   "id": "woodstockletters9141unse",
+   "vol": 91,
+   "printedVol": null,
+   "no": "4",
+   "year": 1962,
+   "season": "Nov",
+   "leaves": 124
+  },
+  {
+   "id": "woodstockletters9211unse",
+   "vol": 92,
+   "printedVol": null,
+   "no": "1",
+   "year": 1963,
+   "season": "Feb",
+   "leaves": 118
+  },
+  {
+   "id": "woodstockletters9221unse",
+   "vol": 92,
+   "printedVol": null,
+   "no": "2",
+   "year": 1963,
+   "season": "Apr",
+   "leaves": 124
+  },
+  {
+   "id": "woodstockletters9231unse",
+   "vol": 92,
+   "printedVol": null,
+   "no": "3",
+   "year": 1963,
+   "season": "July",
+   "leaves": 122
+  },
+  {
+   "id": "woodstockletters9241unse",
+   "vol": 92,
+   "printedVol": null,
+   "no": "4",
+   "year": 1963,
+   "season": "Nov",
+   "leaves": 128
+  },
+  {
+   "id": "woodstockletters9311unse",
+   "vol": 93,
+   "printedVol": null,
+   "no": "1",
+   "year": 1964,
+   "season": "Feb",
+   "leaves": 126
+  },
+  {
+   "id": "woodstockletters9321unse",
+   "vol": 93,
+   "printedVol": null,
+   "no": "2",
+   "year": 1964,
+   "season": "Apr",
+   "leaves": 124
+  },
+  {
+   "id": "woodstockletters9331unse",
+   "vol": 93,
+   "printedVol": null,
+   "no": "3",
+   "year": 1964,
+   "season": "July",
+   "leaves": 106
+  },
+  {
+   "id": "woodstockletters9341unse",
+   "vol": 93,
+   "printedVol": null,
+   "no": "4",
+   "year": 1964,
+   "season": "Nov",
+   "leaves": 124
+  },
+  {
+   "id": "woodstockletters9411unse",
+   "vol": 94,
+   "printedVol": null,
+   "no": "1",
+   "year": 1965,
+   "season": "Winter",
+   "leaves": 118
+  },
+  {
+   "id": "woodstockletters9421unse",
+   "vol": 94,
+   "printedVol": null,
+   "no": "2",
+   "year": 1965,
+   "season": "Spring",
+   "leaves": 148
+  },
+  {
+   "id": "woodstockletters9431unse",
+   "vol": 94,
+   "printedVol": null,
+   "no": "3",
+   "year": 1965,
+   "season": "Summer",
+   "leaves": 132
+  },
+  {
+   "id": "woodstockletters9441unse",
+   "vol": 94,
+   "printedVol": null,
+   "no": "4",
+   "year": 1965,
+   "season": "Fall",
+   "leaves": 140
+  },
+  {
+   "id": "woodstockletters9511unse",
+   "vol": 95,
+   "printedVol": null,
+   "no": "1",
+   "year": 1966,
+   "season": "Winter",
+   "leaves": 150
+  },
+  {
+   "id": "woodstockletters9521unse",
+   "vol": 95,
+   "printedVol": null,
+   "no": "2",
+   "year": 1966,
+   "season": "Spring",
+   "leaves": 140
+  },
+  {
+   "id": "woodstockletters9531unse",
+   "vol": 95,
+   "printedVol": null,
+   "no": "3",
+   "year": 1966,
+   "season": "Summer",
+   "leaves": 142
+  },
+  {
+   "id": "woodstockletters9541unse",
+   "vol": 95,
+   "printedVol": null,
+   "no": "4",
+   "year": 1966,
+   "season": "Fall",
+   "leaves": 140
+  },
+  {
+   "id": "woodstockletters9611unse",
+   "vol": 96,
+   "printedVol": null,
+   "no": "1",
+   "year": 1967,
+   "season": "Winter",
+   "leaves": 154
+  },
+  {
+   "id": "woodstockletters9621unse",
+   "vol": 96,
+   "printedVol": null,
+   "no": "2",
+   "year": 1967,
+   "season": "Spring",
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters9631unse",
+   "vol": 96,
+   "printedVol": null,
+   "no": "3",
+   "year": 1967,
+   "season": "Summer",
+   "leaves": 126
+  },
+  {
+   "id": "woodstockletters9641unse",
+   "vol": 96,
+   "printedVol": null,
+   "no": "4",
+   "year": 1967,
+   "season": "Fall",
+   "leaves": 134
+  },
+  {
+   "id": "woodstockletters9711unse",
+   "vol": 97,
+   "printedVol": null,
+   "no": "1",
+   "year": 1968,
+   "season": "Winter",
+   "leaves": 156
+  },
+  {
+   "id": "woodstockletters9721unse",
+   "vol": 97,
+   "printedVol": null,
+   "no": "2",
+   "year": 1968,
+   "season": "Spring",
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters9731unse",
+   "vol": 97,
+   "printedVol": null,
+   "no": "3",
+   "year": 1968,
+   "season": "Summer",
+   "leaves": 152
+  },
+  {
+   "id": "woodstockletters9741unse",
+   "vol": 97,
+   "printedVol": null,
+   "no": "4",
+   "year": 1968,
+   "season": "Fall",
+   "leaves": 202
+  },
+  {
+   "id": "woodstockletters9811unse",
+   "vol": 98,
+   "printedVol": null,
+   "no": "1",
+   "year": 1969,
+   "season": "Winter",
+   "leaves": 158
+  },
+  {
+   "id": "woodstockletters9821unse",
+   "vol": 98,
+   "printedVol": null,
+   "no": "2",
+   "year": 1969,
+   "season": "Spring",
+   "leaves": 136
+  },
+  {
+   "id": "woodstockletters9831unse",
+   "vol": 98,
+   "printedVol": null,
+   "no": "3",
+   "year": 1969,
+   "season": "Summer",
+   "leaves": 112
+  },
+  {
+   "id": "woodstockletters9841unse",
+   "vol": 98,
+   "printedVol": null,
+   "no": "4",
+   "year": 1969,
+   "season": "Fall",
+   "leaves": 112
+  }
+ ],
+ "extras": [
+  {
+   "id": "woodstockletters1801unse",
+   "label": "Index:v.1/80 (1872/1951)",
+   "year": 1960,
+   "leaves": 366
+  }
+ ]
+}

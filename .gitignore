@@ -1,0 +1,5 @@
+# raw OCR is re-fetched from the Internet Archive on every build
+data/raw/
+__pycache__/
+.claude/
+.netlify/
