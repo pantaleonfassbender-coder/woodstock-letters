@@ -54,8 +54,13 @@ function tierOf(n) {
 const years = n => { const y = [...new Set(S.byVol.get(n).map(i => i.year))]; return y.length > 1 ? `${y[0]}–${String(y.at(-1)).slice(2)}` : `${y[0]}`; };
 const tag = t => `<span class="tag ${TIER[t].cls}">${TIER[t].label}</span>`;
 
+// A Supplement is paginated on its own ("Suppl. vii") and an unnumbered
+// insert is cited by the page it follows; both carry a printed label.
+const range = a => a.pp ?? (a.p0 === a.p1 ? `${a.p0}` : `${a.p0}–${a.p1}`);
+const plab = pg => pg.pl ?? pg.p;
+
 function cite(v, a, page) {
-  const pages = page ? page : (a.p0 === a.p1 ? a.p0 : `${a.p0}–${a.p1}`);
+  const pages = page ? page : range(a);
   return `${a.author ? a.author + ", " : ""}“${a.title},” Woodstock Letters ${v.vol} (${v.year}): ${pages}. ${SITE}#/a/${a.id}`;
 }
 
@@ -139,7 +144,7 @@ async function viewVolume(n) {
       const s = a.section && a.section !== "Articles" ? a.section : null;
       if (s !== sec && s) html += `<h3>${esc(s)}</h3>`;
       sec = s;
-      html += `<li><span class="pg">${a.p0 === a.p1 ? a.p0 : `${a.p0}–${a.p1}`}</span><span>
+      html += `<li><span class="pg">${esc(range(a))}</span><span>
         <a class="ti" href="#/a/${a.id}">${esc(a.title)}</a>${a.subtitle ? `<br><span class="au">${esc(a.subtitle)}</span>` : ""}
         ${a.author ? `<br><span class="au">${esc(a.author)}</span>` : ""}</span></li>`;
     }
@@ -174,7 +179,8 @@ async function viewArticle(id, params) {
     const ps = pg.paras.filter(p => p.a === id);
     if (!ps.length) { if (seen && pg.p > a.p1) break; continue; }
     seen = true;
-    const marker = `<a class="pb${pg.p === target ? " hit" : ""}" id="p${pg.p}" href="${IA(pg.issue, pg.n)}" target="_blank" rel="noopener" title="WL ${n}: ${pg.p}. Open the scan of this page">${n}:${pg.p}</a>`;
+    const hit = pg.p === target && !pg.insert;
+    const marker = `<a class="pb${hit ? " hit" : ""}" id="${pg.insert ? "l" + pg.leaf : "p" + pg.p}" href="${IA(pg.issue, pg.n)}" target="_blank" rel="noopener" title="WL ${n}: ${esc(String(plab(pg)))}. Open the scan of this page">${n}:${esc(String(plab(pg)))}</a>`;
     let placed = false;
     for (const p of ps) {
       if (p.h) {
@@ -204,14 +210,14 @@ async function viewArticle(id, params) {
   return `<div class="kicker"><a href="#/vol/${n}">Vol. ${n} (${v.year})</a> · no. ${esc(iss.no)}${a.section && a.section !== "Articles" ? " · " + esc(a.section) : ""}</div>
   <h1>${esc(a.title)}</h1>
   ${a.subtitle ? `<p class="lede">${esc(a.subtitle)}</p>` : ""}
-  <p class="fine">${a.author ? esc(a.author) + (a.authorFrom === "signature" ? " (from the signature)" : " (from the volume index)") + " · " : ""}pp. ${a.p0}–${a.p1}</p>
+  <p class="fine">${a.author ? esc(a.author) + (a.authorFrom === "signature" ? " (from the signature)" : " (from the volume index)") + " · " : ""}${a.pp ? esc(a.pp) : `pp. ${a.p0}–${a.p1}`}</p>
   <div class="reader">
     <article>${out.join("")}</article>
     <aside class="side">
       <div class="card"><h3>Cite</h3>
         <div class="citebox" id="cite">${esc(cite(v, a))}</div>
         <button class="btn" id="copycite" type="button">Copy citation</button>
-        <p class="fine" style="margin-top:.7rem">Page markers such as <span class="pb">${n}:${a.p0}</span> give the printed page and open its scan.</p>
+        <p class="fine" style="margin-top:.7rem">Page markers such as <span class="pb">${n}:${a.pp ? esc(a.pp.split("–")[0]) : a.p0}</span> give the printed page and open its scan.</p>
       </div>
       <div class="card"><h3>Source</h3>
         <p class="fine">Scan and OCR: Boston College Libraries, <a href="https://archive.org/details/${a.issue}" target="_blank" rel="noopener">${esc(a.issue)}</a>. OCR repaired conservatively; see the <a href="docs/qa/vol${pad3(n)}.md">QA report</a>.</p>
@@ -250,7 +256,7 @@ async function viewSearch(params) {
         const a = v.byId.get(p.a);
         const low = p.t.toLowerCase(), i = Math.max(0, low.indexOf(terms[0]) - 160);
         const ctx = (i ? "… " : "") + p.t.slice(i, i + 360) + (i + 360 < p.t.length ? " …" : "");
-        return `<div class="kwic"><div class="src"><a href="#/a/${a.id}?p=${pg.p}&q=${encodeURIComponent(q)}">WL ${v.vol}: ${pg.p}</a> · ${esc(a.title)}${a.author ? " · " + esc(a.author) : ""}</div><div class="ctx">${hl(ctx)}</div></div>`;
+        return `<div class="kwic"><div class="src"><a href="#/a/${a.id}?${pg.insert ? "" : `p=${pg.p}&`}q=${encodeURIComponent(q)}">WL ${v.vol}: ${esc(String(plab(pg)))}</a> · ${esc(a.title)}${a.author ? " · " + esc(a.author) : ""}</div><div class="ctx">${hl(ctx)}</div></div>`;
       }).join("");
   }
   return `<h1>Search</h1>

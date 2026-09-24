@@ -23,6 +23,26 @@ RAW = ROOT / "data" / "raw"
 SUFFIXES = ["_hocr_searchtext.txt.gz", "_hocr_pageindex.json.gz", "_page_numbers.json"]
 
 
+def item_urls(identifier, name):
+    """Direct data-node URLs for a file. /download/ sometimes redirects to a
+    mirror (dn*.eu/ca.archive.org) that answers 500 for the item; the servers
+    and directory named in the item metadata still serve it."""
+    url = f"https://archive.org/metadata/{identifier}"
+    with urllib.request.urlopen(url, timeout=60) as r:
+        meta = json.loads(r.read())
+    return [f"https://{h}{meta['dir']}/{name}" for h in meta.get("workable_servers", [])]
+
+
+def get(urls):
+    for url in urls:
+        try:
+            with urllib.request.urlopen(url, timeout=60) as r:
+                return r.read()
+        except Exception as e:
+            last = RuntimeError(f"{url}: {e}")
+    raise last
+
+
 def fetch(identifier):
     RAW.mkdir(parents=True, exist_ok=True)
     got = 0
@@ -30,16 +50,19 @@ def fetch(identifier):
         dest = RAW / (identifier + s)
         if dest.exists() and dest.stat().st_size > 0:
             continue
-        url = f"https://archive.org/download/{identifier}/{identifier}{s}"
+        name = identifier + s
         for attempt in range(3):
             try:
-                with urllib.request.urlopen(url, timeout=60) as r:
-                    dest.write_bytes(r.read())
+                try:
+                    data = get([f"https://archive.org/download/{identifier}/{name}"])
+                except Exception:
+                    data = get(item_urls(identifier, name))
+                dest.write_bytes(data)
                 got += 1
                 break
             except Exception as e:  # network hiccups on IA are routine
                 if attempt == 2:
-                    raise RuntimeError(f"{url}: {e}") from e
+                    raise RuntimeError(f"{identifier}/{name}: {e}") from e
                 time.sleep(5 * (attempt + 1))
         time.sleep(1)  # be polite to archive.org
     return got
@@ -53,8 +76,11 @@ def main():
     a = ap.parse_args()
     lo, hi = (a.vol, a.vol) if a.vol else (a.start or 1, a.end or 98)
     cat = json.loads((ROOT / "data" / "catalogue.json").read_text(encoding="utf-8"))
+    # a volume's index may be bound at the back of the previous volume (the
+    # index to vol. 30 closes vol. 29 no. 3), so take that issue too
+    prev = [i for i in cat["issues"] if i["vol"] == lo - 1][-1:]
     for i in cat["issues"]:
-        if lo <= i["vol"] <= hi:
+        if lo <= i["vol"] <= hi or i in prev:
             n = fetch(i["id"])
             print(f"vol {i['vol']} no {i['no']}  {i['id']}  {'fetched' if n else 'cached'}")
 

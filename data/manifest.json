@@ -4,8 +4,48 @@
    "vol": 29,
    "year": 1900,
    "articles": 70,
-   "pages": 551,
-   "words": 234492,
+   "pages": 550,
+   "words": 233952,
+   "built": "2026-09-24"
+  },
+  {
+   "vol": 30,
+   "year": 1901,
+   "articles": 54,
+   "pages": 503,
+   "words": 217628,
+   "built": "2026-09-24"
+  },
+  {
+   "vol": 31,
+   "year": 1902,
+   "articles": 59,
+   "pages": 492,
+   "words": 209423,
+   "built": "2026-09-24"
+  },
+  {
+   "vol": 32,
+   "year": 1903,
+   "articles": 25,
+   "pages": 289,
+   "words": 121307,
+   "built": "2026-09-24"
+  },
+  {
+   "vol": 33,
+   "year": 1904,
+   "articles": 41,
+   "pages": 426,
+   "words": 182908,
+   "built": "2026-09-24"
+  },
+  {
+   "vol": 34,
+   "year": 1905,
+   "articles": 42,
+   "pages": 460,
+   "words": 189915,
    "built": "2026-09-24"
   }
  ]
