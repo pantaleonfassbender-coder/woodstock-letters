@@ -138,6 +138,38 @@ function highlighter(q) {
   return s => esc(s).replace(re, "<mark>$1</mark>");
 }
 
+// The texts of Fassbender's study that the edition holds (data/discourse_study.json, from
+// tools/validate_discourse.py): the article page names the study and sets its values beside the edition's.
+async function studyCard(id) {
+  S.dstudy = S.dstudy || await getJSON("data/discourse_study.json").catch(() => ({ years: {} }));
+  const t = (S.dstudy.texts || []).find(t => t.ids.includes(id));
+  if (!t) return "";
+  const K = [["we", "we"], ["i", "I"], ["certainty", "certainty"], ["achievement", "achievement"], ["WPS", "words per sentence"]];
+  const f = (k, x) => k === "WPS" ? x.toFixed(1) : x.toFixed(2);
+  let rows, what;
+  if (t.ids.length === 1) {
+    S.disc = S.disc || await getJSON("data/discourse.json");
+    const o = S.disc.articles.find(a => a.id === id);
+    const ed = k => k === "WPS" ? (o.ns ? o.wc / o.ns : 0) : 100 * (o.n[k] || 0) / o.wc;
+    what = `one of the study's texts of ${t.year}${t.opt ? " (an optional text, left out of its corpus means)" : ""}`;
+    rows = `<tr><th></th><th>study</th><th>edition</th></tr>` +
+      K.map(([k, l]) => `<tr><td>${l}${k === "WPS" ? "" : " %"}</td><td>${f(k, t.pkg[k])}</td><td>${f(k, ed(k))}</td></tr>`).join("");
+  } else {
+    const others = t.ids.filter(x => x !== id);
+    what = `part of the study's ${t.jubilee ? "Golden Jubilee corpus" : "corpus"} of ${t.year}, with ${others.map(x => `<a href="#/a/${x}">${esc(x)}</a>`).join(" and ")}`;
+    rows = `<tr><th></th><th>corpus of ${t.year}</th></tr>` +
+      K.map(([k, l]) => `<tr><td>${l}${k === "WPS" ? "" : " %"}</td><td>${f(k, t.pkg[k])}</td></tr>`).join("");
+  }
+  return `<div class="card"><h3>In the study</h3>
+        <p class="fine">This article is ${what} in P. Fassbender, “Identity and Values in U.S. Jesuit Discourse, 1890–1944”
+        (replication package, <a href="https://doi.org/10.5281/zenodo.22697014" target="_blank" rel="noopener">doi:10.5281/zenodo.22697014</a>).
+        Open word lists, as percentages of words:</p>
+        <table class="bio">${rows}</table>
+        <p class="fine"><a href="#/discourse?y=${t.year}">Its year in the Discourse view</a> ·
+        <a href="docs/discourse_validation.md">validation report</a></p>
+      </div>`;
+}
+
 async function viewArticle(id, params) {
   const n = +id.split("-")[0];
   if (!S.built.has(n)) return viewVolume(n);
@@ -201,6 +233,7 @@ async function viewArticle(id, params) {
         <p class="fine">Scan and OCR: Boston College Libraries, <a href="https://archive.org/details/${a.issue}" target="_blank" rel="noopener">${esc(a.issue)}</a>. OCR repaired conservatively; see the <a href="docs/qa/vol${pad3(n)}.md">QA report</a>.</p>
         ${a.indexEntry ? `<p class="fine">Volume index: “${esc(a.indexEntry)}”</p>` : ""}
       </div>
+      ${await studyCard(id)}
     </aside>
   </div>
   <div class="pager">
@@ -615,6 +648,10 @@ async function viewDiscourse(params) {
   S.disc = S.disc || await getJSON("data/discourse.json");
   S.dstudy = S.dstudy || await getJSON("data/discourse_study.json").catch(() => ({ years: {} }));
   const D = S.disc, ST = S.dstudy.years;
+  const inStudy = new Set((S.dstudy.texts || []).flatMap(t => t.ids));
+  const byYear = {};
+  for (const t of S.dstudy.texts || []) (byYear[t.year] = byYear[t.year] || []).push(t);
+  const titleOf = id => D.articles.find(a => a.id === id)?.t || id;
   const cat = DCAT[params.get("c")] ? params.get("c") : "we";
   const regs = new Set((params.get("r") || "essay").split(",").filter(r => DREG[r]));
   const us = params.get("us") !== "0", adj = params.get("adj") === "1", agg = params.get("agg") === "median" ? "median" : "mean";
@@ -686,7 +723,7 @@ async function viewDiscourse(params) {
     const arts = pool.filter(a => a.y === yearSel).map(a => ({ a, v: val(a) })).sort((p, q) => q.v - p.v);
     drill = `<h2 id="dyear">${yearSel}: ${arts.length} article${arts.length === 1 ? "" : "s"} in the selection</h2>
       <table class="dist dlist"><thead><tr><td>Article</td><td>Register</td><td class="num">Words</td><td class="num">${esc(DCAT[cat])}</td></tr></thead><tbody>
-      ${arts.map(({ a, v }) => `<tr><td><a href="#/a/${a.id}">${esc(a.t)}</a> <span class="fine">WL ${a.v} · ${esc(a.id)}</span>${a.com ? ' <span class="tag">commemorative</span>' : ""}</td>
+      ${arts.map(({ a, v }) => `<tr><td><a href="#/a/${a.id}">${esc(a.t)}</a> <span class="fine">WL ${a.v} · ${esc(a.id)}</span>${a.com ? ' <span class="tag">commemorative</span>' : ""}${inStudy.has(a.id) ? ' <span class="tag">in the study</span>' : ""}</td>
         <td>${esc(DREG[a.reg])}</td><td class="num">${a.wc.toLocaleString("en")}</td><td class="num">${fmt(v)}</td></tr>`).join("")}</tbody></table>
       <p class="fine">Open an article to read it with its scans. The ${cat in (D.lists || {}) ? `words counted are: <i>${esc(((adj && hasAdj) ? D.lists[cat].filter(w => !D.jesuit_usage.includes(w)) : D.lists[cat]).join(", "))}</i>.` : "measure is computed over the whole text."}</p>`;
   }
@@ -728,7 +765,11 @@ async function viewDiscourse(params) {
         Within the commemorative genre, sentence length, certainty and achievement language rise from 1920 to 1944.</p>
         <p class="fine">Word lists, scripts and per-text results: replication package, CC BY 4.0,
         <a href="https://doi.org/10.5281/zenodo.22697014" target="_blank" rel="noopener">doi:10.5281/zenodo.22697014</a>.
-        The squares on the chart are its corpus means.</p></div>
+        The squares on the chart are its corpus means.</p>
+        <details class="dstudy"><summary>The study's texts in the edition</summary>
+          <ul class="plain">${Object.entries(byYear).map(([y, ts]) => `<li><b>${y}</b>${y === "1920" ? " (Golden Jubilee)" : ""}: ${ts.map(t => t.ids.map(x => `<a href="#/a/${x}">${esc(titleOf(x))}</a>`).join(", ") + (t.opt ? " <span class=\"fine\">(optional)</span>" : "")).join("; ")}</li>`).join("")}
+          <li><b>1944</b> (Diamond Jubilee): vol. 73, after the public-domain cutoff, so not in the edition.</li></ul>
+        </details></div>
       <div class="card"><h3>What the edition adds, and how to read it</h3>
         <ul class="plain">
           <li><b>Every year, 1872–1930.</b> The study's six points become an annual series, and every point opens to its articles.</li>

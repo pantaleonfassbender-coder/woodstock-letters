@@ -1,7 +1,7 @@
 """Check the edition's measures against the replication package of the study.
 
 Scores the edition's articles that correspond to the package's per-article
-files (Woodstock Letters 1900, 1910, 1930), with data/discourse.json, and
+files (Woodstock Letters 1900, 1910, 1930) and its 1890 and 1920 corpora, with data/discourse.json, and
 compares them with the package's results/open_measures.csv, file by file and
 as the study's corpus means (Table 2: word-count-weighted means over the
 non-optional texts). Writes docs/discourse_validation.md.
@@ -22,7 +22,10 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CATS = ["i", "we", "certainty", "achievement", "affiliation", "power", "posemo", "negemo", "future"]
 YV = {"1900": 29, "1910": 39, "1930": 59}
-JUB1920 = ["49-001", "49-006"]  # The Golden Jubilee; The Academy in Honor of the Cardinal
+# the corpora the package gives as one file each, and the edition's articles whose words they are
+# (found by shared 8-word runs; each article is taken whole). 1944 (vol. 73) lies past the edition's cutoff.
+COMBINED = {"WL1890.txt": ["19-003", "19-179", "19-396"],  # Satolli at Woodstock; Spain; Retractation of Clement XIV
+            "WL1920.txt": ["49-001", "49-006"]}  # The Golden Jubilee; The Academy in Honor of the Cardinal
 
 
 def words(t):
@@ -101,23 +104,38 @@ def main(pkg):
             g[k] += float(r[k]) * wc
     study = {y: {k: round(g[k] / g["wc"], 3) for k in ["WPS", "MATTR200"] + CATS} | {"words": g["wc"]}
              for y, g in sorted(ref.items())}
+    # every text of the study that the edition holds, with the package's values, for the links on the site
+    texts = []
+    for r in rows:
+        texts.append({"file": r["file"], "year": int(r["file"][:4]), "ids": [r["id"]], "opt": "_OPT" in r["file"],
+                      "jubilee": False, "wc": int(r["p"]["WC"]),
+                      "pkg": {k: round(float(r["p"][k]), 3) for k in ["WPS"] + CATS}})
+    for f, ids in COMBINED.items():
+        p = pk[f]
+        texts.append({"file": f, "year": int(f[2:6]), "ids": ids, "opt": False, "jubilee": f == "WL1920.txt",
+                      "wc": int(p["WC"]), "pkg": {k: round(float(p[k]), 3) for k in ["WPS"] + CATS}})
+    texts.sort(key=lambda t: (t["year"], t["ids"][0]))
     (ROOT / "data" / "discourse_study.json").write_text(json.dumps({
         "source": "P. Fassbender, “Identity and Values in U.S. Jesuit Discourse, 1890–1944”, replication package "
                   "(results/open_measures.csv), CC BY 4.0, https://doi.org/10.5281/zenodo.22697014",
         "note": "Word-count-weighted means over the study's internal Woodstock Letters texts of each year "
-                "(optional texts excluded); 1920 and 1944 are the jubilee corpora.",
-        "years": study}, ensure_ascii=False, indent=1), encoding="utf-8")
-    # the 1920 jubilee corpus comes as one file; its words are those of two pieces of the Golden Jubilee number
-    J = [disc[i] for i in JUB1920]
-    wc = sum(a["wc"] for a in J)
-    s = study.get("1920", {})
-    out += ["\n## The 1920 jubilee corpus\n",
-            "The package gives the Golden Jubilee essays of 1920 as one cleaned file. Its words are those of two pieces "
-            "of the Golden Jubilee number: " + ", ".join(f"[{a['id']}](../#/a/{a['id']}) {a['t']}" for a in J) + ".\n",
-            "| Source | words | we % | I % | certainty % | achievement % |", "|---|---|---|---|---|---|",
-            f"| package | {s.get('words', 0):,} | {s.get('we', 0):.2f} | {s.get('i', 0):.2f} | {s.get('certainty', 0):.2f} | {s.get('achievement', 0):.2f} |",
-            f"| edition | {wc:,} | " + " | ".join(f"{100 * sum(a['n'][k] for a in J) / wc:.2f}" for k in ("we", "i", "certainty", "achievement")) + " |",
-            "\nThe study's commemorative register is thus the Woodstock jubilee itself. Other anniversary pieces "
+                "(optional texts excluded); 1920 and 1944 are the jubilee corpora. 'texts': the study's texts "
+                "in the edition (1944, vol. 73, lies past its cutoff), with the package's values.",
+        "years": study, "texts": texts}, ensure_ascii=False, indent=1), encoding="utf-8")
+    # the 1890 and 1920 corpora come as one file each; their words are those of whole articles of the edition
+    out += ["\n## The corpora of 1890 and 1920\n",
+            "The package gives the 1890 sample and the Golden Jubilee essays of 1920 as one cleaned file each. "
+            "Their words are those of whole articles of the edition, found by shared runs of eight words.\n",
+            "| Year | Articles | words (pkg / ed.) | we % | I % | certainty % | achievement % |",
+            "|---|---|---|---|---|---|---|"]
+    for f, ids in COMBINED.items():
+        J, p = [disc[i] for i in ids], pk[f]
+        wc = sum(a["wc"] for a in J)
+        out.append(f"| {f[2:6]} | " + "; ".join(f"[{a['id']}](../#/a/{a['id']}) {a['t']}" for a in J)
+                   + f" | {int(p['WC']):,} / {wc:,} | "
+                   + " | ".join(f"{float(p[k]):.2f} / {100 * sum(a['n'][k] for a in J) / wc:.2f}"
+                                for k in ("we", "i", "certainty", "achievement")) + " |")
+    out += ["\nPackage / edition. The study's commemorative register is thus the Woodstock jubilee itself. Other anniversary pieces "
             "(the Spring Hill centennial, the Papal Jubilee celebration, the Auriesville celebration of 1930) stand "
             "in its ordinary series, and their first-person plural is low (0.12–0.48 %). The edition's automatic "
             "commemorative flag is wider (every piece whose title names a jubilee, centenary or anniversary, and "

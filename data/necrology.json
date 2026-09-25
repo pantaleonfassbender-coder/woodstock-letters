@@ -133,19 +133,6 @@
 "died": "10-04-1836",
 "deathplace": "Roma"
 },
-"father:Mazzella": {
-"id": "36914",
-"name": "Mazzella, Camillus",
-"born": "10-02-1833",
-"birthplace": "Vitulano (Benevento)",
-"entered": "04-09-1857",
-"province": "Neapolitana",
-"vows": "02-02-1869",
-"grade": "most eminent",
-"status": "professed of four vows",
-"died": "26-03-1900",
-"deathplace": "Roma"
-},
 "father:Maas": {
 "id": "59480",
 "name": "Maas, Antonius I.",
@@ -158,6 +145,19 @@
 "status": "professed of four vows",
 "died": "20-02-1927",
 "deathplace": "Poughkeepsie"
+},
+"father:Mazzella": {
+"id": "36914",
+"name": "Mazzella, Camillus",
+"born": "10-02-1833",
+"birthplace": "Vitulano (Benevento)",
+"entered": "04-09-1857",
+"province": "Neapolitana",
+"vows": "02-02-1869",
+"grade": "most eminent",
+"status": "professed of four vows",
+"died": "26-03-1900",
+"deathplace": "Roma"
 },
 "father:Paresce": {
 "id": "22988",
@@ -224,19 +224,6 @@
 "died": "04-06-1915",
 "deathplace": "Georgetown"
 },
-"father:Larkin": {
-"id": "14801",
-"name": "Larkin, Ioannes",
-"born": "02-02-1801",
-"birthplace": "Ravenworth (York)",
-"entered": "23-10-1840",
-"province": "Franciae",
-"vows": "15-08-1852",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "11-12-1858",
-"deathplace": "New York"
-},
 "father:Hughes": {
 "id": "71375",
 "name": "Hughes, Thomas A.",
@@ -249,6 +236,19 @@
 "status": "professed of four vows",
 "died": "14-06-1939",
 "deathplace": "Roma (Italia)"
+},
+"father:Larkin": {
+"id": "14801",
+"name": "Larkin, Ioannes",
+"born": "02-02-1801",
+"birthplace": "Ravenworth (York)",
+"entered": "23-10-1840",
+"province": "Franciae",
+"vows": "15-08-1852",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "11-12-1858",
+"deathplace": "New York"
 },
 "father:Shealy": {
 "id": "55580",
@@ -276,19 +276,6 @@
 "died": "16-01-1923",
 "deathplace": "Roma"
 },
-"father:Judge": {
-"id": "35921",
-"name": "Judge, Gulielmus",
-"born": "28-04-1850",
-"birthplace": "Baltimore",
-"entered": "23-08-1875",
-"province": "Taurinensis",
-"vows": "15-05-1890",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "16-01-1899",
-"deathplace": "Dawson (Yukon Territory)"
-},
 "father:Barnum": {
 "id": "54773",
 "name": "Barnum, Franciscus",
@@ -301,6 +288,19 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "03-11-1921",
 "deathplace": "Georgetown"
+},
+"father:Judge": {
+"id": "35921",
+"name": "Judge, Gulielmus",
+"born": "28-04-1850",
+"birthplace": "Baltimore",
+"entered": "23-08-1875",
+"province": "Taurinensis",
+"vows": "15-05-1890",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "16-01-1899",
+"deathplace": "Dawson (Yukon Territory)"
 },
 "father:Watrigant": {
 "id": "58535",
@@ -380,19 +380,6 @@
 "died": "18-12-1930",
 "deathplace": "Holy Cross (Alaska)"
 },
-"father:Russo": {
-"id": "38363",
-"name": "Russo, Nicolaus",
-"born": "24-04-1845",
-"birthplace": "Ascoli Satriano (Foggia)",
-"entered": "07-09-1862",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1884",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "01-04-1902",
-"deathplace": "New York"
-},
 "father:Pantanella": {
 "id": "55343",
 "name": "Pantanella, Dominicus",
@@ -405,6 +392,19 @@
 "status": "professed of four vows",
 "died": "24-05-1922",
 "deathplace": "Denver"
+},
+"father:Russo": {
+"id": "38363",
+"name": "Russo, Nicolaus",
+"born": "24-04-1845",
+"birthplace": "Ascoli Satriano (Foggia)",
+"entered": "07-09-1862",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1884",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "01-04-1902",
+"deathplace": "New York"
 },
 "father:Barbelin": {
 "id": "18452",
@@ -484,19 +484,6 @@
 "died": "03-11-1924",
 "deathplace": "Georgetown"
 },
-"father:Wynne": {
-"id": "81713",
-"name": "Wynne, Ioannes I.",
-"born": "30-09-1859",
-"birthplace": "New York",
-"entered": "30-07-1876",
-"province": "Neo-Eboracensis",
-"vows": "02-02-1897",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "30-11-1948",
-"deathplace": "New York"
-},
 "father:De Augustinis": {
 "id": "35924",
 "name": "De Augustinis, Aemilius",
@@ -509,6 +496,19 @@
 "status": "professed of four vows",
 "died": "17-01-1899",
 "deathplace": "Roma"
+},
+"father:Wynne": {
+"id": "81713",
+"name": "Wynne, Ioannes I.",
+"born": "30-09-1859",
+"birthplace": "New York",
+"entered": "30-07-1876",
+"province": "Neo-Eboracensis",
+"vows": "02-02-1897",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "30-11-1948",
+"deathplace": "New York"
 },
 "father:Joset": {
 "id": "37103",
@@ -640,19 +640,6 @@
 "died": "08-08-1930",
 "deathplace": "New York"
 },
-"father:Schoenmakers": {
-"id": "25271",
-"name": "Schoenmakers, Ioannes",
-"born": "21-11-1807",
-"birthplace": "Waspic (N-Brabant)",
-"entered": "16-01-1834",
-"province": "Missourianae",
-"vows": "08-12-1845",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "28-07-1883",
-"deathplace": "Osage Mission, Kans."
-},
 "father:Drum": {
 "id": "54863",
 "name": "Drum, Gualterus",
@@ -665,6 +652,19 @@
 "status": "professed of four vows",
 "died": "10-12-1921",
 "deathplace": "Baltimore"
+},
+"father:Schoenmakers": {
+"id": "25271",
+"name": "Schoenmakers, Ioannes",
+"born": "21-11-1807",
+"birthplace": "Waspic (N-Brabant)",
+"entered": "16-01-1834",
+"province": "Missourianae",
+"vows": "08-12-1845",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "28-07-1883",
+"deathplace": "Osage Mission, Kans."
 },
 "father:Durthaller": {
 "id": "26297",
@@ -744,19 +744,6 @@
 "died": "16-09-1926",
 "deathplace": "Seattle"
 },
-"father:Vaughan": {
-"id": "55715",
-"name": "Vaughan, Bernardus J.",
-"born": "20-09-1847",
-"birthplace": "Courtfield (Hereford)",
-"entered": "07-12-1866",
-"province": "Angliae",
-"vows": "02-02-1897",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "31-10-1922",
-"deathplace": "Roehampton"
-},
 "father:Frieden": {
 "id": "45668",
 "name": "Frieden, Ioannes Baptista",
@@ -783,6 +770,19 @@
 "died": "03-07-1885",
 "deathplace": "Worcester"
 },
+"father:Vaughan": {
+"id": "55715",
+"name": "Vaughan, Bernardus J.",
+"born": "20-09-1847",
+"birthplace": "Courtfield (Hereford)",
+"entered": "07-12-1866",
+"province": "Angliae",
+"vows": "02-02-1897",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "31-10-1922",
+"deathplace": "Roehampton"
+},
 "father:Kenny:P": {
 "id": "46151",
 "name": "Kenny, Petrus",
@@ -795,19 +795,6 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "19-07-1912",
 "deathplace": "Dublin"
-},
-"father:Verhaegen": {
-"id": "18113",
-"name": "Verhaegen, Petrus",
-"born": "21-06-1800",
-"birthplace": "Haeght (Brabant)",
-"entered": "06-10-1821",
-"province": "Missourianae",
-"vows": "26-03-1836",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "21-07-1868",
-"deathplace": "St. Charles, Mo."
 },
 "father:Ryder": {
 "id": "15131",
@@ -822,6 +809,19 @@
 "died": "12-01-1860",
 "deathplace": "Philadelphia"
 },
+"father:Verhaegen": {
+"id": "18113",
+"name": "Verhaegen, Petrus",
+"born": "21-06-1800",
+"birthplace": "Haeght (Brabant)",
+"entered": "06-10-1821",
+"province": "Missourianae",
+"vows": "26-03-1836",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "21-07-1868",
+"deathplace": "St. Charles, Mo."
+},
 "father:Brady:F": {
 "id": "45077",
 "name": "Brady, Franciscus Xavier",
@@ -834,19 +834,6 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "12-03-1911",
 "deathplace": "Baltimore"
-},
-"father:Walsh:W": {
-"id": "78158",
-"name": "Walsh, Gulielmus H.",
-"born": "01-07-1855",
-"birthplace": "New York",
-"entered": "30-07-1875",
-"province": "Neo-Eboracensis",
-"vows": "02-02-1893",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "08-04-1945",
-"deathplace": "Poughkeepsie"
 },
 "father:Dzierozynski": {
 "id": "12815",
@@ -861,6 +848,19 @@
 "died": "22-09-1850",
 "deathplace": "Frederick"
 },
+"father:Walsh:W": {
+"id": "78158",
+"name": "Walsh, Gulielmus H.",
+"born": "01-07-1855",
+"birthplace": "New York",
+"entered": "30-07-1875",
+"province": "Neo-Eboracensis",
+"vows": "02-02-1893",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "08-04-1945",
+"deathplace": "Poughkeepsie"
+},
 "father:Fitzgerald": {
 "id": "44858",
 "name": "Fitzgerald, Thomas I.",
@@ -873,32 +873,6 @@
 "status": "professed of four vows",
 "died": "11-12-1910",
 "deathplace": "Florissant"
-},
-"father:Nobili": {
-"id": "14042",
-"name": "Nobili, Ioannes",
-"born": "08-04-1812",
-"birthplace": "Roma",
-"entered": "14-11-1828",
-"province": "Romana",
-"vows": "13-05-1849",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "01-03-1856",
-"deathplace": "Sta. Clara"
-},
-"father:Verdin": {
-"id": "29204",
-"name": "Verdin, Ioannes",
-"born": "01-02-1822",
-"birthplace": "St. Louis",
-"entered": "25-04-1838",
-"province": "Missourianae",
-"vows": "15-08-1856",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "02-11-1889",
-"deathplace": "St. Louis"
 },
 "father:Gaffney": {
 "id": "42563",
@@ -913,18 +887,18 @@
 "died": "14-01-1908",
 "deathplace": "Poughkeepsie"
 },
-"father:Scully": {
-"id": "51137",
-"name": "Scully, Ioannes",
-"born": "23-09-1846",
-"birthplace": "Brooklyn",
-"entered": "07-09-1872",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "03-02-1890",
+"father:Nobili": {
+"id": "14042",
+"name": "Nobili, Ioannes",
+"born": "08-04-1812",
+"birthplace": "Roma",
+"entered": "14-11-1828",
+"province": "Romana",
+"vows": "13-05-1849",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "26-12-1917",
-"deathplace": "New York"
+"died": "01-03-1856",
+"deathplace": "Sta. Clara"
 },
 "father:Romano": {
 "id": "48236",
@@ -939,6 +913,32 @@
 "died": "19-01-1915",
 "deathplace": "Baltimore"
 },
+"father:Scully": {
+"id": "51137",
+"name": "Scully, Ioannes",
+"born": "23-09-1846",
+"birthplace": "Brooklyn",
+"entered": "07-09-1872",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "03-02-1890",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "26-12-1917",
+"deathplace": "New York"
+},
+"father:Verdin": {
+"id": "29204",
+"name": "Verdin, Ioannes",
+"born": "01-02-1822",
+"birthplace": "St. Louis",
+"entered": "25-04-1838",
+"province": "Missourianae",
+"vows": "15-08-1856",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "02-11-1889",
+"deathplace": "St. Louis"
+},
 "father:Congiato": {
 "id": "34769",
 "name": "Congiato, Nicolaus",
@@ -951,6 +951,19 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "10-05-1897",
 "deathplace": "Los Gatos"
+},
+"father:Chazelle": {
+"id": "11855",
+"name": "Chazelle, Petrus",
+"born": "12-01-1789",
+"birthplace": "St-Just-en-Bas (Loire)",
+"entered": "01-03-1822",
+"province": "Franciae",
+"vows": "15-08-1833",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "04-09-1845",
+"deathplace": "Green Bay, Mich"
 },
 "father:Rey": {
 "id": "52280",
@@ -965,18 +978,18 @@
 "died": "30-12-1918",
 "deathplace": "Savona"
 },
-"father:Chazelle": {
-"id": "11855",
-"name": "Chazelle, Petrus",
-"born": "12-01-1789",
-"birthplace": "St-Just-en-Bas (Loire)",
-"entered": "01-03-1822",
-"province": "Franciae",
-"vows": "15-08-1833",
+"father:Doonan": {
+"id": "45149",
+"name": "Doonan, Iacobus A.",
+"born": "08-11-1841",
+"birthplace": "Augusta, Ga.",
+"entered": "11-07-1857",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1877",
 "grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "04-09-1845",
-"deathplace": "Green Bay, Mich"
+"status": "professed of four vows",
+"died": "12-04-1911",
+"deathplace": "Georgetown"
 },
 "father:Morgan": {
 "id": "41621",
@@ -1004,32 +1017,6 @@
 "died": "20-07-1908",
 "deathplace": "Worcester"
 },
-"father:Doonan": {
-"id": "45149",
-"name": "Doonan, Iacobus A.",
-"born": "08-11-1841",
-"birthplace": "Augusta, Ga.",
-"entered": "11-07-1857",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1877",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "12-04-1911",
-"deathplace": "Georgetown"
-},
-"father:Secchi": {
-"id": "22469",
-"name": "Secchi, Angelus",
-"born": "29-06-1818",
-"birthplace": "Reggio Emilia",
-"entered": "03-11-1833",
-"province": "Romana",
-"vows": "02-02-1852",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "26-02-1878",
-"deathplace": "Roma"
-},
 "father:Kranewitter": {
 "id": "23654",
 "name": "Kranewitter, Aloisius",
@@ -1056,18 +1043,18 @@
 "died": "07-06-1919",
 "deathplace": "Brooklyn, Ohio"
 },
-"father:Higgins": {
-"id": "38843",
-"name": "Higgins, Eduardus",
-"born": "23-12-1838",
-"birthplace": "Louisville, Ky.",
-"entered": "15-07-1854",
-"province": "Missourianae",
-"vows": "02-02-1873",
+"father:Secchi": {
+"id": "22469",
+"name": "Secchi, Angelus",
+"born": "29-06-1818",
+"birthplace": "Reggio Emilia",
+"entered": "03-11-1833",
+"province": "Romana",
+"vows": "02-02-1852",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "04-12-1902",
-"deathplace": "Cincinnati"
+"died": "26-02-1878",
+"deathplace": "Roma"
 },
 "father:Bally": {
 "id": "24392",
@@ -1081,6 +1068,19 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "30-01-1882",
 "deathplace": "Goshenhoppen, Pa."
+},
+"father:Higgins": {
+"id": "38843",
+"name": "Higgins, Eduardus",
+"born": "23-12-1838",
+"birthplace": "Louisville, Ky.",
+"entered": "15-07-1854",
+"province": "Missourianae",
+"vows": "02-02-1873",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "04-12-1902",
+"deathplace": "Cincinnati"
 },
 "father:Ronan": {
 "id": "42503",
@@ -1121,19 +1121,6 @@
 "died": "02-12-1912",
 "deathplace": "Exaten"
 },
-"father:Mulry:J": {
-"id": "54659",
-"name": "Mulry, Iosephus A.",
-"born": "08-02-1874",
-"birthplace": "New York",
-"entered": "31-10-1890",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "02-02-1910",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "31-08-1921",
-"deathplace": "Philadelphia"
-},
 "father:Cassidy": {
 "id": "38216",
 "name": "Cassidy, Petrus",
@@ -1146,6 +1133,19 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "19-01-1902",
 "deathplace": "New York"
+},
+"father:Mulry:J": {
+"id": "54659",
+"name": "Mulry, Iosephus A.",
+"born": "08-02-1874",
+"birthplace": "New York",
+"entered": "31-10-1890",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "02-02-1910",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "31-08-1921",
+"deathplace": "Philadelphia"
 },
 "father:O'Neil:T": {
 "id": "36008",
@@ -1160,19 +1160,6 @@
 "died": "02-03-1899",
 "deathplace": "Cincinnati"
 },
-"father:Sullivan:J": {
-"id": "49580",
-"name": "Sullivan, Iacobus I.",
-"born": "13-12-1858",
-"birthplace": "Chicago",
-"entered": "24-03-1877",
-"province": "Missourianae",
-"vows": "03-02-1896",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "09-06-1916",
-"deathplace": "Kansas City, Mo."
-},
 "father:Emerick": {
 "id": "63146",
 "name": "Emerick, Abraham",
@@ -1186,18 +1173,18 @@
 "died": "04-02-1931",
 "deathplace": "Woodstock"
 },
-"father:Ehrle": {
-"id": "65909",
-"name": "Ehrle, Franciscus",
-"born": "17-10-1845",
-"birthplace": "Isny (Württemberg)",
-"entered": "29-09-1861",
-"province": "Germaniae Superioris",
-"vows": "02-02-1879",
-"grade": "most eminent",
+"father:Sullivan:J": {
+"id": "49580",
+"name": "Sullivan, Iacobus I.",
+"born": "13-12-1858",
+"birthplace": "Chicago",
+"entered": "24-03-1877",
+"province": "Missourianae",
+"vows": "03-02-1896",
+"grade": "priest",
 "status": "professed of four vows",
-"died": "31-03-1934",
-"deathplace": "Roma"
+"died": "09-06-1916",
+"deathplace": "Kansas City, Mo."
 },
 "father:Burrowes": {
 "id": "59378",
@@ -1224,6 +1211,19 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "18-04-1959",
 "deathplace": "Poughkeepsie"
+},
+"father:Ehrle": {
+"id": "65909",
+"name": "Ehrle, Franciscus",
+"born": "17-10-1845",
+"birthplace": "Isny (Württemberg)",
+"entered": "29-09-1861",
+"province": "Germaniae Superioris",
+"vows": "02-02-1879",
+"grade": "most eminent",
+"status": "professed of four vows",
+"died": "31-03-1934",
+"deathplace": "Roma"
 },
 "father:Vivier": {
 "id": "56882",
@@ -1290,19 +1290,6 @@
 "died": "10-06-1925",
 "deathplace": "New York"
 },
-"father:Ragaru": {
-"id": "54500",
-"name": "Ragaru, Aloisius",
-"born": "29-11-1847",
-"birthplace": "Combrée (Maine-et-L)",
-"entered": "10-11-1869",
-"province": "Franciae",
-"vows": "02-02-1886",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "24-05-1921",
-"deathplace": "Montréal"
-},
 "father:Papi": {
 "id": "61634",
 "name": "Papi, Hector",
@@ -1316,18 +1303,18 @@
 "died": "18-06-1929",
 "deathplace": "Washington"
 },
-"father:Lessmann": {
-"id": "36329",
-"name": "Lessmann, Ioannes Baptista",
-"born": "13-07-1825",
-"birthplace": "Sommersell (Lippe, Westfalen)",
-"entered": "05-11-1851",
-"province": "Germaniae",
-"vows": "27-09-1876",
+"father:Ragaru": {
+"id": "54500",
+"name": "Ragaru, Aloisius",
+"born": "29-11-1847",
+"birthplace": "Combrée (Maine-et-L)",
+"entered": "10-11-1869",
+"province": "Franciae",
+"vows": "02-02-1886",
 "grade": "priest",
-"status": "professed of four vows",
-"died": "01-08-1899",
-"deathplace": "Prairie du Chien"
+"status": "grade spiritual coadjutor, temporal",
+"died": "24-05-1921",
+"deathplace": "Montréal"
 },
 "father:Biever": {
 "id": "66443",
@@ -1342,30 +1329,17 @@
 "died": "14-11-1934",
 "deathplace": "New Orleans"
 },
-"father:Purbrick": {
-"id": "47759",
-"name": "Purbrick, Eduardus",
-"born": "22-06-1830",
-"birthplace": "Birmingham",
-"entered": "16-10-1851",
-"province": "Angliae",
-"vows": "02-02-1869",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "18-07-1914",
-"deathplace": "Manchester"
-},
-"father:O'Conor": {
-"id": "53387",
-"name": "O'Conor, Ioannes F. X.",
-"born": "01-08-1852",
-"birthplace": "New York",
-"entered": "09-10-1872",
+"father:Daugherty": {
+"id": "47669",
+"name": "Daugherty, Hieronymus",
+"born": "25-03-1849",
+"birthplace": "Baltimore",
+"entered": "14-08-1865",
 "province": "Marylandiae-Neo Eboracensis",
-"vows": "02-02-1891",
+"vows": "15-08-1885",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "31-01-1920",
+"died": "24-05-1914",
 "deathplace": "New York"
 },
 "father:Gangoiti": {
@@ -1381,17 +1355,134 @@
 "died": "11-04-1933",
 "deathplace": "La Habana"
 },
-"father:Daugherty": {
-"id": "47669",
-"name": "Daugherty, Hieronymus",
-"born": "25-03-1849",
-"birthplace": "Baltimore",
-"entered": "14-08-1865",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1885",
+"father:Lessmann": {
+"id": "36329",
+"name": "Lessmann, Ioannes Baptista",
+"born": "13-07-1825",
+"birthplace": "Sommersell (Lippe, Westfalen)",
+"entered": "05-11-1851",
+"province": "Germaniae",
+"vows": "27-09-1876",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "24-05-1914",
+"died": "01-08-1899",
+"deathplace": "Prairie du Chien"
+},
+"father:O'Conor": {
+"id": "53387",
+"name": "O'Conor, Ioannes F. X.",
+"born": "01-08-1852",
+"birthplace": "New York",
+"entered": "09-10-1872",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "02-02-1891",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "31-01-1920",
+"deathplace": "New York"
+},
+"father:Purbrick": {
+"id": "47759",
+"name": "Purbrick, Eduardus",
+"born": "22-06-1830",
+"birthplace": "Birmingham",
+"entered": "16-10-1851",
+"province": "Angliae",
+"vows": "02-02-1869",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "18-07-1914",
+"deathplace": "Manchester"
+},
+"father:Dinand": {
+"id": "75965",
+"name": "Dinand, Iosephus N.",
+"born": "03-12-1869",
+"birthplace": "Boston",
+"entered": "13-08-1887",
+"province": "Novae Angliae",
+"vows": "15-08-1906",
+"grade": "most excellent and most reverend",
+"status": "professed of four vows",
+"died": "29-07-1943",
+"deathplace": "Weston, Mass."
+},
+"father:Fagan": {
+"id": "41204",
+"name": "Fagan, Iacobus",
+"born": "20-02-1856",
+"birthplace": "New York",
+"entered": "28-07-1873",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "02-02-1891",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "28-04-1906",
+"deathplace": "New York"
+},
+"father:Finlay:P": {
+"id": "61913",
+"name": "Finlay, Petrus",
+"born": "15-02-1851",
+"birthplace": "Cavan",
+"entered": "02-03-1866",
+"province": "Hiberniae",
+"vows": "02-02-1886",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "21-10-1929",
+"deathplace": "Dublin"
+},
+"father:Harpes": {
+"id": "51716",
+"name": "Harpes, Ioannes",
+"born": "25-03-1852",
+"birthplace": "Bettborn (Moselle)",
+"entered": "26-09-1879",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "03-02-1890",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "15-08-1918",
+"deathplace": "Kingston (Jamaica)"
+},
+"father:Maldonado": {
+"id": "19931",
+"name": "Maldonado, Carolus",
+"born": "21-09-1816",
+"birthplace": "Campo de Criptana (Ciudad Real)",
+"entered": "27-10-1831",
+"province": "Castellan",
+"vows": "02-02-1853",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "24-07-1872",
+"deathplace": "Woodstock"
+},
+"father:Marra": {
+"id": "48404",
+"name": "Marra, Iosephus M.",
+"born": "21-01-1844",
+"birthplace": "Napoli",
+"entered": "26-09-1859",
+"province": "Neapolitana",
+"vows": "02-02-1877",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "29-03-1915",
+"deathplace": "Napoli"
+},
+"father:Mulry:P": {
+"id": "55718",
+"name": "Mulry, Patricius F. X.",
+"born": "03-12-1860",
+"birthplace": "New York",
+"entered": "06-08-1877",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "02-02-1895",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "02-11-1922",
 "deathplace": "New York"
 },
 "father:Rogers": {
@@ -1407,57 +1498,18 @@
 "died": "28-07-1937",
 "deathplace": "Milford, Ohio"
 },
-"father:Mulry:P": {
-"id": "55718",
-"name": "Mulry, Patricius F. X.",
-"born": "03-12-1860",
+"father:Smith:J": {
+"id": "48425",
+"name": "Smith, Iacobus L.",
+"born": "09-09-1850",
 "birthplace": "New York",
-"entered": "06-08-1877",
+"entered": "30-07-1876",
 "province": "Marylandiae-Neo Eboracensis",
-"vows": "02-02-1895",
+"vows": "15-08-1895",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "02-11-1922",
+"died": "02-04-1915",
 "deathplace": "New York"
-},
-"father:Marra": {
-"id": "48404",
-"name": "Marra, Iosephus M.",
-"born": "21-01-1844",
-"birthplace": "Napoli",
-"entered": "26-09-1859",
-"province": "Neapolitana",
-"vows": "02-02-1877",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "29-03-1915",
-"deathplace": "Napoli"
-},
-"father:Maldonado": {
-"id": "19931",
-"name": "Maldonado, Carolus",
-"born": "21-09-1816",
-"birthplace": "Campo de Criptana (Ciudad Real)",
-"entered": "27-10-1831",
-"province": "Castellan",
-"vows": "02-02-1853",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "24-07-1872",
-"deathplace": "Woodstock"
-},
-"father:Dinand": {
-"id": "75965",
-"name": "Dinand, Iosephus N.",
-"born": "03-12-1869",
-"birthplace": "Boston",
-"entered": "13-08-1887",
-"province": "Novae Angliae",
-"vows": "15-08-1906",
-"grade": "most excellent and most reverend",
-"status": "professed of four vows",
-"died": "29-07-1943",
-"deathplace": "Weston, Mass."
 },
 "father:Vermeersch": {
 "id": "68078",
@@ -1472,58 +1524,6 @@
 "died": "12-07-1936",
 "deathplace": "Eegenhoven"
 },
-"father:Fagan": {
-"id": "41204",
-"name": "Fagan, Iacobus",
-"born": "20-02-1856",
-"birthplace": "New York",
-"entered": "28-07-1873",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "02-02-1891",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "28-04-1906",
-"deathplace": "New York"
-},
-"father:Harpes": {
-"id": "51716",
-"name": "Harpes, Ioannes",
-"born": "25-03-1852",
-"birthplace": "Bettborn (Moselle)",
-"entered": "26-09-1879",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "03-02-1890",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "15-08-1918",
-"deathplace": "Kingston (Jamaica)"
-},
-"father:Finlay:P": {
-"id": "61913",
-"name": "Finlay, Petrus",
-"born": "15-02-1851",
-"birthplace": "Cavan",
-"entered": "02-03-1866",
-"province": "Hiberniae",
-"vows": "02-02-1886",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "21-10-1929",
-"deathplace": "Dublin"
-},
-"father:Smith:J": {
-"id": "48425",
-"name": "Smith, Iacobus L.",
-"born": "09-09-1850",
-"birthplace": "New York",
-"entered": "30-07-1876",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1895",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "02-04-1915",
-"deathplace": "New York"
-},
 "father:Fisher": {
 "id": "94283",
 "name": "Fisher, Ioannes H.",
@@ -1536,19 +1536,6 @@
 "status": "professed of four vows",
 "died": "04-05-1961",
 "deathplace": "Woodstock"
-},
-"father:Hagen:J": {
-"id": "62696",
-"name": "Hagen, Ioannes",
-"born": "06-03-1847",
-"birthplace": "Bregenz (Vorarlberg)",
-"entered": "01-10-1863",
-"province": "Germaniae Superioris",
-"vows": "02-02-1881",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "05-09-1930",
-"deathplace": "Roma"
 },
 "father:Gerard": {
 "id": "46475",
@@ -1563,44 +1550,18 @@
 "died": "13-12-1912",
 "deathplace": "London"
 },
-"father:Grassi:J": {
-"id": "12671",
-"name": "Grassi, Ioannes Antonius",
-"born": "10-09-1775",
-"birthplace": "Schilpario (Bergamo)",
-"entered": "21-11-1799",
-"province": "Taurinensis",
-"vows": "15-08-1812",
+"father:Hagen:J": {
+"id": "62696",
+"name": "Hagen, Ioannes",
+"born": "06-03-1847",
+"birthplace": "Bregenz (Vorarlberg)",
+"entered": "01-10-1863",
+"province": "Germaniae Superioris",
+"vows": "02-02-1881",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "12-12-1849",
+"died": "05-09-1930",
 "deathplace": "Roma"
-},
-"father:Jones:A": {
-"id": "51215",
-"name": "Jones, Arthurus",
-"born": "17-11-1838",
-"birthplace": "Brockville, Ont.",
-"entered": "07-12-1857",
-"province": "Canadensis",
-"vows": "15-08-1879",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "19-01-1918",
-"deathplace": "Montréal"
-},
-"father:Gillet:H": {
-"id": "45464",
-"name": "Gillet, Henricus",
-"born": "02-12-1842",
-"birthplace": "Fleetwood (Lancashire)",
-"entered": "07-09-1861",
-"province": "Angliae",
-"vows": "30-05-1887",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "31-08-1911",
-"deathplace": "Dunbrody (South Africa)"
 },
 "father:Boursaud": {
 "id": "38342",
@@ -1614,19 +1575,6 @@
 "status": "professed of four vows",
 "died": "19-03-1902",
 "deathplace": "Frederick"
-},
-"father:Whitney": {
-"id": "51068",
-"name": "Whitney, Ioannes D.",
-"born": "19-07-1850",
-"birthplace": "Island of Nantucket, Mass.",
-"entered": "14-08-1872",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1894",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "27-11-1917",
-"deathplace": "Boston"
 },
 "father:Curley": {
 "id": "29000",
@@ -1654,6 +1602,45 @@
 "died": "27-06-1947",
 "deathplace": "New York"
 },
+"father:Gillet:H": {
+"id": "45464",
+"name": "Gillet, Henricus",
+"born": "02-12-1842",
+"birthplace": "Fleetwood (Lancashire)",
+"entered": "07-09-1861",
+"province": "Angliae",
+"vows": "30-05-1887",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "31-08-1911",
+"deathplace": "Dunbrody (South Africa)"
+},
+"father:Grassi:J": {
+"id": "12671",
+"name": "Grassi, Ioannes Antonius",
+"born": "10-09-1775",
+"birthplace": "Schilpario (Bergamo)",
+"entered": "21-11-1799",
+"province": "Taurinensis",
+"vows": "15-08-1812",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "12-12-1849",
+"deathplace": "Roma"
+},
+"father:Jones:A": {
+"id": "51215",
+"name": "Jones, Arthurus",
+"born": "17-11-1838",
+"birthplace": "Brockville, Ont.",
+"entered": "07-12-1857",
+"province": "Canadensis",
+"vows": "15-08-1879",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "19-01-1918",
+"deathplace": "Montréal"
+},
 "father:Pigot": {
 "id": "61571",
 "name": "Pigot, Eduardus",
@@ -1680,18 +1667,18 @@
 "died": "27-11-1900",
 "deathplace": "San Francisco"
 },
-"father:Fonck": {
-"id": "62822",
-"name": "Fonck, Leopoldus",
-"born": "14-01-1865",
-"birthplace": "Wissen (Rheinland)",
-"entered": "30-09-1892",
-"province": "Austriae",
-"vows": "02-02-1903",
+"father:Whitney": {
+"id": "51068",
+"name": "Whitney, Ioannes D.",
+"born": "19-07-1850",
+"birthplace": "Island of Nantucket, Mass.",
+"entered": "14-08-1872",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1894",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "19-10-1930",
-"deathplace": "Wien"
+"died": "27-11-1917",
+"deathplace": "Boston"
 },
 "father:Brosnan:J": {
 "id": "81725",
@@ -1719,18 +1706,18 @@
 "died": "13-02-1915",
 "deathplace": "Kansas City, Mo."
 },
-"father:Guldner": {
-"id": "59798",
-"name": "Guldner, Benedictus",
-"born": "10-03-1845",
-"birthplace": "Bons pr Saarlouis (Rheinland)",
-"entered": "25-05-1866",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1886",
+"father:Fonck": {
+"id": "62822",
+"name": "Fonck, Leopoldus",
+"born": "14-01-1865",
+"birthplace": "Wissen (Rheinland)",
+"entered": "30-09-1892",
+"province": "Austriae",
+"vows": "02-02-1903",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "19-06-1927",
-"deathplace": "Philadelphia"
+"died": "19-10-1930",
+"deathplace": "Wien"
 },
 "father:Gregory": {
 "id": "47114",
@@ -1745,18 +1732,18 @@
 "died": "08-10-1913",
 "deathplace": "Georgetown"
 },
-"father:Carbery": {
-"id": "12578",
-"name": "Carbery, Iosephus",
-"born": "03-05-1784",
-"birthplace": "St. Clement's (St. Mary's, Md)",
-"entered": "29-05-1818",
-"province": "Marylandiae",
-"vows": "21-12-1833",
+"father:Guldner": {
+"id": "59798",
+"name": "Guldner, Benedictus",
+"born": "10-03-1845",
+"birthplace": "Bons pr Saarlouis (Rheinland)",
+"entered": "25-05-1866",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1886",
 "grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "25-05-1849",
-"deathplace": "St. Inigo's, Md."
+"status": "professed of four vows",
+"died": "19-06-1927",
+"deathplace": "Philadelphia"
 },
 "father:Bayma": {
 "id": "31034",
@@ -1770,6 +1757,19 @@
 "status": "professed of four vows",
 "died": "07-02-1892",
 "deathplace": "Sta. Clara"
+},
+"father:Carbery": {
+"id": "12578",
+"name": "Carbery, Iosephus",
+"born": "03-05-1784",
+"birthplace": "St. Clement's (St. Mary's, Md)",
+"entered": "29-05-1818",
+"province": "Marylandiae",
+"vows": "21-12-1833",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "25-05-1849",
+"deathplace": "St. Inigo's, Md."
 },
 "mr:Lewis": {
 "id": "86165",
@@ -1797,83 +1797,18 @@
 "died": "03-01-1899",
 "deathplace": "Belgaum"
 },
-"father:Tierney": {
-"id": "60371",
-"name": "Tierney, Ricardus H.",
-"born": "02-09-1870",
-"birthplace": "New York",
-"entered": "14-08-1892",
+"father:Duranquet": {
+"id": "30866",
+"name": "Du Ranquet, Henricus",
+"born": "18-12-1809",
+"birthplace": "Chalus (Puy-de-D)",
+"entered": "03-09-1836",
 "province": "Marylandiae-Neo Eboracensis",
-"vows": "02-02-1910",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "10-02-1928",
-"deathplace": "New York"
-},
-"mr:Matthews": {
-"id": "59606",
-"name": "Matthews, Iacobus B.",
-"born": "07-02-1865",
-"birthplace": "Johnstown pr Chapel Point (Charles, Md.)",
-"entered": "14-08-1884",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "03-02-1902",
+"vows": "18-04-1847",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "13-04-1927",
-"deathplace": "Baltimore"
-},
-"father:Miles": {
-"id": "43712",
-"name": "Miles, Thomas",
-"born": "11-08-1831",
-"birthplace": "Bardstown, Ky.",
-"entered": "26-08-1851",
-"province": "Missourianae",
-"vows": "25-03-1865",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "28-05-1909",
-"deathplace": "St. Louis"
-},
-"father:Phillips": {
-"id": "85220",
-"name": "Phillips, Eduardus C.",
-"born": "04-11-1877",
-"birthplace": "Philadelphia",
-"entered": "14-08-1898",
-"province": "Neo-Eboracensis",
-"vows": "02-02-1916",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "09-05-1952",
-"deathplace": "Poughkeepsie"
-},
-"father:Lester": {
-"id": "66398",
-"name": "Lester, Edmundus",
-"born": "14-01-1866",
-"birthplace": "Bristol (Gloucester)",
-"entered": "01-02-1885",
-"province": "Angliae",
-"vows": "02-02-1903",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "24-10-1934",
-"deathplace": "Osterley (Middlesex)"
-},
-"father:Valente": {
-"id": "28385",
-"name": "Valente, Aloisius",
-"born": "07-12-1835",
-"birthplace": "Napoli",
-"entered": "17-01-1850",
-"province": "Neapolitana",
-"vows": "02-02-1869",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "06-08-1888",
-"deathplace": "Marigliano (Caserta)"
+"died": "30-12-1891",
+"deathplace": "Woodstock"
 },
 "father:Hoecken:C": {
 "id": "12965",
@@ -1888,18 +1823,31 @@
 "died": "19-06-1851",
 "deathplace": null
 },
-"father:Duranquet": {
-"id": "30866",
-"name": "Du Ranquet, Henricus",
-"born": "18-12-1809",
-"birthplace": "Chalus (Puy-de-D)",
-"entered": "03-09-1836",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "18-04-1847",
+"father:Lester": {
+"id": "66398",
+"name": "Lester, Edmundus",
+"born": "14-01-1866",
+"birthplace": "Bristol (Gloucester)",
+"entered": "01-02-1885",
+"province": "Angliae",
+"vows": "02-02-1903",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "30-12-1891",
-"deathplace": "Woodstock"
+"died": "24-10-1934",
+"deathplace": "Osterley (Middlesex)"
+},
+"father:Miles": {
+"id": "43712",
+"name": "Miles, Thomas",
+"born": "11-08-1831",
+"birthplace": "Bardstown, Ky.",
+"entered": "26-08-1851",
+"province": "Missourianae",
+"vows": "25-03-1865",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "28-05-1909",
+"deathplace": "St. Louis"
 },
 "father:Monaghan": {
 "id": "73502",
@@ -1927,83 +1875,57 @@
 "died": "27-04-1823",
 "deathplace": "Mount Carmel, Md"
 },
-"father:Kelly:W": {
-"id": "88013",
-"name": "Kelly, Gulielmus I.",
-"born": "02-09-1901",
-"birthplace": "Carbondale, Ill.",
-"entered": "14-08-1921",
-"province": "Marylandiae",
-"vows": "02-02-1937",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "23-03-1955",
-"deathplace": "Scranton, Pa"
-},
-"father:Duffy": {
-"id": "81800",
-"name": "Duffy, Iacobus S.",
-"born": "12-07-1883",
-"birthplace": "Brooklyn",
-"entered": "14-08-1923",
+"father:Phillips": {
+"id": "85220",
+"name": "Phillips, Eduardus C.",
+"born": "04-11-1877",
+"birthplace": "Philadelphia",
+"entered": "14-08-1898",
 "province": "Neo-Eboracensis",
-"vows": "02-02-1934",
+"vows": "02-02-1916",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "09-05-1952",
+"deathplace": "Poughkeepsie"
+},
+"father:Tierney": {
+"id": "60371",
+"name": "Tierney, Ricardus H.",
+"born": "02-09-1870",
+"birthplace": "New York",
+"entered": "14-08-1892",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "02-02-1910",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "10-02-1928",
+"deathplace": "New York"
+},
+"father:Valente": {
+"id": "28385",
+"name": "Valente, Aloisius",
+"born": "07-12-1835",
+"birthplace": "Napoli",
+"entered": "17-01-1850",
+"province": "Neapolitana",
+"vows": "02-02-1869",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "06-08-1888",
+"deathplace": "Marigliano (Caserta)"
+},
+"mr:Matthews": {
+"id": "59606",
+"name": "Matthews, Iacobus B.",
+"born": "07-02-1865",
+"birthplace": "Johnstown pr Chapel Point (Charles, Md.)",
+"entered": "14-08-1884",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "03-02-1902",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "30-12-1948",
-"deathplace": "Amsterdam, N.Y."
-},
-"father:Rockwell": {
-"id": "59906",
-"name": "Rockwell, Iosephus",
-"born": "19-11-1862",
-"birthplace": "Boston",
-"entered": "07-10-1881",
-"province": "Novae Angliae",
-"vows": "02-02-1900",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "01-08-1927",
-"deathplace": "Boston"
-},
-"father:Miege": {
-"id": "25799",
-"name": "Miege, Ioannes Baptista",
-"born": "18-09-1815",
-"birthplace": "Mercury-Gemilly (Savoie)",
-"entered": "23-10-1836",
-"province": "Missourianae",
-"vows": "15-08-1875",
-"grade": "most excellent and most reverend",
-"status": "professed of four vows",
-"died": "21-07-1884",
-"deathplace": "Woodstock"
-},
-"father:Guida": {
-"id": "52721",
-"name": "Guida, Ioannes Baptista",
-"born": "29-11-1828",
-"birthplace": "Nola (Napoli)",
-"entered": "15-06-1843",
-"province": "Neapolitana",
-"vows": "15-08-1862",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "23-05-1919",
-"deathplace": "Denver"
-},
-"father:Freddi": {
-"id": "47699",
-"name": "Freddi, Rogerius",
-"born": "22-03-1846",
-"birthplace": "Macerata Feltria (Pesaro)",
-"entered": "21-09-1862",
-"province": "Romana",
-"vows": "02-02-1880",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "11-06-1914",
-"deathplace": "Roma"
+"died": "13-04-1927",
+"deathplace": "Baltimore"
 },
 "brother:Brancoli": {
 "id": "73046",
@@ -2018,31 +1940,83 @@
 "died": "14-12-1940",
 "deathplace": "Sta. Clara"
 },
-"father:Verreydt": {
-"id": "24998",
-"name": "Verreydt, Felix",
-"born": "18-02-1798",
-"birthplace": "Diest (Brabant)",
-"entered": "06-10-1821",
-"province": "Missourianae",
-"vows": "01-09-1833",
+"father:Duffy": {
+"id": "81800",
+"name": "Duffy, Iacobus S.",
+"born": "12-07-1883",
+"birthplace": "Brooklyn",
+"entered": "14-08-1923",
+"province": "Neo-Eboracensis",
+"vows": "02-02-1934",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "01-03-1883",
-"deathplace": "Cincinnati"
+"died": "30-12-1948",
+"deathplace": "Amsterdam, N.Y."
 },
-"father:Prachensky": {
-"id": "29708",
-"name": "Prachensky, Iosephus",
-"born": "22-06-1822",
-"birthplace": "Cheb (Čechy)",
-"entered": "06-09-1839",
-"province": "Austriaco-Hungarica",
-"vows": "02-02-1864",
+"father:Freddi": {
+"id": "47699",
+"name": "Freddi, Rogerius",
+"born": "22-03-1846",
+"birthplace": "Macerata Feltria (Pesaro)",
+"entered": "21-09-1862",
+"province": "Romana",
+"vows": "02-02-1880",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "08-07-1890",
-"deathplace": "Fordham"
+"died": "11-06-1914",
+"deathplace": "Roma"
+},
+"father:Guida": {
+"id": "52721",
+"name": "Guida, Ioannes Baptista",
+"born": "29-11-1828",
+"birthplace": "Nola (Napoli)",
+"entered": "15-06-1843",
+"province": "Neapolitana",
+"vows": "15-08-1862",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "23-05-1919",
+"deathplace": "Denver"
+},
+"father:Kelly:W": {
+"id": "88013",
+"name": "Kelly, Gulielmus I.",
+"born": "02-09-1901",
+"birthplace": "Carbondale, Ill.",
+"entered": "14-08-1921",
+"province": "Marylandiae",
+"vows": "02-02-1937",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "23-03-1955",
+"deathplace": "Scranton, Pa"
+},
+"father:Miege": {
+"id": "25799",
+"name": "Miege, Ioannes Baptista",
+"born": "18-09-1815",
+"birthplace": "Mercury-Gemilly (Savoie)",
+"entered": "23-10-1836",
+"province": "Missourianae",
+"vows": "15-08-1875",
+"grade": "most excellent and most reverend",
+"status": "professed of four vows",
+"died": "21-07-1884",
+"deathplace": "Woodstock"
+},
+"father:Rockwell": {
+"id": "59906",
+"name": "Rockwell, Iosephus",
+"born": "19-11-1862",
+"birthplace": "Boston",
+"entered": "07-10-1881",
+"province": "Novae Angliae",
+"vows": "02-02-1900",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "01-08-1927",
+"deathplace": "Boston"
 },
 "father:Jordan": {
 "id": "36311",
@@ -2057,57 +2031,31 @@
 "died": "17-07-1899",
 "deathplace": "Philadelphia"
 },
-"father:Muset": {
-"id": "34976",
-"name": "Muset, Paulus",
-"born": "09-07-1854",
-"birthplace": "Cambrai (Nord)",
-"entered": "28-09-1873",
-"province": "Taurinensis",
-"vows": null,
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "07-09-1897",
-"deathplace": "Missoula, Mont."
-},
-"father:Moore:J": {
-"id": "40979",
-"name": "Moore, Ioannes J.",
-"born": "25-07-1858",
-"birthplace": "Ballinter House (Meath)",
-"entered": "13-09-1873",
-"province": "Taurinensis",
-"vows": "08-09-1893",
-"grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "27-01-1906",
-"deathplace": "San Jose, Calif."
-},
-"father:O'Shanahan": {
-"id": "46925",
-"name": "O'Shanahan, Ioannes",
-"born": "24-12-1837",
-"birthplace": "Listowel (Kerry)",
-"entered": "26-04-1860",
-"province": "Neo-Aurelianensis",
-"vows": "15-08-1877",
+"father:Prachensky": {
+"id": "29708",
+"name": "Prachensky, Iosephus",
+"born": "22-06-1822",
+"birthplace": "Cheb (Čechy)",
+"entered": "06-09-1839",
+"province": "Austriaco-Hungarica",
+"vows": "02-02-1864",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "06-07-1913",
-"deathplace": "Grand Coteau"
+"died": "08-07-1890",
+"deathplace": "Fordham"
 },
-"father:Nash": {
-"id": "33572",
-"name": "Nash, Michael",
-"born": "29-09-1825",
-"birthplace": "Whitechurch (Kilkenny)",
-"entered": "13-04-1844",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1865",
+"father:Verreydt": {
+"id": "24998",
+"name": "Verreydt, Felix",
+"born": "18-02-1798",
+"birthplace": "Diest (Brabant)",
+"entered": "06-10-1821",
+"province": "Missourianae",
+"vows": "01-09-1833",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "06-09-1895",
-"deathplace": "Troy, NY"
+"died": "01-03-1883",
+"deathplace": "Cincinnati"
 },
 "father:Giorda": {
 "id": "24686",
@@ -2122,109 +2070,57 @@
 "died": "04-08-1882",
 "deathplace": "Desmet, Idaho"
 },
-"father:Sopranis": {
-"id": "21662",
-"name": "Sopranis, Felix",
-"born": "21-01-1799",
-"birthplace": "Genova",
-"entered": "10-11-1818",
-"province": "Romana",
-"vows": "02-02-1836",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "04-05-1876",
-"deathplace": "Fiesole (Firenze)"
-},
-"father:Enders": {
-"id": "25871",
-"name": "Enders, Iosephus",
-"born": "17-11-1806",
-"birthplace": "Oberteich (Bayern)",
-"entered": "28-09-1836",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1847",
+"father:Moore:J": {
+"id": "40979",
+"name": "Moore, Ioannes J.",
+"born": "25-07-1858",
+"birthplace": "Ballinter House (Meath)",
+"entered": "13-09-1873",
+"province": "Taurinensis",
+"vows": "08-09-1893",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "10-09-1884",
-"deathplace": "Frederick"
+"died": "27-01-1906",
+"deathplace": "San Jose, Calif."
 },
-"father:Monroe": {
-"id": "72026",
-"name": "Monroe, Franciscus M.",
-"born": "02-06-1855",
-"birthplace": "Perreux",
-"entered": "04-11-1874",
-"province": "Oregoniensis",
-"vows": "28-12-1895",
+"father:Muset": {
+"id": "34976",
+"name": "Muset, Paulus",
+"born": "09-07-1854",
+"birthplace": "Cambrai (Nord)",
+"entered": "28-09-1873",
+"province": "Taurinensis",
+"vows": null,
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "09-01-1940",
-"deathplace": "Spokane"
+"died": "07-09-1897",
+"deathplace": "Missoula, Mont."
 },
-"father:Kuppens": {
-"id": "49412",
-"name": "Kuppens, Franciscus Xavier",
-"born": "18-06-1838",
-"birthplace": "Turnhout",
-"entered": "18-03-1857",
-"province": "Missourianae",
-"vows": "15-08-1869",
+"father:Nash": {
+"id": "33572",
+"name": "Nash, Michael",
+"born": "29-09-1825",
+"birthplace": "Whitechurch (Kilkenny)",
+"entered": "13-04-1844",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1865",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "08-04-1916",
-"deathplace": "Florissant"
+"died": "06-09-1895",
+"deathplace": "Troy, NY"
 },
-"father:Racicot": {
-"id": "30269",
-"name": "Racicot, Petrus",
-"born": "20-12-1839",
-"birthplace": "Montréal",
-"entered": "18-07-1855",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1873",
+"father:O'Shanahan": {
+"id": "46925",
+"name": "O'Shanahan, Ioannes",
+"born": "24-12-1837",
+"birthplace": "Listowel (Kerry)",
+"entered": "26-04-1860",
+"province": "Neo-Aurelianensis",
+"vows": "15-08-1877",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "27-03-1891",
-"deathplace": "Boston"
-},
-"father:Grace": {
-"id": "92234",
-"name": "Grace, Gulielmus J.",
-"born": "23-02-1882",
-"birthplace": "St. Louis",
-"entered": "25-07-1902",
-"province": "Missourianae",
-"vows": "02-02-1921",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "16-04-1959",
-"deathplace": "Milwaukee"
-},
-"father:Persone": {
-"id": "55880",
-"name": "Personè, Salvator",
-"born": "24-12-1833",
-"birthplace": "Ostuni (Lecce)",
-"entered": "14-11-1853",
-"province": "Missourianae",
-"vows": "26-11-1871",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "30-12-1922",
-"deathplace": "Trinidad, Colo."
-},
-"father:Dooley": {
-"id": "60962",
-"name": "Dooley, Patricius J.",
-"born": "10-03-1853",
-"birthplace": "Shrule (Mayo)",
-"entered": "03-10-1870",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1889",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "09-10-1928",
-"deathplace": "Poughkeepsie"
+"died": "06-07-1913",
+"deathplace": "Grand Coteau"
 },
 "father:Charaux": {
 "id": "38621",
@@ -2239,18 +2135,57 @@
 "died": "10-08-1902",
 "deathplace": "Montréal"
 },
-"father:Scanlan": {
-"id": "47510",
-"name": "Scanlan, Gulielmus",
-"born": "15-02-1840",
-"birthplace": "Ennis (Clare)",
-"entered": "28-07-1859",
+"father:Dooley": {
+"id": "60962",
+"name": "Dooley, Patricius J.",
+"born": "10-03-1853",
+"birthplace": "Shrule (Mayo)",
+"entered": "03-10-1870",
 "province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1881",
+"vows": "15-08-1889",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "09-10-1928",
+"deathplace": "Poughkeepsie"
+},
+"father:Enders": {
+"id": "25871",
+"name": "Enders, Iosephus",
+"born": "17-11-1806",
+"birthplace": "Oberteich (Bayern)",
+"entered": "28-09-1836",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1847",
 "grade": "priest",
 "status": "grade spiritual coadjutor, temporal",
-"died": "24-03-1914",
-"deathplace": "Boston"
+"died": "10-09-1884",
+"deathplace": "Frederick"
+},
+"father:Grace": {
+"id": "92234",
+"name": "Grace, Gulielmus J.",
+"born": "23-02-1882",
+"birthplace": "St. Louis",
+"entered": "25-07-1902",
+"province": "Missourianae",
+"vows": "02-02-1921",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "16-04-1959",
+"deathplace": "Milwaukee"
+},
+"father:Kuppens": {
+"id": "49412",
+"name": "Kuppens, Franciscus Xavier",
+"born": "18-06-1838",
+"birthplace": "Turnhout",
+"entered": "18-03-1857",
+"province": "Missourianae",
+"vows": "15-08-1869",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "08-04-1916",
+"deathplace": "Florissant"
 },
 "father:Millan": {
 "id": "59114",
@@ -2265,18 +2200,70 @@
 "died": "23-10-1926",
 "deathplace": "Culión, Phil."
 },
-"father:Fine": {
-"id": "59690",
-"name": "Fine, Eduardus",
-"born": "28-05-1847",
-"birthplace": "Marseille",
-"entered": "01-09-1865",
-"province": "Lugdunensis",
-"vows": "15-08-1884",
+"father:Monroe": {
+"id": "72026",
+"name": "Monroe, Franciscus M.",
+"born": "02-06-1855",
+"birthplace": "Perreux",
+"entered": "04-11-1874",
+"province": "Oregoniensis",
+"vows": "28-12-1895",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "09-01-1940",
+"deathplace": "Spokane"
+},
+"father:Persone": {
+"id": "55880",
+"name": "Personè, Salvator",
+"born": "24-12-1833",
+"birthplace": "Ostuni (Lecce)",
+"entered": "14-11-1853",
+"province": "Missourianae",
+"vows": "26-11-1871",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "13-05-1927",
-"deathplace": "Lyon"
+"died": "30-12-1922",
+"deathplace": "Trinidad, Colo."
+},
+"father:Racicot": {
+"id": "30269",
+"name": "Racicot, Petrus",
+"born": "20-12-1839",
+"birthplace": "Montréal",
+"entered": "18-07-1855",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1873",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "27-03-1891",
+"deathplace": "Boston"
+},
+"father:Scanlan": {
+"id": "47510",
+"name": "Scanlan, Gulielmus",
+"born": "15-02-1840",
+"birthplace": "Ennis (Clare)",
+"entered": "28-07-1859",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1881",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "24-03-1914",
+"deathplace": "Boston"
+},
+"father:Sopranis": {
+"id": "21662",
+"name": "Sopranis, Felix",
+"born": "21-01-1799",
+"birthplace": "Genova",
+"entered": "10-11-1818",
+"province": "Romana",
+"vows": "02-02-1836",
+"grade": "priest",
+"status": "professed of four vows",
+"died": "04-05-1876",
+"deathplace": "Fiesole (Firenze)"
 },
 "father:Edelen": {
 "id": "9077",
@@ -2291,18 +2278,18 @@
 "died": "21-12-1823",
 "deathplace": "Newton, Md."
 },
-"father:McDonnell:E": {
-"id": "67358",
-"name": "McDonnell, Eugenius Del",
-"born": "20-10-1864",
-"birthplace": "Baltimore",
-"entered": "24-03-1887",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1905",
+"father:Fine": {
+"id": "59690",
+"name": "Fine, Eduardus",
+"born": "28-05-1847",
+"birthplace": "Marseille",
+"entered": "01-09-1865",
+"province": "Lugdunensis",
+"vows": "15-08-1884",
 "grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "28-10-1935",
-"deathplace": "Washington"
+"status": "professed of four vows",
+"died": "13-05-1927",
+"deathplace": "Lyon"
 },
 "father:Freeman": {
 "id": "42398",
@@ -2330,31 +2317,18 @@
 "died": "25-01-1918",
 "deathplace": "Zizers (Graubünden)"
 },
-"father:Clarke:W": {
-"id": "29897",
-"name": "Clarke, Gulielmus",
-"born": "19-03-1816",
-"birthplace": "Washington",
-"entered": "14-08-1833",
+"father:McDonnell:E": {
+"id": "67358",
+"name": "McDonnell, Eugenius Del",
+"born": "20-10-1864",
+"birthplace": "Baltimore",
+"entered": "24-03-1887",
 "province": "Marylandiae-Neo Eboracensis",
-"vows": "08-09-1852",
+"vows": "15-08-1905",
 "grade": "priest",
-"status": "professed of four vows",
-"died": "17-10-1890",
+"status": "grade spiritual coadjutor, temporal",
+"died": "28-10-1935",
 "deathplace": "Washington"
-},
-"father:Blox": {
-"id": "15227",
-"name": "Blox, Ioannes",
-"born": "17-01-1810",
-"birthplace": "Bergeijk (N-Brabant)",
-"entered": "05-11-1832",
-"province": "Marylandiae",
-"vows": "08-09-1853",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "27-04-1860",
-"deathplace": "Philadelphia"
 },
 "father:Accolti": {
 "id": "22796",
@@ -2369,18 +2343,18 @@
 "died": "07-11-1878",
 "deathplace": "San Francisco"
 },
-"father:Hillman": {
-"id": "51254",
-"name": "Hillman, Franciscus G.",
-"born": "06-04-1846",
-"birthplace": "Vught (N-Brabant)",
-"entered": "24-11-1870",
-"province": "Missourianae",
-"vows": "02-02-1883",
+"father:Blox": {
+"id": "15227",
+"name": "Blox, Ioannes",
+"born": "17-01-1810",
+"birthplace": "Bergeijk (N-Brabant)",
+"entered": "05-11-1832",
+"province": "Marylandiae",
+"vows": "08-09-1853",
 "grade": "priest",
-"status": "grade spiritual coadjutor, temporal",
-"died": "29-01-1918",
-"deathplace": "Florissant"
+"status": "professed of four vows",
+"died": "27-04-1860",
+"deathplace": "Philadelphia"
 },
 "father:Caruana": {
 "id": "47159",
@@ -2395,18 +2369,18 @@
 "died": "29-10-1913",
 "deathplace": "Desmet, Idaho"
 },
-"father:Ledochowski": {
-"id": "75266",
-"name": "Ledóchowski, Wlodimir (Wlodimirus)",
-"born": "07-10-1866",
-"birthplace": "Loosdorf (Österreich)",
-"entered": "24-09-1889",
-"province": "Poloniae Minoris",
-"vows": "25-03-1901",
-"grade": "very reverend father general",
+"father:Clarke:W": {
+"id": "29897",
+"name": "Clarke, Gulielmus",
+"born": "19-03-1816",
+"birthplace": "Washington",
+"entered": "14-08-1833",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "08-09-1852",
+"grade": "priest",
 "status": "professed of four vows",
-"died": "13-12-1942",
-"deathplace": "Roma"
+"died": "17-10-1890",
+"deathplace": "Washington"
 },
 "father:Coghlan": {
 "id": "34931",
@@ -2434,44 +2408,57 @@
 "died": "15-12-1956",
 "deathplace": "Poughkeepsie"
 },
-"father:Stadelman": {
-"id": "73478",
-"name": "Stadelman, Iosephus M.",
-"born": "04-06-1858",
-"birthplace": "Guebwiller (H-Rhin)",
-"entered": "13-08-1877",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "02-02-1898",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "26-04-1941",
-"deathplace": "New York"
-},
-"father:Maraschi": {
-"id": "34640",
-"name": "Maraschi, Antonius",
-"born": "02-09-1820",
-"birthplace": "Oleggio Castello (Novara)",
-"entered": "31-05-1841",
-"province": "Taurinensis",
-"vows": "15-08-1854",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "18-03-1897",
-"deathplace": "San Francisco"
-},
-"father:Sherman": {
-"id": "65090",
-"name": "Sherman, Thomas E.",
-"born": "12-10-1856",
-"birthplace": "San Francisco",
-"entered": "16-06-1878",
+"father:Hillman": {
+"id": "51254",
+"name": "Hillman, Franciscus G.",
+"born": "06-04-1846",
+"birthplace": "Vught (N-Brabant)",
+"entered": "24-11-1870",
 "province": "Missourianae",
-"vows": "15-08-1896",
+"vows": "02-02-1883",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "29-01-1918",
+"deathplace": "Florissant"
+},
+"father:Ledochowski": {
+"id": "75266",
+"name": "Ledóchowski, Wlodimir (Wlodimirus)",
+"born": "07-10-1866",
+"birthplace": "Loosdorf (Österreich)",
+"entered": "24-09-1889",
+"province": "Poloniae Minoris",
+"vows": "25-03-1901",
+"grade": "very reverend father general",
+"status": "professed of four vows",
+"died": "13-12-1942",
+"deathplace": "Roma"
+},
+"brother:Vorbrinck": {
+"id": "46469",
+"name": "Vorbrinck, Theodorus",
+"born": "21-05-1837",
+"birthplace": "Hopsten (Westfalen)",
+"entered": "09-08-1856",
+"province": "Marylandiae-Neo Eboracensis",
+"vows": "15-08-1867",
+"grade": "temporal coadjutor",
+"status": "grade spiritual coadjutor, temporal",
+"died": "09-12-1912",
+"deathplace": "Baltimore"
+},
+"father:Brocard": {
+"id": "13106",
+"name": "Brocard, Ignatius",
+"born": "13-03-1793",
+"birthplace": "Ardon (Valais)",
+"entered": "27-09-1814",
+"province": "Germaniae Superioris et Inferioris",
+"vows": "15-08-1831",
 "grade": "priest",
 "status": "professed of four vows",
-"died": "29-04-1933",
-"deathplace": "New Orleans"
+"died": "01-04-1852",
+"deathplace": "Georgetown"
 },
 "father:Cicaterri:F": {
 "id": "20378",
@@ -2486,6 +2473,19 @@
 "died": "15-07-1873",
 "deathplace": "Woodstock"
 },
+"father:Jacquet": {
+"id": "55199",
+"name": "Jacquet, Aloisius",
+"born": "18-01-1854",
+"birthplace": "Bruges",
+"entered": "19-03-1872",
+"province": "Californiae",
+"vows": "02-02-1895",
+"grade": "priest",
+"status": "grade spiritual coadjutor, temporal",
+"died": "27-03-1922",
+"deathplace": "Montréal"
+},
 "father:Jette": {
 "id": "59441",
 "name": "Jetté, Iulius",
@@ -2498,32 +2498,6 @@
 "status": "grade spiritual coadjutor, temporal",
 "died": "04-02-1927",
 "deathplace": "Akulurak (Alaska)"
-},
-"father:Van Gorp": {
-"id": "40403",
-"name": "van Gorp, Leopoldus",
-"born": "11-06-1834",
-"birthplace": "Turnhout (Belgium)",
-"entered": "25-09-1855",
-"province": "Missourianae",
-"vows": "15-08-1873",
-"grade": "priest",
-"status": "professed of four vows",
-"died": "07-04-1905",
-"deathplace": "St. Ignatius, Mont."
-},
-"brother:Vorbrinck": {
-"id": "46469",
-"name": "Vorbrinck, Theodorus",
-"born": "21-05-1837",
-"birthplace": "Hopsten (Westfalen)",
-"entered": "09-08-1856",
-"province": "Marylandiae-Neo Eboracensis",
-"vows": "15-08-1867",
-"grade": "temporal coadjutor",
-"status": "grade spiritual coadjutor, temporal",
-"died": "09-12-1912",
-"deathplace": "Baltimore"
 }
 }
 }

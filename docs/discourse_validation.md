@@ -34,16 +34,16 @@ Word-count-weighted means over the non-optional texts of each year, from the pac
 The small difference in first-person singular is the package's: its OCR texts keep "I^oyola", "I^etters", "I^ouis" (the L read as I^), which its tokeniser counts as the pronoun *I*; the edition repairs them to Loyola, Letters, Louis.
 
 
-## The 1920 jubilee corpus
+## The corpora of 1890 and 1920
 
-The package gives the Golden Jubilee essays of 1920 as one cleaned file. Its words are those of two pieces of the Golden Jubilee number: [49-001](../#/a/49-001) The Golden Jubilee, [49-006](../#/a/49-006) The Academy in Honor of the Cardinal.
+The package gives the 1890 sample and the Golden Jubilee essays of 1920 as one cleaned file each. Their words are those of whole articles of the edition, found by shared runs of eight words.
 
-| Source | words | we % | I % | certainty % | achievement % |
-|---|---|---|---|---|---|
-| package | 7,773 | 2.03 | 0.53 | 0.33 | 0.37 |
-| edition | 7,806 | 2.04 | 0.54 | 0.33 | 0.37 |
+| Year | Articles | words (pkg / ed.) | we % | I % | certainty % | achievement % |
+|---|---|---|---|---|---|---|
+| 1890 | [19-003](../#/a/19-003) Archbishop Satolli at Woodstock; [19-179](../#/a/19-179) Spain; [19-396](../#/a/19-396) Retractation of Clement XIV | 4,864 / 4,755 | 1.19 / 1.22 | 0.45 / 0.50 | 0.23 / 0.23 | 0.31 / 0.32 |
+| 1920 | [49-001](../#/a/49-001) The Golden Jubilee; [49-006](../#/a/49-006) The Academy in Honor of the Cardinal | 7,773 / 7,806 | 2.03 / 2.04 | 0.53 / 0.54 | 0.33 / 0.33 | 0.37 / 0.37 |
 
-The study's commemorative register is thus the Woodstock jubilee itself. Other anniversary pieces (the Spring Hill centennial, the Papal Jubilee celebration, the Auriesville celebration of 1930) stand in its ordinary series, and their first-person plural is low (0.12–0.48 %). The edition's automatic commemorative flag is wider (every piece whose title names a jubilee, centenary or anniversary, and the whole of an issue given to a jubilee), so its annual contrast is weaker than the study's.
+Package / edition. The study's commemorative register is thus the Woodstock jubilee itself. Other anniversary pieces (the Spring Hill centennial, the Papal Jubilee celebration, the Auriesville celebration of 1930) stand in its ordinary series, and their first-person plural is low (0.12–0.48 %). The edition's automatic commemorative flag is wider (every piece whose title names a jubilee, centenary or anniversary, and the whole of an issue given to a jubilee), so its annual contrast is weaker than the study's.
 
 
 ## Per text
@@ -64,11 +64,11 @@ The study's commemorative register is thus the Woodstock jubilee itself. Other a
 | 1910_odd_road_to_rome_OPT.txt | [39-208](../#/a/39-208) An Odd Road to Rome | essay | 1343 / 1344 | 2.53 / 2.53 |
 | 1910_st_stanislaus.txt | [39-347](../#/a/39-347) St. Stanislaus Seminary | letter | 5762 / 5801 | 0.69 / 0.69 |
 | 1910_working_men_exercises_OPT.txt | [39-091](../#/a/39-091) The Spiritual Exercises for Men | letter | 2028 / 1979 | 1.92 / 1.97 |
-| 1930_auriesville.txt | [59-309](../#/a/59-309) Auriesville Celebration in Honor of | essay | 3432 / 3437 | 0.12 / 0.12 |
+| 1930_auriesville.txt | [59-309](../#/a/59-309) Auriesville Celebration in Honor of the Canonization of the North American Martyrs | essay | 3432 / 3437 | 0.12 / 0.12 |
 | 1930_church_and_radio.txt | [59-053](../#/a/59-053) The Church and the Radio | essay | 1382 / 1383 | 0.94 / 0.94 |
-| 1930_jesuit_seminary_news.txt | [59-021](../#/a/59-021) The Inception of the | essay | 648 / 650 | 0.46 / 0.46 |
+| 1930_jesuit_seminary_news.txt | [59-021](../#/a/59-021) The Inception of the Jesuit Seminary News | essay | 648 / 650 | 0.46 / 0.46 |
 | 1930_papal_jubilee_woodstock.txt | [59-239](../#/a/59-239) Papal Jubilee Celebration | essay | 2311 / 2309 | 0.48 / 0.48 |
-| 1930_pre_emancipation_OPT.txt | [59-023](../#/a/59-023) A Pre-emancipation Jesuit by Joseph A. Maloney, S. J | essay | 3399 / 3396 | 0.53 / 0.53 |
+| 1930_pre_emancipation_OPT.txt | [59-023](../#/a/59-023) A Pre-emancipation Jesuit | essay | 3399 / 3396 | 0.53 / 0.53 |
 | 1930_spring_hill.txt | [59-335](../#/a/59-335) Spring Hill Observes Centennial | essay | 4177 / 4180 | 0.41 / 0.41 |
-| 1930_walsh_time.txt | [59-222](../#/a/59-222) A Record of the Controversy Betweenjl Fr. Edmund A. Walsh and Time | by Francis J. Heyden, S.J. J | essay | 3554 / 3555 | 0.31 / 0.31 |
+| 1930_walsh_time.txt | [59-222](../#/a/59-222) A Record of the Controversy Between Fr. Edmund A. Walsh and Time | essay | 3554 / 3555 | 0.31 / 0.31 |
 | 1930_weston_college.txt | [59-217](../#/a/59-217) Weston College | essay | 1749 / 1751 | 1.20 / 1.20 |
