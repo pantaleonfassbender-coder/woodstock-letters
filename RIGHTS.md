@@ -43,6 +43,19 @@ so these issues are presumed to be in copyright.
   derived OCR text of public-domain volumes and, as illustrations, a small
   number of plates.
 
+## The general index of 1960
+
+The printed *Woodstock Letters Index, Volumes 1–80, 1872–1951*, compiled by
+George Zorn, S.J. (Woodstock College Press, 1960; Internet Archive
+`woodstockletters1801unse`), was published after 1930 and is treated as in
+copyright. The edition's register (`data/general_index.json`,
+`tools/build_general_index.py`) takes from it only what is not protected:
+the headings, which are names of persons, places and things, and the
+volume-and-page references, with the compiler's marks for obituaries,
+authors, reviews and pictures. The compiler's descriptive phrases are read to
+detect those marks and are not stored or shown. Should the rights holders
+clear the index, the phrases can be added.
+
 ## Plates
 
 `assets/plates/` holds page images cut from public-domain sources, registered

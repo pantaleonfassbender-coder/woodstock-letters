@@ -57,6 +57,21 @@ OVERRIDES = {k: v for k, v in json.loads(_ov.read_text(encoding="utf-8")).items(
 # entries corrected; single repairs fixed or refused. Each is listed in the
 # volume's QA report.
 _ed = pathlib.Path(__file__).with_name("article_overrides.json")
+
+# Authors from the printed general index (Zorn 1960; data/general_index.json,
+# built by tools/build_general_index.py): the compiler marks "(auth.)" on a
+# person's entry for the pieces he wrote, by volume and start page. The map
+# gives (vol, page) -> "Given Surname" for those marks only.
+_gi = pathlib.Path(__file__).resolve().parent.parent / "data" / "general_index.json"
+GI_AUTH = {}
+if _gi.exists():
+    for _e in json.loads(_gi.read_text(encoding="utf-8"))["entries"]:
+        _name = re.sub(r"\s*\(\d{4}–\d{4}\)", "", _e["q"]).strip()
+        if not _name or re.search(r"\d", _name) or "," in _e["h"]:
+            continue
+        for _r in _e["refs"]:
+            if len(_r) > 2 and "auth" in _r[2].split(","):
+                GI_AUTH.setdefault((_r[0], _r[1]), f"{_name} {_e['h']}")
 EDITS = json.loads(_ed.read_text(encoding="utf-8")) if _ed.exists() else {}
 REPAIR_FIX = EDITS.get("_repairs", {}).get("fix", {})
 REPAIR_KEEP = set(EDITS.get("_repairs", {}).get("keep", []))
@@ -1924,6 +1939,10 @@ def build(vol):
                 if m:
                     a["author"] = m[1].strip()
                     a["authorFrom"] = "signature"
+        # else the general index's "(auth.)" mark at the article's start page
+        if not a["author"] and "pp" not in a and (vol, a["p0"]) in GI_AUTH:
+            a["author"] = GI_AUTH[(vol, a["p0"])]
+            a["authorFrom"] = "general index"
     for a in articles:
         a.pop("name_line", None)
         a.pop("_edited", None)

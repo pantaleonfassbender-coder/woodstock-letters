@@ -45,6 +45,20 @@ Commit per batch with the volume numbers in the message, for example
 `Add vols. 30–34 (1901–1905)`. Record a summary in `docs/PROGRESS.md`:
 volumes, articles, pages, repairs, and open issues.
 
+## Before every commit
+
+Run `python tools/check_edition.py`. It must print `OK`. A warning is worth a
+look; a failure is not to be committed around.
+
+## Register and tables
+
+- `data/general_index.json` comes from the printed index of 1960 (in copyright):
+  headings and references only, never the compiler's phrases. `build_volume.py`
+  reads its "(auth.)" marks to fill missing authors (`authorFrom: "general index"`).
+- `data/tables/` is built by `tools/extract_tables.py` from the raw OCR of all
+  volumes; it needs `python tools/fetch_ia.py --from 1 --to 59` first. Nothing in
+  it is corrected by hand; if a table is wrong, the scan is the source.
+
 ## Plates, essay, legal notice
 
 - Plates live in `assets/plates/` (JPEG, 1600 px wide, with `_t` thumbnails) and are

@@ -42,6 +42,13 @@ writing; its manuscript (APA 7) is in `docs/` and is built from `data/introducti
 - **Citation forms.** `WL 29 (1900): 46` for a page, `WL 54 (1925): 104*` for an asterisked
   folio, `WL 30 (1901): Suppl. vii` for a Supplement, `WL 30 (1901): insert after p. 332`
   for an unnumbered insert.
+- **Register.** The headings and references of the printed general index to vols. 1–80
+  (Zorn, 1960), with the compiler's marks for obituaries, authors, reviews and pictures;
+  references to vols. 1–59 open the page, to vols. 60–80 the scan. The index is not in the
+  public domain, so only its facts are taken (see [RIGHTS.md](RIGHTS.md)); its author marks
+  fill authors of unsigned pieces.
+- **Tables.** The fold-out statistics (*Ministeria spiritualia*, students in the colleges,
+  the list of the dead) as OCR text and best-effort CSV in `data/tables/`, each linked to its scan.
 - **Plates.** The college as drawn in 1871 and photographed about 1920, the makers of Woodstock
   from Dooley's history of 1927, and the place on the Patapsco from the county atlas of 1877
   (Library of Congress): `assets/plates/`, registered with caption, credit and source leaf in
@@ -53,6 +60,8 @@ writing; its manuscript (APA 7) is in `docs/` and is built from `data/introducti
 ```
 index.html, app.js, style.css   the static site (no build step, no framework)
 net.js                          the atlas network renderer (canvas, no library)
+data/general_index.json         the register: headings and references of the 1960 index
+data/tables.json, data/tables/  the fold-out statistics as OCR text and CSV
 data/introduction.json          the introductory essay; docs/*.docx is built from it
 data/plates.json, assets/       plates cut from public-domain page images, with credits
 CITATION.cff, .zenodo.json      citation metadata for the release and its archiving
@@ -82,6 +91,9 @@ python tools/build_people.py             # rebuild data/people.json
 python tools/fetch_necrology.py          # match its Jesuits to the Jesuit Online Necrology (cached, 2 s apart)
 python tools/build_discourse.py          # score every article with the study's word lists
 python tools/validate_discourse.py PKG   # compare with the study's replication package, unzipped at PKG
+python tools/build_general_index.py      # register from the printed index of 1960 (data/general_index.json)
+python tools/extract_tables.py           # the fold-out statistics into data/tables/ (needs the raw OCR of all volumes)
+python tools/check_edition.py            # consistency checks; run before every commit
 python tools/build_search.py             # build the search index into pagefind/ (git-ignored)
 python -m http.server 8765               # preview at http://localhost:8765
 ```

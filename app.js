@@ -121,6 +121,74 @@ function viewPlates() {
   their sources. The captions and credits are CC0. Sources leaf by leaf: <a href="data/plates.json">data/plates.json</a>.</p>`;
 }
 
+/* The register: the headings and references of the printed general index
+   (Zorn 1960, vols. 1–80), data/general_index.json. A reference to a
+   full-text volume opens the page; one to vols. 60–80 opens the scan. */
+async function viewRegister(params) {
+  S.gi = S.gi || await getJSON("data/general_index.json");
+  const q = (params.get("q") || "").trim().toLowerCase();
+  const letter = (params.get("l") || (q ? "" : "A")).toUpperCase();
+  const es = S.gi.entries.filter(e => q ? (e.h + " " + e.q).toLowerCase().includes(q) : e.h.toUpperCase().replace(/^(SS?T?|MT|FT)\. /, "").startsWith(letter));
+  const KIND = { obit: "obituary", auth: "author", rev: "review", pic: "picture", letter: "letters", sketch: "sketch" };
+  const built = [...S.built].sort((a, b) => a - b);
+  const ref = r => {
+    const [v, p] = r, kinds = r[2] ? r[2].split(",").map(k => KIND[k] || k).join(", ") : "";
+    const full = S.built.has(v);
+    const iss = S.byVol.get(v);
+    const href = full ? `#/p/${v}/${p}` : iss ? `https://archive.org/details/${iss[0].id}` : null;
+    return `<a class="pb${full ? "" : " ext"}" ${href ? `href="${href}"` : ""} ${full ? "" : 'target="_blank" rel="noopener"'} title="${full ? "open the page in the edition" : "vol. " + v + " is not in full text: the scan of the volume"}${kinds ? " · " + kinds : ""}">${v}:${p}${kinds ? `<small> ${kinds}</small>` : ""}</a>`;
+  };
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(L => `<a class="chip${L === letter && !q ? " on" : ""}" href="#/register?l=${L}">${L}</a>`).join("");
+  return `<div class="kicker">Register</div><h1>Persons, places and things, 1872–1951</h1>
+  <p class="lede">The headings and references of the printed <i>Woodstock Letters Index, Volumes 1–80, 1872–1951</i>, compiled by
+  George Zorn, S.J. (Woodstock College Press, 1960): ${S.gi.entries.length.toLocaleString("en")} headings with
+  ${S.gi.entries.reduce((s, e) => s + e.refs.length, 0).toLocaleString("en")} references. A reference to vols. ${built[0]}–${built.at(-1)} opens the page in
+  the edition; one to vols. ${built.at(-1) + 1}–80 opens the scan of the volume. The compiler marked obituaries, authors, reviews and pictures, and those marks are kept.</p>
+  <p class="fine">The index of 1960 is not in the public domain. The edition takes from it only facts, the headings and the volume-and-page references, and
+  reproduces none of its descriptive phrases; an entry here therefore reads “Gibbons, James Cardinal 11:226”, not what the compiler said about the reference.
+  The OCR of the index is read by rule, so a few headings and numbers are wrong; the scan is at the
+  <a href="https://archive.org/details/${S.gi.item}" target="_blank" rel="noopener">Internet Archive</a>.</p>
+  <form class="searchbar" id="rform"><input id="rq" type="search" value="${esc(params.get("q") || "")}" placeholder="a surname, a place, a mission" aria-label="Search the register"><button class="btn" type="submit">Find</button></form>
+  <div class="tools">${letters}</div>
+  <p class="fine">${es.length.toLocaleString("en")} heading${es.length === 1 ? "" : "s"}${q ? ` for “${esc(q)}”` : ""}.</p>
+  <table class="reg"><tbody>${es.slice(0, 1500).map(e => `<tr><td class="h"><b>${esc(e.h)}</b>${e.q ? `, ${esc(e.q)}` : ""}</td><td>${e.refs.map(ref).join(" ")}</td></tr>`).join("")}</tbody></table>
+  ${es.length > 1500 ? `<p class="fine">First 1,500 shown; narrow the search.</p>` : ""}`;
+}
+
+/* The statistical tables (data/tables.json, files in data/tables/): the
+   journal's fold-out tables as OCR text and best-effort CSV, by kind and year. */
+async function viewTables(params) {
+  S.tables = S.tables || await getJSON("data/tables.json");
+  const kind = params.get("k") || "ministeria";
+  const kinds = S.tables.kinds;
+  const rows = S.tables.tables.filter(t => t.kind === kind);
+  return `<div class="kicker">Tables</div><h1>The journal's statistics</h1>
+  <p class="lede">From the 1880s the <i>Letters</i> printed each year the <i>Ministeria spiritualia</i> of every house of the province
+  (baptisms, confessions, communions, marriages, sermons, retreats), the number of students in every college of the United States and Canada,
+  and the list of the dead. They stand on fold-out leaves without page numbers, which the edition's text leaves out like plates.
+  This page gives them as the OCR read them, line by line, with a best-effort CSV: each row is a label and the run of numbers on its line.
+  The column headings of a fold-out are usually read as a jumble, so the meaning of the columns is to be taken from the scan, which each row opens.</p>
+  <div class="tools">${Object.entries(kinds).map(([k, l]) => `<a class="chip${k === kind ? " on" : ""}" href="#/tables?k=${k}">${esc(l)}<span class="n">${S.tables.tables.filter(t => t.kind === k).length}</span></a>`).join("")}</div>
+  <table><thead><tr><th>Vol.</th><th>Year</th><th>Heading as read</th><th>Where</th><th>Lines</th><th>Rows</th><th>Files</th><th>Scan</th></tr></thead><tbody>
+  ${rows.map(t => `<tr><td><a href="#/vol/${t.vol}">${t.vol}</a></td><td>${t.year}</td><td class="fine">${esc(t.heading)}</td><td class="fine">${esc(t.where || "")}</td>
+    <td class="num">${t.lines}</td><td class="num">${t.rows}</td>
+    <td><a href="data/tables/${t.file}.txt">text</a> · <a href="data/tables/${t.file}.csv">csv</a></td>
+    <td><a href="${IA(t.issue, t.n)}" target="_blank" rel="noopener">leaf ${t.leaf} ↗</a></td></tr>`).join("")}</tbody></table>
+  <p class="fine" style="margin-top:1rem">Built by <span class="mono">tools/extract_tables.py</span>; nothing is corrected by hand. The files are CC0 like the rest of the derived data.</p>`;
+}
+
+// #/p/VOL/PAGE: the article that holds a printed page, opened at that page
+async function viewPage(volNo, page) {
+  if (!S.built.has(volNo)) return viewVolume(volNo);
+  const v = await vol(volNo);
+  const pg = v.pages.find(x => x.kind === "text" && x.p === page && !x.pl);
+  const id = pg?.paras.find(q => q.a)?.a;
+  if (!id) return `<h1>Vol. ${volNo}, p. ${page}</h1><p class="lede">No page ${page} in vol. ${volNo} of the edition (the printed index may cite a
+    supplement, a misprinted folio or a page missing from the scan). <a href="#/vol/${volNo}">Contents of vol. ${volNo}</a>.</p>`;
+  location.replace(`#/a/${id}?p=${page}`);
+  return "";
+}
+
 /* The introductory essay (data/introduction.json): the first mention of each
    instrument links to it, so the essay doubles as a guided entrance. The same
    file is the source of the downloadable manuscript in docs/. */
@@ -237,7 +305,21 @@ function viewVolumes() {
     return `<tr><td><a href="#/vol/${n}">${n}</a></td><td>${years(n)}</td>
       <td>${S.byVol.get(n).map(i => `<a href="https://archive.org/details/${i.id}" target="_blank" rel="noopener">no.&nbsp;${esc(i.no)}${i.season ? " " + esc(i.season) : ""}</a>`).join(" · ")}</td>
       <td class="num">${m.articles}</td><td class="num">${m.pages}</td></tr>`;
-  }).join("")}</tbody></table>`;
+  }).join("")}</tbody></table>
+  <h2 style="margin-top:2.4rem">The run to ${Math.max(...S.cat.issues.map(i => i.year))}</h2>
+  <p class="fine">The journal went on after ${PD_CUTOFF}. These volumes are outside the public domain or not yet cleared
+  (see <a href="RIGHTS.md">RIGHTS.md</a>); the edition catalogues them and links their scans, and gives no text.
+  Vols. ${vols.at(-1) + 1}–80 are covered by the <a href="#/register">register</a>, which links their references to the scans.</p>
+  <table><thead><tr><th>Vol.</th><th>Year</th><th>Issues (scans)</th><th>Status</th></tr></thead><tbody>
+  ${[...S.byVol.keys()].filter(n => !S.built.has(n)).sort((a, b) => a - b).map(n => {
+    const last = Math.max(...S.byVol.get(n).map(i => i.year));
+    const status = last <= PD_CUTOFF ? "public domain, queued" : last <= 1963 ? "renewal check pending" : "presumed in copyright";
+    return `<tr><td>${n}</td><td>${years(n)}</td>
+      <td>${S.byVol.get(n).map(i => `<a href="https://archive.org/details/${i.id}" target="_blank" rel="noopener">no.&nbsp;${esc(i.no)}${i.season ? " " + esc(i.season) : ""}</a>`).join(" · ")}</td>
+      <td><span class="tag">${status}</span></td></tr>`;
+  }).join("")}</tbody></table>
+  ${S.cat.extras.map(x => `<p class="fine" style="margin-top:1rem">Also held: <a href="https://archive.org/details/${x.id}" target="_blank" rel="noopener">${esc(x.label)}</a>,
+    the printed general index compiled by George Zorn, S.J. (1960); its headings and references are the edition's <a href="#/register">register</a>.</p>`).join("")}`;
 }
 
 async function viewVolume(n) {
@@ -356,7 +438,7 @@ async function viewArticle(id, params) {
   return `<div class="kicker"><a href="#/vol/${n}">Vol. ${n} (${v.year})</a> · no. ${esc(iss.no)}${a.section && a.section !== "Articles" ? " · " + esc(a.section) : ""}</div>
   <h1>${esc(a.title)}</h1>
   ${a.subtitle ? `<p class="lede">${esc(a.subtitle)}</p>` : ""}
-  <p class="fine">${a.author ? esc(a.author) + (a.authorFrom === "signature" ? " (from the signature)" : " (from the volume index)") + " · " : ""}${a.pp ? esc(a.pp) : `pp. ${a.p0}–${a.p1}`}</p>
+  <p class="fine">${a.author ? esc(a.author) + (a.authorFrom === "signature" ? " (from the signature)" : a.authorFrom === "general index" ? " (from the general index of 1960)" : " (from the volume index)") + " · " : ""}${a.pp ? esc(a.pp) : `pp. ${a.p0}–${a.p1}`}</p>
   <div class="reader">
     <article>${out.join("")}</article>
     <aside class="side">
@@ -994,6 +1076,14 @@ function viewAbout() {
     letters, reviews, tables, Varia, obituaries) and flagged as commemorative or foreign; corrections are by hand. Scored so, the
     study's own texts give its values (<a href="docs/discourse_validation.md">validation report</a>). The annual means are
     word-weighted, with a 90 % band from resampling the articles of the year.</li>
+    <li><b>Register.</b> The headings and volume-and-page references of the printed general index to vols. 1–80 (Zorn, 1960), read from
+    the Internet Archive's OCR of it by rule, with the compiler's marks for obituaries, authors, reviews and pictures. Because the index
+    of 1960 is not in the public domain, none of its descriptive phrases is kept; see <a href="RIGHTS.md">RIGHTS.md</a>. Its “(auth.)”
+    marks supply authors for otherwise unsigned pieces, shown as “from the general index of 1960”. <a href="#/register">Open the register</a>.</li>
+    <li><b>Tables.</b> The journal's fold-out statistics (<i>Ministeria spiritualia</i>, students in the colleges, the list of the dead) as the OCR
+    read them, line by line, with a best-effort CSV per table and a link to the scan; nothing corrected by hand. <a href="#/tables">Open the tables</a>.</li>
+    <li><b>Checks.</b> <span class="mono">tools/check_edition.py</span> verifies before each commit that the manifest, the volume files, the plates,
+    the essay's citations, the register and the legal notice's claim of no third-party loads agree.</li>
   </ol>
   <p>The QA reports are published: ${S.man.volumes.map(v => `<a href="docs/qa/vol${pad3(v.vol)}.md">vol. ${v.vol}</a>`).join(", ")}.</p>
   <h2>Rights</h2>
@@ -1049,6 +1139,9 @@ async function route() {
     else if (r === "discourse") out = await viewDiscourse(params);
     else if (r === "about") out = viewAbout();
     else if (r === "introduction") out = await viewIntroduction();
+    else if (r === "register") out = await viewRegister(params);
+    else if (r === "p") out = await viewPage(+seg[1], +seg[2]);
+    else if (r === "tables") out = await viewTables(params);
     else if (r === "plates") out = viewPlates();
     else if (r === "imprint" || r === "privacy") out = viewImprint();
     else out = `<h1>Not found</h1>`;
@@ -1065,6 +1158,10 @@ async function route() {
   $("#sform")?.addEventListener("submit", ev => {
     ev.preventDefault();
     location.hash = "#/search?q=" + encodeURIComponent($("#q").value.trim());
+  });
+  $("#rform")?.addEventListener("submit", ev => {
+    ev.preventDefault();
+    location.hash = "#/register?q=" + encodeURIComponent($("#rq").value.trim());
   });
   $("#copycite")?.addEventListener("click", async ev => {
     try { await navigator.clipboard.writeText($("#cite").textContent); ev.target.textContent = "Copied"; }

@@ -26,6 +26,10 @@ WHICH FILES
   data/necrology.json    matches to the Jesuit Online Necrology (the records
                          themselves remain Boston College's)
   data/discourse.json    word-list measures and register of every article
+  data/general_index.json  headings and page references taken as facts from
+                         the printed index of 1960, which itself remains in
+                         copyright (see RIGHTS.md)
+  data/tables.json, data/tables/  the fold-out statistics as OCR text and CSV
   data/plates.json       captions and credits of the plates; the images in
                          assets/plates/ are reproductions of public-domain
                          works and are not the licensor's to dedicate
