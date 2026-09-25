@@ -11,6 +11,7 @@
 | 2026-09-25 | 55–59 (1926–1930) | 197 | 2746 | 66 | Pagination against IA labels: 55 433/507, 56 384/384, 57 553/555, 58 718/720, 59 451/451. The differences are the printer's and IA's: vol. 55 no. 3 prints 342–417 for 442–517 and says so in an erratum (IA copied the misprint); vol. 57 IA 47–48 and vol. 58 IA 826–827 are IA misreads (checked on the scans). Vol. 56 no. 1 has a section with asterisked folios (1*–92*). No pagination gaps. Vols. 29–54 rebuilt: same pages; one article change (vol. 32). Atlas, people map and search rebuilt over vols. 29–59, the last volumes before the 1930 cutoff. |
 | 2026-09-25 | 24–28 (1895–1899) | 278 | 2369 | 6990 | Pagination against IA labels: 24 519/519, 25 537/537, 26 508/511, 27 399/399, 28 339/339. The 3 in vol. 26 are IA misreads (IA 621–623 for pp. 521–523; p. 522 checked on the scan). No pagination gaps. Indexes: 24 and 25 in their own volumes, 26 bound at the front of vol. 25 no. 1; none for 27 and 28. Vol. 28 has nos. 1–2 only in the IA collection. Vols. 29–59 rebuilt: same pages; titles of four articles now from the page, not the index. Atlas, people map and search rebuilt over vols. 24–59. |
 | 2026-09-25 | 19–23 (1890–1894) | 298 | 2409 | 6354 | Pagination against IA labels: 19 432/432, 20 469/469, 21 444/444, 22 567/567, 23 462/462. No pagination gaps. Vol. 20 lacks pp. 370–371 in the scan. Indexes (contents lists in vols. 19–20) found for all five. Vols. 24–59 rebuilt: same pages and articles. Atlas, people map and search rebuilt over vols. 19–59. |
+| 2026-09-25 | 14–18 (1885–1889) | 276 | 1909 | 4691 | Pagination against IA labels: 14 406/406, 15 340/340, 16 329/329, 17 400/400, 18 392/392. No pagination gaps. Indexes (contents lists) for vols. 14 and 17 only. Obituaries split at their name lines where no index names them. Vols. 19–59 rebuilt: same pages; 34 more obituaries split out. Atlas, people map and search rebuilt over vols. 14–59. |
 
 ### Vols. 30–34: what the batch found
 
@@ -416,6 +417,36 @@ Seams checked: vol. 20 p. 314 and vol. 21 p. 154 are blank versos at issue ends.
 
 Rebuilt vols. 24–59: pages and articles unchanged.
 
+### Vols. 14–18: what the batch found
+
+Per volume: 14 (1885) 59 articles, 411 pages, 927 repairs; 15 (1886) 58, 350, 802;
+16 (1887) 51, 335, 879; 17 (1888) 61, 407, 1026; 18 (1889) 47, 406, 1057. Pagination
+needed no new rule: every page agrees with IA's labels, and every seam is a blank verso.
+Vol. 16 no. 2 ends with an errata slip ("page 126 line …"), kept out as a plate.
+
+Index: vol. 14 has a contents list at the back of no. 3, vol. 17 at the front of no. 1
+("CONTENTS OF rOL. XVII.", read now). Vols. 15, 16 and 18 have none in the scans. The
+"INDEX ALPHABETICUS SOCIORUM" leaves in vols. 16–18 belong to the reprinted early
+catalogues, not to an index.
+
+Articles:
+
+- **Obituaries by their name lines.** Where no index names the start pages, each notice
+  opens with its name on a line of its own: "Fr. John Cunningham.", "Br. Patrick
+  O'Hara.". Inside the Obituary, such a line opens a new notice when prose follows, it is
+  no letter's signature (the line before does not end in a comma), and the running notice
+  already has text: the name line under a notice's own heading ("FR. CHARLES H.
+  HEICHEMER" / "Father Charles H. Heichemer.") opens nothing. Vols. 15 and 18 now have
+  one entry per notice. Vols. 20–48 gain 34 obituaries the indexes do not list: vol. 21
+  alone has six, among them Brother John Kilcullin, Mr. Henry Raiders and Father Dominic
+  Niederkorn. Vol. 44's Fr. Downing now begins on his name line, p. 228, not at the
+  index's p. 229.
+- The name line after an OBITUARY heading is read in its OCR forms too ("Fk. John Clarke.").
+
+Repairs: `tl` → `tt` only inside a word ("lovetl" is no longer "lovett").
+
+Rebuilt vols. 19–59: pages unchanged.
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -461,6 +492,9 @@ Rebuilt vols. 24–59: pages and articles unchanged.
   editorial notes; the Supplement and insert forms are still to be decided.
 - **Vol. 28 has nos. 1–2 only** in the Internet Archive collection, and no index; nor has
   vol. 27. Their authors come from signatures only.
+- Obituary titles taken from name lines keep the OCR's spelling where no index gives the
+  name ("Fr. Jamks Curivky", vol. 18; "Mr. John Jose^ph Mai^onk", vol. 21).
+- Vols. 15, 16 and 18 have no index in the scans; their authors come from signatures only.
 - Vols. 19–23, left as they are: vol. 21 p. 132, "Books in Press or in Preparation" (indexed as
   an article) runs on through the rest of that Varia; garbled obituary titles in vol. 19
   ("I Do" for Fr. Aloysius Masnata, p. 100; "Btogra Phtca L Sf Rppl Ement", p. 404).
