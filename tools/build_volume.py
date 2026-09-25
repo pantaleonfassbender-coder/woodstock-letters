@@ -57,7 +57,8 @@ MASTHEAD = re.compile(
     re.I)
 # vol. 54 has no index, only a front-matter "CONTENTS OF VOL. LIV." of the same form
 # and from vol. 57 in arabic figures: "INDEX TO VOLUME 57"
-INDEX_HEAD = re.compile(r"(?:INDEX\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?VOL\w*\.?\s+([XVLI]+|\d{2})\b", re.I)
+# ("INDKX TO VOLUME XXV", vol. 25)
+INDEX_HEAD = re.compile(r"(?:IND[EK]X\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?VOL\w*\.?\s+([XVLI]+|\d{2})\b", re.I)
 
 
 def index_numeral(s):
@@ -464,7 +465,11 @@ def paginate(leaves):
     # books for sale: vol. 31 no. 2) are front matter. Only the first leaves
     # count: vol. 34 no. 1 opens with a Jubilee number and has its masthead
     # on p. 113. The printed cover repeats the masthead, so take the last one.
-    mast = max((k for k, lf in enumerate(leaves[:15])
+    # An offprint bound in before the issue ("(From the WOODSTOCK LETTERS, Oct.
+    # 1895.)", 16 pages before vol. 25 no. 1's masthead on leaf 29) is front
+    # matter too: its text is in the volume it came from.
+    reprint = any(re.match(r"\W*From the WOODSTOCK LETTERS", x, re.I) for lf in leaves[:15] for x in lf["lines"][:2])
+    mast = max((k for k, lf in enumerate(leaves[:60 if reprint else 15])
                 if any(re.fullmatch(r"WOODSTOCK\s+LETTERS\.?", x, re.I) for x in lf["lines"][:4])), default=None)
     for lf in leaves[:mast or 0]:
         if lf["text"]:
@@ -614,6 +619,12 @@ class Repair:
             if a not in core or (where == "start" and not core.startswith(a)) \
                     or (isinstance(where, int) and len(core) < where):
                 continue
+            # the Latin dative and ablative plural: "in Indiis", "Dominiis" (vols. 24, 26)
+            # (but "religioiis" is religious, "Jesiis" Jesus: only an -iis that is
+            # not -oiis and whose reading is no common word)
+            if a == "ii" and core.endswith("iis") and not core.endswith("oiis") \
+                    and zipf_frequency(core.replace("ii", "u", 1).lower(), "en") < 3.5:
+                continue
             cand = core.replace(a, b, 1)
             # ii is u more often than il: "diily" is duly, not "dilly"
             if (a, b) == ("ii", "il") and zipf_frequency(core.replace("ii", "u", 1).lower(), "en") > \
@@ -709,9 +720,21 @@ def parse_index(leaves, vol):
                     lines.append(piece)
                     raw.append(r)
     entries, section = [], "Articles"
-    for ln, r in zip(lines, raw):
+    def heading(ln):
+        """OBITUARY / OBITUARIES / VARIA, as the OCR gives them ("lUTUARV.", vol. 25)"""
+        n = norm_head(ln)
         if ln.rstrip(".").upper() in ("OBITUARY", "OBITUARIES", "VARIA"):  # OBITUARIES from vol. 57
-            section = "Varia" if ln.rstrip(".").upper() == "VARIA" else "Obituary"
+            return "Varia" if n == "VARIA" else "Obituary"
+        if len(ln) <= 12 and 5 <= len(n) and sum(c.isupper() for c in ln) >= len(n) - 2:
+            if difflib.SequenceMatcher(None, n, "OBITUARY").ratio() >= 0.6:
+                return "Obituary"
+            if difflib.SequenceMatcher(None, n, "VARIA").ratio() >= 0.75:
+                return "Varia"
+        return None
+    has_varia = any(heading(ln) == "Varia" for ln in lines)
+    for ln, r in zip(lines, raw):
+        if heading(ln):
+            section = heading(ln)
             # in a contents set in two columns (vol. 54) the OCR gives the
             # heading after the first line of its block, which runs several
             # entries together: that line is the section's, if its entries are
@@ -758,9 +781,20 @@ def parse_index(leaves, vol):
             # "Mr. T. J. McGrath (concluded)": the serial's note is not the name
             author = re.sub(r"\s*\((?:concluded|(?:to be )?continued)\W*$", "", author, flags=re.I)
         entries.append({"entry": " — ".join(parts), "author": author,
-                        "pages": pages, "section": section, "_raw": r})
+                        "pages": pages, "section": section, "_raw": r,
+                        # ("Holland. 339": a full stop for the comma, but not a leader "Castillo.... 30")
+                        "_comma": bool(re.search(r"[A-Za-z)](?:,|\.(?!\.))\s*\d{1,3}", ln))})
+    # A contents in two columns (vol. 25) interleaves the obituaries and the
+    # Varia with the headings that name them. After the last article entry,
+    # entries of the form "Name, page" are persons (Obituary) or Varia.
+    if has_varia:
+        last = max((k for k, e in enumerate(entries) if e["section"] == "Articles" and not e.get("_comma")), default=-1)
+        # (a block of them, not one article that happens to end in ", 340", vol. 35)
+        block = [e for e in entries[last + 1:] if e["section"] == "Articles" and e.get("_comma")]
+        for e in block if len(block) >= 5 else []:
+            e["section"] = "Obituary" if re.match(r"(Fr|Ft|Br|Bro|Mr|Rev|Father|Brother)\b", e["entry"]) else "Varia"  # ("Ft." is Fr., vol. 54)
     for e in entries:
-        del e["_raw"]
+        e.pop("_raw", None), e.pop("_comma", None)
     return entries
 
 
@@ -865,8 +899,14 @@ def build(vol):
         leaves = paged[-1][1]
         ins = [l for l in leaves if l["kind"] == "text" and l["insert"] and not l.get("sup")]
         prev = [l for l in leaves if l["kind"] == "text" and not l["insert"] and not l.get("sup")]
-        if ins and prev and prev[-1]["leaf"] < ins[0]["leaf"] and ins[0]["body"] and prev[-1]["head"] \
-                and difflib.SequenceMatcher(None, norm_head(ins[0]["body"][0]), norm_head(prev[-1]["head"])).ratio() >= 0.8:
+        # (or, when its running head is garbled, "1/A klA." under "t^AP/A.",
+        # vol. 25: prose that nothing but plates and blank leaves follow)
+        if ins and prev and prev[-1]["leaf"] < ins[0]["leaf"] and ins[0]["body"] and prev[-1]["head"] is not None \
+                and not any(tabular(l) for l in ins) \
+                and all(l["kind"] == "blank" for l in leaves[prev[-1]["leaf"] + 1:ins[0]["leaf"]]) and (
+                # (not the second half of a fold-out table after its plate, vols. 48–49)
+                difflib.SequenceMatcher(None, norm_head(ins[0]["body"][0]), norm_head(prev[-1]["head"])).ratio() >= 0.8
+                or all(l["kind"] in ("plate", "blank") for l in leaves[ins[-1]["leaf"] + 1:])):
             for k, l in enumerate(ins):
                 l["insert"], l["page"] = None, prev[-1]["page"] + 1 + k
             ins[0]["body"] = ins[0]["body"][1:]  # the running head is not text
@@ -989,19 +1029,27 @@ def build(vol):
     # the index usually opens no. 1, but not always: vol. 31 has it before
     # no. 3, and the index to vol. 30 was bound at the back of vol. 29
     where = [(iss["id"], lv) for iss, lv in raw_issues]
-    prev = [i for i in cat["issues"] if i["vol"] == vol - 1]
-    if prev and (RAW / f"{prev[-1]['id']}_hocr_pageindex.json.gz").exists():
-        lv = read_issue(prev[-1]["id"])
-        paginate(lv)
-        where.append((prev[-1]["id"], lv))
+    # the binder put an index where he pleased: at the back of the previous
+    # volume (the index to vol. 30), or at the front of it (the index to
+    # vol. 26 opens vol. 25 no. 1): look through the neighbours' issues too
+    nearby = [i for i in cat["issues"] if i["vol"] == vol - 1][::-1] + [i for i in cat["issues"] if i["vol"] == vol + 1]
     index, index_from = [], None
     for ident, lv in where:
         index = parse_index(lv, vol)
         if index:
             index_from = ident
             break
+    for i in nearby if not index else []:
+        if not (RAW / f"{i['id']}_hocr_pageindex.json.gz").exists():
+            continue
+        lv = read_issue(i["id"])
+        paginate(lv)
+        index = parse_index(lv, vol)
+        if index:
+            index_from = i["id"]
+            break
     report.insert(1, f"\nVolume index: {len(index)} entries from {index_from}\n" if index_from
-                  else "\nVolume index: **not found** in this volume or at the back of the previous one; "
+                  else "\nVolume index: **not found** in this volume or the issues of the volumes either side; "
                        "authors come from signatures only\n")
     for e in index:
         e["entry"] = rep.para(e["entry"])
@@ -1084,7 +1132,8 @@ def build(vol):
                 body.pop(0)
             paras = []
             for j, ln in enumerate(body):
-                heading = is_upper(ln) and len(ln) < 120
+                # (and a section title in small capitals, read "Varia.", vol. 24)
+                heading = (is_upper(ln) and len(ln) < 120) or ln.strip().rstrip(".").upper() in ("VARIA", "OBITUARY")
                 p = {"t": rep.para(ln)}
                 if heading:
                     p["h"] = 1
@@ -1094,13 +1143,22 @@ def build(vol):
             if opening:
                 while paras and not re.search(r"[A-Za-z]{2}", paras[0]["t"]):  # masthead residue: "0"
                     paras.pop(0)
-            if opening and lf["head"] is None and paras and not paras[0].get("h") and len(paras[0]["t"]) < 60 \
+            # the masthead's "THE" taken for a running head is none (vol. 25 no. 1)
+            unheaded = lf["head"] is None or (opening and m is not None)
+            # a title run into its first line of ordinary type, as in the 1890s:
+            # "OUR COLLEGE AT BATON ROUGE, LOUISIANA. A Letter from Father Gache."
+            if unheaded and paras and not paras[0].get("h"):
+                t = re.match(r"([A-Z][A-Z0-9 ,.'’&—-]{10,}?[.:])\s+(?=[A-Z][a-z]|A\s+[A-Za-z])", paras[0]["t"])
+                if t and len(re.findall(r"[A-Z]{2,}", t[1])) >= 2:
+                    paras[0:1] = [{"t": t[1], "h": 1}, {"t": paras[0]["t"][t.end():], "h": 1}] \
+                        if len(paras[0]["t"]) - t.end() < 120 else [{"t": t[1], "h": 1}, {"t": paras[0]["t"][t.end():]}]
+            if opening and unheaded and paras and not paras[0].get("h") and len(paras[0]["t"]) < 60 \
                     and re.search(r"[A-Za-z]{4}", paras[0]["t"]):
                 paras[0]["h"] = 1
             if lf.get("supheading"):
                 paras = [{"t": title_case(x), "h": 1} for x in lf["supheading"]] + paras
             # an unheaded page opening with a title block starts an article
-            if lf["head"] is None and paras and paras[0].get("h"):
+            if unheaded and paras and paras[0].get("h"):
                 paras[0]["start"] = ("supplement" if lf.get("suptitle")
                                      else "insert" if lf["insert"] and not prev_insert
                                      # the running heads often shorten the title
@@ -1230,7 +1288,13 @@ def build(vol):
             # the retreat tables, vol. 45 p. 460): mid-page, or under its own
             # running head
             elif section_head(p["t"]) == "VARIA" and (
-                    (j > 0 and not pg["paras"][j - 1].get("h")) or section_head(pg["_head"] or "") == "VARIA"):
+                    (j > 0 and not pg["paras"][j - 1].get("h")) or section_head(pg["_head"] or "") == "VARIA"
+                    # or at the top of an unheaded page whose running heads the
+                    # OCR has spoiled ("VARI A." then "U A Ft I A.", vol. 26)
+                    # (a page of prose: over the retreat tables, VARIA is only
+                    # a running head, vols. 45 and 54)
+                    or (j == 0 and not pg["_head"]
+                        and statistics.mean(len(q["t"]) for q in pg["paras"]) >= 80)):
                 p["start"] = p.get("start") or "section"
         if p.get("start") and cur is not None and p["start"] not in ("issue-opening", "supplement", "insert") \
                 and pg["issue"] == cur["issue"]:

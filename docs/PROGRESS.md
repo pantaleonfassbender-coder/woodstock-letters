@@ -9,6 +9,7 @@
 | 2026-09-25 | 45–49 (1916–1920) | 224 | 2216 | 323 | Pagination against IA labels: 45 445/462, 46 431/431, 47 449/449, 48 443/443, 49 327/385. The differences are IA's: vol. 45 no. 2 IA runs 2 behind for pp. 198–214; vol. 49 no. 1 IA counts some photo plates as pages (pp. 39–133). Both checked on the scans. Vol. 49 lacks pp. 134–135 in the scan. No pagination gaps. Vols. 29–44 rebuilt: same pages; article changes listed below. Atlas, people map and search rebuilt over vols. 29–49. |
 | 2026-09-25 | 50–54 (1921–1925) | 204 | 2205 | 289 | Pagination against IA labels: 50 378/378, 51 463/463, 52 424/424, 53 423/426, 54 440/440. The 3 in vol. 53 are the printer's misprint 341–343 for 441–443, which IA copied (checked on the scan). Vol. 54 no. 2 is printed from p. 63 and is cited with the volume's own asterisk (104*). No pagination gaps. Vols. 29–49 rebuilt: same pages except vol. 30 Suppl. xx; 57 articles newly linked to their index entries. Atlas, people map and search rebuilt over vols. 29–54. |
 | 2026-09-25 | 55–59 (1926–1930) | 197 | 2746 | 66 | Pagination against IA labels: 55 433/507, 56 384/384, 57 553/555, 58 718/720, 59 451/451. The differences are the printer's and IA's: vol. 55 no. 3 prints 342–417 for 442–517 and says so in an erratum (IA copied the misprint); vol. 57 IA 47–48 and vol. 58 IA 826–827 are IA misreads (checked on the scans). Vol. 56 no. 1 has a section with asterisked folios (1*–92*). No pagination gaps. Vols. 29–54 rebuilt: same pages; one article change (vol. 32). Atlas, people map and search rebuilt over vols. 29–59, the last volumes before the 1930 cutoff. |
+| 2026-09-25 | 24–28 (1895–1899) | 278 | 2369 | 6990 | Pagination against IA labels: 24 519/519, 25 537/537, 26 508/511, 27 399/399, 28 339/339. The 3 in vol. 26 are IA misreads (IA 621–623 for pp. 521–523; p. 522 checked on the scan). No pagination gaps. Indexes: 24 and 25 in their own volumes, 26 bound at the front of vol. 25 no. 1; none for 27 and 28. Vol. 28 has nos. 1–2 only in the IA collection. Vols. 29–59 rebuilt: same pages; titles of four articles now from the page, not the index. Atlas, people map and search rebuilt over vols. 24–59. |
 
 ### Vols. 30–34: what the batch found
 
@@ -330,6 +331,56 @@ no. 3 and a blank.
 
 Rebuilt vols. 29–54: pages unchanged; articles unchanged except vol. 32 p. 175.
 
+### Vols. 24–28: what the batch found
+
+Per volume: 24 (1895) 68 articles, 524 pages, 1735 repairs; 25 (1896) 48, 544, 1694;
+26 (1897) 78, 524, 1599; 27 (1898) 49, 410, 1038; 28 (1899) 35, 367, 924. The repair
+counts are high for the same reason as in vol. 29: the ct ligature, read as "6l" or "dl".
+
+Pagination:
+
+- **An offprint bound in before an issue.** Vol. 25 no. 1 opens with 16 pages headed
+  "(From the WOODSTOCK LETTERS, Oct. 1895.)", Hughes's "The New Histories of the
+  Society" from vol. 24, before its own masthead on leaf 29. When an early leaf carries
+  that notice, the masthead is looked for further on and the offprint is front matter.
+- **The volume's last page, under a spoiled running head** ("1/A klA." for VARIA, vol.
+  25 p. 544): a closing leaf of prose that nothing but plates and blank leaves follow
+  is the last page, if only blank leaves stand between it and the page before. The
+  second half of a fold-out table after its plate is not (vols. 48 and 49 keep theirs out).
+
+Index:
+
+- **The index to vol. 26 opens vol. 25 no. 1**, after the index to vol. 25. An index is
+  now looked for in every issue of the volumes either side, not only at the back of the
+  previous one. Vols. 27 and 28 have none in the scans: their authors come from
+  signatures only.
+- **"INDKX TO VOLUME XXV"** is read as an index heading.
+- **The contents of vol. 25 is set in two columns**, and the OCR interleaves the
+  obituaries and the Varia with their headings ("lUTUARV.", then "VARIA." after half the
+  Varia entries). Garbled short headings are recognised. Where the index has a Varia
+  section, a block of five or more entries of the form "Name, page" after the last
+  article entry is split into persons (Obituary) and the rest (Varia). A single article
+  entry ending ", 340" (vol. 35) stays an article. "Ft." counts as Fr. (vol. 54's
+  contents); vol. 30's obituary entries now carry their section too.
+
+Articles:
+
+- **Titles run into their first line** ("OUR COLLEGE AT BATON ROUGE, LOUISIANA. A Letter
+  from Father Gache.") are split into title and subtitle on an unheaded page. Vols. 26
+  and 27 had lost their opening articles, and four titles in vols. 41–58 now come from
+  the page instead of the inverted index entry ("Thirty Days in Peten, Guatemala").
+- **The masthead's "THE" taken for a running head** (vol. 25 no. 1) no longer stops the
+  opening article.
+- **Varia in small capitals** ("Varia.", vol. 24) and a VARIA at the top of an unheaded
+  page of prose whose running heads are spoiled ("VARI A." then "U A Ft I A.", vol. 26)
+  open the section. Over the retreat tables (vols. 45, 54) VARIA stays a running head.
+
+Repairs: `ii` → `u` no longer touches a Latin -iis ("in Indiis", "Dominiis", formerly
+"Indus", "Dominus"), unless the ending is -oiis ("religioiis" → religious) or the reading
+is a common word ("Jesiis" → Jesus).
+
+Rebuilt vols. 29–59: pages unchanged.
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -351,8 +402,7 @@ Rebuilt vols. 29–54: pages unchanged; articles unchanged except vol. 32 p. 175
 - Index entries in inverted form become titles where the page heading is not in
   capitals ("Innsbruck, The Golden Jubilee of", "Kenny Father, Letter of").
 - Undecided repairs, left as made: `supped` → `slipped`, `miilenium` → `millenium` (vol. 39).
-- Latin and Romance words repaired as English, once each (vols. 40–44): `Indiis` → Indus,
-  `iusta` → insta, and `Loius` → Loins (for Louis). There is no narrower rule
+- Latin and Romance words repaired as English, once each (vols. 40–44): `iusta` → insta, and `Loius` → Loins (for Louis). There is no narrower rule
   that keeps the correct repairs of the same kind ("iucluding" → including).
 - Vol. 43 p. 1 and vol. 39 p. 1: the Curia articles are split at their subheadings
   ("Habitat of the Curia", "Of Father General").
@@ -374,6 +424,13 @@ Rebuilt vols. 29–54: pages unchanged; articles unchanged except vol. 32 p. 175
 - The asterisk citation is accepted (2026-09-25): `WL 54 (1925): 104*` for vol. 54 no. 2 and
   `WL 56 (1927): 35*` for the asterisked section of vol. 56 no. 1. It should go into the
   editorial notes; the Supplement and insert forms are still to be decided.
+- **Vol. 28 has nos. 1–2 only** in the Internet Archive collection, and no index; nor has
+  vol. 27. Their authors come from signatures only.
+- Vols. 24–28, left as they are: vol. 25 p. 524 "Fr. Jogues" (a Varia item on St. Isaac
+  Jogues, taken for an obituary); vol. 24 p. 139 "Fr. Patrick S. Murphy, p"; vol. 26 p. 4
+  `" " Rev. Fr. Provincial` (ditto marks of the index) and p. 322 "Exstinct^ Societati
+  Me^^'^"; vol. 24 pp. 415–429, Hughes's "New Histories" split into its three parts by the
+  index; repairs `tiines` → tunes (times, vol. 28) and `soiis` → soils (vol. 24).
 - Vols. 55–59, left as they are:
   - vol. 58: pp. 606–607 "Gog Photograpiiinc the Eclipse" and "Atcebu, P. I" split Deppermann's
     eclipse article (p. 604), and p. 382 "Hevision of Studrss" splits the Veruela article
