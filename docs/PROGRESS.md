@@ -501,14 +501,14 @@ CC BY 4.0, doi:10.5281/zenodo.22697014).
   - The *I* difference comes from the package's OCR ("I^oyola").
 - Overrides: vol. 29 merges 29-309 into "Two of Woodstock's Founders" and gives 29-201 its authors. Vol. 39
   retitles 39-362. Both volumes were rebuilt.
-- Defaults: essays and addresses on the American provinces, 300 words at least, Jesuit usage words included.
-  Letters raise *we* and *I* (1.3 % and 1.7 % against 1.0 % and 0.9 %), so they are opt-in.
+- Defaults (decided 2026-09-25): essays and letters on the American provinces, 300 words at least, Jesuit usage
+  words included. Letters raise *we* and *I* (1.3 % and 1.7 % against 1.0 % and 0.9 %); the page says so.
 - Finding, stated on the page: the automatic commemorative flag does not reproduce the study's jubilee contrast
   over 1872–1930 (flagged essays: we 0.9 %; ordinary essays: 1.0 %). The flag covers any title naming a jubilee,
   centenary or anniversary, plus a whole jubilee issue. The study's commemorative register is narrower: the
   Woodstock jubilee addresses. Its 1930 "ordinary" series includes the Spring Hill centennial and the Papal Jubilee.
   Within the vol. 49 jubilee number, "we" runs from 0.38 % to 2.56 %.
-- Open: whether to narrow the flag to hand-marked jubilee addresses (via `commemorative` overrides).
+- The broader automatic flag is kept (decided 2026-09-25); single pieces can still be set by hand via `commemorative`.
 
 ### Open issues fixed (2026-09-25)
 

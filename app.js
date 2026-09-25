@@ -617,7 +617,7 @@ async function viewDiscourse(params) {
   S.dstudy = S.dstudy || await getJSON("data/discourse_study.json").catch(() => ({ years: {} }));
   const D = S.disc, ST = S.dstudy.years;
   const cat = DCAT[params.get("c")] ? params.get("c") : "we";
-  const regs = new Set((params.get("r") || "essay").split(",").filter(r => DREG[r]));
+  const regs = new Set((params.get("r") || "essay,letter").split(",").filter(r => DREG[r]));
   const us = params.get("us") !== "0", adj = params.get("adj") === "1", agg = params.get("agg") === "median" ? "median" : "mean";
   const com = ["all", "ordinary", "commemorative", "split"].includes(params.get("com")) ? params.get("com") : "split";
   const min = +(params.get("min") || 300), yearSel = +params.get("y") || null;
@@ -734,9 +734,10 @@ async function viewDiscourse(params) {
         <ul class="plain">
           <li><b>Every year, 1872–1930.</b> The study's six points become an annual series, and every point opens to its articles.</li>
           <li><b>Registers.</b> Each article is classed as an essay or address, a letter or report, a document or reprint, a papal or
-          Father General's letter, a review, a table, Varia or an obituary. The default is essays and addresses on the American
-          provinces, close to the study's rule; tick letters to add them, but their <i>we</i> and <i>I</i> run higher (1.3 % and
-          1.7 % against 1.0 % and 0.9 % in essays), and their share varies from year to year. The classes are made by rule
+          Father General's letter, a review, a table, Varia or an obituary. The default follows the study's rule: essays and letters
+          on the American provinces, without Varia, obituaries, documents, tables or foreign reports. Letters speak more in the
+          first person (<i>we</i> 1.3 %, <i>I</i> 1.7 %, against 1.0 % and 0.9 % in essays) and their share varies from year
+          to year: untick them to read essays alone. The classes are made by rule
           and can be corrected by hand.</li>
           <li><b>Checked against the study.</b> Scored from the edition's text, the study's 22 internal texts give the same values
           (r = .99–1.00 per category; <a href="docs/discourse_validation.md">validation report</a>).</li>
