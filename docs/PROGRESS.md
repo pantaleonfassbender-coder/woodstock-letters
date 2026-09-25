@@ -10,6 +10,7 @@
 | 2026-09-25 | 50–54 (1921–1925) | 204 | 2205 | 289 | Pagination against IA labels: 50 378/378, 51 463/463, 52 424/424, 53 423/426, 54 440/440. The 3 in vol. 53 are the printer's misprint 341–343 for 441–443, which IA copied (checked on the scan). Vol. 54 no. 2 is printed from p. 63 and is cited with the volume's own asterisk (104*). No pagination gaps. Vols. 29–49 rebuilt: same pages except vol. 30 Suppl. xx; 57 articles newly linked to their index entries. Atlas, people map and search rebuilt over vols. 29–54. |
 | 2026-09-25 | 55–59 (1926–1930) | 197 | 2746 | 66 | Pagination against IA labels: 55 433/507, 56 384/384, 57 553/555, 58 718/720, 59 451/451. The differences are the printer's and IA's: vol. 55 no. 3 prints 342–417 for 442–517 and says so in an erratum (IA copied the misprint); vol. 57 IA 47–48 and vol. 58 IA 826–827 are IA misreads (checked on the scans). Vol. 56 no. 1 has a section with asterisked folios (1*–92*). No pagination gaps. Vols. 29–54 rebuilt: same pages; one article change (vol. 32). Atlas, people map and search rebuilt over vols. 29–59, the last volumes before the 1930 cutoff. |
 | 2026-09-25 | 24–28 (1895–1899) | 278 | 2369 | 6990 | Pagination against IA labels: 24 519/519, 25 537/537, 26 508/511, 27 399/399, 28 339/339. The 3 in vol. 26 are IA misreads (IA 621–623 for pp. 521–523; p. 522 checked on the scan). No pagination gaps. Indexes: 24 and 25 in their own volumes, 26 bound at the front of vol. 25 no. 1; none for 27 and 28. Vol. 28 has nos. 1–2 only in the IA collection. Vols. 29–59 rebuilt: same pages; titles of four articles now from the page, not the index. Atlas, people map and search rebuilt over vols. 24–59. |
+| 2026-09-25 | 19–23 (1890–1894) | 298 | 2409 | 6354 | Pagination against IA labels: 19 432/432, 20 469/469, 21 444/444, 22 567/567, 23 462/462. No pagination gaps. Vol. 20 lacks pp. 370–371 in the scan. Indexes (contents lists in vols. 19–20) found for all five. Vols. 24–59 rebuilt: same pages and articles. Atlas, people map and search rebuilt over vols. 19–59. |
 
 ### Vols. 30–34: what the batch found
 
@@ -381,6 +382,40 @@ is a common word ("Jesiis" → Jesus).
 
 Rebuilt vols. 29–59: pages unchanged.
 
+### Vols. 19–23: what the batch found
+
+Per volume: 19 (1890) 65 articles, 439 pages, 836 repairs; 20 (1891) 60, 477, 958;
+21 (1892) 70, 454, 1495; 22 (1893) 59, 570, 1661; 23 (1894) 44, 469, 1404. Vol. 23 has two
+numbers in the IA collection (pp. 1–200 and 201–469), with continuous pagination.
+
+Pagination:
+
+- **Pages missing from the scan: vol. 20 pp. 370–371.** "A Remarkable Conversion" opens on
+  p. 369 with the crime and the sentence. The next leaf prints 372 and goes on with the
+  execution, before "Chili and the Argentine Republic" (indexed at 372): the conversion
+  itself is not in the scan. This is recorded in `tools/page_overrides.json`.
+- **An unread table on the number the next issue opens with** (vol. 20 no. 1, the
+  Missouri statistics given p. 151) is left out like a plate.
+
+Index:
+
+- **Contents lists in vols. 19–20** run the obituaries into one line: "Obituaries— Mr.
+  Christian F. Wise, 95; Fr. John Verdin, 97; …". The line is split on its semicolons
+  (and a stray colon) into obituary entries.
+- **Headings with stray punctuation** ("Obituary,", "Varia,", "Obituary*") are read.
+- **A lost VARIA heading** (vol. 23): in the Obituary section, a run of three or more
+  entries of the form "Name, page" that are not persons is Varia. A single one stays
+  (vol. 36's "Sanctus Traverso", a brother listed without "Br.").
+- **A numeral the OCR has spoiled** ("INDEX TO VOLUME XXin.-i894") gives way to the year:
+  vol. N appeared in 1871 + N.
+
+Repairs: `6` is the ct ligature, not é, where that gives a common word ("subje6" → subject,
+formerly "subjeé").
+
+Seams checked: vol. 20 p. 314 and vol. 21 p. 154 are blank versos at issue ends.
+
+Rebuilt vols. 24–59: pages and articles unchanged.
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -426,6 +461,9 @@ Rebuilt vols. 29–59: pages unchanged.
   editorial notes; the Supplement and insert forms are still to be decided.
 - **Vol. 28 has nos. 1–2 only** in the Internet Archive collection, and no index; nor has
   vol. 27. Their authors come from signatures only.
+- Vols. 19–23, left as they are: vol. 21 p. 132, "Books in Press or in Preparation" (indexed as
+  an article) runs on through the rest of that Varia; garbled obituary titles in vol. 19
+  ("I Do" for Fr. Aloysius Masnata, p. 100; "Btogra Phtca L Sf Rppl Ement", p. 404).
 - Vols. 24–28, left as they are: vol. 25 p. 524 "Fr. Jogues" (a Varia item on St. Isaac
   Jogues, taken for an obituary); vol. 24 p. 139 "Fr. Patrick S. Murphy, p"; vol. 26 p. 4
   `" " Rev. Fr. Provincial` (ditto marks of the index) and p. 322 "Exstinct^ Societati

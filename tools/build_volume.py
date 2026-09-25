@@ -58,7 +58,7 @@ MASTHEAD = re.compile(
 # vol. 54 has no index, only a front-matter "CONTENTS OF VOL. LIV." of the same form
 # and from vol. 57 in arabic figures: "INDEX TO VOLUME 57"
 # ("INDKX TO VOLUME XXV", vol. 25)
-INDEX_HEAD = re.compile(r"(?:IND[EK]X\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?VOL\w*\.?\s+([XVLI]+|\d{2})\b", re.I)
+INDEX_HEAD = re.compile(r"(?:IND[EK]X\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?VOL\w*\.?\s+([XVLI]+[a-z]*|\d{2})\b", re.I)
 
 
 def index_numeral(s):
@@ -454,7 +454,13 @@ def paginate(leaves):
         if not m:
             k += 1
             continue
-        v = index_numeral(m[1])
+        # a numeral the OCR has spoiled ("XXin.-i894", vol. 23) gives way to the
+        # year beside it: vol. N appeared in 1871 + N
+        y = re.search(r"[1iIl]8[0-9gqo]{2}", m.string[m.end():])
+        if not re.fullmatch(r"[XVLIil]+|\d{2}", m[1]) and y:
+            v = int(y[0].translate(str.maketrans("iIlgqo", "111990"))) - 1871
+        else:
+            v = index_numeral(m[1])
         leaves[k].update(text=False, index=v)
         k += 1
         while k < len(leaves) and (index_like(leaves[k]) or leaves[k]["chars"] < 200):
@@ -586,7 +592,9 @@ class Repair:
             fixed = core.replace("6", "é")
             # but ó in the Spanish -ón ("Le6n" is León, vol. 51), and plain e
             # where that makes a common English word ("th6", the)
-            if re.search(r"6n$", core):
+            if core.islower() and zipf_frequency(core.replace("6", "ct"), "en") >= 3.0:
+                fixed = core.replace("6", "ct")  # the ct ligature again: "subje6" is subject (vol. 19)
+            elif re.search(r"6n$", core):
                 fixed = core[:-2] + "ón"
             elif core.islower() and zipf_frequency(core.replace("6", "e"), "en") >= 4.0:
                 fixed = core.replace("6", "e")
@@ -722,8 +730,9 @@ def parse_index(leaves, vol):
     entries, section = [], "Articles"
     def heading(ln):
         """OBITUARY / OBITUARIES / VARIA, as the OCR gives them ("lUTUARV.", vol. 25)"""
+        ln = ln.strip().rstrip(".,*:; ")  # "Obituary,", "Varia,", "Obituary*" (vols. 21, 23)
         n = norm_head(ln)
-        if ln.rstrip(".").upper() in ("OBITUARY", "OBITUARIES", "VARIA"):  # OBITUARIES from vol. 57
+        if ln.upper() in ("OBITUARY", "OBITUARIES", "VARIA"):  # OBITUARIES from vol. 57
             return "Varia" if n == "VARIA" else "Obituary"
         if len(ln) <= 12 and 5 <= len(n) and sum(c.isupper() for c in ln) >= len(n) - 2:
             if difflib.SequenceMatcher(None, n, "OBITUARY").ratio() >= 0.6:
@@ -733,6 +742,16 @@ def parse_index(leaves, vol):
         return None
     has_varia = any(heading(ln) == "Varia" for ln in lines)
     for ln, r in zip(lines, raw):
+        # the contents of the early volumes run the obituaries together:
+        # "Obituaries— Mr. Christian F. Wise, 95; Fr. John Verdin, 97; …" (vol. 19)
+        ob = re.match(r"Obituar\w*\W*[—-]\s*(.+)", ln)
+        if ob:
+            for part in re.split(r"[;:]", ob[1]):  # ("254: Fr. Louis Sache", vol. 19)
+                pm = re.match(r"\s*(.*?[A-Za-z].*?)[\s.,]*(\d{1,3})\.?\s*$", part)
+                if pm:
+                    entries.append({"entry": pm[1].strip(" .,"), "author": None, "pages": [int(pm[2])],
+                                    "section": "Obituary", "_raw": r})
+            continue
         if heading(ln):
             section = heading(ln)
             # in a contents set in two columns (vol. 54) the OCR gives the
@@ -793,6 +812,15 @@ def parse_index(leaves, vol):
         block = [e for e in entries[last + 1:] if e["section"] == "Articles" and e.get("_comma")]
         for e in block if len(block) >= 5 else []:
             e["section"] = "Obituary" if re.match(r"(Fr|Ft|Br|Bro|Mr|Rev|Father|Brother)\b", e["entry"]) else "Varia"  # ("Ft." is Fr., vol. 54)
+    # an obituary is a person: a place in the Obituary section is a Varia item
+    # whose heading the OCR has lost (vol. 23: "Alaska, 434" after the obituaries)
+    # (three in a row at least: a brother listed without "Br.", "Sanctus
+    # Traverso", vol. 36, is an obituary all the same)
+    place = [e["section"] == "Obituary" and bool(e.get("_comma"))
+             and not re.match(r"(Fr|Ft|Br|Bro|Mr|Rev|Father|Brother|Very)\b", e["entry"]) for e in entries]
+    for k in range(len(entries)):
+        if place[k] and (all(place[k:k + 3]) and len(place[k:k + 3]) == 3 or (k and entries[k - 1]["section"] == "Varia")):
+            entries[k]["section"] = "Varia"
     for e in entries:
         e.pop("_raw", None), e.pop("_comma", None)
     return entries
@@ -863,6 +891,13 @@ def build(vol):
                             l.update(kind="plate", text=False, page=None, insert=None)
                         else:
                             l["insert"], l["page"] = True, last["page"]
+        # an unread table closing an issue on the number the next issue opens
+        # with (vol. 20 no. 1: the Missouri statistics, "1 / 1", given p. 151)
+        # has no page: it is left out like a plate
+        mains = [l for l in leaves if l["kind"] == "text" and not l.get("sup") and not l["insert"]]
+        if first and mains and mains[-1]["page"] >= first and mains[-1]["cand"] != mains[-1]["page"] \
+                and tabular(mains[-1]):
+            mains[-1].update(kind="plate", text=False, page=None)
         ins = [l for l in leaves if l["kind"] == "text" and l["insert"] and not l.get("sup")]
         if ins and first and first - ins[0]["page"] - 1 >= len(ins):
             base = ins[0]["page"]  # (not ins[0]["page"] in the loop: it changes on the first pass)

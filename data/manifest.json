@@ -1,6 +1,46 @@
 {
  "volumes": [
   {
+   "vol": 19,
+   "year": 1890,
+   "articles": 65,
+   "pages": 439,
+   "words": 212283,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 20,
+   "year": 1891,
+   "articles": 60,
+   "pages": 477,
+   "words": 225097,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 21,
+   "year": 1892,
+   "articles": 70,
+   "pages": 454,
+   "words": 206206,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 22,
+   "year": 1893,
+   "articles": 59,
+   "pages": 570,
+   "words": 258496,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 23,
+   "year": 1894,
+   "articles": 44,
+   "pages": 469,
+   "words": 214782,
+   "built": "2026-09-25"
+  },
+  {
    "vol": 24,
    "year": 1895,
    "articles": 68,
