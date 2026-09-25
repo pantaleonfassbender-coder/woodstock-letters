@@ -482,6 +482,42 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Split titles fixed (2026-09-25)
+
+A title printed over two heading lines was cut at the first line, and the rest was taken as the subtitle.
+`build_volume.py` now joins the two lines in two cases:
+
+- **The first line cannot end a title.** It ends in *of*, *the*, *and*, *in*, *to*, *between* and similar words:
+  - "THE INCEPTION OF THE" / "JESUIT SEMINARY NEWS";
+  - "POLISH MISSIONARY WORK IN THE" / "UNITED STATES".
+- **The first line has no full stop, and the second opens with a preposition.** The second line opens with *in*, *on*,
+  *at*, *to*, *into*, *for*, *and* or *among*, and the two lines come to 90 characters or fewer:
+  - "THREE YEARS OF A COADJUTOR BROTHER" / "IN ALASKA.";
+  - "THE ARMS OF LOYOLA" / "AND THE BATTLE OF BEOTIBAR.".
+
+Lines are not joined in these cases, because the second line is a subtitle:
+- a first line with a full stop ("ROCKY MOUNTAIN MISSIONS." / "AMONG THE KOOTENAIS.");
+- a second line opening with *With* ("WITH AN ACCOUNT OF …");
+- a byline ("BY FR. …").
+
+Running heads are now also compared with an article's first heading line alone, since they often carry only that line
+("LAY RETREAT MOVEMENT", vol. 42). That makes the old merge of 51-064 unneeded, so it has been removed.
+
+Results over vols. 1–59:
+- **Titles:** 52 corrected in 27 volumes, 38 by the rule and 14 by hand.
+- **Unchanged:** no page, paragraph, article boundary, author or section.
+- **Corrected by hand:**
+  - Mid-phrase splits no rule can tell from a subtitle, such as "…at Eastern" / "Penitentiary" and "…at Santa" /
+    "Clara": 32-172, 40-037, 40-317, 43-067, 44-312, 44-358, 52-370, 58-039.
+  - OCR noise left after the join: 29-026, 29-471, 41-161.
+  - Other layouts: 14-149 (a bracketed dedication), 44-038 (the second line runs into the text) and 55-419 (an
+    address set over several lines).
+- **Vol. 59:** the hand corrections of 59-021 are replaced by the rule. 59-309, a title over three lines, stays
+  corrected by hand.
+- **Subtitle overrides:** a subtitle override now applies on its own, without a title override (55-419).
+- **Register:** one article changed register. 23-050, Father General's letter to the Alaska missionaries, is now
+  "official". It had been read as an obituary.
+
 ### Links from the study to the edition (2026-09-25)
 
 - Every study text the edition holds is now linked to its article(s). There are 24 of them.
@@ -730,9 +766,6 @@ Rebuilt vols. 9–59:
   and the README.
 - Index entries in inverted form ("Innsbruck, The Golden Jubilee of") remain as titles only where the page gives
   no readable one.
-- A title printed over two heading lines ("THE INCEPTION OF THE" / "JESUIT SEMINARY NEWS") is cut at the
-  first line, the rest taken as subtitle. Vol. 59's four cases are read by eye. A rule (join when the first line
-  ends in *of*, *the*, *in honor of*) wants a regression over vols. 1–59 first.
 - Vol. 22 p. 565 is titled with its opening sentence ("The Following Is a Synopsis of the 'Missiones
   Catholicae' in Regard to British Honduras").
 

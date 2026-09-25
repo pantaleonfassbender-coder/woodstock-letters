@@ -67,6 +67,10 @@
     "section": {"13-224": "Obituary"},
     "repairs": {"fix": {"Qu6en": "Queen"}}
   },
+  "14": {
+    "title": {"14-149": "Tercentenary Celebration of the Sodality in the New York Maryland Province"},
+    "subtitle": {"14-149": "Dedicated to Very Rev. Father Vicar"}
+  },
   "18": {
     "title": {"18-381": "Fr. James Curley"}
   },
@@ -80,6 +84,9 @@
   "21": {
     "merge": ["21-132"],
     "title": {"21-431": "Mr. John Joseph Malone"}
+  },
+  "23": {
+    "register": {"23-050": "official"}
   },
   "24": {
     "merge": ["24-415", "24-420", "24-425"],
@@ -97,6 +104,9 @@
   },
   "29": {
     "author": {"29-201": "Leo XIII and Very Rev. Fr. General"},
+    "title": {"29-026": "Father Secchi's Meteorograph at St. Ignatius College, Cleveland, Ohio",
+              "29-471": "German Jesuit Missionaries in the Seventeenth and Eighteenth Centuries"},
+    "subtitle": {"29-471": "A Sketch"},
     "merge": ["29-309"]
   },
   "30": {
@@ -107,6 +117,10 @@
     "merge": ["31-353"],
     "title": {"31-352": "Mission of Our German Fathers among the Dakota Indians", "31-022": "Navigatio Funesta Patrum Procuratorum"},
     "subtitle": {"31-352": "A Letter from Father Florentine Digmann, S. J."}
+  },
+  "32": {
+    "title": {"32-172": "The First Confirmation at Eastern Penitentiary"},
+    "subtitle": {"32-172": null}
   },
   "34": {
     "title": {"34-030": "Woodstock — The Scholasticate"}
@@ -126,8 +140,22 @@
     "subtitle": {"39-362": null},
     "register": {"39-079": "essay"}
   },
+  "40": {
+    "title": {"40-037": "Laymen's Retreats at St. Mary's College, Kansas", "40-317": "Pilgrimage to St. Francis Xavier's Shrine in Goa"},
+    "subtitle": {"40-037": null, "40-317": null}
+  },
+  "41": {
+    "title": {"41-161": "The Inner Circle of the Twelve Apostles, Rome"}
+  },
   "43": {
-    "merge": ["43-001-2", "43-003"]
+    "merge": ["43-001-2", "43-003"],
+    "title": {"43-067": "Thirty Days' Retreat to Secular Priests"},
+    "subtitle": {"43-067": null}
+  },
+  "44": {
+    "title": {"44-038": "The Sodality Congress of the Missouri Province",
+              "44-312": "Tokyo — Growth of the Catholic University", "44-358": "Travelling in the Time of Blessed Peter Canisius"},
+    "subtitle": {"44-038": "Held at St. Louis, July 14 and 15, 1914", "44-312": null, "44-358": null}
   },
   "45": {
     "merge": ["45-360"],
@@ -143,8 +171,11 @@
     "merge": ["50-018", "50-304"]
   },
   "51": {
-    "merge": ["51-064"],
     "repairs": {"fix": {"dalcy": "dale"}}
+  },
+  "52": {
+    "title": {"52-370": "Echoes of the Passion Play at Santa Clara"},
+    "subtitle": {"52-370": null}
   },
   "53": {
     "index": [{"match": "Fr. John E. Quirk", "entry": "Fr. John F. Quirk", "pages": [385]}]
@@ -152,6 +183,9 @@
   "54": {
     "index": [{"match": "Conference of Md.-New York", "pages": [112], "mark": "*"},
               {"match": "Fr. Himmel as a M", "entry": "Fr. Himmel as a Missioner", "author": "Fr. W. L. Stanton", "pages": [103], "mark": "*"}]
+  },
+  "55": {
+    "subtitle": {"55-419": "Of Pope Pius XI to the Very Reverend Vlodimir Ledochowski, General of the Society of Jesus"}
   },
   "57": {
     "split": [{"p": 483, "at": "BRAZIL"}],
@@ -162,14 +196,15 @@
   },
   "58": {
     "merge": ["58-382", "58-606", "58-607"],
-    "title": {"58-612": "Father Richard A. Fleming"}
+    "title": {"58-612": "Father Richard A. Fleming", "58-039": "Jesuit Education and Secular Universities"},
+    "subtitle": {"58-039": null}
   },
   "59": {
-    "title": {"59-171": "Statistics", "59-021": "The Inception of the Jesuit Seminary News",
+    "title": {"59-171": "Statistics",
               "59-222": "A Record of the Controversy Between Fr. Edmund A. Walsh and Time",
-              "59-309": "Auriesville Celebration in Honor of the Canonization of the North American Martyrs",
-              "59-023": "A Pre-emancipation Jesuit"},
-    "subtitle": {"59-021": null, "59-222": null, "59-309": null},
+              "59-023": "A Pre-emancipation Jesuit",
+              "59-309": "Auriesville Celebration in Honor of the Canonization of the North American Martyrs"},
+    "subtitle": {"59-222": null, "59-309": null},
     "index": [{"match": "Weston College", "pages": [217]}],
     "repairs": {"fix": {"Ciirls": "Girls"}}
   }

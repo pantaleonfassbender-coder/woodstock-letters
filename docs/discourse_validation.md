@@ -50,7 +50,7 @@ Package / edition. The study's commemorative register is thus the Woodstock jubi
 
 | Package file | Edition article | Register | words (pkg / ed.) | we % (pkg / ed.) |
 |---|---|---|---|---|
-| 1900_arms_of_loyola.txt | [29-120](../#/a/29-120) The Arms of Loyola | essay | 949 / 954 | 1.26 / 1.26 |
+| 1900_arms_of_loyola.txt | [29-120](../#/a/29-120) The Arms of Loyola and the Battle of Beotibar | essay | 949 / 954 | 1.26 / 1.26 |
 | 1900_badge_of_loyola.txt | [29-001](../#/a/29-001) The Badge of Loyola | essay | 2244 / 2241 | 1.11 / 1.12 |
 | 1900_bc_harvard.txt | [29-337](../#/a/29-337) Boston College and Harvard University | essay | 1182 / 1180 | 0.34 / 0.34 |
 | 1900_catholic_colleges_conf.txt | [29-342](../#/a/29-342) Ours at the Second Annual Conference of Catholic Colleges | essay | 896 / 896 | 0.45 / 0.45 |
@@ -63,7 +63,7 @@ Package / edition. The study's commemorative register is thus the Woodstock jubi
 | 1910_new_province_california.txt | [39-079](../#/a/39-079) The New Province of California | essay | 454 / 464 | 0.44 / 0.43 |
 | 1910_odd_road_to_rome_OPT.txt | [39-208](../#/a/39-208) An Odd Road to Rome | essay | 1343 / 1344 | 2.53 / 2.53 |
 | 1910_st_stanislaus.txt | [39-347](../#/a/39-347) St. Stanislaus Seminary | letter | 5762 / 5801 | 0.69 / 0.69 |
-| 1910_working_men_exercises_OPT.txt | [39-091](../#/a/39-091) The Spiritual Exercises for Men | letter | 2028 / 1979 | 1.92 / 1.97 |
+| 1910_working_men_exercises_OPT.txt | [39-091](../#/a/39-091) The Spiritual Exercises for Men and for Working-men | letter | 2028 / 1979 | 1.92 / 1.97 |
 | 1930_auriesville.txt | [59-309](../#/a/59-309) Auriesville Celebration in Honor of the Canonization of the North American Martyrs | essay | 3432 / 3437 | 0.12 / 0.12 |
 | 1930_church_and_radio.txt | [59-053](../#/a/59-053) The Church and the Radio | essay | 1382 / 1383 | 0.94 / 0.94 |
 | 1930_jesuit_seminary_news.txt | [59-021](../#/a/59-021) The Inception of the Jesuit Seminary News | essay | 648 / 650 | 0.46 / 0.46 |
