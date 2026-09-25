@@ -16,7 +16,7 @@
     "concordance"
   ],
   "related_identifiers": [
-    {"identifier": "https://archive.org/details/woodstockletters", "relation": "isDerivedFrom", "resource_type": "publication"},
+    {"identifier": "https://archive.org/details/woodstockletters", "relation": "isDerivedFrom", "resource_type": "publication-other"},
     {"identifier": "10.5281/zenodo.22697014", "relation": "isSupplementTo", "resource_type": "dataset"},
     {"identifier": "10.5281/zenodo.22682750", "relation": "references", "resource_type": "software"}
   ]
