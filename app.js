@@ -1153,7 +1153,7 @@ function viewAbout() {
   <p>The edition itself:</p>
   <p class="citebox">Fassbender, P. (2026). <i>Woodstock Letters: A Research Edition</i> (Version 1.0.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.22967521</p>
   <p class="fine">The concept DOI 10.5281/zenodo.22967521 always resolves to the latest archived version; the version DOI of v1.0.0 is
-  <a href="https://doi.org/10.5281/zenodo.22967522" target="_blank" rel="noopener">10.5281/zenodo.22967522</a>. Live site: ${SITE}</p>
+  <a href="https://doi.org/10.5281/zenodo.22967647" target="_blank" rel="noopener">10.5281/zenodo.22967647</a>. Live site: ${SITE}</p>
   <p>The introductory essay:</p>
   <p class="citebox">Fassbender, P. (2026). The Woodstock Letters, 1872–1930: An introduction to a research edition. <i>Woodstock Letters: A Research Edition</i>. ${SITE}#/introduction</p>
   <p class="fine">A companion to <a href="https://ignatian-research.netlify.app/" target="_blank" rel="noopener">Ignatiana</a>

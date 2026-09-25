@@ -11,7 +11,7 @@ identifiers:
     value: 10.5281/zenodo.22967521
     description: "Concept DOI - resolves to the latest archived version on Zenodo"
   - type: doi
-    value: 10.5281/zenodo.22967522
+    value: 10.5281/zenodo.22967647
     description: "Version DOI for v1.0.0"
 repository-code: "https://github.com/pantaleonfassbender-coder/woodstock-letters"
 url: "https://woodstock-letters.netlify.app/"

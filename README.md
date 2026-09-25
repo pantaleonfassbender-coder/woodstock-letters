@@ -135,7 +135,7 @@ The pipeline is written to run unattended in Claude Code cloud sessions. See
 ## Citation
 
 Fassbender, P. (2026). *Woodstock Letters: A Research Edition* (Version 1.0.0) [Data set].
-Zenodo. https://doi.org/10.5281/zenodo.22967521 (concept DOI; v1.0.0: 10.5281/zenodo.22967522).
+Zenodo. https://doi.org/10.5281/zenodo.22967521 (concept DOI; v1.0.0: 10.5281/zenodo.22967647).
 See `CITATION.cff`. Cite the journal itself by volume, year and printed page (`WL 29 (1900): 46`).
 
 ## Licences
