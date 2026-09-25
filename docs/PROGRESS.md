@@ -482,6 +482,20 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Necrology data (2026-09-25)
+
+`tools/fetch_necrology.py` ran over the 289 Jesuits of the people map (Fathers, Brothers, scholastics).
+
+- Results:
+  - 194 matched to a record of the Jesuit Online Necrology (`data/necrology.json`);
+  - 18 ambiguous, with more than one record still fitting, so none is shown;
+  - 78 not found.
+- The site answers four surname searches with an HTTP 500 every time: Abbadie, Ignatius, Murphy and Maleve.
+  - The script now retries once, skips the search and says so, and a rerun asks only for what failed.
+  - These four stay open.
+- Fixed: the People panel's biodata code sat inside the atlas view, so opening a person failed with "bio is not defined".
+  It now sits in the People view.
+
 ### Discourse module (2026-09-25)
 
 A new view, Discourse (`#/discourse`), follows the study's measures year by year over vols. 1–59. It uses the open

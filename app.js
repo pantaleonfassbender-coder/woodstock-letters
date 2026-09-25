@@ -401,22 +401,6 @@ async function viewAtlas(params) {
     .filter(b => b.deg >= 4).sort((a, b) => b.span - a.span || b.deg - a.deg).slice(0, 18);
   const words = new Map(S.man.volumes.map(m => [m.vol, m.words]));
 
-  const MON = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
-  const day = d => { const m = /^(\d\d)-(\d\d)-(\d{4})$/.exec(d || ""); return m ? `${+m[1]} ${MON[+m[2] - 1]} ${m[3]}` : esc(d || ""); };
-  function bio(b) {
-    if (!b) return "";
-    const row = (k, d, pl) => d || pl ? `<tr><td>${k}</td><td>${day(d)}${pl ? `, ${esc(pl)}` : ""}</td></tr>` : "";
-    return `<table class="bio">
-        ${row("Born", b.born, b.birthplace)}
-        ${row("Entered", b.entered, b.province)}
-        ${row("Final vows", b.vows, null)}
-        ${row("Died", b.died, b.deathplace)}
-        ${b.grade || b.status ? `<tr><td>Grade</td><td>${esc([b.grade, b.status].filter(Boolean).join(", "))}</td></tr>` : ""}
-      </table>
-      <p class="fine">From the <a href="${esc(NEC.url + b.id)}" target="_blank" rel="noopener">Jesuit Online Necrology</a>
-      (${esc(b.name)}), after Mendizábal's <i>Catalogus defunctorum</i>.</p>`;
-  }
-
   function panel(id) {
     const n = node.get(id);
     if (!n) return `<h3>Selection</h3><p class="fine">Click a term for its neighbours and its spread across the volumes.</p>`;
@@ -494,6 +478,21 @@ async function viewPeople(params) {
   // biodata of the Jesuits from the Jesuit Online Necrology (tools/fetch_necrology.py)
   S.necro = S.necro || await getJSON("data/necrology.json").catch(() => ({ persons: {} }));
   const P = S.people, NEC = S.necro;
+  const MON = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
+  const day = d => { const m = /^(\d\d)-(\d\d)-(\d{4})$/.exec(d || ""); return m ? `${+m[1]} ${MON[+m[2] - 1]} ${m[3]}` : esc(d || ""); };
+  function bio(b) {
+    if (!b) return "";
+    const row = (k, d, pl) => d || pl ? `<tr><td>${k}</td><td>${day(d)}${pl ? `, ${esc(pl)}` : ""}</td></tr>` : "";
+    return `<table class="bio">
+        ${row("Born", b.born, b.birthplace)}
+        ${row("Entered", b.entered, b.province)}
+        ${row("Final vows", b.vows, null)}
+        ${row("Died", b.died, b.deathplace)}
+        ${b.grade || b.status ? `<tr><td>Grade</td><td>${esc([b.grade, b.status].filter(Boolean).join(", "))}</td></tr>` : ""}
+      </table>
+      <p class="fine">From the <a href="${esc(NEC.url + b.id)}" target="_blank" rel="noopener">Jesuit Online Necrology</a>
+      (${esc(b.name)}), after Mendizábal's <i>Catalogus defunctorum</i>.</p>`;
+  }
   const node = new Map(P.nodes.map(n => [n.id, n]));
   const nb = new Map(P.nodes.map(n => [n.id, []]));
   for (const e of P.edges) { nb.get(e.s).push([e.t, e]); nb.get(e.t).push([e.s, e]); }

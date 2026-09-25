@@ -33,6 +33,7 @@ CACHE = ROOT / "data" / "raw" / "necrology"
 BASE = "https://jesuitonlinenecrology.bc.edu"
 UA = "woodstock-letters research edition (https://woodstock-letters.netlify.app/)"
 _last = [0.0]
+FAILED = []
 
 # entry provinces and missions of North America, as the Catalogus names them
 NA = re.compile(r"Maryland|Marylandiae|Neo.?Ebor|New York|Missouri|Neo.?Aurel|New Orleans|Californ|Canad|Neo.?Angl|"
@@ -48,8 +49,18 @@ def get(path, name):
     if wait > 0:
         time.sleep(wait)
     req = urllib.request.Request(BASE + path, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        data = json.loads(r.read().decode("utf-8"))
+    for attempt in (1, 2):  # the site answers a query now and then with a 500: try once more, then skip it
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                data = json.loads(r.read().decode("utf-8"))
+            break
+        except (urllib.error.URLError, TimeoutError) as e:
+            _last[0] = time.time()
+            if attempt == 2:
+                FAILED.append(path)
+                print(f"  skipped {path}: {e}")
+                return {}
+            time.sleep(10)
     _last[0] = time.time()
     CACHE.mkdir(parents=True, exist_ok=True)
     f.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
@@ -147,6 +158,8 @@ def main():
             continue
         d = docs[0]
         r = get(f"/catalog/{d['id']}.json", f"r_{d['id']}.json")
+        if not r:
+            continue
         out[n["id"]] = {
             "id": d["id"], "name": d["title"],
             "born": field(r, "birth_date_display"), "birthplace": field(r, "place_of_birth_tsi"),
@@ -161,7 +174,7 @@ def main():
             "url": BASE + "/catalog/", "retrieved": time.strftime("%Y-%m-%d"), "persons": out}
     (ROOT / "data" / "necrology.json").write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
     print(f"necrology: {report['matched']} matched, {report['ambiguous']} ambiguous, {report['none']} not found "
-          f"-> data/necrology.json")
+          f"-> data/necrology.json" + (f"; {len(FAILED)} requests failed (rerun to retry)" if FAILED else ""))
 
 
 def field(rec, key):
