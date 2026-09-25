@@ -42,6 +42,10 @@ writing; its manuscript (APA 7) is in `docs/` and is built from `data/introducti
 - **Citation forms.** `WL 29 (1900): 46` for a page, `WL 54 (1925): 104*` for an asterisked
   folio, `WL 30 (1901): Suppl. vii` for a Supplement, `WL 30 (1901): insert after p. 332`
   for an unnumbered insert.
+- **Reading paths.** Seven curated routes through the edition (`data/paths.json`): the farms
+  and the slaves of Maryland, the Jesuits and the American university, Woodstock itself, the
+  jubilee effect (with the discourse measures beside each station), the Indian missions, the
+  Jesuits as scientists, the chaplains. A question per path, a note per station.
 - **Register.** The headings and references of the printed general index to vols. 1–80
   (Zorn, 1960), with the compiler's marks for obituaries, authors, reviews and pictures;
   references to vols. 1–59 open the page, to vols. 60–80 the scan. The index is not in the

@@ -132,6 +132,16 @@ if (ROOT / "data" / "general_index.json").exists():
     elif n_bad:
         warn(f"register: {n_bad} of {total} references hit no page (OCR of the index, or gaps in the scans)")
 
+# reading paths: every station names an existing article
+if (ROOT / "data" / "paths.json").exists():
+    ids = {a["id"] for v in vols.values() for a in v["articles"]}
+    for p in load("data/paths.json")["paths"]:
+        for s in p["stations"]:
+            if s["a"] not in ids:
+                fail(f"path {p['id']}: station {s['a']} is not an article of the edition")
+            if not s.get("note"):
+                warn(f"path {p['id']}: station {s['a']} has no note")
+
 # tables
 if (ROOT / "data" / "tables.json").exists():
     for t in load("data/tables.json")["tables"]:

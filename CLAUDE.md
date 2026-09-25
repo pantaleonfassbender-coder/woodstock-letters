@@ -50,6 +50,13 @@ volumes, articles, pages, repairs, and open issues.
 Run `python tools/check_edition.py`. It must print `OK`. A warning is worth a
 look; a failure is not to be committed around.
 
+## Reading paths
+
+`data/paths.json` is the editor's curation. Stations must be article ids of the
+edition (the check script verifies them). Notes with `"status": "draft"` on the
+path were drafted by the model; only the editor removes the mark. Do not add
+paths or rewrite notes unasked.
+
 ## Register and tables
 
 - `data/general_index.json` comes from the printed index of 1960 (in copyright):

@@ -155,6 +155,52 @@ async function viewRegister(params) {
   ${es.length > 1500 ? `<p class="fine">First 1,500 shown; narrow the search.</p>` : ""}`;
 }
 
+/* Reading paths (data/paths.json): curated routes through the edition, a
+   guiding question per path and a note per station. A path marked
+   "discourse" shows each station's measures of voice from data/discourse.json. */
+async function viewPaths(id) {
+  S.paths = S.paths || await getJSON("data/paths.json");
+  const P = S.paths.paths;
+  if (!id) {
+    return `<div class="kicker">Reading paths</div><h1>Seven ways through sixty years</h1>
+    <p class="lede">A path is a short reading list with a question: six to nine articles of the edition in an order that makes
+    an argument, each with a note on what to read it for. The paths are the editor's; the notes marked <span class="tag">draft</span>
+    were written with the language model and are still to be revised.</p>
+    <div class="grid2">${P.map(p => `<div class="card"><div class="kicker">${esc(p.years)} · ${p.stations.length} stations${p.status === "draft" ? " · draft" : ""}</div>
+      <h3><a href="#/paths/${p.id}">${esc(p.title)}</a></h3><p class="fine" style="font-family:var(--serif);font-size:.95rem;color:var(--fg2)">${esc(p.question)}</p></div>`).join("")}</div>`;
+  }
+  const p = P.find(x => x.id === id);
+  if (!p) return `<h1>No path “${esc(id)}”</h1><p><a href="#/paths">All paths</a></p>`;
+  const arts = await Promise.all(p.stations.map(async s => {
+    const v = await vol(+s.a.split("-")[0]);
+    return { s, v, a: v.byId.get(s.a) };
+  }));
+  let disc = null;
+  if (p.discourse) {
+    S.disc = S.disc || await getJSON("data/discourse.json").catch(() => null);
+    disc = S.disc ? new Map(S.disc.articles.map(o => [o.id, o])) : null;
+  }
+  const measure = o => o ? `<table class="bio"><tr><td>we</td><td>${(100 * (o.n.we || 0) / o.wc).toFixed(2)} %</td></tr>
+    <tr><td>I</td><td>${(100 * (o.n.i || 0) / o.wc).toFixed(2)} %</td></tr>
+    <tr><td>positive emotion</td><td>${(100 * (o.n.posemo || 0) / o.wc).toFixed(2)} %</td></tr>
+    <tr><td>achievement</td><td>${(100 * (o.n.achievement || 0) / o.wc).toFixed(2)} %</td></tr>
+    <tr><td>words</td><td>${o.wc.toLocaleString("en")}</td></tr></table>` : "";
+  const i = P.indexOf(p), prev = P[i - 1], next = P[i + 1];
+  return `<div class="kicker"><a href="#/paths">Reading paths</a> · ${esc(p.years)}${p.status === "draft" ? " · <span class='tag'>draft notes</span>" : ""}</div>
+  <h1>${esc(p.title)}</h1>
+  <p class="lede"><b>${esc(p.question)}</b></p>
+  <p class="prose" style="font-family:var(--serif);font-size:1.02rem">${esc(p.intro)}</p>
+  <ol class="stations">${arts.map(({ s, v, a }, k) => a ? `<li>
+      <div class="st-head"><span class="st-n">${k + 1}</span>
+        <a class="ti" href="#/a/${a.id}${s.p ? `?p=${s.p}` : ""}">${esc(a.title)}</a>
+        <span class="fine">${a.author ? esc(a.author) + " · " : ""}WL ${v.vol} (${v.year}): ${esc(range(a))}</span></div>
+      <p class="st-note">${esc(s.note)}</p>
+      ${disc ? measure(disc.get(a.id)) : ""}</li>` : `<li><span class="st-n">${k + 1}</span> <span class="mono">${esc(s.a)}</span> not found</li>`).join("")}</ol>
+  ${p.discourse ? `<p class="fine">Measures: the study's open word lists as percentages of the article's words (<a href="#/discourse">Discourse</a>);
+    the corpus means of the study are 0.79 % <i>we</i> and 0.58 % <i>I</i> over its twenty-two texts.</p>` : ""}
+  <div class="pager"><span>${prev ? `← <a href="#/paths/${prev.id}">${esc(prev.title)}</a>` : ""}</span><span>${next ? `<a href="#/paths/${next.id}">${esc(next.title)}</a> →` : ""}</span></div>`;
+}
+
 /* The statistical tables (data/tables.json, files in data/tables/): the
    journal's fold-out tables as OCR text and best-effort CSV, by kind and year. */
 async function viewTables(params) {
@@ -1082,6 +1128,9 @@ function viewAbout() {
     marks supply authors for otherwise unsigned pieces, shown as “from the general index of 1960”. <a href="#/register">Open the register</a>.</li>
     <li><b>Tables.</b> The journal's fold-out statistics (<i>Ministeria spiritualia</i>, students in the colleges, the list of the dead) as the OCR
     read them, line by line, with a best-effort CSV per table and a link to the scan; nothing corrected by hand. <a href="#/tables">Open the tables</a>.</li>
+    <li><b>Reading paths.</b> Seven curated routes (<span class="mono">data/paths.json</span>): a question, an order of articles and a note per
+    station; the jubilee path shows each station's measures of voice. Notes marked <i>draft</i> were written with the language model and await
+    the editor's revision. <a href="#/paths">Open the paths</a>.</li>
     <li><b>Checks.</b> <span class="mono">tools/check_edition.py</span> verifies before each commit that the manifest, the volume files, the plates,
     the essay's citations, the register and the legal notice's claim of no third-party loads agree.</li>
   </ol>
@@ -1142,6 +1191,7 @@ async function route() {
     else if (r === "register") out = await viewRegister(params);
     else if (r === "p") out = await viewPage(+seg[1], +seg[2]);
     else if (r === "tables") out = await viewTables(params);
+    else if (r === "paths") out = await viewPaths(seg[1]);
     else if (r === "plates") out = viewPlates();
     else if (r === "imprint" || r === "privacy") out = viewImprint();
     else out = `<h1>Not found</h1>`;
