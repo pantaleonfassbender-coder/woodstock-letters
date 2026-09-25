@@ -27,6 +27,12 @@ outside the public domain or not yet cleared, and are not part of the edition (s
   For the Jesuits it matches, it gives the dates and places of birth, entry and death from the
   [Jesuit Online Necrology](https://jesuitonlinenecrology.bc.edu/) (Boston College Libraries),
   with a link to the record.
+- **Discourse.** Year-by-year measures of voice (*we*, *I*), certainty, motives and feeling,
+  with the open word lists of P. Fassbender's study of U.S. Jesuit discourse, 1890–1944
+  ([replication package](https://doi.org/10.5281/zenodo.22697014), CC BY 4.0). Articles are classed
+  into registers, so that essays can be read apart from letters, Varia and obituaries, and
+  commemorative pieces apart from ordinary ones. The study's texts, scored from the edition,
+  give its values: [validation report](docs/discourse_validation.md).
 - **Citation forms.** `WL 29 (1900): 46` for a page, `WL 54 (1925): 104*` for an asterisked
   folio, `WL 30 (1901): Suppl. vii` for a Supplement, `WL 30 (1901): insert after p. 332`
   for an unnumbered insert.
@@ -40,6 +46,8 @@ net.js                          the atlas network renderer (canvas, no library)
 data/atlas.json                 term co-occurrence network for the atlas
 data/people.json                person-to-person network
 data/necrology.json             biodata from the Jesuit Online Necrology, by person
+data/discourse.json             word-list measures and register of every article
+data/discourse_study.json       the study's corpus means, as reference points
 pagefind/                       search index, built on deploy (git-ignored)
 data/catalogue.json             every issue 1872–1969 (metadata only)
 data/manifest.json              volumes built with full text
@@ -59,6 +67,8 @@ python tools/build_volume.py 29          # build data/vol/029.json + docs/qa/vol
 python tools/build_atlas.py              # rebuild data/atlas.json over all full-text volumes
 python tools/build_people.py             # rebuild data/people.json
 python tools/fetch_necrology.py          # match its Jesuits to the Jesuit Online Necrology (cached, 2 s apart)
+python tools/build_discourse.py          # score every article with the study's word lists
+python tools/validate_discourse.py PKG   # compare with the study's replication package, unzipped at PKG
 python tools/build_search.py             # build the search index into pagefind/ (git-ignored)
 python -m http.server 8765               # preview at http://localhost:8765
 ```

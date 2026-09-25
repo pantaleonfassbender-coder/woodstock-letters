@@ -482,6 +482,34 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Discourse module (2026-09-25)
+
+A new view, Discourse (`#/discourse`), follows the study's measures year by year over vols. 1–59. It uses the open
+word lists of P. Fassbender's "Identity and Values in U.S. Jesuit Discourse, 1890–1944" (replication package,
+CC BY 4.0, doi:10.5281/zenodo.22697014).
+
+- `tools/build_discourse.py` scores 2,671 articles (9.79 M words), applying the package's paragraph filters, sentence
+  count and MATTR-200. Each article is classed into a register by rule: essay 1,183, obituary 626, letter 464,
+  Varia 150, review 121, table 74, document 46, official 7. It is also flagged commemorative or foreign.
+  Adjusted lists drop the Jesuit usage words (*society*, *order*, *superior*, *brother*, *master*, *office*, *will*).
+  Corrections go in `article_overrides.json` under `register` and `commemorative`.
+- `tools/validate_discourse.py` matches the package's 22 internal texts (1900, 1910, 1930) to the edition's
+  articles and scores them from the edition's text:
+  - r = 1.000 for every category except *I* (0.994) and WPS (0.992);
+  - Table 2 is reproduced;
+  - the 1920 jubilee corpus is exactly 49-001 + 49-006 (we 2.04 against 2.03).
+  - The *I* difference comes from the package's OCR ("I^oyola").
+- Overrides: vol. 29 merges 29-309 into "Two of Woodstock's Founders" and gives 29-201 its authors. Vol. 39
+  retitles 39-362. Both volumes were rebuilt.
+- Defaults: essays and addresses on the American provinces, 300 words at least, Jesuit usage words included.
+  Letters raise *we* and *I* (1.3 % and 1.7 % against 1.0 % and 0.9 %), so they are opt-in.
+- Finding, stated on the page: the automatic commemorative flag does not reproduce the study's jubilee contrast
+  over 1872–1930 (flagged essays: we 0.9 %; ordinary essays: 1.0 %). The flag covers any title naming a jubilee,
+  centenary or anniversary, plus a whole jubilee issue. The study's commemorative register is narrower: the
+  Woodstock jubilee addresses. Its 1930 "ordinary" series includes the Spring Hill centennial and the Papal Jubilee.
+  Within the vol. 49 jubilee number, "we" runs from 0.38 % to 2.56 %.
+- Open: whether to narrow the flag to hand-marked jubilee addresses (via `commemorative` overrides).
+
 ### Open issues fixed (2026-09-25)
 
 Most of the listed one-offs are fixed by hand. They are recorded as corrections read by eye in a new file,
