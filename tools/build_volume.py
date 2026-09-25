@@ -213,6 +213,12 @@ def number_run(seq):
             anchors = [(i, o) for o, pos in runs for i in pos]
             for i in range(start, end):
                 seq[i]["page"] = i + min(anchors, key=lambda a: (abs(a[0] - i), a[0]))[1]
+        elif (len(runs) == 1 and start and seq[start - 1]["page"] is not None
+              and seq[start].get("blanks_before")
+              and start + runs[0][0] == seq[start - 1]["page"] + 1 + seq[start]["blanks_before"]):
+            # ... unless it is exactly what the blank pages before it make it
+            for i in range(start, end):
+                seq[i]["page"] = i + runs[0][0]
         start = end
 
 
@@ -251,6 +257,10 @@ def number(leaves):
     seq = [lf for lf in leaves if lf["text"]]
     for lf in leaves:
         lf["page"] = lf["restart"] = lf["insert"] = None
+    # blank leaves are pages without text: number_run lets a lone reading
+    # after them stand when it counts them (vol. 44 no. 3: 453, blank, 455)
+    for a, b in zip(seq, seq[1:]):
+        b["blanks_before"] = sum(leaves[j]["chars"] == 0 for j in range(a["leaf"] + 1, b["leaf"]))
     cuts = restarts(seq)
     for a, b in zip([0] + cuts, cuts + [len(seq)]):
         run = seq[a:b]
@@ -277,17 +287,45 @@ def paginate(leaves):
         lf.update(head=head, cand=cand if cand is not None else foot, body=body)
         lf["chars"] = chars = sum(len(x) for x in body)
         lf["text"] = (head is not None and chars > 250) or chars > 700
+    # A leaf scanned twice (vol. 42 no. 1 repeats pp. 129–134 as leaves
+    # 145–150) repeats the text of a leaf shortly before it: leave it out.
+    sig = [re.sub(r"[^a-z]", "", " ".join(lf["body"]).lower())[:240] for lf in leaves]
+    for k, lf in enumerate(leaves):
+        if lf["text"] and len(sig[k]) > 120 and any(
+                leaves[j]["text"] and not leaves[j].get("dup")
+                and difflib.SequenceMatcher(None, sig[k], sig[j]).quick_ratio() > 0.9
+                and difflib.SequenceMatcher(None, sig[k], sig[j]).ratio() > 0.9
+                for j in range(max(0, k - 30), k)):
+            lf.update(text=False, dup=True)
     # A Supplement closing an issue is paginated on its own (vol. 30 no. 1:
     # pp. i–xix; vol. 33 no. 3: pp. 1–7). Its leaves form their own run and
     # carry a label, so that "Suppl. vii" never collides with p. 7.
     s = next((k for k, lf in enumerate(leaves) if lf["head"] is None and lf["body"] and difflib.SequenceMatcher(
         None, norm_head(lf["body"][0]), "SUPPLEMENT").ratio() >= 0.75), None)
+    if s is None:
+        # A section paginated on its own without a SUPPLEMENT heading (vol. 41
+        # no. 3 closes with a Documentum, pp. 1–14): the readings start again at
+        # 2, 3 on consecutive pages after high numbers; its unnumbered opening
+        # page is p. 1. It is named by its running head.
+        tl = [k for k, lf in enumerate(leaves) if lf["text"]]
+        for a, b in zip(tl, tl[1:]):
+            # after a real run of pages: ten readings of 20 or more before it
+            # (a year in the index heading, "1900", is not a run)
+            if leaves[a]["cand"] == 2 and leaves[b]["cand"] == 3 and \
+                    sum((leaves[k]["cand"] or 0) >= 20 for k in tl if k < a) >= 10:
+                prev = tl[tl.index(a) - 1]
+                s = prev if leaves[prev]["cand"] is None else a
+                heads = Counter(norm_head(lf["head"]) for lf in leaves[s:] if lf["head"])
+                if heads:
+                    leaves[s]["suplabel"] = heads.most_common(1)[0][0].title()
+                break
     if s is not None:
         sup = leaves[s:]
         leaves[s]["sup"] = "start"
         leaves[s]["suptitle"] = True  # opens an article, whatever its pagination
         for lf in sup[1:]:
             lf["sup"] = True
+            lf["suplabel"] = leaves[s].get("suplabel")
         # roman numbers stand alone on the first line ("vii", "Ill" for iii)
         if sum(roman_page(lf["lines"][0]) is not None for lf in sup if lf["lines"]) >= 3:
             for lf in sup:
@@ -353,7 +391,7 @@ def paginate(leaves):
             continue
         block = []
         for b in leaves[k + 1:k + 5]:
-            if b["text"] or b.get("index") or b.get("front") or 0 < b["chars"] <= 150:
+            if b["text"] or b.get("index") or b.get("front") or b.get("dup") or 0 < b["chars"] <= 150:
                 break
             block.append(b)
         rest = leaves[k + 1 + len(block):]
@@ -383,6 +421,8 @@ def paginate(leaves):
     for lf in leaves:
         if lf.get("index") or lf.get("front"):
             lf["kind"], lf["page"] = "front", None
+        elif lf.get("dup"):
+            lf["kind"], lf["page"] = "duplicate", None
         elif not lf["text"]:
             lf["kind"], lf["page"] = ("plate" if lf["body"] else "blank"), None
         elif lf["page"] is None or lf["page"] < 1:
@@ -511,7 +551,15 @@ def parse_index(leaves, vol):
         for ln in lf["lines"]:
             if INDEX_HEAD.match(ln):
                 continue
-            lines.extend(re.split(r"(?<=\d)\s+(?=[A-Z][a-z])", ln))
+            for piece in re.split(r"(?<=\d)\s+(?=[A-Z][a-z])", ln):
+                # an entry too long for its line goes on in lower case on the
+                # next ("Dead, List of Our, / in United States and Canada ... 191"):
+                # join it, or the first half loses its page and the second
+                # becomes an entry of its own
+                if lines and re.match(r"[a-z]", piece) and not re.search(r"\d[.,]?$", lines[-1]):
+                    lines[-1] += " " + piece
+                else:
+                    lines.append(piece)
     entries, section = [], "Articles"
     for ln in lines:
         if ln.rstrip(".").upper() in ("OBITUARY", "VARIA"):
@@ -597,8 +645,12 @@ def build(vol):
         sup = [l for l in tl if l.get("sup")]
         if sup:
             lab = (lambda p: to_roman(p)) if sup[0].get("roman") else str
-            report.append(f"- separately paginated Supplement from leaf {sup[0]['leaf']}: pp. "
-                          f"{lab(sup[0]['page'])}–{lab(sup[-1]['page'])}, cited as “Suppl. …”")
+            name = sup[0].get("suplabel")
+            report.append(f"- separately paginated {name or 'Supplement'} from leaf {sup[0]['leaf']}: pp. "
+                          f"{lab(sup[0]['page'])}–{lab(sup[-1]['page'])}, cited as “{name or 'Suppl.'} …”")
+        dups = [l for l in leaves if l.get("dup")]
+        if dups:
+            report.append(f"- leaves scanned twice, left out: {', '.join(str(l['leaf']) for l in dups)}")
         gaps, blanks = [], []
         for a, b in zip(tl, tl[1:]):
             if b["page"] == a["page"] + 1 or b["restart"]:
@@ -688,8 +740,8 @@ def build(vol):
                 continue
             entry["p"] = lf["page"]
             if lf.get("sup"):  # printed label of a separately paginated page
-                entry["pl"] = "Suppl. " + (to_roman(lf["page"]) if lf.get("roman") else str(lf["page"]))
-                entry["sec"] = "Supplement"
+                entry["pl"] = (lf.get("suplabel") or "Suppl.") + " " + (to_roman(lf["page"]) if lf.get("roman") else str(lf["page"]))
+                entry["sec"] = lf.get("suplabel") or "Supplement"
             if lf["insert"]:  # no printed number: cite by the page it follows
                 entry["pl"] = f"insert after {entry.get('pl') or 'p. ' + str(lf['page'])}"
                 entry["insert"] = 1
@@ -704,6 +756,8 @@ def build(vol):
                 None, norm_head(x), "WOODSTOCKLETTERS").ratio() >= 0.85), None)
             if m is not None:
                 body = body[m + 1:]
+                while body and not re.search(r"[A-Za-z]{2}", body[0]):  # a stray "%" (vol. 44)
+                    body = body[1:]
                 if body and norm_head(body[0]).startswith("VOL") and len(body[0]) < 60:
                     body = body[1:]
             while body and MASTHEAD.match(body[0]):
@@ -844,7 +898,7 @@ def build(vol):
             sec = next((s for s in ("VARIA", "OBITUARY", "SUPPLEMENT") if len(norm_head(cur["title"])) <= len(s) + 1
                         and difflib.SequenceMatcher(None, norm_head(cur["title"]), s).ratio() >= 0.75), None)
             if pg.get("sec") or sec == "SUPPLEMENT":  # separately paginated or not (vol. 35)
-                cur["section"] = "Supplement"
+                cur["section"] = pg.get("sec") or "Supplement"
                 if sec == "SUPPLEMENT" and cur["subtitle"]:  # "^tJPPLEMENT." · the real title
                     cur["title"], _, rest = cur["subtitle"].partition(" · ")
                     cur["subtitle"] = rest or None
