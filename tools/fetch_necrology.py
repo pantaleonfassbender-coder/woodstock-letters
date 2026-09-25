@@ -26,6 +26,7 @@ import re
 import time
 import unicodedata
 import urllib.parse
+import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -33,6 +34,7 @@ CACHE = ROOT / "data" / "raw" / "necrology"
 BASE = "https://jesuitonlinenecrology.bc.edu"
 UA = "woodstock-letters research edition (https://woodstock-letters.netlify.app/)"
 _last = [0.0]
+FAILED = []
 
 # entry provinces and missions of North America, as the Catalogus names them
 NA = re.compile(r"Maryland|Marylandiae|Neo.?Ebor|New York|Missouri|Neo.?Aurel|New Orleans|Californ|Canad|Neo.?Angl|"
@@ -48,8 +50,18 @@ def get(path, name):
     if wait > 0:
         time.sleep(wait)
     req = urllib.request.Request(BASE + path, headers={"User-Agent": UA, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        data = json.loads(r.read().decode("utf-8"))
+    for attempt in (1, 2):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                data = json.loads(r.read().decode("utf-8"))
+            break
+        except (urllib.error.URLError, TimeoutError, ValueError) as e:
+            _last[0] = time.time()
+            if attempt == 2:  # a query the server cannot answer: skipped, not cached, asked again next run
+                print(f"  skipped {path}: {e}")
+                FAILED.append(path)
+                return None
+            time.sleep(10)
     _last[0] = time.time()
     CACHE.mkdir(parents=True, exist_ok=True)
     f.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
@@ -123,6 +135,9 @@ def main():
         sur, first = parse_node(n)
         q = urllib.parse.urlencode({"q": sur, "search_field": "all_fields", "per_page": 100})
         res = get(f"/catalog.json?{q}", f"q_{fold(sur)}.json")
+        if res is None:
+            report["none"] += 1
+            continue
         docs = []
         for d in res.get("docs", []):
             s, _, lat = d["title"].partition(",")
@@ -140,13 +155,16 @@ def main():
         # left, the North American provinces decide
         if len(docs) > 1:
             recs = [(d, get(f"/catalog/{d['id']}.json", f"r_{d['id']}.json")) for d in docs[:8]]
-            na = [(d, r) for d, r in recs if NA.search(field(r, "entrance_province_tsi") or "")]
+            na = [(d, r) for d, r in recs if r and NA.search(field(r, "entrance_province_tsi") or "")]
             docs = [d for d, _ in na]
         if len(docs) != 1:
             report["none" if not docs else "ambiguous"] += 1
             continue
         d = docs[0]
         r = get(f"/catalog/{d['id']}.json", f"r_{d['id']}.json")
+        if r is None:
+            report["none"] += 1
+            continue
         out[n["id"]] = {
             "id": d["id"], "name": d["title"],
             "born": field(r, "birth_date_display"), "birthplace": field(r, "place_of_birth_tsi"),
@@ -161,7 +179,7 @@ def main():
             "url": BASE + "/catalog/", "retrieved": time.strftime("%Y-%m-%d"), "persons": out}
     (ROOT / "data" / "necrology.json").write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
     print(f"necrology: {report['matched']} matched, {report['ambiguous']} ambiguous, {report['none']} not found "
-          f"-> data/necrology.json")
+          f"-> data/necrology.json" + (f"; {len(FAILED)} requests failed (rerun to retry)" if FAILED else ""))
 
 
 def field(rec, key):
