@@ -16,6 +16,14 @@
   "woodstockletters5331unse": {
     "note": "leaves 139–143 print 341–345 for 441–445 (the printer's error, copied by the IA's labels); the pages are numbered in sequence, 441–445; leaf 139 checked 2026-09-25"
   },
+  "woodstockletters4218unse": {
+    "order": [5, 10, 11, 8, 9, 6, 7],
+    "note": "the first sheet of no. 2 is bound out of order: leaves 5–11 print 79, 84, 85, 82, 83, 80, 81, and the text runs on in printed order (the IA labels leaves 10–11 by their binding, 84–85); checked 2026-09-25"
+  },
+  "woodstockletters6218unse": {
+    "order": [33, 34, 35, 36, 29, 30, 31, 32],
+    "note": "two leaves of four pages each are bound in reverse: leaves 29–32 print 101–104 and leaves 33–36 print 97–100; p. 100 opens the Osage letter that p. 101 goes on with (the IA labels follow the binding); checked 2026-09-25"
+  },
   "woodstockletters4911unse": {
     "leaves": {"168": 136},
     "missing": [134, 135],
