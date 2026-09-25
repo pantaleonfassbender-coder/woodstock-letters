@@ -5,6 +5,7 @@
 | 2026-09-24 | 29 (1900) | 70 | 551 | 1443 | Pilot. Pagination 534/534 against IA labels. Open: "The Society in 1899" (p. 137) is not split from the N.E.A. report because its index line wraps; "In De Ab Ipso…" and similar inscriptions sit inside Varia. |
 | 2026-09-24 | 30–34 (1901–1905) | 221 | 2170 | 4317 | Pagination against IA labels: 30 466/466, 31 480/484, 32 287/287, 33 408/408, 34 457/457. The 4 in vol. 31 are IA misreads (IA 880–883 for pp. 330–333; checked on the scan). Vol. 29 rebuilt: 550 pages, 1444 repairs (see below). |
 | 2026-09-25 | 35–39 (1906–1910) | 222 | 2220 | 3578 | Pagination against IA labels: 35 428/428, 36 422/422, 37 445/445, 38 443/443, 39 429/429. No pagination gaps; every seam explained (below). Vols. 30 and 33 rebuilt for two repairs (`ofi"` → off); their pages and articles are unchanged. Atlas rebuilt over vols. 29–39. |
+| 2026-09-25 | 40–44 (1911–1915) | 232 | 2155 | 575 | Pagination against IA labels: 40 408/411, 41 387/387, 42 412/412, 43 435/435, 44 448/450. The 5 differences are IA's: vol. 40 IA 374–376 for pp. 274–276, vol. 44 IA 295–296 for pp. 294–295; checked on the scans (pp. 275, 294, 295). No pagination gaps. Atlas and people map rebuilt over vols. 29–44. |
 
 ### Vols. 30–34: what the batch found
 
@@ -97,6 +98,35 @@ Pipeline fixes in `build_volume.py`. Vols. 29–34 rebuild to the same pages and
 Seams checked and left as they are: vol. 35 p. 342 (blank); vol. 38 p. 160 (blank)
 and pp. 322–324 (blank, fold-out table, blank); vol. 39 p. 302 (blank).
 
+### Vols. 40–44: what the batch found
+
+Per volume: 40 (1911) 45 articles, 439 pages, 89 repairs; 41 (1912) 46, 408, 65;
+42 (1913) 44, 416, 124; 43 (1914) 48, 439, 160; 44 (1915) 49, 453, 137.
+
+Pipeline fixes in `build_volume.py`. Vols. 29–39 rebuild to the same pages and
+articles; vols. 33 and 34 gain one joined index entry each.
+
+- **Sections paginated on their own without a SUPPLEMENT heading.** Vol. 41 no. 3
+  closes with a *Documentum*, the *Ordinatio studiorum in Assistentia Angliae*,
+  pp. 1–14, whose first page is unnumbered. A restart is now also recognised
+  from readings of 2, 3 after a run of ten or more numbered pages. The section is
+  named by its running head and cited "Documentum 7".
+- **Leaves scanned twice.** Vol. 42 no. 1 repeats pp. 129–134 as leaves 145–150,
+  and IA labels them 129–134 again. A leaf whose text repeats a leaf shortly before
+  it is left out and listed in the QA report.
+- **A reading after blank leaves.** Vol. 44 no. 3 goes 453, blank, 455. Alone in its
+  stretch, the 455 was ignored as a lone reading. It now stands when it counts
+  the blank pages exactly (p. 455 checked on the scan).
+- **Wrapped index lines.** An index line that goes on in lower case is joined to the
+  one before. This removes two spurious article starts in the Varia of vol. 44
+  ("in United States and Canada", "the Summer of 1915").
+- **Masthead:** a stray "%" between WOODSTOCK LETTERS and the VOL line (vol. 44 no. 1)
+  had kept "Vol. Xliv. No. I" as the opening article's title.
+
+Seams checked and left as they are (blank versos or table pages): vol. 40 p. 144,
+vol. 41 p. 274, vol. 42 pp. 135–136 and 280, vol. 43 p. 152, vol. 44 p. 296 (the
+Missouri statistics, a fold-out).
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -105,9 +135,10 @@ and pp. 322–324 (blank, fold-out table, blank); vol. 39 p. 302 (blank).
 - **Citation form for Supplements and inserts** (`WL 30 (1901): Suppl. vii`,
   `WL 30 (1901): insert after p. 332`) needs a decision before it goes into the
   editorial notes.
-- Index lines that wrap onto the next line lose their page number (vol. 29: two
-  entries; vol. 30: the article at p. 94 is titled "J- Ryan", and two "Society in …"
-  entries come out as p. 190).
+- Index lines that wrap onto the next line are joined when the continuation starts in
+  lower case (since vols. 40–44). Wraps that go on in capitals still lose their page
+  number (vol. 29: two entries; vol. 30: the article at p. 94 is titled "J- Ryan", and
+  two "Society in …" entries come out as p. 190).
 - One-off titles left as they are: vol. 30 p. 353 "A. M. D. G. Et B. V. M. H"
   (a dedication line), vol. 34 p. 30 (garbled OCR), vol. 31 pp. 352–353 (Digmann's
   mission among the Dakota, probably one article in two); vol. 36 p. 1 "Ibt Memory";
@@ -117,6 +148,11 @@ and pp. 322–324 (blank, fold-out table, blank); vol. 39 p. 302 (blank).
 - Index entries in inverted form become titles where the page heading is not in
   capitals ("Innsbruck, The Golden Jubilee of", "Kenny Father, Letter of").
 - Undecided repairs, left as made: `supped` → `slipped`, `miilenium` → `millenium` (vol. 39).
+- Latin and Romance words repaired as English, once each (vols. 40–44): `Indiis` → Indus,
+  `iusta` → insta, `torna` → toma, and `Loius` → Loins (for Louis). There is no narrower rule
+  that keeps the correct repairs of the same kind ("iucluding" → including).
+- Vol. 43 p. 1 and vol. 39 p. 1: the Curia articles are split at their subheadings
+  ("Habitat of the Curia", "Of Father General").
 - Small capitals after the L-fix read "LOuis", "LOrdship".
 - Tables (mission statistics, retreat lists) are kept as paragraphs of OCR text where
   they sit on numbered pages; unnumbered fold-out tables are left out like plates.
