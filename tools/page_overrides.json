@@ -4,6 +4,11 @@
     "mark": "*",
     "note": "the printer numbered no. 2 from p. 63, so its pp. 63–161 repeat numbers of no. 1; the volume's contents marks no. 2's pages with an asterisk ('pages marked with asterisks will be found in the June issue, Number 2'); p. 63 checked on the scan 2026-09-25"
   },
+  "woodstockletters5531unse": {
+    "note": "the printer's own erratum, leaf 131: 'From page 440 to the end of the volume the page numbers are exactly 100 less than they should be'; leaves 134–209 print 342–417 and are numbered 442–517, as the erratum directs",
+    "index_add": {"sections": ["Obituary", "Varia"], "range": [340, 417], "add": 100,
+                  "note": "the volume index cites the misprinted numbers ('Donlon 341'); no. 3's Obituary and Varia lie wholly after p. 440"}
+  },
   "woodstockletters5331unse": {
     "note": "leaves 139–143 print 341–345 for 441–445 (the printer's error, copied by the IA's labels); the pages are numbered in sequence, 441–445; leaf 139 checked 2026-09-25"
   },

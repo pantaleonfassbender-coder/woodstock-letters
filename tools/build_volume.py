@@ -56,12 +56,15 @@ MASTHEAD = re.compile(
     r"^(A\.?\s*M\.?\s*D\.?\s*G\.?|THE|WOODSTOCK\s+LETTERS\.?|VOL\.?\s*[XVLI]+\.?\s*(No\.?\s*\w+\.?)?)$",
     re.I)
 # vol. 54 has no index, only a front-matter "CONTENTS OF VOL. LIV." of the same form
-INDEX_HEAD = re.compile(r"(?:INDEX\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?VOL\w*\.?\s+([XVLI]+)\b", re.I)
+# and from vol. 57 in arabic figures: "INDEX TO VOLUME 57"
+INDEX_HEAD = re.compile(r"(?:INDEX\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?VOL\w*\.?\s+([XVLI]+|\d{2})\b", re.I)
 
 
 def index_numeral(s):
     """The volume numeral of an index heading. In a numeral set in capitals a
     lower-case l or i is the OCR's I: "XLVIil" is XLVIII (vol. 48)."""
+    if s.isdigit():
+        return int(s)
     return roman(re.sub(r"[il]", "I", s) if re.search(r"[XVL]", s) else s)
 
 
@@ -372,7 +375,11 @@ def paginate(leaves):
             if leaves[a]["cand"] == 2 and leaves[b]["cand"] == 3 and \
                     sum((leaves[k]["cand"] or 0) >= 20 for k in tl if k < a) >= 10:
                 prev = tl[tl.index(a) - 1]
-                s = prev if leaves[prev]["cand"] is None else a
+                # its opening page is unnumbered: unread, or unheaded with a
+                # reading far from the pages before ("8" for *1, vol. 56 no. 1)
+                before = [leaves[k]["cand"] for k in tl if k < prev and leaves[k]["cand"] is not None][-3:]
+                s = prev if leaves[prev]["cand"] is None or (
+                    leaves[prev]["head"] is None and before and abs(leaves[prev]["cand"] - before[-1]) > 5) else a
                 heads = Counter(norm_head(lf["head"]) for lf in leaves[s:] if lf["head"])
                 if heads:
                     leaves[s]["suplabel"] = heads.most_common(1)[0][0].title()
@@ -404,6 +411,11 @@ def paginate(leaves):
         for lf in sup[1:]:
             lf["sup"] = True
             lf["suplabel"] = leaves[s].get("suplabel")
+        # a section whose folios carry an asterisk ("*35", "36*", vol. 56 no. 1)
+        # is cited so: "35*", as the index of vol. 54 cites its no. 2
+        if sum(bool(re.search(r"[*♦]\s*\d{1,3}\b|\b\d{1,3}\s*\*", " ".join(lf["lines"][:2]))) for lf in sup) >= 3:
+            for lf in sup:
+                lf["supmark"], lf["suplabel"] = "*", None
         # roman numbers in the running head ("vii", "Ill" for iii, "... S. J. iV"),
         # when numerals in letters outnumber arabic readings: "11" and "1*" in an
         # arabic Supplement (vol. 40) also read as ii and i
@@ -463,7 +475,9 @@ def paginate(leaves):
     # numbers jump by two is a real page (a brief opening, a table).
     changed = False
     for lf in leaves:
-        if lf["text"] and lf["chars"] < 500 and lf["cand"] != lf["page"] and not lf.get("halftitle"):
+        # (not a leaf under a running head: "STATISTICS 111" is p. 177, vol. 57)
+        if lf["text"] and lf["chars"] < 500 and lf["cand"] != lf["page"] and not lf.get("halftitle") \
+                and not (lf["head"] and len(norm_head(lf["head"])) >= 5):
             lf["text"], changed = False, True
     # The same holds for a block of such leaves (tables, with blank pages among
     # them: vol. 35 pp. 317–318, vol. 39 pp. 299–301) when the numbering after
@@ -525,7 +539,7 @@ class Repair:
     # "rn" only in longer words: "Tirn-Tchou" is a place, not "Tim"
     SUBS = [("6l", "ct", "any"), ("dl", "ct", "any"), ("6t", "ct", "any"), ("(5t", "ct", "any"),
             # "iu" not in four-letter fragments ("sius" is Latin, not "sins")
-            ("fi", "ff", "any"), ("iu", "in", 5), ("rn", "m", 5), ("tl", "ct", "any"),
+            ("fi", "ff", "any"), ("iu", "in", 5), ("rn", "m", 5), ("tl", "tt", 5), ("tl", "ct", "any"),
             ("I^", "L", "any"), ("ly", "L", "start"), ("ii", "u", 6), ("ii", "il", 5),
             ("u", "li", 6), ("c", "e", 5), ("aa", "m", 5), ("7i", "n", "any")]
 
@@ -579,7 +593,9 @@ class Repair:
             cand = re.sub(r"([aeiou])dl", r"\1ct", core)
             if (zipf_frequency(cand.lower(), "en") >= 1.0
                     # (not a bare -ct: "proudl}^" is proudly, not "prouct")
-                    or re.search(r"ct(ion|ions|or|ors|ory|ure|ures|ive|ed|s|ly|ing)$", cand)):
+                    # (-ing not in a name: "Moedling" is a place, not "Moecting")
+                    or re.search(r"ct(ion|ions|or|ors|ory|ure|ures|ive|ed|s|ly)$", cand)
+                    or (not core[0].isupper() and cand.endswith("cting"))):
                 self.log[(core, cand)] += 1
                 return w.replace(core, cand)
         # only the frequency list vetoes a repair: a systematic misreading
@@ -599,6 +615,10 @@ class Repair:
                     or (isinstance(where, int) and len(core) < where):
                 continue
             cand = core.replace(a, b, 1)
+            # ii is u more often than il: "diily" is duly, not "dilly"
+            if (a, b) == ("ii", "il") and zipf_frequency(core.replace("ii", "u", 1).lower(), "en") > \
+                    zipf_frequency(cand.lower(), "en"):
+                continue
             if b == "L" and re.match(r"L[A-Z][a-z]", cand):  # small capitals: "lyOyola" is Loyola
                 cand = "L" + cand[1].lower() + cand[2:]
             # c→e must reach a common word: "wicrd" gave "wierd" (2.6), a
@@ -651,6 +671,7 @@ def parse_index(leaves, vol):
     """Entries "Title — Author . 447" from the index leaves for volume vol
     (paginate() marks them with the volume their heading names)."""
     lines, raw = [], []  # raw: the OCR line each piece comes from
+    numbered = False
     for lf in leaves:
         if lf.get("index") != vol:
             continue
@@ -658,6 +679,14 @@ def parse_index(leaves, vol):
             r = len(raw) and raw[-1] + 1
             if INDEX_HEAD.match(ln):
                 continue
+            # from vol. 57 the index gives issue and page in two columns
+            # ("No. Page"), and each leaf repeats "2 INDEX" / "INDEX 3"
+            if re.fullmatch(r"No\.?\s*Page", ln.strip()):
+                numbered = True
+                continue
+            if re.fullmatch(r"[\d^\s]*INDEX[\d\s]*", ln.strip()):
+                continue
+            ln = re.sub(r"^\W*INDEX\s+(VARIA|OBITUARY)\W*$", r"\1", ln.strip())  # "INDEX VARIA" (vol. 59)
             ln = re.sub(r"(?<=\d)[oO](?=[\s,.]|$)", "0", ln)  # "24o" is 240 (vol. 48)
             ln = re.sub(r"(?<=\d)\*", "", ln)  # "142*": a page of no. 2 (vol. 54, see page_overrides.json)
             ln = re.sub(r"(,\s*in|\s(?:Ill|lll|IIl))$", " 111", ln)  # "Zwinge, in", "Stanton Ill" (vols. 51, 54)
@@ -672,7 +701,7 @@ def parse_index(leaves, vol):
                 # (vol. 48)
                 # (never a section heading: "Fr. Joseph Zwinge, in" + VARIA, vol. 51)
                 if lines and not re.search(r"\d[.,]?$", lines[-1]) \
-                        and piece.rstrip(".").upper() not in ("OBITUARY", "VARIA") and (
+                        and piece.rstrip(".").upper() not in ("OBITUARY", "OBITUARIES", "VARIA") and (
                         re.match(r"[a-z(]", piece)
                         or re.search(r"\b(?:of|the|and|in|at|to|for)$", lines[-1])):
                     lines[-1] += " " + piece
@@ -681,8 +710,8 @@ def parse_index(leaves, vol):
                     raw.append(r)
     entries, section = [], "Articles"
     for ln, r in zip(lines, raw):
-        if ln.rstrip(".").upper() in ("OBITUARY", "VARIA"):
-            section = ln.rstrip(".").title()
+        if ln.rstrip(".").upper() in ("OBITUARY", "OBITUARIES", "VARIA"):  # OBITUARIES from vol. 57
+            section = "Varia" if ln.rstrip(".").upper() == "VARIA" else "Obituary"
             # in a contents set in two columns (vol. 54) the OCR gives the
             # heading after the first line of its block, which runs several
             # entries together: that line is the section's, if its entries are
@@ -695,6 +724,27 @@ def parse_index(leaves, vol):
             if len(last) >= 3 and (all(persons) if section == "Obituary" else not any(persons)):
                 for e in last:
                     e["section"] = section
+            continue
+        if numbered:
+            # a heading of every issue, its pages after the issue in roman:
+            # "Books of Interest to Ours I. 126; II, 424; III, 620"
+            rm = re.match(r"^([A-Za-z][^;]*?)\s+((?:(?:I{1,3}|Ill|Il|lI)[.,]\s*\d{1,3}[;.,]?\s*)+)$", ln)
+            if rm:
+                entries.append({"entry": rm[1].strip(" .,"), "author": None,
+                                "pages": [int(x) for x in re.findall(r"[.,]\s*(\d{1,3})", rm[2])],
+                                "section": section, "_raw": r})
+                continue
+            # "Biblical Institute in Jerusalem, The by Father William H. McClellan 1 1":
+            # the issue, then the page; the author after "by"
+            m = re.match(r"^(.*?[A-Za-z].*?)[\s.,—_\-]*(\d)\.?\s+(\d{1,3})\s*\W?$", ln)
+            if not m:
+                continue
+            body, author = m[1].strip(" .,—-"), None
+            a = re.search(r"\s*\.*\s*\bb[yv]\s+((?:Father|Fr\.|Mr\.?|Msgr\.|Rev\.|Brother|Br\.|Very)\s.+)$", body)
+            if a:
+                body, author = body[:a.start()].strip(" .,—-"), a[1].strip(" .")
+            entries.append({"entry": body, "author": author, "pages": [int(m[3])], "no": int(m[2]),
+                            "section": section, "_raw": r})
             continue
         m = re.match(r"^(.*?[A-Za-z].*?)[\s.,—]*((?:\d{1,3},?\s*)+)\.?$", ln)
         if not m:
@@ -753,11 +803,37 @@ def build(vol):
     # real pages whose numbers the OCR lost (156–158; no. 2 opens at p. 161);
     # the Declaration after p. 332 in vol. 30 has no room and stays an insert.
     for (_, leaves), (_, nxt) in zip(paged, paged[1:]):
-        ins = [l for l in leaves if l["kind"] == "text" and l["insert"] and not l.get("sup")]
         first = next((l["page"] for l in nxt if l["kind"] == "text" and not l.get("sup")), None)
+        # Unread leaves after blank leaves at an issue's end (tables of
+        # statistics) are pages when the next issue leaves room for exactly the
+        # blanks and them (vol. 59 no. 1: 191, blank, two tables, no. 2 at 195),
+        # and inserts when it does not (vol. 57 no. 1: 177, blank, two tables,
+        # no. 2 at 179)
+        main = [l for l in leaves if l["kind"] == "text" and not l.get("sup")]
+        # (a page is read by its number, or by the running head of the pages
+        # before it: "STATISTICS 111" for p. 177, vol. 57)
+        heads = {norm_head(l["head"]) for l in main if l["head"] and l["cand"] == l["page"]}
+        read = max((k for k, l in enumerate(main) if not l["insert"] and (
+            l["cand"] == l["page"] or (l["head"] and norm_head(l["head"]) in heads))), default=None)
+        if first and read is not None and read + 1 < len(main):
+            tail, last = main[read + 1:], main[read]
+            gap = leaves[last["leaf"] + 1:tail[0]["leaf"]]
+            if gap and all(l["kind"] == "blank" for l in gap) and all(l["cand"] != l["page"] for l in tail) \
+                    and all(l["leaf"] == m["leaf"] + 1 for m, l in zip(tail, tail[1:])):
+                if first - last["page"] - 1 == len(gap) + len(tail):
+                    for k, l in enumerate(tail):
+                        l["insert"], l["page"] = None, last["page"] + len(gap) + 1 + k
+                else:  # no room: tables (fold-outs) are left out like plates, prose is an insert
+                    for l in tail:
+                        if tabular(l):
+                            l.update(kind="plate", text=False, page=None, insert=None)
+                        else:
+                            l["insert"], l["page"] = True, last["page"]
+        ins = [l for l in leaves if l["kind"] == "text" and l["insert"] and not l.get("sup")]
         if ins and first and first - ins[0]["page"] - 1 >= len(ins):
+            base = ins[0]["page"]  # (not ins[0]["page"] in the loop: it changes on the first pass)
             for k, l in enumerate(ins):
-                l["insert"], l["page"] = None, ins[0]["page"] + 1 + k
+                l["insert"], l["page"] = None, base + 1 + k
         # likewise a short closing page taken for a plate (vol. 38 no. 1, the
         # last page of the Varia, p. 159), when the next issue leaves room
         main = [l for l in leaves if l["kind"] == "text" and not l.get("sup") and not l["insert"]]
@@ -765,6 +841,35 @@ def build(vol):
             nxt_leaf = next((l for l in leaves[leaves.index(main[-1]) + 1:] if l["kind"] != "blank"), None)
             if nxt_leaf and nxt_leaf["kind"] == "plate" and nxt_leaf["chars"] > 150 and not tabular(nxt_leaf):
                 nxt_leaf.update(kind="text", page=main[-1]["page"] + 1)
+
+    # A section's half-title on a leaf of its own ("VARIA", "Yearly Statistics
+    # and Records", vol. 57) or a short table page (vol. 59 p. 189) is taken
+    # for a plate; where the numbers on either side leave room for exactly the
+    # leaves between (blank or short), it is a page
+    for _, leaves in paged:
+        tl = [l for l in leaves if l["kind"] == "text" and not l["insert"] and l["page"] is not None]
+        for a, b in zip(tl, tl[1:]):
+            between = leaves[a["leaf"] + 1:b["leaf"]]
+            short = [l for l in between if l["kind"] == "plate" and l["chars"] < 200]
+            if short and b["page"] - a["page"] - 1 == len(between) and b.get("sup") == a.get("sup") \
+                    and all(l["kind"] == "blank" or l in short for l in between):
+                for k, l in enumerate(between, 1):
+                    if l in short:
+                        l.update(kind="text", text=True, page=a["page"] + k, halfpage=True,
+                                 sup=a.get("sup") and True, suplabel=a.get("suplabel"), roman=a.get("roman"))
+
+    # The volume's last issue has no next issue to leave room: there a closing
+    # leaf that carries the running head of the page before it without its
+    # number ("VARIA", vol. 55 no. 3, pp. 516–517) is that page's successor
+    if paged:
+        leaves = paged[-1][1]
+        ins = [l for l in leaves if l["kind"] == "text" and l["insert"] and not l.get("sup")]
+        prev = [l for l in leaves if l["kind"] == "text" and not l["insert"] and not l.get("sup")]
+        if ins and prev and prev[-1]["leaf"] < ins[0]["leaf"] and ins[0]["body"] and prev[-1]["head"] \
+                and difflib.SequenceMatcher(None, norm_head(ins[0]["body"][0]), norm_head(prev[-1]["head"])).ratio() >= 0.8:
+            for k, l in enumerate(ins):
+                l["insert"], l["page"] = None, prev[-1]["page"] + 1 + k
+            ins[0]["body"] = ins[0]["body"][1:]  # the running head is not text
 
     for (iss, leaves), disagreements in zip(paged, overruled):
         raw_issues.append((iss, leaves))
@@ -786,8 +891,12 @@ def build(vol):
         if sup:
             lab = (lambda p: to_roman(p)) if sup[0].get("roman") else str
             name = sup[0].get("suplabel")
-            report.append(f"- separately paginated {name or 'Supplement'} from leaf {sup[0]['leaf']}: pp. "
-                          f"{lab(sup[0]['page'])}–{lab(sup[-1]['page'])}, cited as “{name or 'Suppl.'} …”")
+            if sup[0].get("supmark"):
+                report.append(f"- separately paginated section with asterisked folios from leaf {sup[0]['leaf']}: "
+                              f"pp. {sup[0]['page']}*–{sup[-1]['page']}*, cited as “35*”")
+            else:
+                report.append(f"- separately paginated {name or 'Supplement'} from leaf {sup[0]['leaf']}: pp. "
+                              f"{lab(sup[0]['page'])}–{lab(sup[-1]['page'])}, cited as “{name or 'Suppl.'} …”")
         dups = [l for l in leaves if l.get("dup")]
         if dups:
             report.append(f"- leaves scanned twice, left out: {', '.join(str(l['leaf']) for l in dups)}")
@@ -898,6 +1007,16 @@ def build(vol):
         e["entry"] = rep.para(e["entry"])
         if e["author"]:
             e["author"] = rep.para(e["author"])
+    # an index that cites misprinted numbers (vol. 55: see page_overrides.json)
+    for iss in issues:
+        fix = OVERRIDES.get(iss["id"], {}).get("index_add")
+        if fix:
+            lo, hi = fix["range"]
+            moved = [e for e in index if e["section"] in fix["sections"] and e["pages"] and lo <= e["pages"][0] <= hi]
+            for e in moved:
+                e["pages"] = [p + fix["add"] if lo <= p <= hi else p for p in e["pages"]]
+            report.insert(2, f"\nIndex pages corrected: {len(moved)} {' and '.join(fix['sections'])} entries "
+                             f"in pp. {lo}–{hi} + {fix['add']} ({fix['note']})\n")
 
     # 1. one flat stream of paragraphs; pages keep references into it
     pages_out, flat, prev_insert, opened, seen_pages = [], [], None, set(), set()
@@ -919,6 +1038,8 @@ def build(vol):
                 seen_pages.add(key)
             if lf.get("sup"):  # printed label of a separately paginated page
                 entry["pl"] = (lf.get("suplabel") or "Suppl.") + " " + (to_roman(lf["page"]) if lf.get("roman") else str(lf["page"]))
+                if lf.get("supmark"):
+                    entry["pl"] = f"{lf['page']}{lf['supmark']}"
                 entry["sec"] = lf.get("suplabel") or "Supplement"
             # an issue whose numbers repeat another's is cited with the mark
             # the volume's own index gives it (vol. 54 no. 2: "104*")
@@ -945,6 +1066,20 @@ def build(vol):
                 if body and len(body[0]) < 60 and (norm_head(body[0]).startswith("VOL") or re.match(
                         r"V[O0][LIl1]\w*\.?\s+[XVLIl1]+\b", body[0], re.I)):
                     body = body[1:]
+            # From vol. 57 the title is set in blackletter, which the OCR cannot
+            # read ("tKfje WoobJStotfe Hetters!", "MWMfMfMfJiJM"), between rules
+            # of ornament ("ummmmmmmmmmm"): on an issue's first page drop all
+            # down to the VOL line, which stays legible ("| VOL. LVII, No. 3. |")
+            elif opening:
+                v = next((j for j, x in enumerate(body[:6]) if len(x) < 40 and re.search(
+                    r"\bV[O0][LIl1]\w*\.?\s+[XVLIl1]+[.,]?\s*No\b", x)), None)
+                # (only when what stands above it is unreadable: vol. 49 opens
+                # with its title, THE GOLDEN JUBILEE, above the VOL line)
+                if v is not None and all(sum(zipf_frequency(w.lower(), "en") >= 3.0
+                                             for w in re.findall(r"[A-Za-z]{3,}", x)) <= 1 for x in body[:v]):
+                    body = body[v + 1:]
+                    while body and re.fullmatch(r"[\W_mMuUwWnNiIjJfF]{6,}", body[0].strip()):
+                        body = body[1:]
             while body and MASTHEAD.match(body[0]):
                 body.pop(0)
             paras = []
@@ -1105,6 +1240,9 @@ def build(vol):
                     # the page's own heading, where the index entry has
                     # replaced it ("Impressions, Letter of …" / SOME IMPRESSIONS, vol. 52)
                     or part_of(nh, cur.get("_t0", ""))
+                    # or the second line of a two-line title ("THE CATHOLIC
+                    # ASSOCIATION OF / COMMERCIAL TRAVELLERS", vol. 59)
+                    or (cur.get("subtitle") and part_of(nh, person(cur["title"] + cur["subtitle"])))
                     or (pg["p"] == cur["p0"] and part_of(ch, nh))):
                 if pg["p"] == cur["p0"] and len(nh) > len(ch):  # the fuller title wins
                     cur["title"] = title_case(p["t"])
@@ -1130,14 +1268,16 @@ def build(vol):
                    "_t0": person(p["t"])}
             if "pl" in pg:  # the printed range, when it is not a plain page number
                 cur["pl0"] = cur["pp"] = pg["pl"]
-                if OVERRIDES.get(pg["issue"], {}).get("mark"):
+                if OVERRIDES.get(pg["issue"], {}).get("mark") or pg["pl"].endswith("*"):
                     cur["_mark"] = True  # a numbered page all the same (vol. 54 no. 2)
             if p.get("_entry") and not is_upper(p["t"]):
                 cur["title"] = p["_entry"]["entry"]
             if p.get("_entry") and p["_entry"]["section"] == "Obituary":
                 cur["section"] = "Obituary"
             sec = section_head(cur["title"])
-            if pg.get("sec") or sec == "SUPPLEMENT":  # separately paginated or not (vol. 35)
+            # (the Varia inside an asterisked section stay Varia, vol. 56 no. 1)
+            if (pg.get("sec") and not (sec in ("VARIA", "OBITUARY") and pg.get("pl", "").endswith("*"))) \
+                    or sec == "SUPPLEMENT":  # separately paginated or not (vol. 35)
                 cur["section"] = pg.get("sec") or "Supplement"
                 if sec == "SUPPLEMENT" and cur["subtitle"]:  # "^tJPPLEMENT." · the real title
                     cur["title"], _, rest = cur["subtitle"].partition(" · ")
