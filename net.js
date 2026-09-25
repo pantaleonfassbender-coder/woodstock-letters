@@ -12,6 +12,7 @@ function netTheme() {
     acc: v("--acc"), edge: v("--line2"), labelBg: v("--panel"), labelFg: v("--fg2"), focus: v("--fg"),
     sec: { Articles: v("--sec-articles"), Varia: v("--sec-varia"), Obituary: v("--sec-obituary"),
            Supplement: v("--sec-supplement") },
+    v,
   };
 }
 
@@ -37,6 +38,7 @@ function network(cv, data, opts = {}) {
   // pushed the outer ring against the walls of the box
   const K = 0.5 * Math.sqrt((w * h) / Math.max(1, nodes.length));
   let temp = Math.min(w, h) / 7;
+  const r0 = 0.42 * Math.min(w, h), G = nodes.length * K * K / (r0 * r0) * (opts.gravity || 1);
 
   function step() {
     for (const n of nodes) { n.dx = 0; n.dy = 0; }
@@ -58,10 +60,12 @@ function network(cv, data, opts = {}) {
       e.b.dx += dx / d * att; e.b.dy += dy / d * att;
     }
     for (const n of nodes) {
-      // centring, stronger across the short side, so the graph fills the box
-      // instead of piling up against its edges
-      n.dx += (w / 2 - n.x) * 0.0012 * K * (h / w);
-      n.dy += (h / 2 - n.y) * 0.0012 * K;
+      // centring: the repulsion on a node at radius r is about n·K²/r, so a
+      // pull of G·r with G = n·K²/r0² holds the graph within r0 of the centre,
+      // sparse ones too (the people map has many small groups) instead of
+      // pushing them against the walls; an ellipse, to fill a wide box
+      n.dx += (w / 2 - n.x) * G * (h / w);
+      n.dy += (h / 2 - n.y) * G;
       const d = Math.hypot(n.dx, n.dy) || 1, lim = Math.min(d, temp);
       n.x = Math.max(n.r + 10, Math.min(w - n.r - 10, n.x + n.dx / d * lim));
       n.y = Math.max(n.r + 16, Math.min(h - n.r - 10, n.y + n.dy / d * lim));
@@ -85,7 +89,8 @@ function network(cv, data, opts = {}) {
     for (const n of nodes) {
       c.globalAlpha = focus && !near.has(n.id) && n.id !== focus ? .16 : 1;
       c.beginPath(); c.arc(n.x, n.y, n.r, 0, 7);
-      c.fillStyle = P.sec[n.sec] || P.acc; c.fill();
+      // opts.color names a CSS custom property per node; the default colours by section
+      c.fillStyle = (opts.color ? P.v(opts.color(n)) : P.sec[n.sec]) || P.acc; c.fill();
       if (n.id === focus) { c.strokeStyle = P.focus; c.lineWidth = 1.6 / t.k; c.stroke(); }
     }
     c.restore(); c.globalAlpha = 1;
@@ -100,14 +105,14 @@ function network(cv, data, opts = {}) {
       if (shown >= cap) break;
       const sx = n.x * t.k + t.x, sy = n.y * t.k + t.y, sr = n.r * t.k;
       if (sx < -40 || sx > w + 40 || sy < -20 || sy > h + 20) continue;
-      const tw = c.measureText(n.id).width;
+      const tw = c.measureText(n.name || n.id).width;
       const box = { x0: sx - tw / 2 - 3, x1: sx + tw / 2 + 3, y0: sy - sr - 15, y1: sy - sr - 1 };
       if (placed.some(p => !(box.x1 < p.x0 || box.x0 > p.x1 || box.y1 < p.y0 || box.y0 > p.y1))) continue;
       placed.push(box); shown++;
       c.fillStyle = P.labelBg; c.globalAlpha = .85;
       c.fillRect(box.x0, box.y0, box.x1 - box.x0, box.y1 - box.y0);
       c.globalAlpha = 1; c.fillStyle = n.id === focus ? P.focus : P.labelFg;
-      c.fillText(n.id, sx, sy - sr - 3);
+      c.fillText(n.name || n.id, sx, sy - sr - 3);
     }
   }
 

@@ -446,6 +446,103 @@ async function viewAtlas(params) {
   };
 }
 
+/* ---------------------------------------------------------------- people */
+
+const CLS = { father: "Fathers", brother: "Brothers", mr: "Mr. (scholastics, laymen)", prelate: "bishops, cardinals", pope: "popes" };
+
+async function viewPeople(params) {
+  S.people = S.people || await getJSON("data/people.json");
+  const P = S.people;
+  const node = new Map(P.nodes.map(n => [n.id, n]));
+  const nb = new Map(P.nodes.map(n => [n.id, []]));
+  for (const e of P.edges) { nb.get(e.s).push([e.t, e]); nb.get(e.t).push([e.s, e]); }
+  const words = new Map(S.man.volumes.map(m => [m.vol, m.words]));
+  const artLink = id => { const a = P.articles[id]; return a ? `<a href="#/a/${id}">${esc(a.t)}</a> <span class="fine">WL ${a.v} (${a.y}): ${esc(String(a.p))}</span>` : ""; };
+  const surname = n => n.id.split(":")[1];
+  const hubs = P.nodes.map(n => ({ n, deg: nb.get(n.id).length })).sort((a, b) => b.deg - a.deg || b.n.f - a.n.f).slice(0, 18);
+
+  function panel(id) {
+    const n = node.get(id);
+    if (!n) return `<h3>Selection</h3><p class="fine">Click a person, or find one by name, to see who is named with them, and where.</p>`;
+    const rates = P.vols.map((v, i) => n.dist[i] / (words.get(v) || 1) * 1e4), mx = Math.max(...rates, 1e-9);
+    const links = nb.get(id).sort((a, b) => b[1].w - a[1].w).slice(0, 16);
+    return `<h3>${esc(n.name)}</h3>
+      <p class="fine">${CLS[n.cls]} · named ${n.f} times${n.obit ? " · obituary " + artLink(n.obit) : ""}</p>
+      <table class="dist">${P.vols.map((v, i) => n.dist[i] ? `<tr><td>WL ${v}</td><td class="num">${n.dist[i]}</td>
+        <td style="width:50%"><div class="bar"><i style="width:${Math.round(100 * rates[i] / mx)}%"></i></div></td></tr>` : "").join("")}</table>
+      <h3 style="font-size:.95rem;margin-top:.8rem">Named with</h3>
+      <p>${links.map(([m, e]) => `<button class="chip" type="button" data-n="${esc(m)}" title="named together in ${e.f} paragraph${e.f === 1 ? "" : "s"}">${esc(node.get(m).name)}<span class="n">${e.f}</span></button>`).join("") || '<span class="fine">no links</span>'}</p>
+      ${n.wrote ? `<h3 style="font-size:.95rem">Wrote</h3><ul class="plain">${n.wrote.map(a => `<li>${artLink(a)}</li>`).join("")}</ul>` : ""}
+      <h3 style="font-size:.95rem">Named most in</h3><ul class="plain">${n.arts.map(a => `<li>${artLink(a)}</li>`).join("")}</ul>
+      <a class="btn" href="#/concordance?q=${encodeURIComponent(surname(n))}">Concordance →</a>`;
+  }
+
+  return {
+    html: `<h1>People</h1>
+    <p class="lede">Who is named with whom. Two persons are joined when the Letters name them in the same paragraph,
+    in two paragraphs at least; a paragraph that lists many names counts for less. Colour marks the class the title gives.
+    Scroll or double-click to zoom, drag to pan.</p>
+    <div class="chartbox">
+      <div class="tools">
+        <label>Density <select id="dens">${[[80, "sparse (80 persons)"], [160, "medium (160 persons)"], [999, "everyone"]]
+          .map(([k, t]) => `<option value="${k}" ${k === 160 ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+        <input id="who" list="whos" placeholder="Find a person …" aria-label="Find a person" style="min-width:14rem">
+        <datalist id="whos">${P.nodes.map(n => `<option value="${esc(n.name)}">`).join("")}</datalist>
+        <button class="btn" id="reheat" type="button">Re-arrange</button>
+        <button class="btn" id="zin" type="button" aria-label="Zoom in">+</button>
+        <button class="btn" id="zout" type="button" aria-label="Zoom out">−</button>
+        <button class="btn" id="zreset" type="button">Reset</button>
+      </div>
+      <div class="tools">${Object.keys(CLS).filter(c => P.nodes.some(n => n.cls === c)).map(c =>
+        `<button class="chip on" type="button" data-cls="${c}"><i class="sw" style="background:var(--cls-${c})"></i>${CLS[c]}</button>`).join("")}</div>
+      <canvas id="net" aria-label="Network of persons named together"></canvas>
+    </div>
+    <div class="grid2">
+      <div class="card" id="sel">${panel(params.get("id"))}</div>
+      <div class="card"><h3>Most connected</h3>
+        <p class="fine">The persons named with the most others.</p>
+        <p>${hubs.map(h => `<button class="chip" type="button" data-n="${esc(h.n.id)}">${esc(h.n.name)}<span class="n">${h.deg}</span></button>`).join("")}</p></div>
+    </div>
+    <p class="fine">${P.nodes.length} persons and ${P.edges.length} links from ${P.paragraphs.toLocaleString("en")} paragraphs that name someone,
+    vols. ${P.vols[0]}–${P.vols.at(-1)}. A person is a title and a surname (“Father Sabetti”, “Cardinal Gibbons”); namesakes are kept
+    apart only where the text gives them different first names or initials, so two men of one name may still share a node. Offices
+    (“Father General”, “Father Rector”) are not persons. Built by <span class="mono">tools/build_people.py</span>; derived data, CC0.</p>`,
+    init() {
+      let shown = params.get("id");
+      const show = id => { shown = id; $("#sel").innerHTML = panel(id); bind($("#sel")); };
+      const bind = root => root.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { S.net.select(b.dataset.n); show(b.dataset.n); });
+      const on = new Set(Object.keys(CLS));
+      const build = () => {
+        S.net?.stop();
+        const lim = +$("#dens").value;
+        const keep = new Set(P.nodes.filter(n => on.has(n.cls)).slice(0, lim).map(n => n.id));
+        S.net = network($("#net"), {
+          nodes: P.nodes.filter(n => keep.has(n.id)),
+          edges: P.edges.filter(e => keep.has(e.s) && keep.has(e.t)).map(e => ({ ...e, f: e.w })),
+        }, { h: Math.min(620, Math.max(400, innerHeight * .66)), onSelect: show, color: n => `--cls-${n.cls}`, labelCap: 30 });
+        if (params.get("id")) S.net.select(params.get("id"));
+      };
+      document.querySelectorAll("[data-cls]").forEach(b => b.onclick = () => {
+        on.has(b.dataset.cls) ? on.delete(b.dataset.cls) : on.add(b.dataset.cls);
+        b.classList.toggle("on"); build();
+      });
+      $("#who").addEventListener("change", ev => {
+        // "change" fires again when the box loses focus: pick a person once
+        const n = P.nodes.find(x => x.name === ev.target.value);
+        if (n && n.id !== shown) { S.net.select(n.id); show(n.id); }
+        ev.target.value = "";
+      });
+      $("#dens").onchange = build;
+      $("#reheat").onclick = () => S.net.reheat();
+      $("#zin").onclick = () => S.net.zoomBy(1.4);
+      $("#zout").onclick = () => S.net.zoomBy(1 / 1.4);
+      $("#zreset").onclick = () => S.net.resetView();
+      bind(document);
+      build();
+    },
+  };
+}
+
 function viewAbout() {
   return `<div class="prose">
   <h1>About &amp; rights</h1>
@@ -473,6 +570,13 @@ function viewAbout() {
     least six sentences and occur together more often than chance (positive pointwise mutual information). Each term keeps
     its eight strongest links. A term's colour is the section (articles, Varia, obituaries, supplements) in which it is
     relatively most frequent. The network is rebuilt with every batch of volumes, so it describes the volumes in full text, not the whole run.</li>
+    <li><b>People.</b> Persons are found by title and surname (“Father Sabetti”, “Fr. J. J. Ryan”, “Cardinal Gibbons”, “Pope Pius X”).
+    The title gives the class; bishops, archbishops, cardinals and monsignori are one class, because the same man is first Bishop,
+    then Archbishop Carroll. Offices such as “Father General” are not persons. Namesakes are kept apart only where the text gives
+    them different first names or initials; a bare “Father Ryan” is assigned to the Ryan named in the same article, if there is only one.
+    Two persons are joined when they are named in the same paragraph, in two paragraphs at least, and a paragraph naming <i>n</i>
+    persons counts 1/(<i>n</i> − 1) towards each of its links, so that a list of appointments does not outweigh a letter.
+    The class is read from the title in use, so a scholastic (“Mr. Stanton”) and the same man as a priest (“Father Stanton”) are two nodes.</li>
   </ol>
   <p>The QA reports are published: ${S.man.volumes.map(v => `<a href="docs/qa/vol${pad3(v.vol)}.md">vol. ${v.vol}</a>`).join(", ")}.</p>
   <h2>Rights: three tiers</h2>
@@ -516,6 +620,7 @@ async function route() {
     else if (r === "search") out = await viewSearch(params);
     else if (r === "concordance") out = await viewConcordance(params);
     else if (r === "atlas") out = await viewAtlas(params);
+    else if (r === "people") out = await viewPeople(params);
     else if (r === "about") out = viewAbout();
     else out = `<h1>Not found</h1>`;
     view.innerHTML = typeof out === "string" ? out : out.html;
