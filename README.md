@@ -5,7 +5,7 @@ house journal of the Jesuits in North America, printed at Woodstock College,
 Maryland. It is a companion to [Ignatiana](https://ignatian-research.netlify.app/).
 
 **Status: pilot.** The catalogue covers the full run (316 issues, 98 volumes).
-Volumes 29–44 (1900–1915) are in full text.
+Volumes 29–49 (1900–1920) are in full text.
 
 ## What it offers
 
@@ -61,7 +61,9 @@ How the build works, briefly:
 1. **Pages.** The build reads the IA hOCR page by page. Running heads are
    stripped, and printed page numbers are recomputed by consensus over
    neighbouring pages. They are cross-checked against the Internet Archive's own
-   page labels (vol. 29: 534 of 534 agree).
+   page labels (vol. 29: 534 of 534 agree). Pages the OCR cannot settle are read
+   on the scan and recorded in `tools/page_overrides.json`, with pages missing
+   from a scan. Each entry is listed in the QA report.
 2. **Articles.** An article starts at a title page, at a mid-page heading that the
    following running heads repeat, or at a start page named in the volume index.
 3. **Repair.** Line-end hyphenation is resolved, and recurrent misreadings are

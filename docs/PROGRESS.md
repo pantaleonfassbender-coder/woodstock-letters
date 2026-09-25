@@ -6,6 +6,7 @@
 | 2026-09-24 | 30–34 (1901–1905) | 221 | 2170 | 4317 | Pagination against IA labels: 30 466/466, 31 480/484, 32 287/287, 33 408/408, 34 457/457. The 4 in vol. 31 are IA misreads (IA 880–883 for pp. 330–333; checked on the scan). Vol. 29 rebuilt: 550 pages, 1444 repairs (see below). |
 | 2026-09-25 | 35–39 (1906–1910) | 222 | 2220 | 3578 | Pagination against IA labels: 35 428/428, 36 422/422, 37 445/445, 38 443/443, 39 429/429. No pagination gaps; every seam explained (below). Vols. 30 and 33 rebuilt for two repairs (`ofi"` → off); their pages and articles are unchanged. Atlas rebuilt over vols. 29–39. |
 | 2026-09-25 | 40–44 (1911–1915) | 232 | 2155 | 575 | Pagination against IA labels: 40 408/411, 41 387/387, 42 412/412, 43 435/435, 44 448/450. The 5 differences are IA's: vol. 40 IA 374–376 for pp. 274–276, vol. 44 IA 295–296 for pp. 294–295; checked on the scans (pp. 275, 294, 295). No pagination gaps. Atlas and people map rebuilt over vols. 29–44. |
+| 2026-09-25 | 45–49 (1916–1920) | 224 | 2216 | 323 | Pagination against IA labels: 45 445/462, 46 431/431, 47 449/449, 48 443/443, 49 327/385. The differences are IA's: vol. 45 no. 2 IA runs 2 behind for pp. 198–214; vol. 49 no. 1 IA counts some photo plates as pages (pp. 39–133). Both checked on the scans. Vol. 49 lacks pp. 134–135 in the scan. No pagination gaps. Vols. 29–44 rebuilt: same pages; article changes listed below. Atlas, people map and search rebuilt over vols. 29–49. |
 
 ### Vols. 30–34: what the batch found
 
@@ -127,6 +128,79 @@ Seams checked and left as they are (blank versos or table pages): vol. 40 p. 144
 vol. 41 p. 274, vol. 42 pp. 135–136 and 280, vol. 43 p. 152, vol. 44 p. 296 (the
 Missouri statistics, a fold-out).
 
+### Vols. 45–49: what the batch found
+
+Per volume: 45 (1916) 49 articles, 470 pages, 116 repairs; 46 (1917) 48, 450, 89;
+47 (1918) 42, 452, 26; 48 (1919) 41, 448, 44; 49 (1920) 44, 396, 48.
+
+Pagination fixes in `build_volume.py`:
+
+- **Numbers printed bare at the foot.** Vol. 49 no. 1 (the Golden Jubilee number)
+  has no running heads; every page carries its number alone on the last line. A bare
+  number of one to three digits (not "00") at the foot of a headless page is now read
+  as the page number and removed from the text. The trailing-page rule now counts
+  pages whose reading was accepted, so a table's final figure (vol. 42, "106") cannot
+  pass for a number.
+- **The printer's repeated numbers.** Vol. 45 no. 2 prints pp. 213–214 twice (checked
+  on the scans). The second pair is cited "213 bis", "214 bis", and the QA report
+  lists the repeat. IA labels this stretch two too low from p. 198.
+- **Roman Supplement without a heading.** The Pignatelli supplement in vol. 46 no. 2
+  (pp. i–ix) is recognised from its roman numerals: a restart at i–iv after ten or
+  more arabic pages, where lettered numerals outnumber arabic readings (vol. 40's
+  arabic supplement, whose "11" reads like ii, is unaffected).
+- **Pages checked by hand: `tools/page_overrides.json`.** For each IA item it lists
+  leaves whose page was read on the scan, and pages missing from it. Every entry is
+  printed in the QA report. The first entry: vol. 49 leaf 168 is p. 136; pp. 134–135
+  are not in the scan (leaf 167 prints 133 and breaks off mid-sentence).
+- **Index heading numerals.** "INDEX TO VOLUME XLVIil" (vol. 48): a lower-case l or i
+  in a numeral set in capitals is read as I.
+
+Article fixes:
+
+- **Varia under a running head.** From vol. 47 the Varia open on a page headed
+  "VARIA 97", with the title repeated below, or mid-page on headless pages (vol. 49
+  no. 1). The title-page rule saw neither, so the last obituary ran on through the
+  Varia (vol. 48 "Fr. Maurice Prendergast", pp. 92–160). A VARIA heading now opens
+  the section when it stands mid-page or under its own running head. Within the Varia,
+  running heads the OCR has spoiled ("V A A- /A", "VA IU A") open nothing. This
+  removes false splits in vol. 45 ("Ireland", p. 290) and vol. 49 (p. 363). A second
+  OBITUARY over a running notice opens nothing either (vol. 49 p. 353).
+- **The index a page out.** Vol. 48's index puts five obituaries one page late
+  ("Neander 236", which begins on p. 235). An entry that finds no heading on its page
+  now tries the pages on either side, for headings only.
+- **Obituary name lines run into the text** ("Father Joseph O'Reilly S.J. The Rev.
+  Joseph O'Reilly, S.J., after …", vol. 47 pp. 230, 232, 236). For an obituary entry,
+  a paragraph that begins with the name is split, and the name becomes the heading.
+- **Index lines broken after "of the"** or before "(concluded) 18" are joined (vol. 48).
+  "(concluded)" and "(To be continued)" are stripped from authors, and "24o" is read as 240.
+- **Varia index entries no longer give a section to the article at their page.** Every
+  issue's opening article at p. 1 had been marked "Varia" through an entry such as
+  "Mexico … 1, 70" (vols. 33, 36, 38, 40, 43).
+- **Folios "(228)"** at the foot of opening pages are removed from the text. Vol. 32
+  "Retreats for Men" now finds its signature (Matthew Russell).
+
+Repair fixes. Each wrong repair was traced to its rule, and the rule narrowed:
+
+- A substitution may not turn one word into another unless the reading is much
+  commoner (1.5 on the zipf scale): "De Lancy" stays (not "Laney"), "coats-of-arnis"
+  no longer becomes "amis", "cornets" is no longer "comets" (vol. 34), and "torna" is
+  no longer "toma" (vol. 42). "thern" → them and `supped` → slipped still pass. One
+  right repair is lost: "Lord Adlon" (Acton, vol. 35).
+- The dl→ct rule no longer accepts a bare -ct ending that is not a word ("proudl}^" had
+  become "prouct"; "goodl" "gooct"). Half-repairs such as "efiedl" → "efiect" go with it,
+  and the misreading now stands unrepaired.
+- The ct-ligature rule leaves numbers alone ("i6tli" is 16th, not "ictli"). `6`→`é`
+  no longer applies after *i* ("Troi6-Rivieres").
+- Small capitals after the L-fix: "lyOyola", "lyOrdship" now give Loyola, Lordship.
+
+Seams checked and left as they are (blank versos at issue ends): vol. 46 p. 290,
+vol. 47 p. 144, vol. 48 p. 298, vol. 49 p. 150.
+
+Rebuilt vols. 29–44: pages unchanged. The article changes are those listed above,
+plus vol. 36 "Notes from Vigan", which now starts on its title page (p. 321, not 323),
+and vol. 39's Sodality supplement, which takes author Fr. A. J. E. Mullan from the
+index entry "Sodality Aggregations" on its page.
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -149,11 +223,18 @@ Missouri statistics, a fold-out).
   capitals ("Innsbruck, The Golden Jubilee of", "Kenny Father, Letter of").
 - Undecided repairs, left as made: `supped` → `slipped`, `miilenium` → `millenium` (vol. 39).
 - Latin and Romance words repaired as English, once each (vols. 40–44): `Indiis` → Indus,
-  `iusta` → insta, `torna` → toma, and `Loius` → Loins (for Louis). There is no narrower rule
+  `iusta` → insta, and `Loius` → Loins (for Louis). There is no narrower rule
   that keeps the correct repairs of the same kind ("iucluding" → including).
 - Vol. 43 p. 1 and vol. 39 p. 1: the Curia articles are split at their subheadings
   ("Habitat of the Curia", "Of Father General").
-- Small capitals after the L-fix read "LOuis", "LOrdship".
+- Vols. 45–49, left as they are: vol. 45 p. 360 "Fordtlam" splits the Fordham history
+  (the running head misread); vol. 45 p. 30 and p. 371 have garbled titles; vol. 47
+  p. 372, Mr. Hawkins's obituary, is not split (the index is a page out and his name is
+  not set as a heading); vol. 49 no. 1, the Jubilee number, keeps "The Scientific Academy"
+  as one piece over pp. 48–99, since its index entries ("Theological Disputation 23",
+  "Banquet, Addresses 85") name pages without headings.
+- Vol. 45 no. 2 and vol. 49 no. 1 differ from IA's page labels (see the table); ours are
+  checked on the scans. The IA labels are not corrected upstream.
 - Tables (mission statistics, retreat lists) are kept as paragraphs of OCR text where
   they sit on numbered pages; unnumbered fold-out tables are left out like plates.
 - Latin passages are not repaired except for the ligature rules, because the frequency gate is English.

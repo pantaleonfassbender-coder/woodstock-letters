@@ -5,7 +5,7 @@
    "year": 1900,
    "articles": 70,
    "pages": 550,
-   "words": 233952,
+   "words": 233926,
    "built": "2026-09-25"
   },
   {
@@ -13,7 +13,7 @@
    "year": 1901,
    "articles": 54,
    "pages": 503,
-   "words": 217628,
+   "words": 217613,
    "built": "2026-09-25"
   },
   {
@@ -21,7 +21,7 @@
    "year": 1902,
    "articles": 59,
    "pages": 492,
-   "words": 209423,
+   "words": 209392,
    "built": "2026-09-25"
   },
   {
@@ -29,7 +29,7 @@
    "year": 1903,
    "articles": 25,
    "pages": 289,
-   "words": 121307,
+   "words": 121284,
    "built": "2026-09-25"
   },
   {
@@ -37,7 +37,7 @@
    "year": 1904,
    "articles": 41,
    "pages": 426,
-   "words": 182908,
+   "words": 182878,
    "built": "2026-09-25"
   },
   {
@@ -45,7 +45,7 @@
    "year": 1905,
    "articles": 42,
    "pages": 460,
-   "words": 189915,
+   "words": 189881,
    "built": "2026-09-25"
   },
   {
@@ -53,7 +53,7 @@
    "year": 1906,
    "articles": 53,
    "pages": 432,
-   "words": 182786,
+   "words": 182758,
    "built": "2026-09-25"
   },
   {
@@ -61,7 +61,7 @@
    "year": 1907,
    "articles": 38,
    "pages": 433,
-   "words": 190262,
+   "words": 190239,
    "built": "2026-09-25"
   },
   {
@@ -69,7 +69,7 @@
    "year": 1908,
    "articles": 42,
    "pages": 471,
-   "words": 195974,
+   "words": 195943,
    "built": "2026-09-25"
   },
   {
@@ -77,7 +77,7 @@
    "year": 1909,
    "articles": 42,
    "pages": 451,
-   "words": 193264,
+   "words": 193243,
    "built": "2026-09-25"
   },
   {
@@ -85,7 +85,7 @@
    "year": 1910,
    "articles": 47,
    "pages": 433,
-   "words": 178004,
+   "words": 177978,
    "built": "2026-09-25"
   },
   {
@@ -93,7 +93,7 @@
    "year": 1911,
    "articles": 45,
    "pages": 439,
-   "words": 184668,
+   "words": 184636,
    "built": "2026-09-25"
   },
   {
@@ -101,7 +101,7 @@
    "year": 1912,
    "articles": 46,
    "pages": 408,
-   "words": 170727,
+   "words": 170707,
    "built": "2026-09-25"
   },
   {
@@ -109,7 +109,7 @@
    "year": 1913,
    "articles": 44,
    "pages": 416,
-   "words": 172969,
+   "words": 172946,
    "built": "2026-09-25"
   },
   {
@@ -117,7 +117,7 @@
    "year": 1914,
    "articles": 48,
    "pages": 439,
-   "words": 184351,
+   "words": 184327,
    "built": "2026-09-25"
   },
   {
@@ -125,7 +125,47 @@
    "year": 1915,
    "articles": 49,
    "pages": 453,
-   "words": 193025,
+   "words": 193006,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 45,
+   "year": 1916,
+   "articles": 49,
+   "pages": 470,
+   "words": 204777,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 46,
+   "year": 1917,
+   "articles": 48,
+   "pages": 450,
+   "words": 199641,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 47,
+   "year": 1918,
+   "articles": 42,
+   "pages": 452,
+   "words": 193686,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 48,
+   "year": 1919,
+   "articles": 41,
+   "pages": 448,
+   "words": 191717,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 49,
+   "year": 1920,
+   "articles": 44,
+   "pages": 396,
+   "words": 163352,
    "built": "2026-09-25"
   }
  ]
