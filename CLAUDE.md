@@ -53,7 +53,9 @@ look; a failure is not to be committed around.
 ## Reading paths
 
 `data/paths.json` is the editor's curation. Stations must be article ids of the
-edition (the check script verifies them). Notes with `"status": "draft"` on the
+edition (the check script verifies them). After editing stations or rebuilding
+volumes, run `python tools/build_paths.py` to refresh each station's cached
+title, author and range (the check script fails on a stale cache). Notes with `"status": "draft"` on the
 path were drafted by the model; only the editor removes the mark. Do not add
 paths or rewrite notes unasked.
 

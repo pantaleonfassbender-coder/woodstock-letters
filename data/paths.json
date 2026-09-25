@@ -9,14 +9,78 @@
       "question": "How does the province speak about its own past while it speaks about mission?",
       "intro": "The Maryland Jesuits lived from their farms for two centuries, and the farms were worked by enslaved people until the province sold them in 1838. Joseph Zwinge's serial of 1910–1913 is the journal's own account of that history, written from the estate books by the province's procurator. Read beside it are the pieces the same years printed on the Church's work among Black Catholics, in which the sale is never mentioned. The path sets the two registers side by side.",
       "stations": [
-        {"a": "39-374", "note": "Zwinge opens the serial with the land itself: the grants, the manors, the titles. Note how the labour that worked them enters the account."},
-        {"a": "40-065", "note": "The second instalment. The farms as an economy: crops, tenants, the debts of the college at Georgetown."},
-        {"a": "41-275", "note": "The instalment that reaches 1838. The sale is told from the procurator's side: the price, Father General's order on the proceeds, the emancipation that followed. Compare the sentences on the people sold with those on the money."},
-        {"a": "42-001", "note": "After the sale: how the estates were leased and run without the enslaved workforce."},
-        {"a": "42-336", "note": "The serial's close. What Zwinge thinks the history of the farms was for."},
-        {"a": "30-223", "note": "Hogan in 1901 on church work among the Negroes: the mission register, written for colleagues. Who is the subject of the sentences here?"},
-        {"a": "37-239", "note": "Kelly in 1908 on the Negro missions in Maryland, in the same counties as Zwinge's farms. The two texts never meet; the reader can make them."},
-        {"a": "42-069", "note": "The Colored Mission in Philadelphia, printed in the same volume as Zwinge's last instalments."}
+        {
+          "a": "39-374",
+          "note": "Zwinge opens the serial with the land itself: the grants, the manors, the titles. Note how the labour that worked them enters the account.",
+          "t": "The Jesuit Farms in Maryland",
+          "au": "Fr. J. Zwinge",
+          "v": 39,
+          "y": 1910,
+          "pp": "374–382"
+        },
+        {
+          "a": "40-065",
+          "note": "The second instalment. The farms as an economy: crops, tenants, the debts of the college at Georgetown.",
+          "t": "Jesuit Farms in Maryland",
+          "au": "Fr. J. Zwinge",
+          "v": 40,
+          "y": 1911,
+          "pp": "65–77"
+        },
+        {
+          "a": "41-275",
+          "note": "The instalment that reaches 1838. The sale is told from the procurator's side: the price, Father General's order on the proceeds, the emancipation that followed. Compare the sentences on the people sold with those on the money.",
+          "t": "The Jesuit Farms in Maryland",
+          "au": "Fr. J. Zwinge",
+          "v": 41,
+          "y": 1912,
+          "pp": "275–291"
+        },
+        {
+          "a": "42-001",
+          "note": "After the sale: how the estates were leased and run without the enslaved workforce.",
+          "t": "The Jesuit Farms in Maryland",
+          "au": null,
+          "v": 42,
+          "y": 1913,
+          "pp": "1–12"
+        },
+        {
+          "a": "42-336",
+          "note": "The serial's close. What Zwinge thinks the history of the farms was for.",
+          "t": "The Jesuit Farms in Maryland",
+          "au": "Fr. J. Zwinge i",
+          "v": 42,
+          "y": 1913,
+          "pp": "336–352"
+        },
+        {
+          "a": "30-223",
+          "note": "Hogan in 1901 on church work among the Negroes: the mission register, written for colleagues. Who is the subject of the sentences here?",
+          "t": "Church Work Among the Negroes",
+          "au": "Fr. John A. Hogan",
+          "v": 30,
+          "y": 1901,
+          "pp": "223–230"
+        },
+        {
+          "a": "37-239",
+          "note": "Kelly in 1908 on the Negro missions in Maryland, in the same counties as Zwinge's farms. The two texts never meet; the reader can make them.",
+          "t": "Negro Missions in Maryland",
+          "au": "Fr. L,. J. Kelly",
+          "v": 37,
+          "y": 1908,
+          "pp": "239–244"
+        },
+        {
+          "a": "42-069",
+          "note": "The Colored Mission in Philadelphia, printed in the same volume as Zwinge's last instalments.",
+          "t": "The Colored Mission of Our Lady of the Blessed Sacrament, Philadelphia, Pa",
+          "au": "Fr. A. J. Fmrick",
+          "v": 42,
+          "y": 1913,
+          "pp": "69–82"
+        }
       ]
     },
     {
@@ -27,11 +91,51 @@
       "question": "When does the internal prose take over the vocabulary of accreditation?",
       "intro": "Around 1900 the American Jesuit colleges met the American university: Harvard's president refused their degrees, the National Educational Association set the standards, and the Jesuits began to hold conferences of their own. The journal reported it all for colleagues, and the reports are where the language of achievement, standards and credit first enters the house organ. The path follows that language into the text.",
       "stations": [
-        {"a": "28-121", "note": "The first Conference of Catholic Colleges, 1899, in three pages: a new kind of meeting, reported in the old kind of prose."},
-        {"a": "29-123", "note": "Fagan at the N.E.A. in Chicago, 1900. A Jesuit measures his colleges against the mainstream and admires what he sees. Where does the admiration turn into a programme?"},
-        {"a": "29-337", "note": "Boston College and Harvard University: the Eliot controversy recorded as a dossier, item by item, in the defensive key of the year of Testem benevolentiae."},
-        {"a": "29-342", "note": "Ours at the second Conference. The province learns to speak of itself as a system of colleges."},
-        {"a": "36-257", "note": "Conway at the Conference of 1907: seven years on, the vocabulary has settled. Compare with 28-121."}
+        {
+          "a": "28-121",
+          "note": "The first Conference of Catholic Colleges, 1899, in three pages: a new kind of meeting, reported in the old kind of prose.",
+          "t": "The Conference of Catholic Colleges",
+          "au": null,
+          "v": 28,
+          "y": 1899,
+          "pp": "121–123"
+        },
+        {
+          "a": "29-123",
+          "note": "Fagan at the N.E.A. in Chicago, 1900. A Jesuit measures his colleges against the mainstream and admires what he sees. Where does the admiration turn into a programme?",
+          "t": "Meeting of the N. E. A. at Chicago",
+          "au": "Fr. Fagan",
+          "v": 29,
+          "y": 1900,
+          "pp": "123–136"
+        },
+        {
+          "a": "29-337",
+          "note": "Boston College and Harvard University: the Eliot controversy recorded as a dossier, item by item, in the defensive key of the year of Testem benevolentiae.",
+          "t": "Boston College and Harvard University",
+          "au": null,
+          "v": 29,
+          "y": 1900,
+          "pp": "337–339"
+        },
+        {
+          "a": "29-342",
+          "note": "Ours at the second Conference. The province learns to speak of itself as a system of colleges.",
+          "t": "Ours at the Second Annual Conference of Catholic Colleges",
+          "au": null,
+          "v": 29,
+          "y": 1900,
+          "pp": "342–344"
+        },
+        {
+          "a": "36-257",
+          "note": "Conway at the Conference of 1907: seven years on, the vocabulary has settled. Compare with 28-121.",
+          "t": "Conference of Catholic Colleges",
+          "au": "Fr. J. A. Conway",
+          "v": 36,
+          "y": 1907,
+          "pp": "257–263"
+        }
       ]
     },
     {
@@ -42,14 +146,78 @@
       "question": "How does a house write about itself, and how does the tone change from foundation to jubilee?",
       "intro": "The journal was printed in the house it most often describes. From the first survey of the surroundings in 1873 to Dooley's house history of 1927, Woodstock wrote its own chronicle: departures and arrivals, academies, jubilees, founders remembered. The path reads that chronicle in order, with the plates beside it.",
       "stations": [
-        {"a": "2-041", "note": "Woodstock, its surroundings and its associations, 1873: the ridge, the river, the railway, the Jesuit past of the county. The house introduces its landscape."},
-        {"a": "8-042", "note": "Mazzella leaves for Rome, 1879. The first of the founders to go, and the first farewell the journal prints."},
-        {"a": "23-091", "note": "The Woodstock Academy for the Study of the Ratio, 1894: the scholastics debate the Society's own plan of studies. The house as a school thinking about schools."},
-        {"a": "24-088", "note": "The Silver Jubilee, 1895. Twenty-five years told in seven pages; note what is already remembered and what is not."},
-        {"a": "29-296", "note": "Two of Woodstock's founders, 1900: Mazzella and De Augustinis remembered at their deaths. The founding generation becomes history."},
-        {"a": "49-001", "note": "The Golden Jubilee of November 1919. Read the opening for its register: demobilisation, the 'Old Boys', the breath-stealing hill."},
-        {"a": "49-025", "note": "'Golden Sheaves from the Silver Harvest': the jubilee's retrospect on fifty years of the house."},
-        {"a": "56-003", "note": "Dooley's Woodstock and Its Makers, 1927. The chronicle becomes a book, with portraits of the makers and the drawing of 1871."}
+        {
+          "a": "2-041",
+          "note": "Woodstock, its surroundings and its associations, 1873: the ridge, the river, the railway, the Jesuit past of the county. The house introduces its landscape.",
+          "t": "Woodstock — Its Surroundings and Its Associations",
+          "au": null,
+          "v": 2,
+          "y": 1873,
+          "pp": "41–57"
+        },
+        {
+          "a": "8-042",
+          "note": "Mazzella leaves for Rome, 1879. The first of the founders to go, and the first farewell the journal prints.",
+          "t": "Father Mazzella's Departure from Woodstock College",
+          "au": null,
+          "v": 8,
+          "y": 1879,
+          "pp": "42–45"
+        },
+        {
+          "a": "23-091",
+          "note": "The Woodstock Academy for the Study of the Ratio, 1894: the scholastics debate the Society's own plan of studies. The house as a school thinking about schools.",
+          "t": "The Woodstock Academy for the Study of the Ratio",
+          "au": null,
+          "v": 23,
+          "y": 1894,
+          "pp": "91–107"
+        },
+        {
+          "a": "24-088",
+          "note": "The Silver Jubilee, 1895. Twenty-five years told in seven pages; note what is already remembered and what is not.",
+          "t": "The Silver Jubilee of Woodstock College",
+          "au": null,
+          "v": 24,
+          "y": 1895,
+          "pp": "88–94"
+        },
+        {
+          "a": "29-296",
+          "note": "Two of Woodstock's founders, 1900: Mazzella and De Augustinis remembered at their deaths. The founding generation becomes history.",
+          "t": "Two of Woodstock's Founders",
+          "au": null,
+          "v": 29,
+          "y": 1900,
+          "pp": "296–316"
+        },
+        {
+          "a": "49-001",
+          "note": "The Golden Jubilee of November 1919. Read the opening for its register: demobilisation, the 'Old Boys', the breath-stealing hill.",
+          "t": "The Golden Jubilee",
+          "au": null,
+          "v": 49,
+          "y": 1920,
+          "pp": "1–6"
+        },
+        {
+          "a": "49-025",
+          "note": "'Golden Sheaves from the Silver Harvest': the jubilee's retrospect on fifty years of the house.",
+          "t": "Golden Sheaves from the Silver Harvest",
+          "au": null,
+          "v": 49,
+          "y": 1920,
+          "pp": "25–48"
+        },
+        {
+          "a": "56-003",
+          "note": "Dooley's Woodstock and Its Makers, 1927. The chronicle becomes a book, with portraits of the makers and the drawing of 1871.",
+          "t": "Woodstock and Its Makers",
+          "au": null,
+          "v": 56,
+          "y": 1927,
+          "pp": "3–46"
+        }
       ]
     },
     {
@@ -61,15 +229,87 @@
       "question": "Is the corporate 'we' of the Jesuits a matter of the calendar?",
       "intro": "A psycholinguistic study of this journal found that the collective voice of Jesuit self-presentation, the dense 'we', belongs to commemorative occasions and is rare in the everyday prose of the order. This path is the study's argument as a reading list: jubilees of the province, of individual fathers, of the college and of the journal itself, each station with its measures of voice beside it, so that the reader can hear what the numbers count. Read in order, the stations refine the finding: the voice lives in the addresses given at a jubilee, not in the journal's report of it.",
       "stations": [
-        {"a": "12-205", "note": "The Jubilee of the Province, 1883: thirty-two pages of celebration, sermons and addresses, and already a 'we' (1.0 %) above the journal's ordinary prose."},
-        {"a": "13-205", "note": "A father's golden jubilee, 1884, told as a chronicle of the day: the community as a family, but in the third person (0.5 % 'we')."},
-        {"a": "17-029", "note": "Father Damen's golden jubilee, 1888: the jubilarian's own reminiscences, hence the path's highest 'I' (1.3 %) and a low 'we'. A commemoration in the singular."},
-        {"a": "17-372", "note": "Father Villiger's jubilee, the same year, in the chronicle form again. The commemorative occasion alone does not make the collective voice; the address does."},
-        {"a": "49-001", "note": "The Golden Jubilee of the college, 1919–1920, as the journal's own report: narrative, wry, and low in 'we' (0.4 %). The collective voice is not in the account of the celebration but in what was said at it."},
-        {"a": "49-006", "note": "The Academy in honour of the Cardinal: the addresses, the pledges, 'our undying love and filial obedience'. Here the 'we' is at its densest in the whole path (2.6 %), six times the report that precedes it."},
-        {"a": "49-085", "note": "The banquet and the addresses: 'we' at 1.8 %, and the first person singular rises with it, because the speakers speak for themselves and for the house at once."},
-        {"a": "51-001", "note": "The journal's own golden jubilee, 1922: fifty years of the Letters reviewed by the Letters, in the full commemorative voice (2.1 % 'we', the path's highest positive emotion)."},
-        {"a": "51-081", "note": "The progress of twenty-five years: the same jubilee number turning to statistics, and the 'we' falling to 0.2 %. The register, not the occasion, carries the voice."}
+        {
+          "a": "12-205",
+          "note": "The Jubilee of the Province, 1883: thirty-two pages of celebration, sermons and addresses, and already a 'we' (1.0 %) above the journal's ordinary prose.",
+          "t": "The Jubilee of the Province",
+          "au": null,
+          "v": 12,
+          "y": 1883,
+          "pp": "205–237"
+        },
+        {
+          "a": "13-205",
+          "note": "A father's golden jubilee, 1884, told as a chronicle of the day: the community as a family, but in the third person (0.5 % 'we').",
+          "t": "The Golden Jubilee of Father Basil Pacciarinl",
+          "au": null,
+          "v": 13,
+          "y": 1884,
+          "pp": "205–210"
+        },
+        {
+          "a": "17-029",
+          "note": "Father Damen's golden jubilee, 1888: the jubilarian's own reminiscences, hence the path's highest 'I' (1.3 %) and a low 'we'. A commemoration in the singular.",
+          "t": "Father Damen's Golden Jubilee",
+          "au": null,
+          "v": 17,
+          "y": 1888,
+          "pp": "29–34"
+        },
+        {
+          "a": "17-372",
+          "note": "Father Villiger's jubilee, the same year, in the chronicle form again. The commemorative occasion alone does not make the collective voice; the address does.",
+          "t": "Father Villiger's Golden Jubilee",
+          "au": null,
+          "v": 17,
+          "y": 1888,
+          "pp": "372–378"
+        },
+        {
+          "a": "49-001",
+          "note": "The Golden Jubilee of the college, 1919–1920, as the journal's own report: narrative, wry, and low in 'we' (0.4 %). The collective voice is not in the account of the celebration but in what was said at it.",
+          "t": "The Golden Jubilee",
+          "au": null,
+          "v": 49,
+          "y": 1920,
+          "pp": "1–6"
+        },
+        {
+          "a": "49-006",
+          "note": "The Academy in honour of the Cardinal: the addresses, the pledges, 'our undying love and filial obedience'. Here the 'we' is at its densest in the whole path (2.6 %), six times the report that precedes it.",
+          "t": "The Academy in Honor of the Cardinal",
+          "au": null,
+          "v": 49,
+          "y": 1920,
+          "pp": "6–23"
+        },
+        {
+          "a": "49-085",
+          "note": "The banquet and the addresses: 'we' at 1.8 %, and the first person singular rises with it, because the speakers speak for themselves and for the house at once.",
+          "t": "The Banquet and Addresses",
+          "au": "Leonard Feeney",
+          "v": 49,
+          "y": 1920,
+          "pp": "85–99"
+        },
+        {
+          "a": "51-001",
+          "note": "The journal's own golden jubilee, 1922: fifty years of the Letters reviewed by the Letters, in the full commemorative voice (2.1 % 'we', the path's highest positive emotion).",
+          "t": "Our Golden Jubilee 1872-1922",
+          "au": null,
+          "v": 51,
+          "y": 1922,
+          "pp": "1–6"
+        },
+        {
+          "a": "51-081",
+          "note": "The progress of twenty-five years: the same jubilee number turning to statistics, and the 'we' falling to 0.2 %. The register, not the occasion, carries the voice.",
+          "t": "The Progress of Twenty-five Years",
+          "au": null,
+          "v": 51,
+          "y": 1922,
+          "pp": "81–98"
+        }
       ]
     },
     {
@@ -80,12 +320,60 @@
       "question": "What changes between the missionary's report and the report about the missionary?",
       "intro": "From the first volumes the journal carried letters from the Indian missions of the Rocky Mountains, the Great Lakes and the plains, and reprinted the older history of the Jesuits among the Natchez and the Potawatomi. Over fifty years the genre shifts: the letter from the field gives way to the history of the field, and finally to a senator's tribute read into the record. The path follows that shift.",
       "stations": [
-        {"a": "3-163", "note": "The Natchez Indians in 1730: the old Society's mission retold in 1874 from the French relations. History as the journal's first mode."},
-        {"a": "4-042", "note": "The Potawatomi, 1875: the Missouri mission's own past, written by those who inherited it."},
-        {"a": "7-092", "note": "Ponziglione from the Osage mission, 1878: a working missionary's letter, with its distances, its baptisms and its weather."},
-        {"a": "9-095", "note": "Palladino on the Catholic Church in Montana, 1880: the mission becomes a diocese in the telling. The author is known from the general index."},
-        {"a": "29-422", "note": "Brother O'Hare on the plague in Alaska, 1900: reportage from the edge of the province's world."},
-        {"a": "29-238", "note": "Senator Vest's tribute to the Jesuit Indian schools, 1900, reprinted from the Congressional Record. The mission seen from outside, and printed inside with evident pride."}
+        {
+          "a": "3-163",
+          "note": "The Natchez Indians in 1730: the old Society's mission retold in 1874 from the French relations. History as the journal's first mode.",
+          "t": "The Natchez Indians in 1730",
+          "au": null,
+          "v": 3,
+          "y": 1874,
+          "pp": "163–182"
+        },
+        {
+          "a": "4-042",
+          "note": "The Potawatomi, 1875: the Missouri mission's own past, written by those who inherited it.",
+          "t": "Pottowattomy Indians",
+          "au": null,
+          "v": 4,
+          "y": 1875,
+          "pp": "42–56"
+        },
+        {
+          "a": "7-092",
+          "note": "Ponziglione from the Osage mission, 1878: a working missionary's letter, with its distances, its baptisms and its weather.",
+          "t": "Indian Missions",
+          "au": "Paul Mary Ponziglione",
+          "v": 7,
+          "y": 1878,
+          "pp": "92–105"
+        },
+        {
+          "a": "9-095",
+          "note": "Palladino on the Catholic Church in Montana, 1880: the mission becomes a diocese in the telling. The author is known from the general index.",
+          "t": "The Catholic Church in Montana",
+          "au": "Laurence B. Palladino",
+          "v": 9,
+          "y": 1880,
+          "pp": "95–106"
+        },
+        {
+          "a": "29-422",
+          "note": "Brother O'Hare on the plague in Alaska, 1900: reportage from the edge of the province's world.",
+          "t": "The Plague in Alaska",
+          "au": "Br. V. O'Hare",
+          "v": 29,
+          "y": 1900,
+          "pp": "422–427"
+        },
+        {
+          "a": "29-238",
+          "note": "Senator Vest's tribute to the Jesuit Indian schools, 1900, reprinted from the Congressional Record. The mission seen from outside, and printed inside with evident pride.",
+          "t": "Senator Vest's Tribute to the Jesuit Indian Schools",
+          "au": null,
+          "v": 29,
+          "y": 1900,
+          "pp": "238–245"
+        }
       ]
     },
     {
@@ -96,12 +384,60 @@
       "question": "How does the order justify to itself that it measures the stars?",
       "intro": "Observatories at Georgetown, Cleveland and Manila, an eclipse expedition, a meteorograph, a scientific academy at the jubilee, a priest on the radio: the journal records the Society's science for colleagues who were mostly not scientists. The path reads the justifications, the pride and the occasional defensiveness of that record.",
       "stations": [
-        {"a": "8-025", "note": "The eclipse expedition of three Maryland professors, 1879: science as an adventure of the province, told like a mission journey."},
-        {"a": "20-419", "note": "The work at the Georgetown Observatory, 1891: the routine of measurement described for a house that did not measure."},
-        {"a": "27-035", "note": "Odenbach's meteorological observatory at Cleveland, 1898: the instruments, the funding, the ambition."},
-        {"a": "29-109", "note": "Our Observatory at Manila vindicated, 1900: the Society defends its science in public and reports the defence at home."},
-        {"a": "49-048", "note": "The Scientific Academy at the Golden Jubilee, 1920, with its diagrams: science as a jubilee performance."},
-        {"a": "58-351", "note": "Father Scott and the radio, 1929: a new medium, and a new argument for using it."}
+        {
+          "a": "8-025",
+          "note": "The eclipse expedition of three Maryland professors, 1879: science as an adventure of the province, told like a mission journey.",
+          "t": "Eclipse Expedition of Three Maryland Professors",
+          "au": "John J. Ryan",
+          "v": 8,
+          "y": 1879,
+          "pp": "25–32"
+        },
+        {
+          "a": "20-419",
+          "note": "The work at the Georgetown Observatory, 1891: the routine of measurement described for a house that did not measure.",
+          "t": "The Work at the Georgetown Observatory",
+          "au": null,
+          "v": 20,
+          "y": 1891,
+          "pp": "419–425"
+        },
+        {
+          "a": "27-035",
+          "note": "Odenbach's meteorological observatory at Cleveland, 1898: the instruments, the funding, the ambition.",
+          "t": "The Meteorological Observatory of St. Ignatius College, Cleveland, Ohio",
+          "au": "Frederick L. Odenbach",
+          "v": 27,
+          "y": 1898,
+          "pp": "35–46"
+        },
+        {
+          "a": "29-109",
+          "note": "Our Observatory at Manila vindicated, 1900: the Society defends its science in public and reports the defence at home.",
+          "t": "Our Observatory at Manila Vindicated",
+          "au": "Fr. Algue",
+          "v": 29,
+          "y": 1900,
+          "pp": "109–116"
+        },
+        {
+          "a": "49-048",
+          "note": "The Scientific Academy at the Golden Jubilee, 1920, with its diagrams: science as a jubilee performance.",
+          "t": "The Scientific Academy",
+          "au": null,
+          "v": 49,
+          "y": 1920,
+          "pp": "48–85"
+        },
+        {
+          "a": "58-351",
+          "note": "Father Scott and the radio, 1929: a new medium, and a new argument for using it.",
+          "t": "Father Scott and the Radio",
+          "au": "Father Martin J. Scott",
+          "v": 58,
+          "y": 1929,
+          "pp": "351–357"
+        }
       ]
     },
     {
@@ -112,13 +448,69 @@
       "question": "What does the order's war look like from the house that stayed at home?",
       "intro": "The journal printed the chaplains' wars late and at length: the Mexican War of 1846 and the Civil War recalled forty years after, in Michael Nash's letters of 1861 serialised from 1887; then, in its own time, the camps of 1917–1918, the influenza at Camp Meade, the prisoners of war in Germany. The path reads the chaplain as the journal's soldier.",
       "stations": [
-        {"a": "14-375", "note": "Chaplains during the Civil War of 1861, 1885: the province lists its own, twenty-four years on."},
-        {"a": "15-198", "note": "Chaplains for the Mexican War, 1846, recalled in 1886: the earlier war, the same genre."},
-        {"a": "16-020", "note": "Michael Nash's letters from 1861 begin. Read them for what a chaplain reports to his superior and what he leaves out."},
-        {"a": "18-319", "note": "The last instalment of Nash's letters, 1889."},
-        {"a": "47-057", "note": "Works of Ours among the soldiers, 1918: the Great War in the present tense of the journal."},
-        {"a": "48-004", "note": "The influenza epidemic at Camp Meade, October 1918: the chaplain's war as an epidemic."},
-        {"a": "48-018", "note": "French prisoners of war at Weingarten: a Jesuit chaplain on the other side of the line."}
+        {
+          "a": "14-375",
+          "note": "Chaplains during the Civil War of 1861, 1885: the province lists its own, twenty-four years on.",
+          "t": "Chaplains during the Civil War of 1861",
+          "au": null,
+          "v": 14,
+          "y": 1885,
+          "pp": "375–380"
+        },
+        {
+          "a": "15-198",
+          "note": "Chaplains for the Mexican War, 1846, recalled in 1886: the earlier war, the same genre.",
+          "t": "Chaplains for the Mexican War",
+          "au": null,
+          "v": 15,
+          "y": 1886,
+          "pp": "198–202"
+        },
+        {
+          "a": "16-020",
+          "note": "Michael Nash's letters from 1861 begin. Read them for what a chaplain reports to his superior and what he leaves out.",
+          "t": "Letters from a Chaplain in the War of 1861",
+          "au": "Michael Nash",
+          "v": 16,
+          "y": 1887,
+          "pp": "20–30"
+        },
+        {
+          "a": "18-319",
+          "note": "The last instalment of Nash's letters, 1889.",
+          "t": "Letters from a Chaplain in the War of 1861",
+          "au": "Michael Nash",
+          "v": 18,
+          "y": 1889,
+          "pp": "319–332"
+        },
+        {
+          "a": "47-057",
+          "note": "Works of Ours among the soldiers, 1918: the Great War in the present tense of the journal.",
+          "t": "Works of Ours Among the Soldiers",
+          "au": null,
+          "v": 47,
+          "y": 1918,
+          "pp": "57–66"
+        },
+        {
+          "a": "48-004",
+          "note": "The influenza epidemic at Camp Meade, October 1918: the chaplain's war as an epidemic.",
+          "t": "The Influenza Epidemic at Camp Meade, October 1918",
+          "au": null,
+          "v": 48,
+          "y": 1919,
+          "pp": "4–17"
+        },
+        {
+          "a": "48-018",
+          "note": "French prisoners of war at Weingarten: a Jesuit chaplain on the other side of the line.",
+          "t": "French Prisoners of War at Weinqarten",
+          "au": "Fr. Jon Svensson",
+          "v": 48,
+          "y": 1919,
+          "pp": "18–28"
+        }
       ]
     }
   ]

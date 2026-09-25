@@ -141,6 +141,9 @@ if (ROOT / "data" / "paths.json").exists():
                 fail(f"path {p['id']}: station {s['a']} is not an article of the edition")
             if not s.get("note"):
                 warn(f"path {p['id']}: station {s['a']} has no note")
+            a = next((x for v in vols.values() for x in v["articles"] if x["id"] == s["a"]), None)
+            if a and (s.get("t") != a["title"] or s.get("au") != a.get("author")):
+                fail(f"path {p['id']}: station {s['a']} cache is stale, run tools/build_paths.py")
 
 # tables
 if (ROOT / "data" / "tables.json").exists():

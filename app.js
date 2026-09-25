@@ -171,10 +171,9 @@ async function viewPaths(id) {
   }
   const p = P.find(x => x.id === id);
   if (!p) return `<h1>No path “${esc(id)}”</h1><p><a href="#/paths">All paths</a></p>`;
-  const arts = await Promise.all(p.stations.map(async s => {
-    const v = await vol(+s.a.split("-")[0]);
-    return { s, v, a: v.byId.get(s.a) };
-  }));
+  // the stations carry their article's title, author and range, filled by
+  // tools/build_paths.py, so no volume has to be loaded to show a path
+  const arts = p.stations.map(s => ({ s, v: { vol: s.v, year: s.y }, a: s.t ? { id: s.a, title: s.t, author: s.au, pp: s.pp } : null }));
   let disc = null;
   if (p.discourse) {
     S.disc = S.disc || await getJSON("data/discourse.json").catch(() => null);
@@ -193,7 +192,7 @@ async function viewPaths(id) {
   <ol class="stations">${arts.map(({ s, v, a }, k) => a ? `<li>
       <div class="st-head"><span class="st-n">${k + 1}</span>
         <a class="ti" href="#/a/${a.id}${s.p ? `?p=${s.p}` : ""}">${esc(a.title)}</a>
-        <span class="fine">${a.author ? esc(a.author) + " · " : ""}WL ${v.vol} (${v.year}): ${esc(range(a))}</span></div>
+        <span class="fine">${a.author ? esc(a.author) + " · " : ""}WL ${v.vol} (${v.year}): ${esc(a.pp)}</span></div>
       <p class="st-note">${esc(s.note)}</p>
       ${disc ? measure(disc.get(a.id)) : ""}</li>` : `<li><span class="st-n">${k + 1}</span> <span class="mono">${esc(s.a)}</span> not found</li>`).join("")}</ol>
   ${p.discourse ? `<p class="fine">Measures: the study's open word lists as percentages of the article's words (<a href="#/discourse">Discourse</a>);

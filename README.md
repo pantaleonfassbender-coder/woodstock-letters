@@ -97,6 +97,7 @@ python tools/build_discourse.py          # score every article with the study's 
 python tools/validate_discourse.py PKG   # compare with the study's replication package, unzipped at PKG
 python tools/build_general_index.py      # register from the printed index of 1960 (data/general_index.json)
 python tools/extract_tables.py           # the fold-out statistics into data/tables/ (needs the raw OCR of all volumes)
+python tools/build_paths.py              # cache title, author and range of each path station
 python tools/check_edition.py            # consistency checks; run before every commit
 python tools/build_search.py             # build the search index into pagefind/ (git-ignored)
 python -m http.server 8765               # preview at http://localhost:8765
