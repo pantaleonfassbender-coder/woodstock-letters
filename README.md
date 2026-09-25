@@ -66,6 +66,9 @@ How the build works, briefly:
    from a scan. Each entry is listed in the QA report.
 2. **Articles.** An article starts at a title page, at a mid-page heading that the
    following running heads repeat, or at a start page named in the volume index.
+   One-off faults (a split the running heads misled, a title the OCR spoiled, a misread
+   index page) are corrected by eye in `tools/article_overrides.json`, and each is listed
+   in the QA report.
 3. **Repair.** Line-end hyphenation is resolved, and recurrent misreadings are
    fixed: the *ct* ligature read as `6l`/`dl`, `é` read as `6`, years such as
    `i898`. Other repairs are gated by an English frequency list (`wordfreq`).

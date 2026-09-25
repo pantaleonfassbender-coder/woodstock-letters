@@ -5,13 +5,13 @@
    "year": 1872,
    "articles": 30,
    "pages": 205,
-   "words": 68060,
+   "words": 67856,
    "built": "2026-09-25"
   },
   {
    "vol": 2,
    "year": 1873,
-   "articles": 27,
+   "articles": 29,
    "pages": 244,
    "words": 82070,
    "built": "2026-09-25"
@@ -29,7 +29,7 @@
    "year": 1875,
    "articles": 25,
    "pages": 199,
-   "words": 66098,
+   "words": 66092,
    "built": "2026-09-25"
   },
   {
@@ -61,7 +61,7 @@
    "year": 1879,
    "articles": 30,
    "pages": 188,
-   "words": 65453,
+   "words": 65452,
    "built": "2026-09-25"
   },
   {
@@ -147,9 +147,9 @@
   {
    "vol": 19,
    "year": 1890,
-   "articles": 65,
+   "articles": 66,
    "pages": 439,
-   "words": 212263,
+   "words": 212258,
    "built": "2026-09-25"
   },
   {
@@ -163,7 +163,7 @@
   {
    "vol": 21,
    "year": 1892,
-   "articles": 80,
+   "articles": 79,
    "pages": 454,
    "words": 206167,
    "built": "2026-09-25"
@@ -187,7 +187,7 @@
   {
    "vol": 24,
    "year": 1895,
-   "articles": 70,
+   "articles": 67,
    "pages": 524,
    "words": 239453,
    "built": "2026-09-25"
@@ -195,7 +195,7 @@
   {
    "vol": 25,
    "year": 1896,
-   "articles": 49,
+   "articles": 47,
    "pages": 544,
    "words": 241300,
    "built": "2026-09-25"
@@ -243,7 +243,7 @@
   {
    "vol": 31,
    "year": 1902,
-   "articles": 59,
+   "articles": 58,
    "pages": 492,
    "words": 209387,
    "built": "2026-09-25"
@@ -299,7 +299,7 @@
   {
    "vol": 38,
    "year": 1909,
-   "articles": 43,
+   "articles": 41,
    "pages": 451,
    "words": 193183,
    "built": "2026-09-25"
@@ -339,7 +339,7 @@
   {
    "vol": 43,
    "year": 1914,
-   "articles": 50,
+   "articles": 48,
    "pages": 439,
    "words": 184296,
    "built": "2026-09-25"
@@ -355,7 +355,7 @@
   {
    "vol": 45,
    "year": 1916,
-   "articles": 50,
+   "articles": 49,
    "pages": 470,
    "words": 204713,
    "built": "2026-09-25"
@@ -387,7 +387,7 @@
   {
    "vol": 49,
    "year": 1920,
-   "articles": 46,
+   "articles": 47,
    "pages": 396,
    "words": 163338,
    "built": "2026-09-25"
@@ -395,7 +395,7 @@
   {
    "vol": 50,
    "year": 1921,
-   "articles": 42,
+   "articles": 40,
    "pages": 415,
    "words": 185206,
    "built": "2026-09-25"
@@ -403,7 +403,7 @@
   {
    "vol": 51,
    "year": 1922,
-   "articles": 48,
+   "articles": 47,
    "pages": 470,
    "words": 202691,
    "built": "2026-09-25"
@@ -451,7 +451,7 @@
   {
    "vol": 57,
    "year": 1928,
-   "articles": 40,
+   "articles": 41,
    "pages": 563,
    "words": 209525,
    "built": "2026-09-25"
@@ -459,7 +459,7 @@
   {
    "vol": 58,
    "year": 1929,
-   "articles": 40,
+   "articles": 37,
    "pages": 724,
    "words": 267561,
    "built": "2026-09-25"
