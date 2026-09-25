@@ -150,6 +150,15 @@ def is_upper(s):
     return len(letters) >= 3 and sum(c.isupper() for c in letters) / len(letters) >= 0.75
 
 
+# a title line that cannot end a title: it runs on in the next heading line
+# ("THE INCEPTION OF THE" / "JESUIT SEMINARY NEWS", vol. 59)
+RUNS_ON = re.compile(r"\b(?:of|the|and|in|on|at|to|for|an|with|from|between|among|amongst|into|upon)[.,]?\s*$", re.I)
+# or a first line without a full stop, and a second that opens with a
+# preposition ("THREE YEARS OF A COADJUTOR BROTHER" / "IN ALASKA.", vol. 23);
+# "WITH AN ACCOUNT OF …" is a subtitle
+RUNS_IN = re.compile(r"(?:in|on|at|to|into|for|and|among|amongst)\b", re.I)
+
+
 def norm_head(s):
     return re.sub(r"[^A-Z]", "", s.upper())
 
@@ -1730,6 +1739,9 @@ def build(vol):
                 and pg["issue"] == cur["issue"]:
             nh, ch = person(p["t"]), person(cur["title"])
             if ((pg["p"] - cur["p1"] <= 1 and difflib.SequenceMatcher(None, nh, ch).ratio() >= 0.75)
+                    # (a running head that gives only the first line of a
+                    # two-line title: "LAY RETREAT MOVEMENT", vol. 42)
+                    or (pg["p"] - cur["p1"] <= 1 and difflib.SequenceMatcher(None, nh, cur.get("_t0", "")).ratio() >= 0.75)
                     or part_of(nh, ch)
                     # the page's own heading, where the index entry has
                     # replaced it ("Impressions, Letter of …" / SOME IMPRESSIONS, vol. 52)
@@ -1753,6 +1765,16 @@ def build(vol):
             while k < len(flat) and flat[k][1].get("h") and not flat[k][1].get("start") and len(tl) < 4:
                 tl.append(flat[k][1]["t"])
                 k += 1
+            # a title set over two lines, cut where the first line cannot end
+            # (not before a byline: "BY FR. …")
+            while len(tl) > 1 and is_upper(tl[0]) and not re.match(r"\s*by\b", tl[1], re.I):
+                if RUNS_ON.search(tl[0]):
+                    tl[:2] = [tl[0].rstrip() + " " + tl[1].lstrip()]
+                elif not tl[0].rstrip().endswith(".") and RUNS_IN.match(tl[1].lstrip()) \
+                        and len(tl[0]) + len(tl[1]) <= 90:
+                    tl[:2] = [tl[0].rstrip().rstrip(",") + " " + tl[1].lstrip()]
+                else:
+                    break
             # a Supplement's pages restart, so its ids do too: 30-S001
             aid = f"{vol}-{'S' if pg.get('sec') else ''}{pg['p']:03d}"
             n = sum(1 for a in articles if a["id"].startswith(aid))
@@ -1848,6 +1870,12 @@ def build(vol):
             if key == "title":
                 a["_edited"] = True
                 a["subtitle"] = ed.get("subtitle", {}).get(aid, a.get("subtitle"))
+    # a subtitle corrected alone ("TO THE" of a letter's address, vol. 55)
+    for aid, v in ed.get("subtitle", {}).items():
+        a = next((a for a in articles if a["id"] == aid), None)
+        if a is not None and aid not in ed.get("title", {}):
+            edits_done.append(f"{aid}: subtitle “{a.get('subtitle')}” → “{v}”")
+            a["subtitle"] = v
 
     # 5. authors: volume index by start page, else an end signature
     for a in articles:
