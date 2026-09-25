@@ -589,6 +589,180 @@ async function viewPeople(params) {
   };
 }
 
+/* ------------------------------------------------------------- discourse */
+
+// The open word lists of Fassbender, "Identity and Values in U.S. Jesuit Discourse,
+// 1890–1944" (replication package, CC BY 4.0), applied by tools/build_discourse.py to
+// every article, with the study's filters, sentence count and MATTR.
+const DCAT = {
+  we: "First-person plural (we)", i: "First-person singular (I)", certainty: "Certainty", achievement: "Achievement",
+  affiliation: "Affiliation", power: "Power", posemo: "Positive emotion", negemo: "Negative emotion", future: "Future orientation",
+  WPS: "Words per sentence", MATTR: "Lexical diversity (MATTR-200)"
+};
+const DREG = {
+  essay: "Essays and addresses", letter: "Letters and reports", document: "Documents and reprints",
+  official: "Papal and Father General's letters", review: "Reviews and queries", table: "Tables and lists",
+  varia: "Varia", obituary: "Obituaries"
+};
+// the study's historiographical frame, and the anniversaries the Letters themselves kept
+const DEVENTS = [
+  [1891, "Tercentenary of St. Aloysius"], [1894, "Woodstock College, silver jubilee"],
+  [1897, "The Letters' silver jubilee"], [1899, "Testem benevolentiae"], [1907, "Pascendi dominici gregis"],
+  [1914, "Centenary of the Restoration"], [1920, "Woodstock College, golden jubilee"],
+  [1930, "Canonization of the North American Martyrs"]
+];
+
+async function viewDiscourse(params) {
+  S.disc = S.disc || await getJSON("data/discourse.json");
+  S.dstudy = S.dstudy || await getJSON("data/discourse_study.json").catch(() => ({ years: {} }));
+  const D = S.disc, ST = S.dstudy.years;
+  const cat = DCAT[params.get("c")] ? params.get("c") : "we";
+  const regs = new Set((params.get("r") || "essay").split(",").filter(r => DREG[r]));
+  const us = params.get("us") !== "0", adj = params.get("adj") === "1", agg = params.get("agg") === "median" ? "median" : "mean";
+  const com = ["all", "ordinary", "commemorative", "split"].includes(params.get("com")) ? params.get("com") : "split";
+  const min = +(params.get("min") || 300), yearSel = +params.get("y") || null;
+  const state = { c: cat, r: [...regs].join(","), us: us ? "" : "0", adj: adj ? "1" : "", agg: agg === "median" ? "median" : "", com, min: min === 300 ? "" : min, y: yearSel || "" };
+  const link = (o = {}) => "#/discourse?" + new URLSearchParams(Object.fromEntries(Object.entries({ ...state, ...o })
+    .filter(([, x]) => x !== "" && x != null))).toString();
+  const hasAdj = cat in (D.articles[0]?.adj || {});
+
+  // one value per article
+  const val = a => cat === "WPS" ? (a.ns ? a.wc / a.ns : null) : cat === "MATTR" ? a.mattr
+    : 100 * ((adj && hasAdj ? a.adj : a.n)[cat]) / a.wc;
+  const pool = D.articles.filter(a => regs.has(a.reg) && (!us || !a.fx) && a.wc >= min && val(a) != null);
+  const groups = com === "split" ? [["ordinary", pool.filter(a => !a.com)], ["commemorative", pool.filter(a => a.com)]]
+    : [[com, com === "all" ? pool : pool.filter(a => (com === "commemorative") === a.com)]];
+
+  // a year's value: the word-count-weighted mean over its articles (as the study's corpus means),
+  // or their median; the band is a bootstrap over the articles (5th–95th percentile)
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const stat = arr => {
+    if (agg === "median") { const v = arr.map(val).sort((x, y) => x - y); const m = v.length >> 1; return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2; }
+    let s = 0, w = 0; for (const a of arr) { s += val(a) * a.wc; w += a.wc; } return s / w;
+  };
+  const yearsAll = [...new Set(D.articles.map(a => a.y))].sort((a, b) => a - b);
+  const series = groups.map(([name, arts]) => {
+    const by = new Map();
+    for (const a of arts) { if (!by.has(a.y)) by.set(a.y, []); by.get(a.y).push(a); }
+    const pts = [...by.entries()].sort((a, b) => a[0] - b[0]).map(([y, arr]) => {
+      const boots = [];
+      for (let b = 0; b < 200 && arr.length > 1; b++) boots.push(stat(arr.map(() => arr[Math.floor(rnd() * arr.length)])));
+      boots.sort((x, z) => x - z);
+      return { y, v: stat(arr), lo: boots.length ? boots[10] : null, hi: boots.length ? boots[189] : null, n: arr.length, wc: arr.reduce((s, a) => s + a.wc, 0) };
+    });
+    return { name, pts };
+  });
+  const studyKey = cat === "MATTR" ? "MATTR200" : cat;
+  const study = Object.entries(ST).map(([y, v]) => ({ y: +y, v: v[studyKey] })).filter(p => p.v != null);
+
+  // the chart: an SVG line over the years, dependency-free
+  const W = 900, H = 340, L = 52, R = 14, T = 16, B = 34;
+  const x0 = yearsAll[0], x1 = yearsAll.at(-1);
+  const all = series.flatMap(s => s.pts.flatMap(p => [p.v, p.hi ?? p.v])).concat(study.filter(p => p.y <= x1).map(p => p.v));
+  const ymax = Math.max(...all, 0) * 1.08 || 1, ymin = cat === "WPS" || cat === "MATTR" ? Math.min(...series.flatMap(s => s.pts.map(p => p.lo ?? p.v)), ...study.map(p => p.v)) * 0.92 : 0;
+  const X = y => L + (y - x0) / (x1 - x0) * (W - L - R), Y = v => T + (1 - (v - ymin) / (ymax - ymin)) * (H - T - B);
+  const colour = { ordinary: "var(--acc2)", commemorative: "var(--acc)", all: "var(--acc2)" };
+  const ticks = []; for (let i = 0; i <= 4; i++) { const v = ymin + (ymax - ymin) * i / 4; ticks.push(v); }
+  const fmt = v => cat === "WPS" ? v.toFixed(1) : cat === "MATTR" ? v.toFixed(3) : v.toFixed(2);
+  const svg = `<svg viewBox="0 0 ${W} ${H}" class="dchart" role="img" aria-label="${esc(DCAT[cat])} by year">
+    ${ticks.map(v => `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" class="grid"/><text x="${L - 6}" y="${Y(v) + 4}" class="ax" text-anchor="end">${fmt(v)}</text>`).join("")}
+    ${DEVENTS.filter(([y]) => y >= x0 && y <= x1).map(([y, t]) => `<line x1="${X(y)}" x2="${X(y)}" y1="${T}" y2="${H - B}" class="ev"><title>${y}: ${esc(t)}</title></line>`).join("")}
+    ${[1875, 1880, 1890, 1900, 1910, 1920, 1930].filter(y => y >= x0 && y <= x1).map(y => `<text x="${X(y)}" y="${H - B + 18}" class="ax" text-anchor="middle">${y}</text>`).join("")}
+    ${series.map(s => {
+      const band = s.pts.filter(p => p.lo != null);
+      const poly = band.length > 1 ? `<polygon class="band" style="fill:${colour[s.name]}" points="${band.map(p => `${X(p.y)},${Y(p.hi)}`).join(" ")} ${band.slice().reverse().map(p => `${X(p.y)},${Y(p.lo)}`).join(" ")}"/>` : "";
+      const line = s.name === "commemorative" ? "" : `<polyline class="ln" style="stroke:${colour[s.name]}" points="${s.pts.map(p => `${X(p.y)},${Y(p.v)}`).join(" ")}"/>`;
+      const dots = s.pts.map(p => s.name === "commemorative"
+        ? `<a href="${link({ y: p.y })}"><path class="dia${p.y === yearSel ? " sel" : ""}" d="M${X(p.y)},${Y(p.v) - 6} l6,6 l-6,6 l-6,-6z"><title>${p.y} commemorative: ${fmt(p.v)} (${p.n} pieces, ${p.wc.toLocaleString("en")} words)</title></path></a>`
+        : `<a href="${link({ y: p.y })}"><circle class="pt${p.y === yearSel ? " sel" : ""}" style="fill:${colour[s.name]}" cx="${X(p.y)}" cy="${Y(p.v)}" r="${p.y === yearSel ? 5.5 : 3.5}"><title>${p.y}: ${fmt(p.v)} (${p.n} articles, ${p.wc.toLocaleString("en")} words)</title></circle></a>`).join("");
+      return (s.name === "commemorative" ? "" : poly) + line + dots;
+    }).join("")}
+    ${study.filter(p => p.y >= x0 && p.y <= x1).map(p => `<rect class="st" x="${X(p.y) - 5}" y="${Y(p.v) - 5}" width="10" height="10"><title>Study, ${p.y}: ${fmt(p.v)}</title></rect>`).join("")}
+  </svg>`;
+
+  // the year opened: its articles, by their share of the category's words
+  let drill = "";
+  if (yearSel) {
+    const arts = pool.filter(a => a.y === yearSel).map(a => ({ a, v: val(a) })).sort((p, q) => q.v - p.v);
+    drill = `<h2 id="dyear">${yearSel}: ${arts.length} article${arts.length === 1 ? "" : "s"} in the selection</h2>
+      <table class="dist dlist"><thead><tr><td>Article</td><td>Register</td><td class="num">Words</td><td class="num">${esc(DCAT[cat])}</td></tr></thead><tbody>
+      ${arts.map(({ a, v }) => `<tr><td><a href="#/a/${a.id}">${esc(a.t)}</a> <span class="fine">WL ${a.v} · ${esc(a.id)}</span>${a.com ? ' <span class="tag">commemorative</span>' : ""}</td>
+        <td>${esc(DREG[a.reg])}</td><td class="num">${a.wc.toLocaleString("en")}</td><td class="num">${fmt(v)}</td></tr>`).join("")}</tbody></table>
+      <p class="fine">Open an article to read it with its scans. The ${cat in (D.lists || {}) ? `words counted are: <i>${esc(((adj && hasAdj) ? D.lists[cat].filter(w => !D.jesuit_usage.includes(w)) : D.lists[cat]).join(", "))}</i>.` : "measure is computed over the whole text."}</p>`;
+  }
+  const csv = "year,group,value,lo,hi,articles,words\n" + series.flatMap(s => s.pts.map(p => [p.y, s.name, p.v, p.lo ?? "", p.hi ?? "", p.n, p.wc].join(","))).join("\n");
+  const chip = (k, on, href, label) => `<a class="chip${on ? " on" : ""}" href="${href}">${label}</a>`;
+  const regLink = r => { const s = new Set(regs); s.has(r) ? s.delete(r) : s.add(r); return link({ r: [...s].join(",") || "essay" }); };
+  return {
+    html: `<h1>Discourse</h1>
+    <p class="lede">How the Letters speak, year by year: the voice they use (<i>we</i>, <i>I</i>), their certainty, motives and
+    feeling, measured with the open word lists of a study of U.S. Jesuit discourse and applied to every article of the edition.
+    Choose which kinds of text count. Click a year for its articles.</p>
+    <div class="chartbox">
+      <div class="tools">
+        <label>Measure <select id="dcat">${Object.entries(DCAT).map(([k, t]) => `<option value="${k}" ${k === cat ? "selected" : ""}>${esc(t)}</option>`).join("")}</select></label>
+        <label>Year value <select id="dagg"><option value="mean" ${agg === "mean" ? "selected" : ""}>word-weighted mean</option><option value="median" ${agg === "median" ? "selected" : ""}>median article</option></select></label>
+        <label>Jubilees <select id="dcom">${[["split", "shown apart"], ["all", "included"], ["ordinary", "left out"], ["commemorative", "only"]].map(([k, t]) => `<option value="${k}" ${k === com ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+        ${hasAdj ? `<label title="Leave out Society, order, superior, brother, master, office, will: words that in the Letters mostly name the order and its offices"><input type="checkbox" id="dadj" ${adj ? "checked" : ""}> without Jesuit usage</label>` : ""}
+        <label><input type="checkbox" id="dus" ${us ? "checked" : ""}> United States only</label>
+      </div>
+      <div class="tools">${Object.entries(DREG).map(([k, t]) => chip(k, regs.has(k), regLink(k), esc(t))).join("")}</div>
+      ${svg}
+      <div class="legend">
+        <span><i style="background:var(--acc2)"></i>${com === "commemorative" ? "commemorative pieces" : com === "split" ? "ordinary articles, with a 90 % band" : "articles, with a 90 % band"}</span>
+        ${com === "split" ? `<span><i class="dia-k"></i>commemorative pieces (jubilees, centenaries)</span>` : ""}
+        <span><i class="st-k"></i>the study's corpus means${ST["1944"] && ST["1944"][studyKey] != null ? ` (1944, beyond the edition: ${fmt(ST["1944"][studyKey])})` : ""}</span>
+        <span><i class="ev-k"></i>events (hover)</span>
+      </div>
+      <p class="fine">${pool.length.toLocaleString("en")} articles, ${pool.reduce((s, a) => s + a.wc, 0).toLocaleString("en")} words, each of at least ${min} words.
+        <a download="woodstock-discourse-${cat}.csv" href="data:text/csv;charset=utf-8,${encodeURIComponent(csv)}">Download the series (CSV)</a></p>
+    </div>
+    ${drill}
+    <div class="grid2">
+      <div class="card"><h3>The study behind the measures</h3>
+        <p>Pantaleon Fassbender's study of U.S. Jesuit discourse, 1890–1944, reads six volumes of the Letters (1890, 1900, 1910,
+        1920, 1930, 1944) against <i>America</i> and the secular press. It measures voice, certainty, motives and feeling with
+        LIWC and with a set of open word lists that converge with LIWC (r = .85–1.00 for the core categories; power only .67).
+        Its main finding is a <b>jubilee effect</b>: the corporate <i>we</i> is concentrated in commemorative writing (about 2 % of
+        words in the jubilee essays of 1920 and 1944), while ordinary internal prose is impersonal and administrative (0.5–0.8 %).
+        Within the commemorative genre, sentence length, certainty and achievement language rise from 1920 to 1944.</p>
+        <p class="fine">Word lists, scripts and per-text results: replication package, CC BY 4.0,
+        <a href="https://doi.org/10.5281/zenodo.22697014" target="_blank" rel="noopener">doi:10.5281/zenodo.22697014</a>.
+        The squares on the chart are its corpus means.</p></div>
+      <div class="card"><h3>What the edition adds, and how to read it</h3>
+        <ul class="plain">
+          <li><b>Every year, 1872–1930.</b> The study's six points become an annual series, and every point opens to its articles.</li>
+          <li><b>Registers.</b> Each article is classed as an essay or address, a letter or report, a document or reprint, a papal or
+          Father General's letter, a review, a table, Varia or an obituary. The default is essays and addresses on the American
+          provinces, close to the study's rule; tick letters to add them, but their <i>we</i> and <i>I</i> run higher (1.3 % and
+          1.7 % against 1.0 % and 0.9 % in essays), and their share varies from year to year. The classes are made by rule
+          and can be corrected by hand.</li>
+          <li><b>Checked against the study.</b> Scored from the edition's text, the study's 22 internal texts give the same values
+          (r = .99–1.00 per category; <a href="docs/discourse_validation.md">validation report</a>).</li>
+          <li><b>Jubilees.</b> The diamonds are every piece whose title names a jubilee, centenary or anniversary, with the whole of
+          an issue given to a jubilee. That is wider than the study's commemorative register, the Woodstock jubilee itself (its 1920
+          corpus is two pieces, 49-001 and 49-006): other anniversaries, such as the Spring Hill centennial of 1930, speak in the
+          ordinary voice. Across 1872–1930 the flagged pieces are not more collective than ordinary essays (<i>we</i> 0.9 % against
+          1.0 %); the contrast lies in particular addresses, not in the occasion as such.</li>
+          <li><b>Cautions.</b> The study's texts were chosen for identity; the annual series takes all articles of a register, so its
+          level differs. Words per sentence depends on the OCR's punctuation. <i>Society</i>, <i>order</i>, <i>superior</i> and
+          <i>brother</i> mostly name the order and its offices: tick “without Jesuit usage” to leave them out. A year with few
+          articles has a wide band.</li>
+        </ul></div>
+    </div>`,
+    init() {
+      const go = o => { location.hash = link({ ...o, y: o.y ?? yearSel ?? "" }); };
+      $("#dcat").onchange = e => go({ c: e.target.value });
+      $("#dagg").onchange = e => go({ agg: e.target.value === "median" ? "median" : "" });
+      $("#dcom").onchange = e => go({ com: e.target.value });
+      $("#dus").onchange = e => go({ us: e.target.checked ? "" : "0" });
+      $("#dadj")?.addEventListener("change", e => go({ adj: e.target.checked ? "1" : "" }));
+      if (yearSel) $("#dyear")?.scrollIntoView({ block: "nearest" });
+    }
+  };
+}
+
 function viewAbout() {
   return `<div class="prose">
   <h1>About &amp; rights</h1>
@@ -632,6 +806,13 @@ function viewAbout() {
     Archivum Romanum Societatis Iesu and the Woodstock Theological Library. A person is matched by surname and forename
     (English to the Catalogus's Latin), by the year of his obituary in the Letters where there is one, and otherwise by a North
     American province where several records fit; where more than one record still fits, none is shown.</li>
+    <li><b>Discourse.</b> Every article is scored with the open word lists of Fassbender's study of U.S. Jesuit discourse
+    (replication package, CC BY 4.0, <a href="https://doi.org/10.5281/zenodo.22697014" target="_blank" rel="noopener">doi:10.5281/zenodo.22697014</a>),
+    with its paragraph filters (headings, tables and foreign-language paragraphs left out), sentence count and MATTR-200.
+    Articles are classed by rule into registers (essays and addresses, letters and reports, documents, papal and Father General's
+    letters, reviews, tables, Varia, obituaries) and flagged as commemorative or foreign; corrections are by hand. Scored so, the
+    study's own texts give its values (<a href="docs/discourse_validation.md">validation report</a>). The annual means are
+    word-weighted, with a 90 % band from resampling the articles of the year.</li>
   </ol>
   <p>The QA reports are published: ${S.man.volumes.map(v => `<a href="docs/qa/vol${pad3(v.vol)}.md">vol. ${v.vol}</a>`).join(", ")}.</p>
   <h2>Rights</h2>
@@ -681,6 +862,7 @@ async function route() {
     else if (r === "concordance") out = await viewConcordance(params);
     else if (r === "atlas") out = await viewAtlas(params);
     else if (r === "people") out = await viewPeople(params);
+    else if (r === "discourse") out = await viewDiscourse(params);
     else if (r === "about") out = viewAbout();
     else out = `<h1>Not found</h1>`;
     view.innerHTML = typeof out === "string" ? out : out.html;

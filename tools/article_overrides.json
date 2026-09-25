@@ -96,7 +96,8 @@
     "repairs": {"fix": {"tiines": "times"}}
   },
   "29": {
-    "author": {"29-201": "Leo XIII and Very Rev. Fr. General"}
+    "author": {"29-201": "Leo XIII and Very Rev. Fr. General"},
+    "merge": ["29-309"]
   },
   "30": {
     "title": {"30-353": "Exhortation at the Opening of the Scholasticate at Woodstock, Sept. 23, 1869"},
@@ -121,7 +122,9 @@
     "split": [{"p": 101, "at": "Father Joseph Raby."}],
     "index": [{"match": "Fr. Joseph Raby", "entry": "Fr. Joseph Raby", "pages": [101]}],
     "index_add": [{"entry": "Fr. Ignatius Renaud", "pages": [102], "section": "Obituary"}],
-    "title": {"39-398": "Father Patrick Cleason"}
+    "title": {"39-398": "Father Patrick Cleason", "39-362": "Social Work of Ours in Belgium"},
+    "subtitle": {"39-362": null},
+    "register": {"39-079": "essay"}
   },
   "43": {
     "merge": ["43-001-2", "43-003"]

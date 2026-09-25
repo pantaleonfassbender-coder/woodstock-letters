@@ -169,3 +169,19 @@ footer{border-top:1px solid var(--line);color:var(--fg3);font-size:.78rem;paddin
   #nav{margin-left:0;width:100%;order:3}
   h1{font-size:1.6rem}
 }
+
+/* discourse: a year-by-year line of a measure, with its band, the jubilees apart and the study's points */
+.dchart{display:block;width:100%;height:auto}
+.dchart .grid{stroke:var(--line);stroke-width:1}
+.dchart .ax{fill:var(--fg3);font-size:11px;font-family:var(--sans)}
+.dchart .ev{stroke:var(--line2);stroke-dasharray:3 4;stroke-width:1.5}
+.dchart .band{opacity:.18}
+.dchart .ln{fill:none;stroke-width:2}
+.dchart .pt{cursor:pointer}
+.dchart .pt.sel,.dchart .dia.sel{stroke:var(--fg);stroke-width:2}
+.dchart .dia{fill:none;stroke:var(--acc);stroke-width:2;cursor:pointer}
+.dchart .st{fill:var(--acc3);opacity:.9}
+.legend .dia-k{display:inline-block;width:.6rem;height:.6rem;border:2px solid var(--acc);transform:rotate(45deg);margin-right:.35rem;background:none}
+.legend .st-k{display:inline-block;width:.6rem;height:.6rem;background:var(--acc3);margin-right:.35rem}
+.legend .ev-k{display:inline-block;width:0;height:.8rem;border-left:2px dashed var(--line2);margin-right:.35rem}
+.dlist td{vertical-align:top}

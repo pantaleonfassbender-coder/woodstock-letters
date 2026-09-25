@@ -1,0 +1,90 @@
+{
+ "source": "P. Fassbender, “Identity and Values in U.S. Jesuit Discourse, 1890–1944”, replication package (results/open_measures.csv), CC BY 4.0, https://doi.org/10.5281/zenodo.22697014",
+ "note": "Word-count-weighted means over the study's internal Woodstock Letters texts of each year (optional texts excluded); 1920 and 1944 are the jubilee corpora.",
+ "years": {
+  "1890": {
+   "WPS": 19.61,
+   "MATTR200": 0.626,
+   "i": 0.452,
+   "we": 1.192,
+   "certainty": 0.226,
+   "achievement": 0.308,
+   "affiliation": 1.521,
+   "power": 0.658,
+   "posemo": 0.411,
+   "negemo": 0.144,
+   "future": 0.308,
+   "words": 4864
+  },
+  "1900": {
+   "WPS": 24.584,
+   "MATTR200": 0.589,
+   "i": 0.54,
+   "we": 0.773,
+   "certainty": 0.451,
+   "achievement": 0.217,
+   "affiliation": 1.224,
+   "power": 0.756,
+   "posemo": 0.523,
+   "negemo": 0.173,
+   "future": 0.322,
+   "words": 17978
+  },
+  "1910": {
+   "WPS": 20.539,
+   "MATTR200": 0.58,
+   "i": 0.254,
+   "we": 0.608,
+   "certainty": 0.261,
+   "achievement": 0.179,
+   "affiliation": 1.217,
+   "power": 0.827,
+   "posemo": 0.413,
+   "negemo": 0.121,
+   "future": 0.269,
+   "words": 25644
+  },
+  "1920": {
+   "WPS": 16.64,
+   "MATTR200": 0.608,
+   "i": 0.527,
+   "we": 2.033,
+   "certainty": 0.334,
+   "achievement": 0.373,
+   "affiliation": 2.354,
+   "power": 0.643,
+   "posemo": 1.248,
+   "negemo": 0.09,
+   "future": 0.334,
+   "words": 7773
+  },
+  "1930": {
+   "WPS": 21.675,
+   "MATTR200": 0.623,
+   "i": 0.232,
+   "we": 0.464,
+   "certainty": 0.238,
+   "achievement": 0.203,
+   "affiliation": 0.759,
+   "power": 0.968,
+   "posemo": 0.452,
+   "negemo": 0.243,
+   "future": 0.18,
+   "words": 17253
+  },
+  "1944": {
+   "WPS": 21.21,
+   "MATTR200": 0.61,
+   "i": 0.551,
+   "we": 2.024,
+   "certainty": 0.522,
+   "achievement": 0.413,
+   "affiliation": 2.59,
+   "power": 0.472,
+   "posemo": 0.805,
+   "negemo": 0.145,
+   "future": 0.53,
+   "words": 13785
+  }
+ }
+}
