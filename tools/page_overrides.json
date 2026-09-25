@@ -1,0 +1,8 @@
+{
+  "_about": "Page numbers read by eye on the Internet Archive scan, for leaves the OCR and the consensus cannot settle, and pages missing from a scan. Keyed by IA item; 'leaves' maps the scan leaf to its printed page. Every entry is listed in the volume's QA report. Add an entry only after looking at the scan.",
+  "woodstockletters4911unse": {
+    "leaves": {"168": 136},
+    "missing": [134, 135],
+    "note": "leaf 167 prints 133 and ends mid-sentence, leaf 168 prints 136 and begins another text: pp. 134–135 are not in the scan; checked 2026-09-25"
+  }
+}
