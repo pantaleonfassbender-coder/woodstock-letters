@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Woodstock College: the long front of 1871 on its ridge above the Patapsco,
+       with the cross on the central pavilion and the river below. -->
+  <rect x="0" y="0" width="64" height="64" rx="12" fill="#100e0c"/>
+  <path d="M6 54 C 16 46, 26 58, 36 50 S 54 46, 60 52" fill="none" stroke="#9db8a4" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M8 44 L 56 44 L 56 30 L 8 30 Z" fill="#c9a227"/>
+  <path d="M26 30 L 26 24 L 38 24 L 38 30 Z" fill="#c9a227"/>
+  <path d="M32 12 v 9 M 28.5 15.5 h 7" stroke="#c9a227" stroke-width="2.2" stroke-linecap="round"/>
+  <g fill="#100e0c">
+    <rect x="12" y="34" width="3" height="4"/><rect x="18" y="34" width="3" height="4"/><rect x="24" y="34" width="3" height="4"/>
+    <rect x="30.5" y="34" width="3" height="4"/><rect x="37" y="34" width="3" height="4"/><rect x="43" y="34" width="3" height="4"/><rect x="49" y="34" width="3" height="4"/>
+    <rect x="30.5" y="26" width="3" height="3"/>
+  </g>
+</svg>

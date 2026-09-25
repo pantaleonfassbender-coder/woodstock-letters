@@ -164,8 +164,7 @@ async function viewPaths(id) {
   if (!id) {
     return `<div class="kicker">Reading paths</div><h1>Seven ways through sixty years</h1>
     <p class="lede">A path is a short reading list with a question: six to nine articles of the edition in an order that makes
-    an argument, each with a note on what to read it for. The paths are the editor's; the notes marked <span class="tag">draft</span>
-    were written with the language model and are still to be revised.</p>
+    an argument, each with a note on what to read it for. The jubilee path sets each station's measures of voice beside it.</p>
     <div class="grid2">${P.map(p => `<div class="card"><div class="kicker">${esc(p.years)} · ${p.stations.length} stations${p.status === "draft" ? " · draft" : ""}</div>
       <h3><a href="#/paths/${p.id}">${esc(p.title)}</a></h3><p class="fine" style="font-family:var(--serif);font-size:.95rem;color:var(--fg2)">${esc(p.question)}</p></div>`).join("")}</div>`;
   }
@@ -1128,8 +1127,8 @@ function viewAbout() {
     <li><b>Tables.</b> The journal's fold-out statistics (<i>Ministeria spiritualia</i>, students in the colleges, the list of the dead) as the OCR
     read them, line by line, with a best-effort CSV per table and a link to the scan; nothing corrected by hand. <a href="#/tables">Open the tables</a>.</li>
     <li><b>Reading paths.</b> Seven curated routes (<span class="mono">data/paths.json</span>): a question, an order of articles and a note per
-    station; the jubilee path shows each station's measures of voice. Notes marked <i>draft</i> were written with the language model and await
-    the editor's revision. <a href="#/paths">Open the paths</a>.</li>
+    station; the jubilee path shows each station's measures of voice. The notes were drafted with the language model and revised by the
+    editor. <a href="#/paths">Open the paths</a>.</li>
     <li><b>Checks.</b> <span class="mono">tools/check_edition.py</span> verifies before each commit that the manifest, the volume files, the plates,
     the essay's citations, the register and the legal notice's claim of no third-party loads agree.</li>
   </ol>

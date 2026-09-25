@@ -1,11 +1,10 @@
 {
-  "_note": "Reading paths: curated routes through the edition, a guiding question per path and a note per station. Stations name an article id (data/vol/*.json) and optionally a page. status 'draft' marks notes written by the model and not yet revised by the editor; the site shows the mark.",
+  "_note": "Reading paths: curated routes through the edition, a guiding question per path and a note per station. Stations name an article id (data/vol/*.json) and optionally a page; tools/build_paths.py caches each station's title, author and range. The notes were drafted with the language model and revised by the editor.",
   "paths": [
     {
       "id": "farms",
       "title": "The Farms and the Slaves of Maryland",
       "years": "1901–1913",
-      "status": "draft",
       "question": "How does the province speak about its own past while it speaks about mission?",
       "intro": "The Maryland Jesuits lived from their farms for two centuries, and the farms were worked by enslaved people until the province sold them in 1838. Joseph Zwinge's serial of 1910–1913 is the journal's own account of that history, written from the estate books by the province's procurator. Read beside it are the pieces the same years printed on the Church's work among Black Catholics, in which the sale is never mentioned. The path sets the two registers side by side.",
       "stations": [
@@ -87,7 +86,6 @@
       "id": "university",
       "title": "The Jesuits and the American University",
       "years": "1899–1907",
-      "status": "draft",
       "question": "When does the internal prose take over the vocabulary of accreditation?",
       "intro": "Around 1900 the American Jesuit colleges met the American university: Harvard's president refused their degrees, the National Educational Association set the standards, and the Jesuits began to hold conferences of their own. The journal reported it all for colleagues, and the reports are where the language of achievement, standards and credit first enters the house organ. The path follows that language into the text.",
       "stations": [
@@ -142,7 +140,6 @@
       "id": "woodstock",
       "title": "Woodstock Itself",
       "years": "1873–1927",
-      "status": "draft",
       "question": "How does a house write about itself, and how does the tone change from foundation to jubilee?",
       "intro": "The journal was printed in the house it most often describes. From the first survey of the surroundings in 1873 to Dooley's house history of 1927, Woodstock wrote its own chronicle: departures and arrivals, academies, jubilees, founders remembered. The path reads that chronicle in order, with the plates beside it.",
       "stations": [
@@ -224,7 +221,6 @@
       "id": "jubilee",
       "title": "The Jubilee Effect",
       "years": "1883–1922",
-      "status": "draft",
       "discourse": true,
       "question": "Is the corporate 'we' of the Jesuits a matter of the calendar?",
       "intro": "A psycholinguistic study of this journal found that the collective voice of Jesuit self-presentation, the dense 'we', belongs to commemorative occasions and is rare in the everyday prose of the order. This path is the study's argument as a reading list: jubilees of the province, of individual fathers, of the college and of the journal itself, each station with its measures of voice beside it, so that the reader can hear what the numbers count. Read in order, the stations refine the finding: the voice lives in the addresses given at a jubilee, not in the journal's report of it.",
@@ -316,7 +312,6 @@
       "id": "missions",
       "title": "Missions among the Indians",
       "years": "1874–1920",
-      "status": "draft",
       "question": "What changes between the missionary's report and the report about the missionary?",
       "intro": "From the first volumes the journal carried letters from the Indian missions of the Rocky Mountains, the Great Lakes and the plains, and reprinted the older history of the Jesuits among the Natchez and the Potawatomi. Over fifty years the genre shifts: the letter from the field gives way to the history of the field, and finally to a senator's tribute read into the record. The path follows that shift.",
       "stations": [
@@ -380,7 +375,6 @@
       "id": "science",
       "title": "The Jesuits as Scientists",
       "years": "1879–1929",
-      "status": "draft",
       "question": "How does the order justify to itself that it measures the stars?",
       "intro": "Observatories at Georgetown, Cleveland and Manila, an eclipse expedition, a meteorograph, a scientific academy at the jubilee, a priest on the radio: the journal records the Society's science for colleagues who were mostly not scientists. The path reads the justifications, the pride and the occasional defensiveness of that record.",
       "stations": [
@@ -444,7 +438,6 @@
       "id": "chaplains",
       "title": "The Chaplains",
       "years": "1885–1919",
-      "status": "draft",
       "question": "What does the order's war look like from the house that stayed at home?",
       "intro": "The journal printed the chaplains' wars late and at length: the Mexican War of 1846 and the Civil War recalled forty years after, in Michael Nash's letters of 1861 serialised from 1887; then, in its own time, the camps of 1917–1918, the influenza at Camp Meade, the prisoners of war in Germany. The path reads the chaplain as the journal's soldier.",
       "stations": [
@@ -505,7 +498,7 @@
         {
           "a": "48-018",
           "note": "French prisoners of war at Weingarten: a Jesuit chaplain on the other side of the line.",
-          "t": "French Prisoners of War at Weinqarten",
+          "t": "French Prisoners of War at Weingarten",
           "au": "Fr. Jon Svensson",
           "v": 48,
           "y": 1919,

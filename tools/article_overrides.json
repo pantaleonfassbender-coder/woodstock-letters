@@ -1,228 +1,678 @@
 {
-  "_about": "Corrections read by eye on the page, for one-off faults a heuristic would not fix without harm elsewhere. Keyed by volume. 'merge': article ids joined to the article before them. 'split': a piece that opens at the paragraph on page p containing 'at' (the paragraph is split there if need be). 'title', 'subtitle', 'section', 'author': by article id. 'drop': a line on page p beginning with 'text' (a running head the OCR spoiled). 'running_heads': the volume's running heads, where the OCR spoils them past matching. 'index' / 'index_add' / 'index_drop': the volume index corrected by the page. 'repairs': per volume ('fix': a reading to give; 'keep': a word to leave). '_repairs' applies to every volume. Every correction is listed in the volume's QA report.",
-  "_repairs": {
-    "fix": {"Loius": "Louis", "XIH": "XIII"},
-    "keep": ["supped", "Baius", "iusta"]
+ "_about": "Corrections read by eye on the page, for one-off faults a heuristic would not fix without harm elsewhere. Keyed by volume. 'merge': article ids joined to the article before them. 'split': a piece that opens at the paragraph on page p containing 'at' (the paragraph is split there if need be). 'title', 'subtitle', 'section', 'author': by article id. 'drop': a line on page p beginning with 'text' (a running head the OCR spoiled). 'running_heads': the volume's running heads, where the OCR spoils them past matching. 'index' / 'index_add' / 'index_drop': the volume index corrected by the page. 'repairs': per volume ('fix': a reading to give; 'keep': a word to leave). '_repairs' applies to every volume. Every correction is listed in the volume's QA report.",
+ "_repairs": {
+  "fix": {
+   "Loius": "Louis",
+   "XIH": "XIII"
   },
-  "1": {
-    "running_heads": ["An Historical Sketch of Father Andrew White", "Father White's Relation", "Canada — Indian Missions",
-                      "Montreal", "The Chicago Fire", "Florissant", "Buffalo", "St. Louis", "Ward's Island", "Central America",
-                      "A Miracle of Lourdes", "Province of Mexico in 1767", "Fort Hill and Environs", "Indian Missions",
-                      "Fr. Hampaux", "St. Ignatius', Adams Co., Pa.", "St. Joseph hears the Prayer of the Poor",
-                      "Extracts of Letters from Abroad", "Georgetown College, D. C.", "College of Belen", "Letter from St. Louis",
-                      "Fr. Weninger on the Pacific Coast", "Fr. Peter Kenny", "Father Maldonado"],
-    "drop": [{"p": 138, "text": ".S7. yos:p/i"}, {"p": 176, "text": "********"},
-             {"p": 18, "text": "luTtficr"}, {"p": 50, "text": "lh((ta"}, {"p": 56, "text": ".SV, f.om"},
-             {"p": 126, "text": "Fr. 1 ItDiipaiix"}, {"p": 160, "text": "Ci 'orj"}, {"p": 164, "text": "ColU i"},
-             {"p": 168, "text": "Col/i i"}, {"p": 172, "text": "CWfcgv"}, {"p": 170, "text": "CoUcgt"}, {"p": 173, "text": "173"}],
-    "title": {"1-001": "An Historical Sketch of Father Andrew White, S. J., the Apostle of Maryland",
-              "1-012": "Father White's Relation", "1-071": "Father White's Relation", "1-052": "Letter from St. Louis"},
-    "subtitle": {"1-071": "Continued", "1-001": null}
+  "keep": [
+   "supped",
+   "Baius",
+   "iusta"
+  ]
+ },
+ "1": {
+  "running_heads": [
+   "An Historical Sketch of Father Andrew White",
+   "Father White's Relation",
+   "Canada — Indian Missions",
+   "Montreal",
+   "The Chicago Fire",
+   "Florissant",
+   "Buffalo",
+   "St. Louis",
+   "Ward's Island",
+   "Central America",
+   "A Miracle of Lourdes",
+   "Province of Mexico in 1767",
+   "Fort Hill and Environs",
+   "Indian Missions",
+   "Fr. Hampaux",
+   "St. Ignatius', Adams Co., Pa.",
+   "St. Joseph hears the Prayer of the Poor",
+   "Extracts of Letters from Abroad",
+   "Georgetown College, D. C.",
+   "College of Belen",
+   "Letter from St. Louis",
+   "Fr. Weninger on the Pacific Coast",
+   "Fr. Peter Kenny",
+   "Father Maldonado"
+  ],
+  "drop": [
+   {
+    "p": 138,
+    "text": ".S7. yos:p/i"
+   },
+   {
+    "p": 176,
+    "text": "********"
+   },
+   {
+    "p": 18,
+    "text": "luTtficr"
+   },
+   {
+    "p": 50,
+    "text": "lh((ta"
+   },
+   {
+    "p": 56,
+    "text": ".SV, f.om"
+   },
+   {
+    "p": 126,
+    "text": "Fr. 1 ItDiipaiix"
+   },
+   {
+    "p": 160,
+    "text": "Ci 'orj"
+   },
+   {
+    "p": 164,
+    "text": "ColU i"
+   },
+   {
+    "p": 168,
+    "text": "Col/i i"
+   },
+   {
+    "p": 172,
+    "text": "CWfcgv"
+   },
+   {
+    "p": 170,
+    "text": "CoUcgt"
+   },
+   {
+    "p": 173,
+    "text": "173"
+   }
+  ],
+  "title": {
+   "1-001": "An Historical Sketch of Father Andrew White, S. J., the Apostle of Maryland",
+   "1-012": "Father White's Relation",
+   "1-071": "Father White's Relation",
+   "1-052": "Letter from St. Louis"
   },
-  "2": {
-    "index": [{"match": "Annals of St. Joseph", "pages": [14, 85, 172]},
-              {"match": "Missions in Pennsylvania and Delaware", "pages": [146]},
-              {"match": "China — Nankin Mission", "pages": [161]},
-              {"match": "De Statu Causarum", "pages": [165]},
-              {"match": "Current Items", "pages": [166], "entry": "Current Items"}],
-    "title": {"2-041": "Woodstock — Its Surroundings and Its Associations", "2-040": "References to the Map",
-              "2-161": "China — Nankin Mission: Fr. Pfister to Fr. Valente",
-              "2-146": "Missions in Northern Pennsylvania, and in Wilmington, Del."},
-    "subtitle": {"2-041": null},
-    "author": {"2-161": "Fr. Pfister"}
-  },
-  "3": {
-    "title": {"3-043": "Fiftieth Anniversary of the Missouri Province: Celebration at the Novitiate"}
-  },
-  "4": {
-    "title": {"4-079": "Early Missions of Our Society in St. Charles Co., Mo."},
-    "subtitle": {"4-079": "Portage des Sioux — A Fragment of History, or the Reputation of Father Marquette Defended"},
-    "drop": [{"p": 110, "text": "I lO"}, {"p": 110, "text": "Brother yohii"}]
-  },
-  "6": {
-    "title": {"6-112": "The Execution of Charles H. Simpson and Martin Henry, on the 9th of Feb., 1877, at Port Tobacco, Charles Co., Md.",
-              "6-130": "Description of the Ceiling", "6-172": "Death of Fr. Van Assche, S. J."}
-  },
-  "7": {
-    "title": {"7-192": "Varia"},
-    "subtitle": {"7-192": "Appendix"},
-    "section": {"7-192": "Varia"},
-    "index": [{"match": "Indian Missions", "pages": [92]},
-              {"match": "\" John Rover", "entry": "Fr. John Rover", "pages": [121], "section": "Obituary"}]
-  },
-  "8": {
-    "drop": [{"p": 62, "text": "}raria."}],
-    "index": [{"match": "Indian Missions", "pages": [32]}]
-  },
-  "9": {
-    "title": {"9-068": "Varia"},
-    "subtitle": {"9-068": "Appendix"},
-    "section": {"9-068": "Varia"}
-  },
-  "12": {
-    "index_drop": ["V"]
-  },
-  "13": {
-    "title": {"13-224": "Father Robert Ignatius Pardow"},
-    "section": {"13-224": "Obituary"},
-    "repairs": {"fix": {"Qu6en": "Queen"}}
-  },
-  "14": {
-    "title": {"14-149": "Tercentenary Celebration of the Sodality in the New York Maryland Province"},
-    "subtitle": {"14-149": "Dedicated to Very Rev. Father Vicar"}
-  },
-  "18": {
-    "title": {"18-381": "Fr. James Curley"}
-  },
-  "19": {
-    "split": [{"p": 101, "at": "Fr. John B. Emig."}],
-    "drop": [{"p": 101, "text": "/'A'. JO/f.X"}, {"p": 101, "text": "lOI"}],
-    "title": {"19-100": "Fr. Aloysius Masnata", "19-101": "Fr. John B. Emig", "19-404": "Biographical Supplement"},
-    "subtitle": {"19-100": null},
-    "section": {"19-101": "Obituary"}
-  },
-  "21": {
-    "merge": ["21-132"],
-    "title": {"21-431": "Mr. John Joseph Malone"}
-  },
-  "23": {
-    "register": {"23-050": "official"},
-    "title": {"23-155": "List of Our Dead in North America"},
-    "subtitle": {"23-155": "From Nov. 15, 1893, to April 15, 1894"}
-  },
-  "24": {
-    "merge": ["24-415", "24-420", "24-425"],
-    "title": {"24-139": "Fr. Patrick S. Murphy"},
-    "repairs": {"fix": {"soiis": "sons"}}
-  },
-  "25": {
-    "merge": ["25-524", "25-525"]
-  },
-  "26": {
-    "title": {"26-004": "Rev. Father Provincial to the Editor", "26-322": "Exstinctae Societati Meae",
-              "26-495": "List of Our Dead in North America"},
-    "subtitle": {"26-495": "From June 15, 1897, to Nov. 1, 1897"}
-  },
-  "28": {
-    "repairs": {"fix": {"tiines": "times"}}
-  },
-  "29": {
-    "author": {"29-201": "Leo XIII and Very Rev. Fr. General"},
-    "title": {"29-026": "Father Secchi's Meteorograph at St. Ignatius College, Cleveland, Ohio",
-              "29-471": "German Jesuit Missionaries in the Seventeenth and Eighteenth Centuries"},
-    "subtitle": {"29-471": "A Sketch"},
-    "merge": ["29-309"]
-  },
-  "30": {
-    "title": {"30-353": "Exhortation at the Opening of the Scholasticate at Woodstock, Sept. 23, 1869",
-              "30-195": "South America — Our Mission in Colombia"},
-    "subtitle": {"30-353": null, "30-195": null}
-  },
-  "31": {
-    "merge": ["31-353"],
-    "title": {"31-352": "Mission of Our German Fathers among the Dakota Indians", "31-022": "Navigatio Funesta Patrum Procuratorum"},
-    "subtitle": {"31-352": "A Letter from Father Florentine Digmann, S. J."}
-  },
-  "32": {
-    "title": {"32-172": "The First Confirmation at Eastern Penitentiary"},
-    "subtitle": {"32-172": null}
-  },
-  "34": {
-    "title": {"34-030": "Woodstock — The Scholasticate"}
-  },
-  "35": {
-    "title": {"35-400": "Letter of Father Peter Kenny"},
-    "subtitle": {"35-400": "To Rev. Mr. Dubuisson, Pres. of Georgetown College, D. C."}
-  },
-  "36": {
-    "title": {"36-001": "In Memory: Father Frisbee", "36-002": "Father Samuel H. Frisbee",
-              "36-209": "In Memoriam: Rev. Samuel H. Frisbee, S. J."}
-  },
-  "38": {
-    "merge": ["38-178", "38-192"]
-  },
-  "39": {
-    "merge": ["39-002"],
-    "split": [{"p": 101, "at": "Father Joseph Raby."}],
-    "index": [{"match": "Fr. Joseph Raby", "entry": "Fr. Joseph Raby", "pages": [101]}],
-    "index_add": [{"entry": "Fr. Ignatius Renaud", "pages": [102], "section": "Obituary"}],
-    "title": {"39-398": "Father Patrick Cleason", "39-362": "Social Work of Ours in Belgium"},
-    "subtitle": {"39-362": null},
-    "register": {"39-079": "essay"}
-  },
-  "40": {
-    "title": {"40-037": "Laymen's Retreats at St. Mary's College, Kansas", "40-317": "Pilgrimage to St. Francis Xavier's Shrine in Goa"},
-    "subtitle": {"40-037": null, "40-317": null}
-  },
-  "41": {
-    "title": {"41-161": "The Inner Circle of the Twelve Apostles, Rome"}
-  },
-  "43": {
-    "merge": ["43-001-2", "43-003"],
-    "title": {"43-067": "Thirty Days' Retreat to Secular Priests"},
-    "subtitle": {"43-067": null}
-  },
-  "44": {
-    "title": {"44-038": "The Sodality Congress of the Missouri Province",
-              "44-312": "Tokyo — Growth of the Catholic University", "44-358": "Travelling in the Time of Blessed Peter Canisius",
-              "44-451": "Retreats Given by Fathers of the United States and Canada during the Summer of 1915"},
-    "subtitle": {"44-038": "Held at St. Louis, July 14 and 15, 1914", "44-312": null, "44-358": null}
-  },
-  "45": {
-    "merge": ["45-360"],
-    "split": [{"p": 370, "at": "THE DIAMOND JUBILEE OF FORDHAM"}],
-    "title": {"45-030": "St. Ignatius and the Projected Crusade of 1518", "45-370": "The Diamond Jubilee of Fordham University"}
-  },
-  "49": {
-    "merge": ["49-302"],
-    "split": [{"p": 23, "at": "FATHER HERZOG'S DEFENCE"}, {"p": 85, "at": "THE LITTLE ROUND GRAVEYARD"}],
-    "title": {"49-023": "The Theological Disputation", "49-085": "The Banquet and Addresses", "49-299": "Key West, 30 and 28.81"}
-  },
-  "50": {
-    "merge": ["50-018", "50-304"]
-  },
-  "51": {
-    "title": {"51-467": "List of Our Dead in the United States and Canada"},
-    "subtitle": {"51-467": "From October 1, 1921, to October 1, 1922"},
-    "repairs": {"fix": {"dalcy": "dale"}}
-  },
-  "52": {
-    "title": {"52-370": "Echoes of the Passion Play at Santa Clara"},
-    "subtitle": {"52-370": null}
-  },
-  "53": {
-    "index": [{"match": "Fr. John E. Quirk", "entry": "Fr. John F. Quirk", "pages": [385]}],
-    "title": {"53-312": "The Novena of Grace in Our Churches and Other Churches"},
-    "register": {"53-312": "table"}
-  },
-  "54": {
-    "index": [{"match": "Conference of Md.-New York", "pages": [112], "mark": "*"},
-              {"match": "Fr. Himmel as a M", "entry": "Fr. Himmel as a Missioner", "author": "Fr. W. L. Stanton", "pages": [103], "mark": "*"}]
-  },
-  "55": {
-    "subtitle": {"55-419": "Of Pope Pius XI to the Very Reverend Vlodimir Ledochowski, General of the Society of Jesus"}
-  },
-  "57": {
-    "split": [{"p": 483, "at": "BRAZIL"}],
-    "title": {"57-483": "Varia",
-              "57-476": "The Closing Address of Very Reverend Father General to the Fathers Procurator of the Provinces"},
-    "section": {"57-483": "Varia"},
-    "repairs": {"keep": ["rning", "perrn"]}
-  },
-  "58": {
-    "merge": ["58-382", "58-606", "58-607"],
-    "title": {"58-612": "Father Richard A. Fleming", "58-039": "Jesuit Education and Secular Universities",
-              "58-363": "Annual Meeting of the Eastern Section of the Seismological Society of America",
-              "58-393": "The \"People's Mission\" of Vienna"},
-    "subtitle": {"58-039": null}
-  },
-  "59": {
-    "title": {"59-171": "Statistics",
-              "59-222": "A Record of the Controversy Between Fr. Edmund A. Walsh and Time",
-              "59-023": "A Pre-emancipation Jesuit",
-              "59-309": "Auriesville Celebration in Honor of the Canonization of the North American Martyrs"},
-    "subtitle": {"59-222": null, "59-309": null},
-    "index": [{"match": "Weston College", "pages": [217]}],
-    "repairs": {"fix": {"Ciirls": "Girls"}}
+  "subtitle": {
+   "1-071": "Continued",
+   "1-001": null
   }
+ },
+ "2": {
+  "index": [
+   {
+    "match": "Annals of St. Joseph",
+    "pages": [
+     14,
+     85,
+     172
+    ]
+   },
+   {
+    "match": "Missions in Pennsylvania and Delaware",
+    "pages": [
+     146
+    ]
+   },
+   {
+    "match": "China — Nankin Mission",
+    "pages": [
+     161
+    ]
+   },
+   {
+    "match": "De Statu Causarum",
+    "pages": [
+     165
+    ]
+   },
+   {
+    "match": "Current Items",
+    "pages": [
+     166
+    ],
+    "entry": "Current Items"
+   }
+  ],
+  "title": {
+   "2-041": "Woodstock — Its Surroundings and Its Associations",
+   "2-040": "References to the Map",
+   "2-161": "China — Nankin Mission: Fr. Pfister to Fr. Valente",
+   "2-146": "Missions in Northern Pennsylvania, and in Wilmington, Del."
+  },
+  "subtitle": {
+   "2-041": null
+  },
+  "author": {
+   "2-161": "Fr. Pfister"
+  }
+ },
+ "3": {
+  "title": {
+   "3-043": "Fiftieth Anniversary of the Missouri Province: Celebration at the Novitiate"
+  }
+ },
+ "4": {
+  "title": {
+   "4-079": "Early Missions of Our Society in St. Charles Co., Mo."
+  },
+  "subtitle": {
+   "4-079": "Portage des Sioux — A Fragment of History, or the Reputation of Father Marquette Defended"
+  },
+  "drop": [
+   {
+    "p": 110,
+    "text": "I lO"
+   },
+   {
+    "p": 110,
+    "text": "Brother yohii"
+   }
+  ]
+ },
+ "6": {
+  "title": {
+   "6-112": "The Execution of Charles H. Simpson and Martin Henry, on the 9th of Feb., 1877, at Port Tobacco, Charles Co., Md.",
+   "6-130": "Description of the Ceiling",
+   "6-172": "Death of Fr. Van Assche, S. J."
+  }
+ },
+ "7": {
+  "title": {
+   "7-192": "Varia"
+  },
+  "subtitle": {
+   "7-192": "Appendix"
+  },
+  "section": {
+   "7-192": "Varia"
+  },
+  "index": [
+   {
+    "match": "Indian Missions",
+    "pages": [
+     92
+    ]
+   },
+   {
+    "match": "\" John Rover",
+    "entry": "Fr. John Rover",
+    "pages": [
+     121
+    ],
+    "section": "Obituary"
+   }
+  ]
+ },
+ "8": {
+  "drop": [
+   {
+    "p": 62,
+    "text": "}raria."
+   }
+  ],
+  "index": [
+   {
+    "match": "Indian Missions",
+    "pages": [
+     32
+    ]
+   }
+  ]
+ },
+ "9": {
+  "title": {
+   "9-068": "Varia"
+  },
+  "subtitle": {
+   "9-068": "Appendix"
+  },
+  "section": {
+   "9-068": "Varia"
+  }
+ },
+ "12": {
+  "index_drop": [
+   "V"
+  ]
+ },
+ "13": {
+  "title": {
+   "13-224": "Father Robert Ignatius Pardow"
+  },
+  "section": {
+   "13-224": "Obituary"
+  },
+  "repairs": {
+   "fix": {
+    "Qu6en": "Queen"
+   }
+  }
+ },
+ "14": {
+  "title": {
+   "14-149": "Tercentenary Celebration of the Sodality in the New York Maryland Province"
+  },
+  "subtitle": {
+   "14-149": "Dedicated to Very Rev. Father Vicar"
+  }
+ },
+ "18": {
+  "title": {
+   "18-381": "Fr. James Curley"
+  }
+ },
+ "19": {
+  "split": [
+   {
+    "p": 101,
+    "at": "Fr. John B. Emig."
+   }
+  ],
+  "drop": [
+   {
+    "p": 101,
+    "text": "/'A'. JO/f.X"
+   },
+   {
+    "p": 101,
+    "text": "lOI"
+   }
+  ],
+  "title": {
+   "19-100": "Fr. Aloysius Masnata",
+   "19-101": "Fr. John B. Emig",
+   "19-404": "Biographical Supplement"
+  },
+  "subtitle": {
+   "19-100": null
+  },
+  "section": {
+   "19-101": "Obituary"
+  }
+ },
+ "21": {
+  "merge": [
+   "21-132"
+  ],
+  "title": {
+   "21-431": "Mr. John Joseph Malone"
+  }
+ },
+ "23": {
+  "register": {
+   "23-050": "official"
+  },
+  "title": {
+   "23-155": "List of Our Dead in North America"
+  },
+  "subtitle": {
+   "23-155": "From Nov. 15, 1893, to April 15, 1894"
+  }
+ },
+ "24": {
+  "merge": [
+   "24-415",
+   "24-420",
+   "24-425"
+  ],
+  "title": {
+   "24-139": "Fr. Patrick S. Murphy"
+  },
+  "repairs": {
+   "fix": {
+    "soiis": "sons"
+   }
+  }
+ },
+ "25": {
+  "merge": [
+   "25-524",
+   "25-525"
+  ]
+ },
+ "26": {
+  "title": {
+   "26-004": "Rev. Father Provincial to the Editor",
+   "26-322": "Exstinctae Societati Meae",
+   "26-495": "List of Our Dead in North America"
+  },
+  "subtitle": {
+   "26-495": "From June 15, 1897, to Nov. 1, 1897"
+  }
+ },
+ "28": {
+  "repairs": {
+   "fix": {
+    "tiines": "times"
+   }
+  }
+ },
+ "29": {
+  "author": {
+   "29-201": "Leo XIII and Very Rev. Fr. General"
+  },
+  "title": {
+   "29-026": "Father Secchi's Meteorograph at St. Ignatius College, Cleveland, Ohio",
+   "29-471": "German Jesuit Missionaries in the Seventeenth and Eighteenth Centuries"
+  },
+  "subtitle": {
+   "29-471": "A Sketch"
+  },
+  "merge": [
+   "29-309"
+  ]
+ },
+ "30": {
+  "title": {
+   "30-353": "Exhortation at the Opening of the Scholasticate at Woodstock, Sept. 23, 1869",
+   "30-195": "South America — Our Mission in Colombia"
+  },
+  "subtitle": {
+   "30-353": null,
+   "30-195": null
+  }
+ },
+ "31": {
+  "merge": [
+   "31-353"
+  ],
+  "title": {
+   "31-352": "Mission of Our German Fathers among the Dakota Indians",
+   "31-022": "Navigatio Funesta Patrum Procuratorum"
+  },
+  "subtitle": {
+   "31-352": "A Letter from Father Florentine Digmann, S. J."
+  }
+ },
+ "32": {
+  "title": {
+   "32-172": "The First Confirmation at Eastern Penitentiary"
+  },
+  "subtitle": {
+   "32-172": null
+  }
+ },
+ "34": {
+  "title": {
+   "34-030": "Woodstock — The Scholasticate"
+  }
+ },
+ "35": {
+  "title": {
+   "35-400": "Letter of Father Peter Kenny"
+  },
+  "subtitle": {
+   "35-400": "To Rev. Mr. Dubuisson, Pres. of Georgetown College, D. C."
+  }
+ },
+ "36": {
+  "title": {
+   "36-001": "In Memory: Father Frisbee",
+   "36-002": "Father Samuel H. Frisbee",
+   "36-209": "In Memoriam: Rev. Samuel H. Frisbee, S. J."
+  }
+ },
+ "38": {
+  "merge": [
+   "38-178",
+   "38-192"
+  ]
+ },
+ "39": {
+  "merge": [
+   "39-002"
+  ],
+  "split": [
+   {
+    "p": 101,
+    "at": "Father Joseph Raby."
+   }
+  ],
+  "index": [
+   {
+    "match": "Fr. Joseph Raby",
+    "entry": "Fr. Joseph Raby",
+    "pages": [
+     101
+    ]
+   }
+  ],
+  "index_add": [
+   {
+    "entry": "Fr. Ignatius Renaud",
+    "pages": [
+     102
+    ],
+    "section": "Obituary"
+   }
+  ],
+  "title": {
+   "39-398": "Father Patrick Cleason",
+   "39-362": "Social Work of Ours in Belgium"
+  },
+  "subtitle": {
+   "39-362": null
+  },
+  "register": {
+   "39-079": "essay"
+  }
+ },
+ "40": {
+  "title": {
+   "40-037": "Laymen's Retreats at St. Mary's College, Kansas",
+   "40-317": "Pilgrimage to St. Francis Xavier's Shrine in Goa"
+  },
+  "subtitle": {
+   "40-037": null,
+   "40-317": null
+  }
+ },
+ "41": {
+  "title": {
+   "41-161": "The Inner Circle of the Twelve Apostles, Rome"
+  }
+ },
+ "43": {
+  "merge": [
+   "43-001-2",
+   "43-003"
+  ],
+  "title": {
+   "43-067": "Thirty Days' Retreat to Secular Priests"
+  },
+  "subtitle": {
+   "43-067": null
+  }
+ },
+ "44": {
+  "title": {
+   "44-038": "The Sodality Congress of the Missouri Province",
+   "44-312": "Tokyo — Growth of the Catholic University",
+   "44-358": "Travelling in the Time of Blessed Peter Canisius",
+   "44-451": "Retreats Given by Fathers of the United States and Canada during the Summer of 1915"
+  },
+  "subtitle": {
+   "44-038": "Held at St. Louis, July 14 and 15, 1914",
+   "44-312": null,
+   "44-358": null
+  }
+ },
+ "45": {
+  "merge": [
+   "45-360"
+  ],
+  "split": [
+   {
+    "p": 370,
+    "at": "THE DIAMOND JUBILEE OF FORDHAM"
+   }
+  ],
+  "title": {
+   "45-030": "St. Ignatius and the Projected Crusade of 1518",
+   "45-370": "The Diamond Jubilee of Fordham University"
+  }
+ },
+ "49": {
+  "merge": [
+   "49-302"
+  ],
+  "split": [
+   {
+    "p": 23,
+    "at": "FATHER HERZOG'S DEFENCE"
+   },
+   {
+    "p": 85,
+    "at": "THE LITTLE ROUND GRAVEYARD"
+   }
+  ],
+  "title": {
+   "49-023": "The Theological Disputation",
+   "49-085": "The Banquet and Addresses",
+   "49-299": "Key West, 30 and 28.81"
+  }
+ },
+ "50": {
+  "merge": [
+   "50-018",
+   "50-304"
+  ]
+ },
+ "51": {
+  "title": {
+   "51-467": "List of Our Dead in the United States and Canada"
+  },
+  "subtitle": {
+   "51-467": "From October 1, 1921, to October 1, 1922"
+  },
+  "repairs": {
+   "fix": {
+    "dalcy": "dale"
+   }
+  }
+ },
+ "52": {
+  "title": {
+   "52-370": "Echoes of the Passion Play at Santa Clara"
+  },
+  "subtitle": {
+   "52-370": null
+  }
+ },
+ "53": {
+  "index": [
+   {
+    "match": "Fr. John E. Quirk",
+    "entry": "Fr. John F. Quirk",
+    "pages": [
+     385
+    ]
+   }
+  ],
+  "title": {
+   "53-312": "The Novena of Grace in Our Churches and Other Churches"
+  },
+  "register": {
+   "53-312": "table"
+  }
+ },
+ "54": {
+  "index": [
+   {
+    "match": "Conference of Md.-New York",
+    "pages": [
+     112
+    ],
+    "mark": "*"
+   },
+   {
+    "match": "Fr. Himmel as a M",
+    "entry": "Fr. Himmel as a Missioner",
+    "author": "Fr. W. L. Stanton",
+    "pages": [
+     103
+    ],
+    "mark": "*"
+   }
+  ]
+ },
+ "55": {
+  "subtitle": {
+   "55-419": "Of Pope Pius XI to the Very Reverend Vlodimir Ledochowski, General of the Society of Jesus"
+  }
+ },
+ "57": {
+  "split": [
+   {
+    "p": 483,
+    "at": "BRAZIL"
+   }
+  ],
+  "title": {
+   "57-483": "Varia",
+   "57-476": "The Closing Address of Very Reverend Father General to the Fathers Procurator of the Provinces"
+  },
+  "section": {
+   "57-483": "Varia"
+  },
+  "repairs": {
+   "keep": [
+    "rning",
+    "perrn"
+   ]
+  }
+ },
+ "58": {
+  "merge": [
+   "58-382",
+   "58-606",
+   "58-607"
+  ],
+  "title": {
+   "58-612": "Father Richard A. Fleming",
+   "58-039": "Jesuit Education and Secular Universities",
+   "58-363": "Annual Meeting of the Eastern Section of the Seismological Society of America",
+   "58-393": "The \"People's Mission\" of Vienna"
+  },
+  "subtitle": {
+   "58-039": null
+  }
+ },
+ "59": {
+  "title": {
+   "59-171": "Statistics",
+   "59-222": "A Record of the Controversy Between Fr. Edmund A. Walsh and Time",
+   "59-023": "A Pre-emancipation Jesuit",
+   "59-309": "Auriesville Celebration in Honor of the Canonization of the North American Martyrs"
+  },
+  "subtitle": {
+   "59-222": null,
+   "59-309": null
+  },
+  "index": [
+   {
+    "match": "Weston College",
+    "pages": [
+     217
+    ]
+   }
+  ],
+  "repairs": {
+   "fix": {
+    "Ciirls": "Girls"
+   }
+  }
+ },
+ "47": {
+  "title": {
+   "47-293": "Among the French Prisoners of War at Weingarten (Suabia) by Father Jon Svensson, S. J"
+  }
+ },
+ "48": {
+  "title": {
+   "48-018": "French Prisoners of War at Weingarten"
+  }
+ }
 }
