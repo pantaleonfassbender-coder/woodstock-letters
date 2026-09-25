@@ -27,7 +27,7 @@
   {
    "vol": 32,
    "year": 1903,
-   "articles": 25,
+   "articles": 24,
    "pages": 289,
    "words": 121284,
    "built": "2026-09-25"
@@ -206,6 +206,46 @@
    "articles": 37,
    "pages": 445,
    "words": 197236,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 55,
+   "year": 1926,
+   "articles": 53,
+   "pages": 515,
+   "words": 218659,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 56,
+   "year": 1927,
+   "articles": 31,
+   "pages": 484,
+   "words": 184550,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 57,
+   "year": 1928,
+   "articles": 40,
+   "pages": 563,
+   "words": 209548,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 58,
+   "year": 1929,
+   "articles": 40,
+   "pages": 724,
+   "words": 267626,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 59,
+   "year": 1930,
+   "articles": 33,
+   "pages": 460,
+   "words": 151403,
    "built": "2026-09-25"
   }
  ]

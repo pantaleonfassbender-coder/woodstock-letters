@@ -8,6 +8,7 @@
 | 2026-09-25 | 40–44 (1911–1915) | 232 | 2155 | 575 | Pagination against IA labels: 40 408/411, 41 387/387, 42 412/412, 43 435/435, 44 448/450. The 5 differences are IA's: vol. 40 IA 374–376 for pp. 274–276, vol. 44 IA 295–296 for pp. 294–295; checked on the scans (pp. 275, 294, 295). No pagination gaps. Atlas and people map rebuilt over vols. 29–44. |
 | 2026-09-25 | 45–49 (1916–1920) | 224 | 2216 | 323 | Pagination against IA labels: 45 445/462, 46 431/431, 47 449/449, 48 443/443, 49 327/385. The differences are IA's: vol. 45 no. 2 IA runs 2 behind for pp. 198–214; vol. 49 no. 1 IA counts some photo plates as pages (pp. 39–133). Both checked on the scans. Vol. 49 lacks pp. 134–135 in the scan. No pagination gaps. Vols. 29–44 rebuilt: same pages; article changes listed below. Atlas, people map and search rebuilt over vols. 29–49. |
 | 2026-09-25 | 50–54 (1921–1925) | 204 | 2205 | 289 | Pagination against IA labels: 50 378/378, 51 463/463, 52 424/424, 53 423/426, 54 440/440. The 3 in vol. 53 are the printer's misprint 341–343 for 441–443, which IA copied (checked on the scan). Vol. 54 no. 2 is printed from p. 63 and is cited with the volume's own asterisk (104*). No pagination gaps. Vols. 29–49 rebuilt: same pages except vol. 30 Suppl. xx; 57 articles newly linked to their index entries. Atlas, people map and search rebuilt over vols. 29–54. |
+| 2026-09-25 | 55–59 (1926–1930) | 197 | 2746 | 66 | Pagination against IA labels: 55 433/507, 56 384/384, 57 553/555, 58 718/720, 59 451/451. The differences are the printer's and IA's: vol. 55 no. 3 prints 342–417 for 442–517 and says so in an erratum (IA copied the misprint); vol. 57 IA 47–48 and vol. 58 IA 826–827 are IA misreads (checked on the scans). Vol. 56 no. 1 has a section with asterisked folios (1*–92*). No pagination gaps. Vols. 29–54 rebuilt: same pages; one article change (vol. 32). Atlas, people map and search rebuilt over vols. 29–59, the last volumes before the 1930 cutoff. |
 
 ### Vols. 30–34: what the batch found
 
@@ -268,6 +269,67 @@ vol. 53 p. 156.
 
 Rebuilt vols. 29–49: pages unchanged except vol. 30 (Suppl. xx, above).
 
+### Vols. 55–59: what the batch found
+
+Per volume: 55 (1926) 53 articles, 515 pages, 21 repairs; 56 (1927) 31, 484, 7;
+57 (1928) 40, 563, 13; 58 (1929) 40, 724, 16; 59 (1930) 33, 460, 9. These are the last
+volumes before the public-domain cutoff (1930); vols. 60–98 stay catalogue-only.
+
+Pagination:
+
+- **The printer's erratum in vol. 55 no. 3.** A slip after p. 440 reads "From page 440
+  to the end of the volume the page numbers are exactly 100 less than they should be".
+  The pages are numbered as it directs (442–517 for the printed 342–417). The volume
+  index cites the misprinted numbers ("Donlon 341"), so its Obituary and Varia entries
+  in pp. 340–417 are moved up by 100 (`index_add` in `tools/page_overrides.json`).
+  This splits five obituaries out of Donlon's notice.
+- **A section with asterisked folios** (vol. 56 no. 1): the McDonough sketch, the
+  Campbell notice, the Varia and the statistics run *1–*92 after p. 112. They are cited
+  with the asterisk, `WL 56 (1927): 35*`, the form accepted for vol. 54. Its opening page,
+  whose number the OCR read as "8", is now part of the section.
+- **Half-titles on leaves of their own** ("VARIA", "Yearly Statistics and Records",
+  vol. 57) and short table pages (vol. 59 p. 189) had been taken for plates. Where the
+  numbers on either side leave room for exactly the leaves between, they are pages.
+  A short leaf under a running head is never demoted to a plate ("STATISTICS 111" is
+  p. 177, vol. 57; checked on the scan).
+- **Unnumbered tables at an issue's end**, after blank leaves, are pages when the next
+  issue leaves room for exactly the blanks and them (vol. 59 no. 1: 191, blank, two
+  tables, no. 2 at 195). When it does not, as in vol. 57 no. 1 (177, blank, two
+  fold-outs, no. 2 at 179; checked on the scan), they are left out like plates. The
+  volume's last issue, which no issue follows, keeps a closing leaf headed like the page
+  before it (vol. 55: "VARIA", pp. 516–517).
+- **A bug in the old next-issue rule**: two unnumbered pages at an issue's end were
+  numbered 333, 335. No earlier volume was affected.
+
+Index and articles:
+
+- **The index from vol. 57** is headed in arabic figures ("INDEX TO VOLUME 57") and
+  gives issue and page in two columns ("No. Page"): "Biblical Institute in Jerusalem,
+  The by Father William H. McClellan 1 1". The last number is the page, and the author
+  follows "by". The column furniture ("2 INDEX", "No. Page") is skipped. "OBITUARIES" and
+  "INDEX VARIA" open their sections, and headings of every issue, "Books of Interest to
+  Ours I. 126; II, 424; III, 620", give all their pages.
+- **The blackletter masthead** (from vol. 57) comes out of the OCR as "tKfje WoobJStotfe
+  Hetters!" or "MWMfMfMfJiJM" between rules of ornament. On an issue's first page all is
+  dropped down to the legible VOL line, provided what stands above it is unreadable (vol.
+  49 keeps THE GOLDEN JUBILEE).
+- **Two-line titles**: a running head that repeats a title's second line ("THE CATHOLIC
+  ASSOCIATION OF / COMMERCIAL TRAVELLERS", vol. 59) no longer splits the article. This
+  also joins vol. 32 p. 175 ("At Eastern Penitentiary") to the article it continues.
+
+Repairs:
+- `tl` → `tt` before `tl` → `ct`, in words of five letters or more ("letler" → letter,
+  formerly "lecter"; "litlle" → little).
+- `dl` → `ct` no longer makes an -ing word of a name ("Moedling" and "Modling" had become
+  "Moecting" and "Mocting").
+- `ii` → `il` gives way where `ii` → `u` is commoner ("diily" is no longer "dilly").
+
+Seams checked and left as they are: vol. 57 p. 178 (blank); vol. 59 pp. 193–194 are
+tables before no. 2 at p. 195, and pp. 304–306 are a blank verso, the title leaf of
+no. 3 and a blank.
+
+Rebuilt vols. 29–54: pages unchanged; articles unchanged except vol. 32 p. 175.
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -309,8 +371,19 @@ Rebuilt vols. 29–49: pages unchanged except vol. 30 (Suppl. xx, above).
   - vol. 54: the In Memoriam of Fr. Woods ("June, No. 2") is bound at the end of no. 1
     as two unnumbered leaves, kept as inserts after p. 161;
   - vol. 51: `dalcy` → daley, half of the hyphenated "Martin-dale".
-- Vol. 54's asterisk citation (`WL 54 (1925): 104*`) is the volume's own convention; it
-  should go into the editorial notes with the Supplement and insert forms.
+- The asterisk citation is accepted (2026-09-25): `WL 54 (1925): 104*` for vol. 54 no. 2 and
+  `WL 56 (1927): 35*` for the asterisked section of vol. 56 no. 1. It should go into the
+  editorial notes; the Supplement and insert forms are still to be decided.
+- Vols. 55–59, left as they are:
+  - vol. 58: pp. 606–607 "Gog Photograpiiinc the Eclipse" and "Atcebu, P. I" split Deppermann's
+    eclipse article (p. 604), and p. 382 "Hevision of Studrss" splits the Veruela article
+    (p. 377): misread running heads;
+  - vol. 59 p. 171 "St Ati St Ics" (STATISTICS in spaced capitals);
+  - vol. 57 p. 476: the Father General's address to the Procurators, printed within the
+    Varia, opens an article that runs on through the rest of the Varia to p. 566;
+  - vol. 59 no. 3's Weston College entry is indexed at p. 317, but the article is at p. 217;
+  - repairs: `Baius` → Bains (vol. 58, the theologian), `Ciirls` → Curls (vol. 59, for
+    Girls), `rning` → ming and `perrn` → perm (vol. 57, both garbled beyond reading).
 - Vol. 45 no. 2 and vol. 49 no. 1 differ from IA's page labels (see the table); ours are
   checked on the scans. The IA labels are not corrected upstream.
 - Tables (mission statistics, retreat lists) are kept as paragraphs of OCR text where
