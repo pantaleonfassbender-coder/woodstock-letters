@@ -13,6 +13,7 @@
 | 2026-09-25 | 19–23 (1890–1894) | 298 | 2409 | 6354 | Pagination against IA labels: 19 432/432, 20 469/469, 21 444/444, 22 567/567, 23 462/462. No pagination gaps. Vol. 20 lacks pp. 370–371 in the scan. Indexes (contents lists in vols. 19–20) found for all five. Vols. 24–59 rebuilt: same pages and articles. Atlas, people map and search rebuilt over vols. 19–59. |
 | 2026-09-25 | 14–18 (1885–1889) | 276 | 1909 | 4691 | Pagination against IA labels: 14 406/406, 15 340/340, 16 329/329, 17 400/400, 18 392/392. No pagination gaps. Indexes (contents lists) for vols. 14 and 17 only. Obituaries split at their name lines where no index names them. Vols. 19–59 rebuilt: same pages; 34 more obituaries split out. Atlas, people map and search rebuilt over vols. 14–59. |
 | 2026-09-25 | 9–13 (1880–1884) | 179 | 1621 | 4100 | Pagination against IA labels: 9 223/223, 10 292/292, 11 313/313, 12 350/350, 13 416/416. No pagination gaps. Contents lists found for all five (vol. 11's heading misread as XL, vol. 13's as "Xllt."). Early running heads in italic title case are read. Vols. 14–59 rebuilt: same pages; one article change (vol. 19). Atlas, people map and search rebuilt over vols. 9–59. |
+| 2026-09-25 | 4–8 (1875–1879) | 130 | 1004 | 1427 | Pagination against IA labels: 4 189/191, 5 222/222, 6 179/187, 7 187/187, 8 183/183. The 10 differences are leaves bound out of order (vol. 4 no. 2, pp. 79–85; vol. 6 no. 2, pp. 97–104), where IA numbers the leaves as bound; read in printed order after checking the scans. No pagination gaps. Contents lists for all five (vol. 4's headed only "CONTENTS."). Vols. 9–59 rebuilt: two page changes, 37 articles newly split out, 838 leaked running-head lines dropped (below). Atlas, people map and search rebuilt over vols. 4–59. |
 
 ### Vols. 30–34: what the batch found
 
@@ -478,6 +479,80 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Vols. 4–8: what the batch found
+
+Per volume: 4 (1875) 25 articles, 199 pages, 10 repairs; 5 (1876) 25, 230, 2; 6 (1877) 22,
+197, 571; 7 (1878) 28, 190, 490; 8 (1879) 30, 188, 354. Vols. 4 and 5 were printed without
+the *ct* ligature; their OCR is clean (2–4 unknown words in 1,000, as in vols. 9 and 12),
+hence the few repairs. Vol. 4 has nos. 1–2 only.
+
+Pagination:
+
+- **Leaves bound out of order.** Vol. 4 no. 2 opens 79, 84, 85, 82, 83, 80, 81, 86; in vol. 6
+  no. 2, leaves 29–32 (pp. 101–104) are bound before leaves 33–36 (pp. 97–100). Both were
+  checked on the scans, where the text runs on in printed order. `page_overrides.json` takes a
+  new key, `order`: the scan leaves in printed order. The pages are read in that order, and each
+  keeps its own scan leaf and viewer index for the link. The QA report counts these leaves
+  apart in the IA cross-check, since IA's labels follow the binding.
+- **A year is not a page number.** "THE NATCHEZ INDIANS IN 1730." and "MISSION AT
+  GEORGETOWN, D. C, 1875." were taken for running heads with pages 1730 and 1875, and
+  "… MASS. 1 868-1 876." for page 876. A four-digit token 15xx–19xx is no longer a page, and
+  a year split after its 1 is joined first. This recovers titles throughout the later volumes
+  ("Chaplains during the Civil War of 1861", "The Society in 1898", the "Summer Retreats"
+  lists of vols. 43–51).
+- **Garbled italic running heads.** A title-case line at the top of a page that the heads
+  (or first lines) of the pages beside it repeat is a running head, however the OCR has
+  spoiled it ("The A^aUkcz: Indians in lyjo."). Its number is taken from the line beside it,
+  even when read as letters ("lO", "I go", "lOI"). A line in capitals is never taken, since
+  that is a title. A line only the pages after repeat is taken only where the text runs on in
+  mid-sentence, where the article opens lower on the page, or where the page before is its
+  title page. Such heads do not count as evidence for article starts.
+- **Heads of one word or in two halves:** "Varia." over "193" or "6s"; "Retreats and Missions
+  by the Fathers of Maryland," / "during the Summer and Fall of 1875." over a bare number
+  (vol. 5). Stray marks left at a page's top under its head ("•", "*", "I") are dropped.
+- **A title under a sheet's signature** ("4" / "RETREAT AT ST. IGNATIUS' CHURCH", vol. 6
+  p. 120) goes back to the text when the consensus overrules the figure and the pages before
+  do not carry the line.
+- **Seams:** vol. 5 no. 1 ends on p. 79 and no. 2 opens on p. 81; vol. 7 no. 1 ends on p. 67
+  and no. 2 opens on p. 69; vol. 8 no. 2 ends on p. 127 and no. 3 opens on p. 129. All three
+  issues end cleanly ("L. D. S.", "D. O. M."), and no index cites the page between. As in
+  vols. 10 and 12, they are taken for blank leaves that the scan does not show.
+- Vol. 8 no. 1 closes with an unnumbered two-leaf table of the English Province's
+  *Ministeria spiritualia* for 1877, left out as a plate.
+
+Index:
+
+- **Vol. 4's contents** is headed only "CONTENTS. / PAGE", at the back of no. 2. Such a list is
+  taken for the volume's own when no other index is found. A year in an entry is not a page
+  ("The Natchez Indians in 1730, 21, 150").
+- A heading up to 160 characters now matches its index entry ("THE EXECUTION OF CHARLES H.
+  SIMPSON AND MARTIN HENRY, … CHARLES CO., MD.", vol. 6).
+- A page that opens "APPENDIX." / "VARIA." is a Varia start (vols. 7, 9).
+
+Repairs and titles:
+
+- `VV` at the start of a word is W ("VVhitemarsh", "VVorld"). O read as 0 inside a word in
+  capitals is O ("EXECUTI0N").
+- A word in capitals broken at a line end is joined when the whole is a word and both halves
+  have three letters at least ("BALTI- MORE", "NEW- TOWN", "WOOD- STOCK"; not "J- F.").
+- Titles keep roman numerals ("Pius IX.", "Chapter XIII") and figures in lower case
+  ("16th"), capitalise after a dash, and lose a closing comma ("Georgetown College,").
+- `dl` for *ct* before a suffix now needs a stem of three letters: "codled" (coddled) is
+  no longer "cocted".
+
+Rebuilt vols. 9–59:
+
+- Pages: vol. 10 gains p. 301, the last page of Mr. James O'Connell's notice ("D. O. M."),
+  which had been a plate (checked on the scan). Vol. 56 no. 1's fold-out *Ministeria
+  spiritualia* table (two leaves after p. 90*) is now a plate, like the fold-outs of vols. 48–49
+  and 57. It had been numbered 91*–92* only because "1926" in its heading was read as a page.
+- Articles: 2,434 → 2,467. 37 pieces are newly split out, most with titles closing in a year,
+  and in the early volumes the provinces' reports inside "Missionary Labors" ("Brazil",
+  "Kansas", "Texas"). 62 titles change: hyphens joined, VV→W, numerals, closing commas, and
+  some titles now from the page rather than the index. Vol. 9's Varia now starts on p. 68 under
+  "Appendix", where it begins.
+- Text: 838 leaked running-head lines and stray page numbers are dropped from the text.
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -537,6 +612,17 @@ Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above
   `" " Rev. Fr. Provincial` (ditto marks of the index) and p. 322 "Exstinct^ Societati
   Me^^'^"; vol. 24 pp. 415–429, Hughes's "New Histories" split into its three parts by the
   index; repairs `tiines` → tunes (times, vol. 28) and `soiis` → soils (vol. 24).
+- Vols. 4–8, left as they are:
+  - vol. 4 p. 79: the issue-opening title is the first line of the subtitle ("Portage Des
+    Sioux a Fragment of History, Or the"), since the OCR puts the title "Early Missions of
+    Our Society in St. Charles Co., Mo." after the first paragraph;
+  - vol. 4 p. 110: a garbled head ("Brother yohii Dc Bn/yiL") is left in the text;
+  - vol. 6 p. 112 "The P:xecution of Charles H. Simpson…", p. 130 "Desckiption of the
+    Ceiling", p. 172 "Fr. Vax Assche": OCR in the titles;
+  - vol. 7 pp. 55 and 192, vol. 9 p. 68: the Varia under "Appendix" is titled "Appendix";
+  - vols. 7–8: "Indian Missions" is indexed a page after its heading (vol. 7 p. 93, vol. 8
+    p. 33), and "Our Colleges in the United States and Canada" is an unnumbered table;
+  - garbled "Varia" heads in vol. 8 ("}raria.", "VaiHa.") stay in the text.
 - Vols. 55–59, left as they are:
   - vol. 58: pp. 606–607 "Gog Photograpiiinc the Eclipse" and "Atcebu, P. I" split Deppermann's
     eclipse article (p. 604), and p. 382 "Hevision of Studrss" splits the Veruela article
