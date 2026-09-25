@@ -11,6 +11,8 @@
   --markbg:rgba(211,162,74,.28);
   /* atlas: the section in which a term has its centre of gravity */
   --sec-articles:#9db8a4; --sec-varia:#c9a227; --sec-obituary:#c07a5a; --sec-supplement:#8fa3c9;
+  /* people map: the class a person's title gives */
+  --cls-father:#c9a227; --cls-brother:#9db8a4; --cls-mr:#8fa3c9; --cls-prelate:#c07a5a; --cls-pope:#c98fae;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
   --mono:"SF Mono",ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
@@ -26,6 +28,7 @@ html[data-theme="light"]{
   --topbar:rgba(250,247,240,.94); --accfg:#fffdf5;
   --markbg:rgba(138,107,16,.18);
   --sec-articles:#42604d; --sec-varia:#8a6b10; --sec-obituary:#9c4f30; --sec-supplement:#4a6391;
+  --cls-father:#8a6b10; --cls-brother:#42604d; --cls-mr:#4a6391; --cls-prelate:#9c4f30; --cls-pope:#8d4f73;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -145,6 +148,10 @@ table.dist .num{text-align:right;font-family:var(--mono);font-size:.78rem}
 .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:.8rem;margin-bottom:1rem}
 .chartbox canvas{display:block;width:100%;cursor:grab}
 .legend .sec{border:0}
+.chip .sw{display:inline-block;width:.6rem;height:.6rem;border-radius:2px;margin-right:.3rem}
+.chip:not(.on) .sw{opacity:.35}
+ul.plain{list-style:none;padding:0;margin:.3rem 0 .9rem;font-size:.86rem}
+ul.plain li{margin:.15rem 0}
 
 .prose{max-width:46rem}
 .prose h2{margin-top:2rem}

@@ -24,6 +24,7 @@ pip install -r requirements.txt
 python tools/fetch_ia.py --from 30 --to 34
 python tools/build_volume.py 30 31 32 33 34
 python tools/build_atlas.py        # rebuild the atlas network over all full-text volumes
+python tools/build_people.py       # rebuild the people network
 ```
 
 Then review each `docs/qa/volNNN.md` before committing:
