@@ -54,6 +54,9 @@ volumes, articles, pages, repairs, and open issues.
 - The introductory essay is `data/introduction.json`; the site renders it at
   `#/introduction` and `tools/build_introduction_docx.js` builds the manuscript in
   `docs/`. Change the JSON, then rebuild the .docx, never the other way round.
+  The essay follows APA Style: the author is P. Fassbender alone; the AI system is
+  never listed as an author but disclosed in the author note and the closing section
+  (Anthropic, 2026; Floridi, in press; McAdoo, 2024). Keep it that way.
 - The legal notice at `#/imprint` (in `app.js`, `viewImprint`) describes the site's
   actual behaviour: no cookies, one localStorage key (`wlTheme`), no third-party
   requests, Netlify's injected RUM script. Anything that changes that behaviour

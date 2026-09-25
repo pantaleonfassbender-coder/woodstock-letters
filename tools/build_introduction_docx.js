@@ -15,7 +15,7 @@ const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, PageB
 
 const ROOT = path.resolve(__dirname, "..");
 const e = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "introduction.json"), "utf8"));
-const OUT = path.join(ROOT, "docs", "Fassbender-Claude-2026-Woodstock-Letters-Introduction.docx");
+const OUT = path.join(ROOT, "docs", "Fassbender-2026-Woodstock-Letters-Introduction.docx");
 
 const FONT = "Times New Roman";
 const runs = (s, extra = {}) => s.split(/(\*[^*]+\*)/).filter(Boolean).map(t =>

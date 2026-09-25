@@ -152,7 +152,7 @@ async function viewIntroduction() {
     <div class="kicker">Introductory essay</div>
     <h1>${esc(e.title)}: ${esc(e.subtitle)}</h1>
     <p class="note">${authors}<br>${esc(e.date)} · version ${esc(e.version)} · editorial matter of this site, CC BY 4.0 ·
-      <a href="docs/Fassbender-Claude-2026-Woodstock-Letters-Introduction.docx">manuscript (.docx, APA 7)</a></p>
+      <a href="docs/Fassbender-2026-Woodstock-Letters-Introduction.docx">manuscript (.docx, APA 7)</a></p>
     <div class="abstract"><p><b>Abstract.</b> ${fmt(e.abstract)}</p><p><b>Keywords:</b> ${e.keywords.map(esc).join("; ")}</p></div>
     ${e.sections.map(s => `${s.title ? `<h2>${esc(s.title)}</h2>` : ""}${s.paras.map(p => `<p>${fmt(p)}</p>`).join("")}`).join("")}
     <figure class="plate">${plate("college-1871").replace(/^<figure class="plate ">|<\/figure>$/g, "")}</figure>
@@ -953,8 +953,8 @@ function viewAbout() {
   reproduces are the <a href="#/plates">plates</a>, cut from public-domain issues and from the county atlas of 1877, each with its source.</p>
   <h2>Introduction</h2>
   <p>The <a href="#/introduction">introductory essay</a> describes the journal, the source and its rights, the method and the apparatus,
-  and states how the work was divided between the human author and the language model. It can be downloaded as a manuscript in APA style
-  (<a href="docs/Fassbender-Claude-2026-Woodstock-Letters-Introduction.docx">.docx</a>).</p>
+  and discloses how the edition and the essay were made with a generative AI system, as an experiment in distant writing. It can be downloaded as a manuscript in APA style
+  (<a href="docs/Fassbender-2026-Woodstock-Letters-Introduction.docx">.docx</a>).</p>
   <h2>Method</h2>
   <ol>
     <li><b>Pages.</b> Running heads are stripped. Printed page numbers are recomputed by consensus over neighbouring
@@ -1016,7 +1016,7 @@ function viewAbout() {
   <p>The edition itself:</p>
   <p class="citebox">Fassbender, Pantaleon. <i>Woodstock Letters: A Research Edition</i> (${new Date().getFullYear()}). ${SITE}</p>
   <p>The introductory essay:</p>
-  <p class="citebox">Fassbender, P., &amp; Claude. (2026). The Woodstock Letters, 1872–1930: An introduction to a research edition. <i>Woodstock Letters: A Research Edition</i>. ${SITE}#/introduction</p>
+  <p class="citebox">Fassbender, P. (2026). The Woodstock Letters, 1872–1930: An introduction to a research edition. <i>Woodstock Letters: A Research Edition</i>. ${SITE}#/introduction</p>
   <p class="fine">A companion to <a href="https://ignatian-research.netlify.app/" target="_blank" rel="noopener">Ignatiana</a>
   and to the psycholinguistic study of the Woodstock Letters corpora (replication package on <a href="https://zenodo.org/records/22697014" target="_blank" rel="noopener">Zenodo</a>).
   Operator and privacy: <a href="#/imprint">legal notice</a>.</p>

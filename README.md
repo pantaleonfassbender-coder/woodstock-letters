@@ -11,8 +11,9 @@ outside the public domain or not yet cleared, and are not part of the edition (s
 [RIGHTS.md](RIGHTS.md)).
 
 An [introductory essay](https://woodstock-letters.netlify.app/#/introduction) describes the journal,
-the source, the method and the apparatus, and how the work was divided between the human author and
-the language model; its manuscript is in `docs/` and is built from `data/introduction.json` by
+the source, the method and the apparatus, and discloses, as APA Style asks, how the edition and the
+essay were made with a generative AI system (Claude), as an experiment in what Floridi calls distant
+writing; its manuscript (APA 7) is in `docs/` and is built from `data/introduction.json` by
 `tools/build_introduction_docx.js`.
 
 ## What it offers
