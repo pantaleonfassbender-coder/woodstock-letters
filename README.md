@@ -1,11 +1,14 @@
 # Woodstock Letters: A Research Edition
 
-A searchable, citable edition of the *Woodstock Letters* (1872–1969), the private
-house journal of the Jesuits in North America, printed at Woodstock College,
-Maryland. It is a companion to [Ignatiana](https://ignatian-research.netlify.app/).
+A searchable, citable edition of the *Woodstock Letters*, the private house journal of
+the Jesuits in North America, printed at Woodstock College, Maryland. It is a companion to
+[Ignatiana](https://ignatian-research.netlify.app/).
 
-**Status: pilot.** The catalogue covers the full run (316 issues, 98 volumes).
-Volumes 1–59 (1872–1930), the whole public-domain run, are in full text.
+The journal ran to 98 volumes, from 1872 to 1969. The edition gives the full text of the
+volumes in the public domain, vols. 1–59 (1872–1930): 172 issues, 24,248 pages, 2,672 articles and some
+10 million words, each page linked to its scan at the Internet Archive. The later volumes are
+outside the public domain or not yet cleared, and are not part of the edition (see
+[RIGHTS.md](RIGHTS.md)).
 
 ## What it offers
 
@@ -21,7 +24,10 @@ Volumes 1–59 (1872–1930), the whole public-domain run, are in full text.
   sentences more often than chance, coloured by the section they belong to.
 - **People.** A person-to-person network: Jesuits, prelates and others named in the
   same paragraphs, with each person's spread over the volumes, obituary and writings.
-- **Rights tiers.** See [RIGHTS.md](RIGHTS.md).
+- **Citation forms.** `WL 29 (1900): 46` for a page, `WL 54 (1925): 104*` for an asterisked
+  folio, `WL 30 (1901): Suppl. vii` for a Supplement, `WL 30 (1901): insert after p. 332`
+  for an unnumbered insert.
+- **Rights.** See [RIGHTS.md](RIGHTS.md).
 
 ## Layout
 
