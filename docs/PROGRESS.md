@@ -482,6 +482,27 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Inverted titles fixed (2026-09-25)
+
+Where the page gives no title in capitals, an article takes its title from the volume index. That title was sometimes
+the index's inverted form ("Colombia, Our Missions in"). Now:
+
+- **The plain inverted form is turned back.** `uninvert()` in `build_volume.py` handles an entry that ends in *of*,
+  *in*, *at*, *to* and similar words: "Jamaica, Obeah and Duppyism in" becomes "Obeah and Duppyism in Jamaica", and
+  "Kenny Father, Letter of" becomes "Letter of Father Kenny". Place names ("Galveston, Texas") are left alone.
+- **Titles read on the page.** Ten titles use the page's own wording where it is fuller or the entry is garbled:
+  - 58-393 'The "People's Mission" of Vienna';
+  - 58-363 "Annual Meeting of the Eastern Section of the Seismological Society of America";
+  - 35-400 "Letter of Father Peter Kenny";
+  - 30-195 "South America — Our Mission in Colombia";
+  - the lists of the dead, with their date ranges (23-155, 26-495, 51-467);
+  - 36-209 "In Memoriam: Rev. Samuel H. Frisbee, S. J.";
+  - 44-451, the summer retreats of 1915;
+  - 53-312, the Novena of Grace.
+
+Regression over vols. 1–59: 11 titles in 9 volumes changed, and nothing else. In the discourse data, 23-155 is now a
+table. 53-312 is kept a table by hand, since it lost "Statistics" from its title.
+
 ### Split titles fixed (2026-09-25)
 
 A title printed over two heading lines was cut at the first line, and the rest was taken as the subtitle.
@@ -544,7 +565,7 @@ Results over vols. 1–59:
   - 78 not found.
 - The site answers four surname searches with an HTTP 500 every time: Abbadie, Ignatius, Murphy and Maleve.
   - The script now retries once, skips the search and says so, and a rerun asks only for what failed.
-  - These four stay open.
+  - Closed (2026-09-25): these four are left without biodata; the topic is done.
 - Fixed: the People panel's biodata code sat inside the atlas view, so opening a person failed with "bio is not defined".
   It now sits in the People view.
 
@@ -764,8 +785,6 @@ Rebuilt vols. 9–59:
   asterisked folio (vol. 54 no. 2, the asterisked section of vol. 56 no. 1), `WL 30 (1901): Suppl. vii` for a
   Supplement, `WL 30 (1901): insert after p. 332` for an unnumbered insert. They are in the site's About page
   and the README.
-- Index entries in inverted form ("Innsbruck, The Golden Jubilee of") remain as titles only where the page gives
-  no readable one.
 - Vol. 22 p. 565 is titled with its opening sentence ("The Following Is a Synopsis of the 'Missiones
   Catholicae' in Regard to British Honduras").
 

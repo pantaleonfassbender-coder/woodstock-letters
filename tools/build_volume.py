@@ -1052,6 +1052,18 @@ def inverted(e):
     return re.search(r"[,.] (?:The|A|An|Our|Some)\b|\b(?:of|in|at|on|to|by|between|and|with)$|^\w+, \w+ —|^[A-Z]\w+, [A-Z]?[a-z]", e) is not None
 
 
+def uninvert(e):
+    """An inverted index entry turned back into a title, where its form is plain:
+    "Colombia, Our Missions in" → "Our Missions in Colombia", "Eastern
+    Seismologists, Annual Meeting of the" → "Annual Meeting of the Eastern
+    Seismologists", "Kenny Father, Letter of" → "Letter of Father Kenny"."""
+    m = re.fullmatch(r"([^,]+), ([^,]+ (?:of|in|at|on|to|by|between|and|with|among)(?: the)?)", e.strip())
+    if not m:
+        return e
+    key = re.sub(r"^([\w'.-]+) (Father|Brother|Fr\.|Br\.)$", r"\2 \1", m[1])
+    return f"{m[2]} {key}"
+
+
 def garbled(s):
     """A heading the OCR has spoiled past reading: letter-spaced ("D U R a N Q U
     E T"), strewn with stray marks ("Refu(ie", "01^^"), or mostly unknown words
@@ -1793,7 +1805,7 @@ def build(vol):
             ent = p.get("_entry") and p["_entry"]["entry"]
             if ent and (not is_upper(p["t"]) and not (inverted(ent) and not garbled(p["t"]) and len(p["t"]) > 8)
                         or garbled(p["t"]) and not inverted(ent) and len(ent) <= 80 and '"' not in ent):
-                cur["title"] = ent
+                cur["title"] = uninvert(ent)  # ("Colombia, Our Missions in", vol. 30)
             elif garbled(p["t"]):  # (a title page the index names too: "G K( )Rg Kt( )Wn C( ) L F.kg K", vol. 1)
                 # (when two pieces share the page, the entry must share a word with
                 # the heading: Malone and Gagnier on p. 431, vol. 21)
