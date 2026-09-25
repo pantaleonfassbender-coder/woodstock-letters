@@ -165,7 +165,11 @@
     "title": {"58-612": "Father Richard A. Fleming"}
   },
   "59": {
-    "title": {"59-171": "Statistics"},
+    "title": {"59-171": "Statistics", "59-021": "The Inception of the Jesuit Seminary News",
+              "59-222": "A Record of the Controversy Between Fr. Edmund A. Walsh and Time",
+              "59-309": "Auriesville Celebration in Honor of the Canonization of the North American Martyrs",
+              "59-023": "A Pre-emancipation Jesuit"},
+    "subtitle": {"59-021": null, "59-222": null, "59-309": null},
     "index": [{"match": "Weston College", "pages": [217]}],
     "repairs": {"fix": {"Ciirls": "Girls"}}
   }

@@ -1,6 +1,6 @@
 {
  "source": "P. Fassbender, “Identity and Values in U.S. Jesuit Discourse, 1890–1944”, replication package (results/open_measures.csv), CC BY 4.0, https://doi.org/10.5281/zenodo.22697014",
- "note": "Word-count-weighted means over the study's internal Woodstock Letters texts of each year (optional texts excluded); 1920 and 1944 are the jubilee corpora.",
+ "note": "Word-count-weighted means over the study's internal Woodstock Letters texts of each year (optional texts excluded); 1920 and 1944 are the jubilee corpora. 'texts': the study's texts in the edition (1944, vol. 73, lies past its cutoff), with the package's values.",
  "years": {
   "1890": {
    "WPS": 19.61,
@@ -86,5 +86,538 @@
    "future": 0.53,
    "words": 13785
   }
- }
+ },
+ "texts": [
+  {
+   "file": "WL1890.txt",
+   "year": 1890,
+   "ids": [
+    "19-003",
+    "19-179",
+    "19-396"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 4864,
+   "pkg": {
+    "WPS": 19.61,
+    "i": 0.452,
+    "we": 1.192,
+    "certainty": 0.226,
+    "achievement": 0.308,
+    "affiliation": 1.521,
+    "power": 0.658,
+    "posemo": 0.411,
+    "negemo": 0.144,
+    "future": 0.308
+   }
+  },
+  {
+   "file": "1900_badge_of_loyola.txt",
+   "year": 1900,
+   "ids": [
+    "29-001"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 2244,
+   "pkg": {
+    "WPS": 28.77,
+    "i": 0.446,
+    "we": 1.114,
+    "certainty": 0.312,
+    "achievement": 0.089,
+    "affiliation": 2.05,
+    "power": 0.178,
+    "posemo": 0.49,
+    "negemo": 0.0,
+    "future": 0.312
+   }
+  },
+  {
+   "file": "1900_arms_of_loyola.txt",
+   "year": 1900,
+   "ids": [
+    "29-120"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 949,
+   "pkg": {
+    "WPS": 26.36,
+    "i": 1.581,
+    "we": 1.264,
+    "certainty": 0.738,
+    "achievement": 0.211,
+    "affiliation": 2.424,
+    "power": 0.421,
+    "posemo": 0.105,
+    "negemo": 0.0,
+    "future": 0.105
+   }
+  },
+  {
+   "file": "1900_nea_chicago_OPT.txt",
+   "year": 1900,
+   "ids": [
+    "29-123"
+   ],
+   "opt": true,
+   "jubilee": false,
+   "wc": 5594,
+   "pkg": {
+    "WPS": 24.86,
+    "i": 1.251,
+    "we": 0.608,
+    "certainty": 0.304,
+    "achievement": 0.375,
+    "affiliation": 0.769,
+    "power": 0.733,
+    "posemo": 0.25,
+    "negemo": 0.215,
+    "future": 0.304
+   }
+  },
+  {
+   "file": "1900_oxford_st_marys.txt",
+   "year": 1900,
+   "ids": [
+    "29-283"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 5341,
+   "pkg": {
+    "WPS": 15.39,
+    "i": 0.917,
+    "we": 0.805,
+    "certainty": 0.468,
+    "achievement": 0.206,
+    "affiliation": 1.011,
+    "power": 0.169,
+    "posemo": 0.449,
+    "negemo": 0.169,
+    "future": 0.73
+   }
+  },
+  {
+   "file": "1900_woodstocks_founders.txt",
+   "year": 1900,
+   "ids": [
+    "29-296"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 7366,
+   "pkg": {
+    "WPS": 28.11,
+    "i": 0.272,
+    "we": 0.692,
+    "certainty": 0.489,
+    "achievement": 0.231,
+    "affiliation": 1.195,
+    "power": 1.045,
+    "posemo": 0.679,
+    "negemo": 0.285,
+    "future": 0.149
+   }
+  },
+  {
+   "file": "1900_bc_harvard.txt",
+   "year": 1900,
+   "ids": [
+    "29-337"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 1182,
+   "pkg": {
+    "WPS": 32.83,
+    "i": 0.085,
+    "we": 0.338,
+    "certainty": 0.423,
+    "achievement": 0.423,
+    "affiliation": 0.423,
+    "power": 3.13,
+    "posemo": 0.169,
+    "negemo": 0.085,
+    "future": 0.0
+   }
+  },
+  {
+   "file": "1900_catholic_colleges_conf.txt",
+   "year": 1900,
+   "ids": [
+    "29-342"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 896,
+   "pkg": {
+    "WPS": 27.15,
+    "i": 0.223,
+    "we": 0.446,
+    "certainty": 0.112,
+    "achievement": 0.223,
+    "affiliation": 0.446,
+    "power": 0.558,
+    "posemo": 0.67,
+    "negemo": 0.0,
+    "future": 0.0
+   }
+  },
+  {
+   "file": "1910_curia_father_general.txt",
+   "year": 1910,
+   "ids": [
+    "39-001"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 10223,
+   "pkg": {
+    "WPS": 18.22,
+    "i": 0.108,
+    "we": 0.293,
+    "certainty": 0.372,
+    "achievement": 0.127,
+    "affiliation": 1.096,
+    "power": 0.704,
+    "posemo": 0.225,
+    "negemo": 0.088,
+    "future": 0.039
+   }
+  },
+  {
+   "file": "1910_new_province_california.txt",
+   "year": 1910,
+   "ids": [
+    "39-079"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 454,
+   "pkg": {
+    "WPS": 8.11,
+    "i": 1.542,
+    "we": 0.441,
+    "certainty": 0.0,
+    "achievement": 0.0,
+    "affiliation": 0.661,
+    "power": 0.661,
+    "posemo": 0.881,
+    "negemo": 0.0,
+    "future": 0.661
+   }
+  },
+  {
+   "file": "1910_working_men_exercises_OPT.txt",
+   "year": 1910,
+   "ids": [
+    "39-091"
+   ],
+   "opt": true,
+   "jubilee": false,
+   "wc": 2028,
+   "pkg": {
+    "WPS": 32.19,
+    "i": 0.789,
+    "we": 1.923,
+    "certainty": 0.74,
+    "achievement": 0.444,
+    "affiliation": 2.367,
+    "power": 0.345,
+    "posemo": 0.986,
+    "negemo": 0.197,
+    "future": 0.296
+   }
+  },
+  {
+   "file": "1910_brooklyn_college.txt",
+   "year": 1910,
+   "ids": [
+    "39-167"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 5427,
+   "pkg": {
+    "WPS": 19.45,
+    "i": 0.498,
+    "we": 1.087,
+    "certainty": 0.129,
+    "achievement": 0.276,
+    "affiliation": 1.308,
+    "power": 1.29,
+    "posemo": 0.719,
+    "negemo": 0.055,
+    "future": 0.977
+   }
+  },
+  {
+   "file": "1910_odd_road_to_rome_OPT.txt",
+   "year": 1910,
+   "ids": [
+    "39-208"
+   ],
+   "opt": true,
+   "jubilee": false,
+   "wc": 1343,
+   "pkg": {
+    "WPS": 17.67,
+    "i": 2.01,
+    "we": 2.532,
+    "certainty": 0.596,
+    "achievement": 0.223,
+    "affiliation": 2.978,
+    "power": 0.298,
+    "posemo": 1.042,
+    "negemo": 0.447,
+    "future": 0.447
+   }
+  },
+  {
+   "file": "1910_st_stanislaus.txt",
+   "year": 1910,
+   "ids": [
+    "39-347"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 5762,
+   "pkg": {
+    "WPS": 21.91,
+    "i": 0.226,
+    "we": 0.694,
+    "certainty": 0.295,
+    "achievement": 0.226,
+    "affiliation": 1.718,
+    "power": 0.885,
+    "posemo": 0.434,
+    "negemo": 0.278,
+    "future": 0.087
+   }
+  },
+  {
+   "file": "1910_jesuit_farms_maryland.txt",
+   "year": 1910,
+   "ids": [
+    "39-374"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 3778,
+   "pkg": {
+    "WPS": 27.78,
+    "i": 0.185,
+    "we": 0.662,
+    "certainty": 0.132,
+    "achievement": 0.132,
+    "affiliation": 0.715,
+    "power": 0.424,
+    "posemo": 0.397,
+    "negemo": 0.079,
+    "future": 0.106
+   }
+  },
+  {
+   "file": "WL1920.txt",
+   "year": 1920,
+   "ids": [
+    "49-001",
+    "49-006"
+   ],
+   "opt": false,
+   "jubilee": true,
+   "wc": 7773,
+   "pkg": {
+    "WPS": 16.64,
+    "i": 0.527,
+    "we": 2.033,
+    "certainty": 0.334,
+    "achievement": 0.373,
+    "affiliation": 2.354,
+    "power": 0.643,
+    "posemo": 1.248,
+    "negemo": 0.09,
+    "future": 0.334
+   }
+  },
+  {
+   "file": "1930_jesuit_seminary_news.txt",
+   "year": 1930,
+   "ids": [
+    "59-021"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 648,
+   "pkg": {
+    "WPS": 24.92,
+    "i": 0.0,
+    "we": 0.463,
+    "certainty": 0.0,
+    "achievement": 0.772,
+    "affiliation": 1.235,
+    "power": 0.154,
+    "posemo": 0.463,
+    "negemo": 0.0,
+    "future": 0.154
+   }
+  },
+  {
+   "file": "1930_pre_emancipation_OPT.txt",
+   "year": 1930,
+   "ids": [
+    "59-023"
+   ],
+   "opt": true,
+   "jubilee": false,
+   "wc": 3399,
+   "pkg": {
+    "WPS": 28.81,
+    "i": 1.206,
+    "we": 0.53,
+    "certainty": 0.441,
+    "achievement": 0.235,
+    "affiliation": 0.941,
+    "power": 0.794,
+    "posemo": 1.0,
+    "negemo": 0.382,
+    "future": 0.382
+   }
+  },
+  {
+   "file": "1930_church_and_radio.txt",
+   "year": 1930,
+   "ids": [
+    "59-053"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 1382,
+   "pkg": {
+    "WPS": 21.59,
+    "i": 0.289,
+    "we": 0.941,
+    "certainty": 0.289,
+    "achievement": 0.145,
+    "affiliation": 1.23,
+    "power": 0.507,
+    "posemo": 0.941,
+    "negemo": 0.145,
+    "future": 0.289
+   }
+  },
+  {
+   "file": "1930_weston_college.txt",
+   "year": 1930,
+   "ids": [
+    "59-217"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 1749,
+   "pkg": {
+    "WPS": 22.71,
+    "i": 0.0,
+    "we": 1.201,
+    "certainty": 0.114,
+    "achievement": 0.172,
+    "affiliation": 1.429,
+    "power": 0.172,
+    "posemo": 0.286,
+    "negemo": 0.0,
+    "future": 0.114
+   }
+  },
+  {
+   "file": "1930_walsh_time.txt",
+   "year": 1930,
+   "ids": [
+    "59-222"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 3554,
+   "pkg": {
+    "WPS": 22.64,
+    "i": 0.76,
+    "we": 0.31,
+    "certainty": 0.338,
+    "achievement": 0.028,
+    "affiliation": 0.478,
+    "power": 0.816,
+    "posemo": 0.141,
+    "negemo": 0.422,
+    "future": 0.253
+   }
+  },
+  {
+   "file": "1930_papal_jubilee_woodstock.txt",
+   "year": 1930,
+   "ids": [
+    "59-239"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 2311,
+   "pkg": {
+    "WPS": 18.94,
+    "i": 0.087,
+    "we": 0.476,
+    "certainty": 0.303,
+    "achievement": 0.303,
+    "affiliation": 0.606,
+    "power": 2.25,
+    "posemo": 0.865,
+    "negemo": 0.822,
+    "future": 0.087
+   }
+  },
+  {
+   "file": "1930_auriesville.txt",
+   "year": 1930,
+   "ids": [
+    "59-309"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 3432,
+   "pkg": {
+    "WPS": 21.72,
+    "i": 0.029,
+    "we": 0.117,
+    "certainty": 0.35,
+    "achievement": 0.087,
+    "affiliation": 0.35,
+    "power": 0.583,
+    "posemo": 0.437,
+    "negemo": 0.058,
+    "future": 0.233
+   }
+  },
+  {
+   "file": "1930_spring_hill.txt",
+   "year": 1930,
+   "ids": [
+    "59-335"
+   ],
+   "opt": false,
+   "jubilee": false,
+   "wc": 4177,
+   "pkg": {
+    "WPS": 21.42,
+    "i": 0.144,
+    "we": 0.407,
+    "certainty": 0.096,
+    "achievement": 0.335,
+    "affiliation": 0.91,
+    "power": 1.317,
+    "posemo": 0.407,
+    "negemo": 0.096,
+    "future": 0.12
+   }
+  }
+ ]
 }

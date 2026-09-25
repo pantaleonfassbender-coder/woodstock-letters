@@ -167,15 +167,16 @@ def main():
         pmi = math.log(n * np_ / (f[a] * f[b]))
         edges.append({"s": a, "t": b, "f": n, "w": round(cw[(a, b)], 2), "pmi": round(pmi, 3)})
     score = lambda e: e["w"] * max(0.1, e["pmi"])
+    rank = lambda e: (-score(e), e["s"], e["t"])  # ties broken by name, so that a rebuild gives the same network
     best = set()
     for k in keep:
-        mine = sorted((e for e in edges if k in (e["s"], e["t"])), key=score, reverse=True)[:PER_NODE]
+        mine = sorted((e for e in edges if k in (e["s"], e["t"])), key=rank)[:PER_NODE]
         best.update((e["s"], e["t"]) for e in mine)
     edges = [e for e in edges if (e["s"], e["t"]) in best]
     linked = Counter(x for e in edges for x in (e["s"], e["t"]))
-    nodes_k = sorted((k for k in keep if linked[k]), key=lambda k: -f[k])[:N_NODES]
+    nodes_k = sorted((k for k in keep if linked[k]), key=lambda k: (-f[k], k))[:N_NODES]
     ks = set(nodes_k)
-    edges = sorted((e for e in edges if e["s"] in ks and e["t"] in ks), key=score, reverse=True)
+    edges = sorted((e for e in edges if e["s"] in ks and e["t"] in ks), key=rank)
 
     # authors and obituaries, matched to the persons by class and surname
     def person_of(text):

@@ -482,6 +482,22 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Links from the study to the edition (2026-09-25)
+
+- Every study text the edition holds is now linked to its article(s). There are 24 of them.
+- The 1890 sample and the 1920 jubilee file are each made of whole articles, found by shared 8-word runs:
+  - 1890: 19-003, 19-179 and 19-396; *we* 1.19 in the study, 1.22 in the edition;
+  - 1920: 49-001 and 49-006.
+- 1944 is vol. 73, past the cutoff, and is named but not linked.
+- Where the links appear:
+  - Each of these articles gets an "In the study" card with the study's values beside the edition's.
+  - The Discourse view tags them "in the study" in its year tables and lists them year by year.
+- `data/discourse_study.json` holds the list (`texts`); `tools/validate_discourse.py` writes it.
+- Vol. 59: four titles split over two heading lines are read by eye (59-021, 59-023, 59-222, 59-309).
+- `tools/build_people.py` now breaks ties by name. The network had changed with Python's hash seed from one rebuild to
+  the next. It is stable now, with 634 links.
+- The necrology match was rerun over the stable node set: 192 matched, 19 ambiguous, 79 not found.
+
 ### Necrology data (2026-09-25)
 
 `tools/fetch_necrology.py` ran over the 289 Jesuits of the people map (Fathers, Brothers, scholastics).
@@ -714,6 +730,9 @@ Rebuilt vols. 9–59:
   and the README.
 - Index entries in inverted form ("Innsbruck, The Golden Jubilee of") remain as titles only where the page gives
   no readable one.
+- A title printed over two heading lines ("THE INCEPTION OF THE" / "JESUIT SEMINARY NEWS") is cut at the
+  first line, the rest taken as subtitle. Vol. 59's four cases are read by eye. A rule (join when the first line
+  ends in *of*, *the*, *in honor of*) wants a regression over vols. 1–59 first.
 - Vol. 22 p. 565 is titled with its opening sentence ("The Following Is a Synopsis of the 'Missiones
   Catholicae' in Regard to British Honduras").
 
