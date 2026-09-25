@@ -12,8 +12,8 @@
    "vol": 30,
    "year": 1901,
    "articles": 54,
-   "pages": 503,
-   "words": 217613,
+   "pages": 504,
+   "words": 217765,
    "built": "2026-09-25"
   },
   {
@@ -166,6 +166,46 @@
    "articles": 44,
    "pages": 396,
    "words": 163352,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 50,
+   "year": 1921,
+   "articles": 40,
+   "pages": 415,
+   "words": 185231,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 51,
+   "year": 1922,
+   "articles": 47,
+   "pages": 470,
+   "words": 202707,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 52,
+   "year": 1923,
+   "articles": 35,
+   "pages": 430,
+   "words": 188839,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 53,
+   "year": 1924,
+   "articles": 45,
+   "pages": 445,
+   "words": 200362,
+   "built": "2026-09-25"
+  },
+  {
+   "vol": 54,
+   "year": 1925,
+   "articles": 37,
+   "pages": 445,
+   "words": 197236,
    "built": "2026-09-25"
   }
  ]
