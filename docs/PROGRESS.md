@@ -7,6 +7,7 @@
 | 2026-09-25 | 35–39 (1906–1910) | 222 | 2220 | 3578 | Pagination against IA labels: 35 428/428, 36 422/422, 37 445/445, 38 443/443, 39 429/429. No pagination gaps; every seam explained (below). Vols. 30 and 33 rebuilt for two repairs (`ofi"` → off); their pages and articles are unchanged. Atlas rebuilt over vols. 29–39. |
 | 2026-09-25 | 40–44 (1911–1915) | 232 | 2155 | 575 | Pagination against IA labels: 40 408/411, 41 387/387, 42 412/412, 43 435/435, 44 448/450. The 5 differences are IA's: vol. 40 IA 374–376 for pp. 274–276, vol. 44 IA 295–296 for pp. 294–295; checked on the scans (pp. 275, 294, 295). No pagination gaps. Atlas and people map rebuilt over vols. 29–44. |
 | 2026-09-25 | 45–49 (1916–1920) | 224 | 2216 | 323 | Pagination against IA labels: 45 445/462, 46 431/431, 47 449/449, 48 443/443, 49 327/385. The differences are IA's: vol. 45 no. 2 IA runs 2 behind for pp. 198–214; vol. 49 no. 1 IA counts some photo plates as pages (pp. 39–133). Both checked on the scans. Vol. 49 lacks pp. 134–135 in the scan. No pagination gaps. Vols. 29–44 rebuilt: same pages; article changes listed below. Atlas, people map and search rebuilt over vols. 29–49. |
+| 2026-09-25 | 50–54 (1921–1925) | 204 | 2205 | 289 | Pagination against IA labels: 50 378/378, 51 463/463, 52 424/424, 53 423/426, 54 440/440. The 3 in vol. 53 are the printer's misprint 341–343 for 441–443, which IA copied (checked on the scan). Vol. 54 no. 2 is printed from p. 63 and is cited with the volume's own asterisk (104*). No pagination gaps. Vols. 29–49 rebuilt: same pages except vol. 30 Suppl. xx; 57 articles newly linked to their index entries. Atlas, people map and search rebuilt over vols. 29–54. |
 
 ### Vols. 30–34: what the batch found
 
@@ -201,6 +202,72 @@ plus vol. 36 "Notes from Vigan", which now starts on its title page (p. 321, not
 and vol. 39's Sodality supplement, which takes author Fr. A. J. E. Mullan from the
 index entry "Sodality Aggregations" on its page.
 
+### Vols. 50–54: what the batch found
+
+Per volume: 50 (1921) 40 articles, 415 pages, 89 repairs; 51 (1922) 47, 470, 113;
+52 (1923) 35, 430, 52; 53 (1924) 45, 445, 18; 54 (1925) 37, 445, 17.
+
+Pagination:
+
+- **Vol. 54 no. 2 is numbered from p. 63.** The printer began the June number at
+  p. 63 (checked on the scan), so its pp. 63–161 repeat numbers of no. 1; no. 3 goes
+  on from p. 179. The volume's contents marks no. 2's pages with an asterisk
+  ("the numbers marked with asterisks will be found in the June issue, Number 2").
+  The edition follows it: every page of no. 2 is cited with the asterisk,
+  `WL 54 (1925): 104*`, and article ranges read "79*–97*". This is set in
+  `tools/page_overrides.json` (`"mark": "*"`) and explained in the QA report.
+- **Numbers the printer skipped.** Vol. 54 no. 3 goes from p. 322 to p. 333 on
+  consecutive leaves, and the text runs on mid-sentence ("27 different religious /
+  orders"). Nothing is missing. Where the next leaf continues a sentence, the report
+  now lists such a jump as a printer's skip, not as a pagination gap.
+- **Misprinted numbers.** Vol. 53 no. 3 prints 341–345 for 441–445 (checked on the
+  scan; IA copied the misprint). The pages are numbered in sequence, and the override
+  file records the check.
+- **Closing pages of a Supplement.** The last two pages of the Ledóchowski letter
+  (vol. 50, Suppl. xxix–xxx) carry no number. A separately paginated section has no
+  next issue to leave room for, so its unnumbered closing pages now go on in sequence
+  instead of becoming inserts. This also makes the Note closing vol. 30's Supplement
+  "Suppl. xx".
+- **Advertisements bound mid-issue.** Two unnumbered leaves of publisher's
+  advertisements between pp. 282 and 283 (vol. 50 no. 3) had been numbered 283, 282.
+  Unnumbered leaves between two read pages that follow on directly are now inserts.
+
+Index and articles:
+
+- **Vol. 54 has a contents list, not an index.** "CONTENTS OF VOL. LIV." at the front
+  of no. 1 is read as the index. It is set in two columns, and the OCR puts the
+  OBITUARY and VARIA headings after the first line of their blocks. A heading now
+  takes the line just before it when that line runs several entries of its own kind
+  together (persons for OBITUARY, none for VARIA); vols. 39 and 48 keep theirs.
+- **Index entries closed by full stops** ("Fr. Joseph F. Hanselman, 382. Fr. Edward J.
+  McGrath, 266.", from vol. 52): vol. 52's index had lost its obituaries and all its
+  Varia. "in" and "Ill" at a line's end are read as 111.
+- **A heading is never joined to the line before.** "Fr. Joseph Zwinge, in" (111) ends
+  in "in", so VARIA was joined to it and vol. 51's Varia entries became obituaries.
+- **Later pages of an index entry.** A serial's later parts and each issue's "Books of
+  Interest to Ours" are listed as later pages of one entry ("Russian Diary, Notes from
+  a … 54, 63, 206"). An article on such a page now takes the entry, and its author,
+  when the title shares two words with it. This links 57 articles in vols. 29–49 that
+  had shown "not in volume index", among them the serial parts of Zwinge's "Jesuit
+  Farms in Maryland", Emerick's "Colored Mission" and Thompkins's "Notes from Vigan".
+- **Supplement half-title on a leaf of its own** (vol. 50: "SUPPLEMENT / A NATIVE CLERGY
+  IN OUR FOREIGN MISSIONS" on an otherwise empty leaf): the Supplement now opens under
+  that title on its first text page. It had been swallowed by the Varia (p. "214–30").
+- **Masthead:** "VOIv. LIII, No. I" is recognised as the volume line (vol. 53 had
+  opened with an article titled "Voiv. Liii, No. I").
+- **A running head that repeats the page's own heading** no longer splits an article
+  whose title the index has replaced (vol. 52 "Some Impressions", p. 2).
+
+Repairs: `6`→`ó` in the Spanish ending -ón ("Le6n" → León, "Raz6n" → Razón, formerly
+"Leén"); `6`→`e` where that gives a common English word ("th6" → the, formerly "thé");
+ordinals with 1 read as i or l and 0 as o ("io6th" → 106th, "i6tli" → 16th, eleven
+more in vols. 30–50).
+
+Seams checked and left as they are (blank versos at issue ends): vol. 52 p. 174,
+vol. 53 p. 156.
+
+Rebuilt vols. 29–49: pages unchanged except vol. 30 (Suppl. xx, above).
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -233,6 +300,17 @@ index entry "Sodality Aggregations" on its page.
   not set as a heading); vol. 49 no. 1, the Jubilee number, keeps "The Scientific Academy"
   as one piece over pp. 48–99, since its index entries ("Theological Disputation 23",
   "Banquet, Addresses 85") name pages without headings.
+- Vols. 50–54, left as they are:
+  - vol. 50: p. 18 "Silver Jubllkk" and p. 304 "Detroit Uxivrrsitv" (the latter continues p. 303);
+  - vol. 51: p. 64 "Pj?03f Fields Afar" (continues p. 36);
+  - vol. 53: p. 385 "Father John F. Quirk", whom the index puts at p. 391;
+  - vol. 54: no. 2's "Father Himmel as a Missioner" and the philosophers' conference
+    stand at pp. 103* and 112*, where the contents gives 111 and 103;
+  - vol. 54: the In Memoriam of Fr. Woods ("June, No. 2") is bound at the end of no. 1
+    as two unnumbered leaves, kept as inserts after p. 161;
+  - vol. 51: `dalcy` → daley, half of the hyphenated "Martin-dale".
+- Vol. 54's asterisk citation (`WL 54 (1925): 104*`) is the volume's own convention; it
+  should go into the editorial notes with the Supplement and insert forms.
 - Vol. 45 no. 2 and vol. 49 no. 1 differ from IA's page labels (see the table); ours are
   checked on the scans. The IA labels are not corrected upstream.
 - Tables (mission statistics, retreat lists) are kept as paragraphs of OCR text where
