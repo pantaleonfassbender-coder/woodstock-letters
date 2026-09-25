@@ -231,134 +231,179 @@ async function viewArticle(id, params) {
   </div>`;
 }
 
-async function viewSearch(params) {
-  const q = (params.get("q") || "").trim();
-  let res = "";
-  if (q) {
-    const terms = q.toLowerCase().match(/[\p{L}\d']+/gu) || [];
-    const res_ = [];
-    for (const m of S.man.volumes) {
-      const v = await vol(m.vol);
-      for (const pg of v.pages) {
-        if (pg.kind !== "text") continue;
-        for (const p of pg.paras) {
-          if (!p.a) continue;
-          const low = p.t.toLowerCase();
-          if (terms.every(t => new RegExp(`\\b${t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "u").test(low)))
-            res_.push({ v, pg, p });
-          if (res_.length >= 300) break;
-        }
-      }
-    }
-    const hl = highlighter(q);
-    res = `<p class="fine">${res_.length >= 300 ? "First 300" : res_.length} passage${res_.length === 1 ? "" : "s"} in ${S.man.volumes.length} volume${S.man.volumes.length === 1 ? "" : "s"}.</p>` +
-      res_.map(({ v, pg, p }) => {
-        const a = v.byId.get(p.a);
-        const low = p.t.toLowerCase(), i = Math.max(0, low.indexOf(terms[0]) - 160);
-        const ctx = (i ? "… " : "") + p.t.slice(i, i + 360) + (i + 360 < p.t.length ? " …" : "");
-        return `<div class="kwic"><div class="src"><a href="#/a/${a.id}?${pg.insert ? "" : `p=${pg.p}&`}q=${encodeURIComponent(q)}">WL ${v.vol}: ${esc(String(plab(pg)))}</a> · ${esc(a.title)}${a.author ? " · " + esc(a.author) : ""}</div><div class="ctx">${hl(ctx)}</div></div>`;
-      }).join("");
-  }
-  return `<h1>Search</h1>
-  <form class="searchbar" id="sform"><input id="q" type="search" value="${esc(q)}" placeholder="e.g. Georgetown, Indian school, retreat, Sabetti" aria-label="Search the full text"><button class="btn" type="submit">Search</button></form>
-  <p class="fine">All words must occur in the same paragraph. The pilot searches the volumes in full text; the full edition will use a prebuilt index (Pagefind).</p>
-  ${res}`;
+/* ---------------------------------------------------------------- search */
+
+// Search and the concordance read the Pagefind index (pagefind/, built by
+// tools/build_search.py): one record per printed page and article, with the
+// citation in its meta and the volume and section as filters. Only the
+// fragments of matching pages are fetched, never whole volumes.
+function pagefind() {
+  S.pf = S.pf || import("./pagefind/pagefind.js").then(async pf => {
+    await pf.options({ excerptLength: 36 });
+    await pf.filters();  // loads the filter index, so every search reports its counts
+    return pf;
+  });
+  return S.pf;
 }
-
-/* ----------------------------------------------------------- concordance */
-
-// accent-insensitive: "Algue" finds "Algué", "Jette" finds "Jetté"
-const ACC = { a: "aàáâä", e: "eèéêë", i: "iìíîï", o: "oòóôö", u: "uùúûü", n: "nñ", c: "cç" };
+const noIndex = e => `<p class="fine">The search index is not available (${esc(e.message)}).
+  Locally, build it with <span class="mono">python tools/build_search.py</span>.</p>`;
+const hitLink = (d, q) => d.url.replace(/^\//, "") + (d.url.includes("?") ? "&" : "?") + "q=" + encodeURIComponent(q);
 const fold = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
-const rxTerm = t => fold(t).split("").map(ch => ACC[ch.toLowerCase()] ? `[${ACC[ch.toLowerCase()]}]`
-  : ch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("");
 const STOP = new Set(("the a an and or but of to in on at by for with from as is are was were be been being it its " +
   "this that these those he she they we you i his her their our your my me him them us not no nor so such then than " +
   "there here which who whom whose what when where while if all any both each one two had has have having would could " +
   "should shall will may might must can did does done upon into unto also very more most much many other some only " +
-  "even about after before over under again once said made came went being") .split(" "));
-const allVols = () => Promise.all(S.man.volumes.map(m => vol(m.vol)));
-const WIN = 64;  // characters of context on each side
+  "even about after before over under again once said made came went being").split(" "));
+
+// the filter chips of a result: volume or section, with the page counts Pagefind reports
+function filterChips(counts, name, active, href) {
+  return Object.entries(counts || {}).filter(([, n]) => n).map(([k, n]) =>
+    `<a class="chip ${active === k ? "on" : ""}" href="${href(active === k ? "" : k)}">${esc(k)}<span class="n">${n}</span></a>`).join("");
+}
+
+async function viewSearch(params) {
+  const q = (params.get("q") || "").trim();
+  const vf = params.get("v") || "", sf = params.get("s") || "";
+  const link = (o = {}) => "#/search?" + new URLSearchParams(Object.fromEntries(Object.entries(
+    { q, v: vf, s: sf, ...o }).filter(([, x]) => x))).toString();
+  return {
+    html: `<h1>Search</h1>
+    <form class="searchbar" id="sform"><input id="q" type="search" value="${esc(q)}" placeholder="e.g. Georgetown, Indian school, retreat, Sabetti" aria-label="Search the full text"><button class="btn" type="submit">Search</button></form>
+    <p class="fine">Every word is searched in its inflected forms as well (<i>sodality</i> finds <i>sodalities</i>); put a phrase in
+    quotation marks (<a href="#/search?q=%22Sacred%20Heart%22">"Sacred Heart"</a>). Accents are ignored. Results are printed pages,
+    best matches first; the <a href="#/concordance${q ? "?q=" + encodeURIComponent(q) : ""}">concordance</a> lists them in the order of the text.</p>
+    <div id="sout">${q ? '<p class="fine">Searching …</p>' : ""}</div>`,
+    async init() {
+      const here = location.hash;
+      if (!q) return;
+      const out = $("#sout");
+      let pf;
+      try { pf = await pagefind(); } catch (e) { out.innerHTML = noIndex(e); return; }
+      const filters = {};
+      if (vf) filters.volume = vf;
+      if (sf) filters.section = sf;
+      const s = await pf.search(q, { filters });
+      if (location.hash !== here) return;  // the reader moved on while we searched
+      let shown = 0;
+      out.innerHTML = `<p class="fine">${s.results.length} page${s.results.length === 1 ? "" : "s"} ${vf ? "in WL " + esc(vf) : `in ${S.man.volumes.length} volumes`}${sf ? ", " + esc(sf) : ""}.</p>
+        <p>${filterChips(s.filters.volume, "v", vf, k => link({ v: k }))}</p>
+        <p>${filterChips(s.filters.section, "s", sf, k => link({ s: k }))}</p>
+        <div id="hits"></div><p><button class="btn" id="more" type="button" hidden>More results</button></p>`;
+      const more = async () => {
+        const ds = await Promise.all(s.results.slice(shown, shown + 20).map(r => r.data()));
+        if (location.hash !== here) return;  // left the page while loading
+        shown += ds.length;
+        $("#hits").insertAdjacentHTML("beforeend", ds.map(d => `<div class="kwic">
+          <div class="src"><a href="${hitLink(d, q)}">${esc(d.meta.cite)}</a> · ${esc(d.meta.title)}${d.meta.author ? " · " + esc(d.meta.author) : ""}</div>
+          <div class="ctx">${d.excerpt}</div></div>`).join(""));  // Pagefind escapes the excerpt and adds only <mark>
+        $("#more").hidden = shown >= s.results.length;
+      };
+      $("#more").onclick = more;
+      await more();
+    },
+  };
+}
+
+/* ----------------------------------------------------------- concordance */
+
+const WIN = 64;       // characters of context on each side
+const BATCH = 50;     // pages read at a time
 
 async function viewConcordance(params) {
   const q = (params.get("q") || "").trim();
   const sort = params.get("sort") || "text";
-  const only = new Set((params.get("v") || "").split(",").filter(Boolean).map(Number));
+  const vf = params.get("v") || "";
   const link = (o = {}) => "#/concordance?" + new URLSearchParams(Object.fromEntries(Object.entries(
-    { q, sort, v: [...only].join(","), ...o }).filter(([, x]) => x))).toString();
-  const starts = ["sodality", "retreat", "novices", "Indians", "cholera", "observatory", "Immaculate Conception", "Georgetown"];
-  let res = "";
-  if (q.length >= 3) {
-    const vs = await allVols();
-    const rx = new RegExp(`(?<![\\p{L}])(${q.split(/\s+/).map(rxTerm).join("\\s+")})`, "giu");
-    const rows = [], counts = new Map(), coll = new Map();
-    const qwords = new Set(fold(q.toLowerCase()).split(/\s+/));
-    for (const v of vs) {
-      let n = 0;
-      for (const pg of v.pages) {
-        if (pg.kind !== "text") continue;
-        for (const p of pg.paras) {
-          if (!p.a) continue;
-          rx.lastIndex = 0;
-          let m;
-          while ((m = rx.exec(p.t))) {
-            n++;
-            if (only.size && !only.has(v.vol)) continue;
-            const l = p.t.slice(Math.max(0, m.index - WIN), m.index), r = p.t.slice(m.index + m[0].length, m.index + m[0].length + WIN);
-            rows.push({ v, pg, a: v.byId.get(p.a), l, k: m[0], r });
-            // collocates: content words within five words either side
-            const near = [...l.trim().split(/\s+/).slice(-5), ...r.trim().split(/\s+/).slice(0, 5)];
-            for (const x of near) {
-              const w = fold(x.toLowerCase()).replace(/[^a-z']/g, "");
-              if (w.length >= 4 && !STOP.has(w) && !qwords.has(w)) coll.set(w, (coll.get(w) || 0) + 1);
-            }
-          }
-        }
-      }
-      counts.set(v.vol, n);
-    }
-    // sort on the words only: ", and the" sorts under "and"
-    const key = s => fold(s.toLowerCase()).replace(/[^a-z]+/g, " ").trim();
-    // a hit that ends (or opens) its paragraph has no context word: those go last
-    const cmp = (a, b) => (!a) - (!b) || a.localeCompare(b);
-    if (sort === "left") rows.sort((x, y) => cmp(key(x.l).split(" ").reverse().join(" "), key(y.l).split(" ").reverse().join(" ")));
-    if (sort === "right") rows.sort((x, y) => cmp(key(x.r), key(y.r)));
-    const total = [...counts.values()].reduce((s, x) => s + x, 0);
-    const words = new Map(S.man.volumes.map(m => [m.vol, m.words]));
-    const rates = new Map([...counts].map(([v, n]) => [v, n / words.get(v) * 1e4]));
-    const maxRate = Math.max(1e-9, ...rates.values());
-    const cap = 1000;
-    res = `<div class="grid2">
-      <div class="card"><h3>Distribution</h3>
-        <table class="dist">${vs.map(v => `<tr>
-          <td><a href="${link({ v: only.size === 1 && only.has(v.vol) ? "" : String(v.vol) })}">WL ${v.vol} (${v.year})</a></td>
-          <td class="num">${counts.get(v.vol)}</td>
-          <td class="num">${rates.get(v.vol).toFixed(2)}</td>
-          <td style="width:45%"><div class="bar"><i style="width:${Math.round(100 * rates.get(v.vol) / maxRate)}%"></i></div></td></tr>`).join("")}
-        </table>
-        <p class="fine" style="margin:.5rem 0 0">Hits, and hits per 10,000 words. Click a volume to restrict the lines to it.</p></div>
-      <div class="card"><h3>Collocates <span class="fine">± 5 words</span></h3>
-        <p>${[...coll].sort((a, b) => b[1] - a[1]).slice(0, 24).map(([w, n]) =>
-          `<a class="chip" href="#/concordance?q=${encodeURIComponent(w)}">${esc(w)}<span class="n">${n}</span></a>`).join("") || '<span class="fine">none</span>'}</p></div>
-    </div>
-    <div class="tools">${total} hit${total === 1 ? "" : "s"} in ${S.man.volumes.length} volumes${only.size ? `; showing vol. ${[...only].join(", ")} (<a href="${link({ v: "" })}">all</a>)` : ""}.
-      Sort by <select id="csort" aria-label="Sort lines">${[["text", "order in the text"], ["left", "word to the left"], ["right", "word to the right"]]
-        .map(([k, t]) => `<option value="${k}" ${k === sort ? "selected" : ""}>${t}</option>`).join("")}</select></div>
-    <div class="scroll"><table class="conc"><tbody>${rows.slice(0, cap).map(x => `<tr>
-      <td class="l">${x.l.length >= WIN ? "…" : ""}${esc(x.l)}</td><td class="k">${esc(x.k)}</td><td class="r">${esc(x.r)}${x.r.length >= WIN ? "…" : ""}</td>
-      <td class="ref"><a href="#/a/${x.a.id}?${x.pg.insert ? "" : `p=${x.pg.p}&`}q=${encodeURIComponent(q)}" title="${esc(x.a.title)}">WL ${x.v.vol}: ${esc(String(plab(x.pg)))}</a></td></tr>`).join("")}</tbody></table></div>
-    ${rows.length > cap ? `<p class="fine">First ${cap} of ${rows.length} lines shown. Restrict to a volume for the rest.</p>` : ""}`;
-  } else if (q) res = `<p class="fine">Type at least three characters.</p>`;
+    { q, sort, v: vf, ...o }).filter(([, x]) => x))).toString();
+  const starts = ["sodality", "retreat", "novices", "Indians", "cholera", "observatory", '"Immaculate Conception"', "Georgetown"];
   return {
     html: `<h1>Concordance</h1>
-    <p class="lede">Keyword in context across every volume in full text, each line cited to its printed page and linked to it.
-    Phrases work (<a href="#/concordance?q=Sacred%20Heart">Sacred Heart</a>); accents are ignored.</p>
+    <p class="lede">Keyword in context across every volume in full text, in the order of the text, each line cited to its
+    printed page and linked to it.</p>
     <form class="searchbar" id="cform"><input id="cq" type="search" value="${esc(q)}" placeholder="Word or phrase …" aria-label="Word or phrase"><button class="btn" type="submit">Search</button></form>
+    <p class="fine">A word is found in its inflected forms (<i>sodality, sodalities</i>), which are counted apart below; a phrase
+    goes in quotation marks. Accents are ignored.</p>
     ${q ? "" : `<p>${starts.map(t => `<a class="chip" href="#/concordance?q=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</p>`}
-    ${res}`,
-    init() {
+    <div id="cout">${q.length >= 3 ? '<p class="fine">Searching …</p>' : q ? '<p class="fine">Type at least three characters.</p>' : ""}</div>`,
+    async init() {
+      const here = location.hash;
       $("#cform").addEventListener("submit", ev => { ev.preventDefault(); location.hash = link({ q: $("#cq").value.trim() }); });
-      $("#csort")?.addEventListener("change", ev => { location.hash = link({ sort: ev.target.value }); });
+      if (q.length < 3) return;
+      const out = $("#cout");
+      let pf;
+      try { pf = await pagefind(); } catch (e) { out.innerHTML = noIndex(e); return; }
+      const s = await pf.search(q, { sort: { order: "asc" }, ...(vf ? { filters: { volume: vf } } : {}) });
+      if (location.hash !== here) return;
+      const pages = new Map(S.man.volumes.map(m => [`${m.vol} (${m.year})`, m.pages]));
+      const counts = (vf ? s.totalFilters : s.filters).volume || {};
+      const rate = k => (counts[k] || 0) / (pages.get(k) || 1) * 1000, maxRate = Math.max(1e-9, ...Object.keys(counts).map(rate));
+      const rows = [];
+      let read = 0;
+
+      // KWIC lines from the word positions Pagefind reports; a run of
+      // consecutive positions is one hit (a phrase)
+      function lines(d) {
+        const w = d.content.split(/\s+/), locs = [...d.locations].sort((a, b) => a - b);
+        for (let i = 0; i < locs.length;) {
+          let j = i;
+          while (j + 1 < locs.length && locs[j + 1] === locs[j] + 1) j++;
+          const l = w.slice(Math.max(0, locs[i] - 14), locs[i]).join(" ");
+          const r = w.slice(locs[j] + 1, locs[j] + 15).join(" ");
+          rows.push({ d, n: rows.length, k: w.slice(locs[i], locs[j] + 1).join(" "),
+                      l: l.length > WIN ? l.slice(-WIN) : l, r: r.length > WIN ? r.slice(0, WIN) : r, lcut: l.length > WIN, rcut: r.length > WIN });
+          i = j + 1;
+        }
+      }
+      const key = s => fold(s.toLowerCase()).replace(/[^a-z]+/g, " ").trim();
+      const cmp = (a, b) => (!a) - (!b) || a.localeCompare(b);  // no context word: last
+      function draw() {
+        const shown = rows.slice();
+        if (sort === "left") shown.sort((x, y) => cmp(key(x.l).split(" ").reverse().join(" "), key(y.l).split(" ").reverse().join(" ")));
+        if (sort === "right") shown.sort((x, y) => cmp(key(x.r), key(y.r)));
+        const forms = new Map(), coll = new Map();
+        const qwords = new Set(key(q).split(" "));
+        for (const x of rows) {
+          const f = key(x.k);
+          forms.set(f, (forms.get(f) || 0) + 1);
+          for (const t of [...x.l.split(/\s+/).slice(-5), ...x.r.split(/\s+/).slice(0, 5)]) {
+            const c = key(t);
+            if (c.length >= 4 && !c.includes(" ") && !STOP.has(c) && !qwords.has(c) && !forms.has(c)) coll.set(c, (coll.get(c) || 0) + 1);
+          }
+        }
+        out.innerHTML = `<div class="grid2">
+          <div class="card"><h3>Distribution</h3>
+            <table class="dist">${[...pages.keys()].map(k => `<tr>
+              <td><a href="${link({ v: vf === k ? "" : k })}" class="${vf === k ? "on" : ""}">WL ${esc(k)}</a></td>
+              <td class="num">${counts[k] || 0}</td><td class="num">${rate(k).toFixed(1)}</td>
+              <td style="width:45%"><div class="bar"><i style="width:${Math.round(100 * rate(k) / maxRate)}%"></i></div></td></tr>`).join("")}
+            </table>
+            <p class="fine" style="margin:.5rem 0 0">Pages with a match, and per 1,000 pages. Click a volume to read only its lines.</p></div>
+          <div class="card"><h3>Forms</h3>
+            <p>${[...forms].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([f, n]) => `<span class="chip">${esc(f)}<span class="n">${n}</span></span>`).join("")}</p>
+            <h3>Collocates <span class="fine">± 5 words</span></h3>
+            <p>${[...coll].sort((a, b) => b[1] - a[1]).slice(0, 24).map(([w, n]) =>
+              `<a class="chip" href="#/concordance?q=${encodeURIComponent(w)}">${esc(w)}<span class="n">${n}</span></a>`).join("") || '<span class="fine">none</span>'}</p>
+            <p class="fine">From the lines read so far.</p></div>
+        </div>
+        <div class="tools">${rows.length} line${rows.length === 1 ? "" : "s"} from ${read} of ${s.results.length} pages${vf ? ` in WL ${esc(vf)} (<a href="${link({ v: "" })}">all volumes</a>)` : ""}.
+          Sort by <select id="csort" aria-label="Sort lines">${[["text", "order in the text"], ["left", "word to the left"], ["right", "word to the right"]]
+            .map(([k, t]) => `<option value="${k}" ${k === sort ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+        <div class="scroll"><table class="conc"><tbody>${shown.map(x => `<tr>
+          <td class="l">${x.lcut ? "…" : ""}${esc(x.l)}</td><td class="k">${esc(x.k)}</td><td class="r">${esc(x.r)}${x.rcut ? "…" : ""}</td>
+          <td class="ref"><a href="${hitLink(x.d, q)}" title="${esc(x.d.meta.title)}">${esc(x.d.meta.cite.replace(/ \(\d{4}\)/, ""))}</a></td></tr>`).join("")}</tbody></table></div>
+        ${read < s.results.length ? `<p><button class="btn" id="cmore" type="button">Read ${Math.min(BATCH, s.results.length - read)} more pages</button></p>` : ""}`;
+        $("#csort").addEventListener("change", ev => { location.hash = link({ sort: ev.target.value }); });
+        $("#cmore")?.addEventListener("click", more);
+      }
+      async function more() {
+        const ds = await Promise.all(s.results.slice(read, read + BATCH).map(r => r.data()));
+        if (location.hash !== here) return;  // left the page while loading
+        read += ds.length;
+        ds.forEach(lines);
+        draw();
+      }
+      if (!s.results.length) { out.innerHTML = `<p class="fine">No page matches.</p>`; return; }
+      await more();
     },
   };
 }
@@ -563,8 +608,11 @@ function viewAbout() {
     <li><b>Repair.</b> Two things are repaired: line-end hyphenation, and recurrent OCR confusions such as the <i>ct</i>
     ligature read as “6l” or “dl”. A repair is made only when the word is unknown and the repaired form is a common English word.
     Every repair is logged.</li>
-    <li><b>Concordance.</b> Keyword in context over the full-text volumes, in the browser. Accents are ignored, a
-    match must begin a word, and each line is cited to its printed page. Collocates are the content words within five words of a hit.</li>
+    <li><b>Search and concordance.</b> Both read a prebuilt index (<a href="https://pagefind.app/" target="_blank" rel="noopener">Pagefind</a>)
+    with one record per printed page and article, so the browser fetches only the pages that match. A word is found in its
+    inflected forms (<i>sodality, sodalities</i>) and accents are ignored; a phrase goes in quotation marks. The concordance reads
+    the matching pages in the order of the text, cuts each line from the positions of the match, and counts the forms apart.
+    Its distribution counts pages with a match per volume. Collocates are the content words within five words of a hit, in the lines read so far.</li>
     <li><b>Atlas.</b> The terms are the journal's own vocabulary: content words the Letters use at least four times more
     often than English at large (the <i>wordfreq</i> list), ranked by keyness. Two terms are joined when they share at
     least six sentences and occur together more often than chance (positive pointwise mutual information). Each term keeps
@@ -624,7 +672,9 @@ async function route() {
     else if (r === "about") out = viewAbout();
     else out = `<h1>Not found</h1>`;
     view.innerHTML = typeof out === "string" ? out : out.html;
-    out.init?.();
+    Promise.resolve(out.init?.()).catch(e => {
+      view.insertAdjacentHTML("beforeend", `<p class="mono">Something went wrong: ${esc(e.message)}</p>`);
+    });
   } catch (e) {
     view.innerHTML = `<h1>Something went wrong</h1><p class="mono">${esc(e.message)}</p>`;
   }

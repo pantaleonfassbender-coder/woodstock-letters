@@ -1,5 +1,10 @@
 [build]
   publish = "."
+  # the site itself has no build step; this only adds the search index (pagefind/)
+  command = "python -m pip install -q -r requirements.txt && python tools/build_search.py"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
 
 [[headers]]
   for = "/*"

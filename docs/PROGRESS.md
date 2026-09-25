@@ -121,6 +121,6 @@ and pp. 322–324 (blank, fold-out table, blank); vol. 39 p. 302 (blank).
 - Tables (mission statistics, retreat lists) are kept as paragraphs of OCR text where
   they sit on numbered pages; unnumbered fold-out tables are left out like plates.
 - Latin passages are not repaired except for the ligature rules, because the frequency gate is English.
-- **Search and the concordance are a linear scan in the browser** over all volumes
-  (now eleven, about 13 MB). This is past the planned threshold of ten: the move to
-  Pagefind is due before the next batch.
+- Search and the concordance moved to Pagefind (2026-09-25). The concordance's
+  distribution now counts pages with a match rather than hits, and its lines load
+  50 pages at a time; words are matched with their inflected forms.

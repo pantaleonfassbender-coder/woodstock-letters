@@ -3,3 +3,5 @@ data/raw/
 __pycache__/
 .claude/
 .netlify/
+# the search index: built by tools/build_search.py, on Netlify as the build command
+pagefind/
