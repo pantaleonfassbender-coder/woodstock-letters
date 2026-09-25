@@ -30,6 +30,7 @@ index.html, app.js, style.css   the static site (no build step, no framework)
 net.js                          the atlas network renderer (canvas, no library)
 data/atlas.json                 term co-occurrence network for the atlas
 data/people.json                person-to-person network
+pagefind/                       search index, built on deploy (git-ignored)
 data/catalogue.json             every issue 1872–1969 (metadata only)
 data/manifest.json              volumes built with full text
 data/vol/NNN.json               one volume: articles, pages, paragraphs, index
@@ -47,8 +48,13 @@ python tools/fetch_ia.py --vol 29        # fetch OCR for one volume (or --from 1
 python tools/build_volume.py 29          # build data/vol/029.json + docs/qa/vol029.md
 python tools/build_atlas.py              # rebuild data/atlas.json over all full-text volumes
 python tools/build_people.py             # rebuild data/people.json
+python tools/build_search.py             # build the search index into pagefind/ (git-ignored)
 python -m http.server 8765               # preview at http://localhost:8765
 ```
+
+The site has no build step of its own. Netlify runs `tools/build_search.py` as its
+build command (see `netlify.toml`), so the search index is rebuilt on every deploy and
+never committed.
 
 How the build works, briefly:
 

@@ -14,8 +14,10 @@ Read README.md for the layout and RIGHTS.md before touching any volume after 193
 - **Regex patches go through the Edit tool, never through Bash heredocs.**
   Backslashes (`\1`, `\b`, `\d`) are silently mangled in heredocs. This has
   already broken the year repair once.
-- Keep the site dependency-free and the data files static. Search will move to
-  Pagefind once more volumes are in, as a build step that adds files, not a framework.
+- Keep the site dependency-free and the data files static. Search and the
+  concordance use Pagefind, built by `tools/build_search.py` into `pagefind/`:
+  a build step that adds files, not a framework. Netlify runs it on deploy; never
+  commit `pagefind/`. Run it locally before previewing search.
 
 ## Processing a batch of volumes
 
