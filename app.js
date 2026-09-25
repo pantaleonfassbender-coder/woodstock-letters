@@ -401,6 +401,22 @@ async function viewAtlas(params) {
     .filter(b => b.deg >= 4).sort((a, b) => b.span - a.span || b.deg - a.deg).slice(0, 18);
   const words = new Map(S.man.volumes.map(m => [m.vol, m.words]));
 
+  const MON = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
+  const day = d => { const m = /^(\d\d)-(\d\d)-(\d{4})$/.exec(d || ""); return m ? `${+m[1]} ${MON[+m[2] - 1]} ${m[3]}` : esc(d || ""); };
+  function bio(b) {
+    if (!b) return "";
+    const row = (k, d, pl) => d || pl ? `<tr><td>${k}</td><td>${day(d)}${pl ? `, ${esc(pl)}` : ""}</td></tr>` : "";
+    return `<table class="bio">
+        ${row("Born", b.born, b.birthplace)}
+        ${row("Entered", b.entered, b.province)}
+        ${row("Final vows", b.vows, null)}
+        ${row("Died", b.died, b.deathplace)}
+        ${b.grade || b.status ? `<tr><td>Grade</td><td>${esc([b.grade, b.status].filter(Boolean).join(", "))}</td></tr>` : ""}
+      </table>
+      <p class="fine">From the <a href="${esc(NEC.url + b.id)}" target="_blank" rel="noopener">Jesuit Online Necrology</a>
+      (${esc(b.name)}), after Mendizábal's <i>Catalogus defunctorum</i>.</p>`;
+  }
+
   function panel(id) {
     const n = node.get(id);
     if (!n) return `<h3>Selection</h3><p class="fine">Click a term for its neighbours and its spread across the volumes.</p>`;
@@ -475,7 +491,9 @@ const CLS = { father: "Fathers", brother: "Brothers", mr: "Mr. (scholastics, lay
 
 async function viewPeople(params) {
   S.people = S.people || await getJSON("data/people.json");
-  const P = S.people;
+  // biodata of the Jesuits from the Jesuit Online Necrology (tools/fetch_necrology.py)
+  S.necro = S.necro || await getJSON("data/necrology.json").catch(() => ({ persons: {} }));
+  const P = S.people, NEC = S.necro;
   const node = new Map(P.nodes.map(n => [n.id, n]));
   const nb = new Map(P.nodes.map(n => [n.id, []]));
   for (const e of P.edges) { nb.get(e.s).push([e.t, e]); nb.get(e.t).push([e.s, e]); }
@@ -491,6 +509,7 @@ async function viewPeople(params) {
     const links = nb.get(id).sort((a, b) => b[1].w - a[1].w).slice(0, 16);
     return `<h3>${esc(n.name)}</h3>
       <p class="fine">${CLS[n.cls]} · named ${n.f} times${n.obit ? " · obituary " + artLink(n.obit) : ""}</p>
+      ${bio(NEC.persons[id])}
       <table class="dist">${P.vols.map((v, i) => n.dist[i] ? `<tr><td>WL ${v}</td><td class="num">${n.dist[i]}</td>
         <td style="width:50%"><div class="bar"><i style="width:${Math.round(100 * rates[i] / mx)}%"></i></div></td></tr>` : "").join("")}</table>
       <h3 style="font-size:.95rem;margin-top:.8rem">Named with</h3>
@@ -529,7 +548,11 @@ async function viewPeople(params) {
     <p class="fine">${P.nodes.length} persons and ${P.edges.length} links from ${P.paragraphs.toLocaleString("en")} paragraphs that name someone,
     vols. ${P.vols[0]}–${P.vols.at(-1)}. A person is a title and a surname (“Father Sabetti”, “Cardinal Gibbons”); namesakes are kept
     apart only where the text gives them different first names or initials, so two men of one name may still share a node. Offices
-    (“Father General”, “Father Rector”) are not persons. Built by <span class="mono">tools/build_people.py</span>; derived data, CC0.</p>`,
+    (“Father General”, “Father Rector”) are not persons. Built by <span class="mono">tools/build_people.py</span>; derived data, CC0.
+    Dates and places of birth, entry and death for ${Object.keys(NEC.persons).length} of the Jesuits come from the
+    <a href="https://jesuitonlinenecrology.bc.edu/" target="_blank" rel="noopener">Jesuit Online Necrology</a> (Boston College
+    Libraries, with the Archivum Romanum Societatis Iesu and the Woodstock Theological Library), matched by name and, where the
+    Letters print an obituary, by the year of death; a man is matched only when one record fits.</p>`,
     init() {
       let shown = params.get("id");
       const show = id => { shown = id; $("#sel").innerHTML = panel(id); bind($("#sel")); };
@@ -602,7 +625,13 @@ function viewAbout() {
     them different first names or initials; a bare “Father Ryan” is assigned to the Ryan named in the same article, if there is only one.
     Two persons are joined when they are named in the same paragraph, in two paragraphs at least, and a paragraph naming <i>n</i>
     persons counts 1/(<i>n</i> − 1) towards each of its links, so that a list of appointments does not outweigh a letter.
-    The class is read from the title in use, so a scholastic (“Mr. Stanton”) and the same man as a priest (“Father Stanton”) are two nodes.</li>
+    The class is read from the title in use, so a scholastic (“Mr. Stanton”) and the same man as a priest (“Father Stanton”) are two nodes.
+    For the Jesuits, the dates and places of birth, entry, final vows and death come from the
+    <a href="https://jesuitonlinenecrology.bc.edu/" target="_blank" rel="noopener">Jesuit Online Necrology</a>, the digital
+    edition of Mendizábal's <i>Catalogus defunctorum in renata Societate Iesu</i> (1972) by Boston College Libraries, the
+    Archivum Romanum Societatis Iesu and the Woodstock Theological Library. A person is matched by surname and forename
+    (English to the Catalogus's Latin), by the year of his obituary in the Letters where there is one, and otherwise by a North
+    American province where several records fit; where more than one record still fits, none is shown.</li>
   </ol>
   <p>The QA reports are published: ${S.man.volumes.map(v => `<a href="docs/qa/vol${pad3(v.vol)}.md">vol. ${v.vol}</a>`).join(", ")}.</p>
   <h2>Rights</h2>

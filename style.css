@@ -143,6 +143,9 @@ table.conc .ref{font-family:var(--mono);font-size:.72rem;white-space:nowrap}
 table.dist{border-collapse:collapse;font-size:.84rem;width:100%}
 table.dist td{padding:.15rem .4rem}
 table.dist .num{text-align:right;font-family:var(--mono);font-size:.78rem}
+table.bio{border-collapse:collapse;font-size:.84rem;margin:.3rem 0 .2rem}
+table.bio td{padding:.1rem .6rem .1rem 0;vertical-align:top}
+table.bio td:first-child{color:var(--muted);white-space:nowrap}
 .bar{height:8px;border-radius:4px;background:var(--panel2)}
 .bar i{display:block;height:8px;border-radius:4px;background:var(--acc)}
 .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:.8rem;margin-bottom:1rem}
