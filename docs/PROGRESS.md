@@ -12,6 +12,7 @@
 | 2026-09-25 | 24–28 (1895–1899) | 278 | 2369 | 6990 | Pagination against IA labels: 24 519/519, 25 537/537, 26 508/511, 27 399/399, 28 339/339. The 3 in vol. 26 are IA misreads (IA 621–623 for pp. 521–523; p. 522 checked on the scan). No pagination gaps. Indexes: 24 and 25 in their own volumes, 26 bound at the front of vol. 25 no. 1; none for 27 and 28. Vol. 28 has nos. 1–2 only in the IA collection. Vols. 29–59 rebuilt: same pages; titles of four articles now from the page, not the index. Atlas, people map and search rebuilt over vols. 24–59. |
 | 2026-09-25 | 19–23 (1890–1894) | 298 | 2409 | 6354 | Pagination against IA labels: 19 432/432, 20 469/469, 21 444/444, 22 567/567, 23 462/462. No pagination gaps. Vol. 20 lacks pp. 370–371 in the scan. Indexes (contents lists in vols. 19–20) found for all five. Vols. 24–59 rebuilt: same pages and articles. Atlas, people map and search rebuilt over vols. 19–59. |
 | 2026-09-25 | 14–18 (1885–1889) | 276 | 1909 | 4691 | Pagination against IA labels: 14 406/406, 15 340/340, 16 329/329, 17 400/400, 18 392/392. No pagination gaps. Indexes (contents lists) for vols. 14 and 17 only. Obituaries split at their name lines where no index names them. Vols. 19–59 rebuilt: same pages; 34 more obituaries split out. Atlas, people map and search rebuilt over vols. 14–59. |
+| 2026-09-25 | 9–13 (1880–1884) | 179 | 1621 | 4100 | Pagination against IA labels: 9 223/223, 10 292/292, 11 313/313, 12 350/350, 13 416/416. No pagination gaps. Contents lists found for all five (vol. 11's heading misread as XL, vol. 13's as "Xllt."). Early running heads in italic title case are read. Vols. 14–59 rebuilt: same pages; one article change (vol. 19). Atlas, people map and search rebuilt over vols. 9–59. |
 
 ### Vols. 30–34: what the batch found
 
@@ -447,6 +448,36 @@ Repairs: `tl` → `tt` only inside a word ("lovetl" is no longer "lovett").
 
 Rebuilt vols. 19–59: pages unchanged.
 
+### Vols. 9–13: what the batch found
+
+Per volume: 9 (1880) 26 articles, 228 pages, 591 repairs; 10 (1881) 29, 295, 695;
+11 (1882) 29, 319, 928; 12 (1883) 40, 356, 897; 13 (1884) 55, 423, 989.
+
+Pagination:
+
+- **Running heads in italic title case.** Until vol. 12 the running heads are set in
+  italic capitals and lower case ("Recollections of the Rocky Mountains. 315"), not in
+  capitals. A short title-case line closed by a full stop, beside a number with a digit
+  in it, is now read as a running head. The titles of the later statistics tables carry
+  no full stop, and "Father James J. Conway. •" (vol. 38) has no number, so neither is
+  taken. Vols. 9 and 11 thereby keep their last pages (pp. 231, 323), which had been
+  inserts. In vol. 19, "MR. ALOYSIUS DEBONO" on p. 258 is now read as a running head, so
+  Fr. Sache's notice ends on p. 258, where Debono's begins.
+- **Seams:** vol. 10 no. 2 ends on p. 205 and no. 3 opens on p. 209; vol. 12 no. 2 ends on
+  p. 258 and no. 3 opens on p. 261. Both issues end cleanly (a signature; "D. O. M."), and
+  neither index cites the pages between. They are taken for blank leaves that the scan
+  does not show.
+
+Index:
+
+- **Contents lists at the back of no. 3** in every volume. Their headings, as the OCR gives
+  them: "CONTENTS OF VOL, XII." (a comma), "CONTENTS OF VOL. Xllt." (XIII: l, i, t, 1 and
+  | now all read as I in a numeral in capitals), and "CONTENTS OF VOL. XL" for vol. 11. An
+  index in a volume's own issues whose numeral is far from that volume is taken as its own
+  when nothing else is found.
+
+Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
+
 ## Open issues
 
 - **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
@@ -492,6 +523,9 @@ Rebuilt vols. 19–59: pages unchanged.
   editorial notes; the Supplement and insert forms are still to be decided.
 - **Vol. 28 has nos. 1–2 only** in the Internet Archive collection, and no index; nor has
   vol. 27. Their authors come from signatures only.
+- Vols. 9–13, left as they are: vol. 13 p. 224 "Pardow" (a garbled obituary title); Latin
+  fragments of the catalogues read as index entries in vol. 12 ("Julii", "V"); repair
+  `Qu6en` → Quéen (Queen, vol. 13).
 - Obituary titles taken from name lines keep the OCR's spelling where no index gives the
   name ("Fr. Jamks Curivky", vol. 18; "Mr. John Jose^ph Mai^onk", vol. 21).
 - Vols. 15, 16 and 18 have no index in the scans; their authors come from signatures only.

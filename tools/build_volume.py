@@ -59,7 +59,7 @@ MASTHEAD = re.compile(
 # and from vol. 57 in arabic figures: "INDEX TO VOLUME 57"
 # ("INDKX TO VOLUME XXV", vol. 25)
 # ("CONTENTS OF rOL. XVII.", vol. 17)
-INDEX_HEAD = re.compile(r"(?:IND[EK]X\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?[VvrY]OL\w*\.?\s+([XVLI]+[a-z]*|\d{2})\b", re.I)
+INDEX_HEAD = re.compile(r"(?:IND[EK]X\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?[VvrY]OL\w*[.,]?\s+([XVLI]+[a-z]*|\d{2})\b", re.I)  # ("VOL, XII.", vol. 12)
 
 
 def index_numeral(s):
@@ -67,7 +67,9 @@ def index_numeral(s):
     lower-case l or i is the OCR's I: "XLVIil" is XLVIII (vol. 48)."""
     if s.isdigit():
         return int(s)
-    return roman(re.sub(r"[il]", "I", s) if re.search(r"[XVL]", s) else s)
+    # (and "Xllt." is XIII, vol. 13: l, i, t, 1 and | all stand for I)
+    t = re.sub(r"[ilt1|]", "I", s) if re.search(r"[XVL]", s) else s
+    return roman(t) if re.fullmatch(r"[XVLI]+", t.upper()) else None
 
 
 def roman(s):
@@ -167,6 +169,18 @@ def read_issue(ident):
     return leaves
 
 
+def headlike(s):
+    """A running head: in capitals, or in the early volumes in italic title
+    case ("Recollections of the Rocky Mountains.", vols. 9–12)."""
+    if is_upper(s):
+        return True
+    words = re.findall(r"[A-Za-z]{4,}", s)
+    # (closed by a full stop: the titles of the later statistics tables,
+    # "Students in our Colleges … 1895-'96", are not running heads)
+    return (len(s) < 70 and re.match(r"[A-Z]", s) is not None and len(words) >= 2
+            and s.rstrip().endswith(".") and sum(w[0].isupper() for w in words) / len(words) >= 0.6)
+
+
 def split_head(lines):
     """Return (head_title, page_candidate, body_lines)."""
     if not lines:
@@ -178,17 +192,21 @@ def split_head(lines):
     l0 = re.sub(r"^(\d) (\d\d)$|^(\d\d) (\d)$", lambda m: "".join(g for g in m.groups() if g), l0)
     l1 = lines[1] if len(lines) > 1 else ""
     l1 = re.sub(r"^(\d) (\d\d)$|^(\d\d) (\d)$", lambda m: "".join(g for g in m.groups() if g), l1)
+    # a head in capitals, or in title case beside a number with a digit in it
+    # (not "Father James J. Conway. •", vol. 38)
+    def hl(title, tok):
+        return is_upper(title) or (headlike(title) and re.search(r"\d", tok) is not None)
     # "N" / "TITLE"  or  "TITLE" / "N"  or a bare "N" (tables, lists)
-    if pageish(l0) and " " not in l0 and is_upper(l1) and len(l1) < 90:
+    if pageish(l0) and " " not in l0 and hl(l1, l0) and len(l1) < 90:
         return l1, digits(l0), lines[2:]
-    if is_upper(l0) and len(l0) < 90 and pageish(l1) and " " not in l1:
+    if hl(l0, l1) and len(l0) < 90 and pageish(l1) and " " not in l1:
         return l0, digits(l1), lines[2:]
     # "N TITLE" or "TITLE N" on one line
     m = re.match(r"^(\S{1,5})\s+(.+)$", l0)
-    if m and pageish(m[1]) and is_upper(m[2]) and len(m[2]) < 90:
+    if m and pageish(m[1]) and hl(m[2], m[1]) and len(m[2]) < 90:
         return m[2], digits(m[1]), lines[1:]
     m = re.match(r"^(.+?)\s+(\S{1,5})$", l0)
-    if m and pageish(m[2]) and is_upper(m[1]) and 4 < len(m[1]) < 90:
+    if m and pageish(m[2]) and hl(m[1], m[2]) and 4 < len(m[1]) < 90:
         return m[1], digits(m[2]), lines[1:]
     if pageish(l0) and " " not in l0 and len(l0) <= 5:
         return "", digits(l0), lines[1:]
@@ -1078,6 +1096,20 @@ def build(vol):
         if index:
             index_from = ident
             break
+    # an index in the volume's own issues whose numeral the OCR has turned into
+    # a far one ("CONTENTS OF VOL. XL" at the back of vol. 11 no. 3) is its own
+    if not index:
+        for ident, lv in where[:len(raw_issues)]:
+            far = {lf["index"] for lf in lv if lf.get("index") is not None and abs(lf["index"] - vol) > 1}
+            if len(far) == 1:
+                w = far.pop()
+                for lf in lv:
+                    if lf.get("index") == w:
+                        lf["index"] = vol
+                index = parse_index(lv, vol)
+                if index:
+                    index_from = ident
+                    break
     for i in nearby if not index else []:
         if not (RAW / f"{i['id']}_hocr_pageindex.json.gz").exists():
             continue
