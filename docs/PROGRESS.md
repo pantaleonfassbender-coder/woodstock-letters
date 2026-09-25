@@ -16,6 +16,7 @@
 | 2026-09-25 | 4–8 (1875–1879) | 130 | 1004 | 1427 | Pagination against IA labels: 4 189/191, 5 222/222, 6 179/187, 7 187/187, 8 183/183. The 10 differences are leaves bound out of order (vol. 4 no. 2, pp. 79–85; vol. 6 no. 2, pp. 97–104), where IA numbers the leaves as bound; read in printed order after checking the scans. No pagination gaps. Contents lists for all five (vol. 4's headed only "CONTENTS."). Vols. 9–59 rebuilt: two page changes, 37 articles newly split out, 838 leaked running-head lines dropped (below). Atlas, people map and search rebuilt over vols. 4–59. |
 | 2026-09-25 | 1–3 (1872–1874) | 81 | 674 | 235 | Pagination against IA labels: 1 199/199, 2 229/229, 3 213/213. No pagination gaps. Contents lists for all three ("CONTENTS.", "CONTENTS,", no volume named). Vol. 1's OCR is the poorest of the run (letter-spaced headings, `)'` for y, `<^` for g); repairs added for it. Vols. 4–59 rebuilt: pages unchanged; 7 articles newly split out, 102 titles or extents changed; 1,975 more repairs (h read as li). Atlas, people map and search rebuilt over vols. 1–59, the whole public-domain run. |
 | 2026-09-25 | Open issues, vols. 1–59 | 2,685 → 2,672 | unchanged | 13 fixed or refused | The open issues fixed: 127 corrections read by eye in `tools/article_overrides.json` (merges, splits, titles, index entries, stray lines, repairs), and three index-parsing fixes in `build_volume.py`. Pages unchanged. Atlas, people map and search rebuilt. |
+| 2026-09-25 | Site and README | – | – | – | "Pilot" dropped. The overview, the volume list and the README present the public-domain edition, vols. 1–59 (1872–1930); the run to 1969 is outlined, and the later volumes are no longer listed. Citation forms for Supplements and inserts decided and published on the About page. |
 
 ### Vols. 30–34: what the batch found
 
@@ -665,10 +666,10 @@ Rebuilt vols. 9–59:
   - Vol. 28 has nos. 1–2 only.
   - Vols. 15, 16, 18, 27 and 28 have no index in the scans.
   - The authors of these volumes come from signatures only.
-- **Citation form for Supplements and inserts** (`WL 30 (1901): Suppl. vii`, `WL 30 (1901): insert after
-  p. 332`) needs a decision before it goes into the editorial notes. The asterisk form is accepted
-  (2026-09-25): `WL 54 (1925): 104*` for vol. 54 no. 2, and `WL 56 (1927): 35*` for the asterisked section of
-  vol. 56 no. 1.
+- **Citation forms, decided (2026-09-25):** `WL 29 (1900): 46` for a page, `WL 54 (1925): 104*` for an
+  asterisked folio (vol. 54 no. 2, the asterisked section of vol. 56 no. 1), `WL 30 (1901): Suppl. vii` for a
+  Supplement, `WL 30 (1901): insert after p. 332` for an unnumbered insert. They are in the site's About page
+  and the README.
 - Index entries in inverted form ("Innsbruck, The Golden Jubilee of") remain as titles only where the page gives
   no readable one.
 - Vol. 22 p. 565 is titled with its opening sentence ("The Following Is a Synopsis of the 'Missiones

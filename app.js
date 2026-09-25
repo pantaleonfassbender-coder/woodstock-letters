@@ -13,12 +13,6 @@ const SITE = "https://woodstock-letters.netlify.app/";
 
 // US public domain: published before 1 January of (this year − 95)
 const PD_CUTOFF = new Date().getFullYear() - 96;
-const TIER = {
-  full:   { label: "Full text",              cls: "full"  },
-  pd:     { label: "Public domain · queued", cls: "pd"    },
-  check:  { label: "Renewal check pending",  cls: "check" },
-  closed: { label: "Catalogue only",         cls: "closed"}
-};
 
 const S = { cat: null, man: null, vols: new Map() };
 
@@ -44,15 +38,7 @@ function indexVolume(v) {
   v.byId = new Map(v.articles.map((a, i) => [a.id, Object.assign(a, { i })]));
   return v;
 }
-function tierOf(n) {
-  if (S.built.has(n)) return "full";
-  const last = Math.max(...S.byVol.get(n).map(i => i.year));
-  if (last <= PD_CUTOFF) return "pd";
-  if (last <= 1963) return "check";
-  return "closed";
-}
 const years = n => { const y = [...new Set(S.byVol.get(n).map(i => i.year))]; return y.length > 1 ? `${y[0]}–${String(y.at(-1)).slice(2)}` : `${y[0]}`; };
-const tag = t => `<span class="tag ${TIER[t].cls}">${TIER[t].label}</span>`;
 
 // A Supplement is paginated on its own ("Suppl. vii") and an unnumbered
 // insert is cited by the page it follows; both carry a printed label.
@@ -67,75 +53,67 @@ function cite(v, a, page) {
 /* ------------------------------------------------------------------ views */
 
 function viewHome() {
-  const vols = [...S.byVol.keys()].sort((a, b) => a - b);
-  const counts = { full: 0, pd: 0, check: 0, closed: 0 };
-  vols.forEach(n => counts[tierOf(n)]++);
+  const vols = [...S.built].sort((a, b) => a - b);
+  const first = vols[0], last = vols.at(-1);
+  const issues = vols.reduce((s, n) => s + S.byVol.get(n).length, 0);
   const words = S.man.volumes.reduce((s, v) => s + v.words, 0);
   const arts = S.man.volumes.reduce((s, v) => s + v.articles, 0);
+  const pages = S.man.volumes.reduce((s, v) => s + v.pages, 0);
+  const runLast = Math.max(...S.cat.issues.map(i => i.year));
+  const runVols = S.byVol.size;
   return `
-  <div class="kicker">Research edition · pilot</div>
-  <h1>The Woodstock Letters, 1872–1969</h1>
+  <div class="kicker">Research edition</div>
+  <h1>The Woodstock Letters, ${S.byVol.get(first)[0].year}–${S.byVol.get(last).at(-1).year}</h1>
   <p class="lede">For almost a century the Jesuits of North America wrote to one another in a journal printed
   “for circulation among Ours only” at Woodstock College, Maryland: mission reports, college histories, obituaries,
-  letters from the frontier and from abroad. This edition makes the run citable page by page, links every page to its
-  scan, and gives the full text of the volumes that are in the public domain.</p>
+  letters from the frontier and from abroad. The journal ran to ${runVols} volumes, from 1872 to ${runLast}.
+  This edition gives the full text of the volumes in the public domain, vols. ${first}–${last}
+  (${S.byVol.get(first)[0].year}–${S.byVol.get(last).at(-1).year}), citable page by page, with every page linked to its scan.</p>
   <div class="stats">
-    <div class="stat"><b>${S.cat.issues.length}</b><span>issues catalogued</span></div>
-    <div class="stat"><b>${vols.length}</b><span>volumes, 1872–1969</span></div>
-    <div class="stat"><b>${counts.full}</b><span>volume${counts.full === 1 ? "" : "s"} in full text</span></div>
-    <div class="stat"><b>${arts}</b><span>articles delimited</span></div>
-    <div class="stat"><b>${(words / 1000).toFixed(0)}k</b><span>words edited</span></div>
+    <div class="stat"><b>${vols.length}</b><span>volumes in full text</span></div>
+    <div class="stat"><b>${issues}</b><span>issues</span></div>
+    <div class="stat"><b>${pages.toLocaleString("en")}</b><span>pages</span></div>
+    <div class="stat"><b>${arts.toLocaleString("en")}</b><span>articles delimited</span></div>
+    <div class="stat"><b>${(words / 1e6).toFixed(1)}M</b><span>words edited</span></div>
   </div>
-  <h2>The run</h2>
-  <p class="fine">One cell per volume. Open a volume for its contents or its scans.</p>
-  <div class="run">${vols.map(n => `<a href="#/vol/${n}" class="t-${tierOf(n)}" title="Vol. ${n} (${years(n)}) · ${TIER[tierOf(n)].label}">${n}<small>${String(S.byVol.get(n)[0].year).slice(2)}</small></a>`).join("")}</div>
-  <div class="legend">
-    <span><i class="t-full"></i>full text here (${counts.full})</span>
-    <span><i class="t-pd"></i>public domain, queued (${counts.pd})</span>
-    <span><i class="t-check"></i>1931–1963, renewal check pending (${counts.check})</span>
-    <span><i class="t-closed"></i>1964–1969, catalogue only (${counts.closed})</span>
-  </div>
+  <h2>The volumes</h2>
+  <p class="fine">One cell per volume. Open a volume for its contents.</p>
+  <div class="run">${vols.map(n => `<a href="#/vol/${n}" class="t-full" title="Vol. ${n} (${years(n)})">${n}<small>${String(S.byVol.get(n)[0].year).slice(2)}</small></a>`).join("")}</div>
   <div class="grid2" style="margin-top:2rem">
     <div class="card"><h3>Cite by volume and page</h3>
       <p>Every paragraph sits on its printed page, so any passage can be cited as <span class="mono">WL 29 (1900): 46</span>
       and checked against the scan in one click. The page numbers are recomputed from the running heads, not trusted from the OCR.</p></div>
     <div class="card"><h3>Built openly</h3>
-      <p>The text is Boston College's scan and OCR, repaired conservatively. Every repair and every overruled page number
-      is listed in a public QA report, so nothing is silently changed. See <a href="#/about">About &amp; rights</a>.</p></div>
+      <p>The text is Boston College's scan and OCR, repaired conservatively. Every repair, every overruled page number and
+      every correction made by hand is listed in a public QA report, so nothing is silently changed.
+      See <a href="#/about">About &amp; rights</a>.</p></div>
   </div>`;
 }
 
 function viewVolumes() {
-  const vols = [...S.byVol.keys()].sort((a, b) => a - b);
+  const vols = [...S.built].sort((a, b) => a - b);
   return `<h1>Volumes</h1>
-  <p class="lede">The whole run as held by the Internet Archive (Boston College Libraries). Full text appears here as the
-  public-domain volumes are processed. The others are listed with links to their scans.</p>
-  <table><thead><tr><th>Vol.</th><th>Year</th><th>Issues (scans)</th><th>Status</th></tr></thead><tbody>
+  <p class="lede">The public-domain volumes, ${vols[0]}–${vols.at(-1)}, in full text, with the scans of each issue at the
+  Internet Archive (Boston College Libraries).</p>
+  <table><thead><tr><th>Vol.</th><th>Year</th><th>Issues (scans)</th><th>Articles</th><th>Pages</th></tr></thead><tbody>
   ${vols.map(n => {
-    const t = tierOf(n);
+    const m = S.man.volumes.find(x => x.vol === n);
     return `<tr><td><a href="#/vol/${n}">${n}</a></td><td>${years(n)}</td>
       <td>${S.byVol.get(n).map(i => `<a href="https://archive.org/details/${i.id}" target="_blank" rel="noopener">no.&nbsp;${esc(i.no)}${i.season ? " " + esc(i.season) : ""}</a>`).join(" · ")}</td>
-      <td>${tag(t)}</td></tr>`;
-  }).join("")}</tbody></table>
-  ${S.cat.extras.map(x => `<p class="fine" style="margin-top:1rem">Also held: <a href="https://archive.org/details/${x.id}" target="_blank" rel="noopener">${esc(x.label)}</a>, the general index to vols. 1–80. It will guide the article catalogue for the later volumes.</p>`).join("")}`;
+      <td class="num">${m.articles}</td><td class="num">${m.pages}</td></tr>`;
+  }).join("")}</tbody></table>`;
 }
 
 async function viewVolume(n) {
   if (!S.byVol.has(n)) return `<h1>No volume ${n}</h1>`;
-  const t = tierOf(n);
-  const issues = S.byVol.get(n);
   const head = `<div class="kicker">Volume ${n} · ${years(n)}</div><h1>Woodstock Letters, vol. ${n}</h1>`;
-  if (t !== "full") {
-    const why = {
-      pd: "This volume is in the US public domain and is queued for processing. Until then, read it in the scans.",
-      check: "Issues from 1931 to 1963 are in the public domain only if their copyright was not renewed. That check is pending, so for now only the catalogue entry and the scans are shown.",
-      closed: "Issues from 1964 on are presumed to be in copyright. The edition lists them and links the scans the Internet Archive already provides."
-    }[t];
-    return `${head}<p>${tag(t)}</p><p class="lede">${why}</p>
-      <ul class="toc">${issues.map(i => `<li><span class="pg">no. ${esc(i.no)}</span><span><a href="https://archive.org/details/${i.id}" target="_blank" rel="noopener">${esc(i.season || "")} ${i.year} · scan and OCR at the Internet Archive</a></span></li>`).join("")}</ul>`;
+  if (!S.built.has(n)) {
+    const vols = [...S.built].sort((a, b) => a - b);
+    return `${head}<p class="lede">This edition covers the volumes in the public domain, vols. ${vols[0]}–${vols.at(-1)}.
+      Vol. ${n} is not among them. <a href="#/volumes">All volumes in the edition</a>.</p>`;
   }
   const v = await vol(n);
-  let html = `${head}<p>${tag(t)} <span class="fine">${v.articles.length} articles · ${S.man.volumes.find(x => x.vol === n).pages} pages · <a href="docs/qa/vol${pad3(n)}.md">QA report</a></span></p>`;
+  let html = `${head}<p><span class="fine">${v.articles.length} articles · ${S.man.volumes.find(x => x.vol === n).pages} pages · <a href="docs/qa/vol${pad3(n)}.md">QA report</a></span></p>`;
   for (const iss of v.issues) {
     const arts = v.articles.filter(a => a.issue === iss.id);
     html += `<h2 style="margin-top:2rem">No. ${esc(iss.no)}${iss.season ? " · " + esc(iss.season) : ""} <a class="fine" href="https://archive.org/details/${iss.id}" target="_blank" rel="noopener">scan ↗</a></h2><ul class="toc">`;
@@ -627,20 +605,25 @@ function viewAbout() {
     The class is read from the title in use, so a scholastic (“Mr. Stanton”) and the same man as a priest (“Father Stanton”) are two nodes.</li>
   </ol>
   <p>The QA reports are published: ${S.man.volumes.map(v => `<a href="docs/qa/vol${pad3(v.vol)}.md">vol. ${v.vol}</a>`).join(", ")}.</p>
-  <h2>Rights: three tiers</h2>
-  <ul>
-    <li><b>1872–${PD_CUTOFF}.</b> Public domain in the United States (published more than 95 years ago). Full text.</li>
-    <li><b>${PD_CUTOFF + 1}–1963.</b> Public domain only if the copyright was not renewed. The renewal records still have
-    to be checked. There is a further question: the issues bear “for circulation among Ours only”, so they may not
-    count as published at all. Until this is clarified with the rights holders, the edition shows these volumes as catalogue only.</li>
-    <li><b>1964–1969.</b> Presumed in copyright. Catalogue only.</li>
-  </ul>
-  <p>Each January the cutoff moves forward by one year, and the site computes it from the date.</p>
+  <h2>Rights</h2>
+  <p>The edition gives the volumes published before 1 January ${PD_CUTOFF + 1}, vols. ${[...S.built].sort((a, b) => a - b)[0]}–${Math.max(...S.built)}
+  (1872–${PD_CUTOFF}), which are in the public domain in the United States. The journal went on to 1969; the later
+  volumes are outside the public domain or not yet cleared, and the edition does not include them. Each January the
+  cutoff moves forward by one year. See <a href="RIGHTS.md">RIGHTS.md</a>.</p>
   <h2>Licences</h2>
   <p>Code: MIT. Editorial texts: CC BY 4.0. Derived data (catalogue, pagination, article delimitation, repairs): CC0 1.0.
   The public-domain text itself is not claimed.</p>
   <h2>Citation</h2>
-  <p class="citebox">Fassbender, Pantaleon. <i>Woodstock Letters: A Research Edition</i> (pilot, ${new Date().getFullYear()}). ${SITE}</p>
+  <p>A passage is cited by volume, year and printed page:</p>
+  <ul>
+    <li><span class="mono">WL 29 (1900): 46</span>, a page;</li>
+    <li><span class="mono">WL 54 (1925): 104*</span>, a page with an asterisked folio (vol. 54 no. 2 and the asterisked section
+    of vol. 56 no. 1 repeat numbers already used in their volume, and the journal marks them so);</li>
+    <li><span class="mono">WL 30 (1901): Suppl. vii</span>, a page of a Supplement paginated on its own;</li>
+    <li><span class="mono">WL 30 (1901): insert after p. 332</span>, an unnumbered insert, by the page it follows.</li>
+  </ul>
+  <p>The edition itself:</p>
+  <p class="citebox">Fassbender, Pantaleon. <i>Woodstock Letters: A Research Edition</i> (${new Date().getFullYear()}). ${SITE}</p>
   <p class="fine">A companion to <a href="https://ignatian-research.netlify.app/" target="_blank" rel="noopener">Ignatiana</a>
   and to the psycholinguistic study of the Woodstock Letters corpora (replication package on <a href="https://zenodo.org/records/22697014" target="_blank" rel="noopener">Zenodo</a>).</p>
   </div>`;
