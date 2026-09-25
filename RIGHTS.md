@@ -36,8 +36,21 @@ so these issues are presumed to be in copyright.
 
 ## What the site never does
 
-- It does not copy scans. Every page links to the Internet Archive viewer.
+- It does not mirror the scans. Every page links to the Internet Archive viewer.
 - It does not host full text beyond the public-domain cutoff unless the rights
   holders clear it in writing.
-- It leaves the Boston College scans on their own site. The site uses only the
-  derived OCR text of public-domain volumes.
+- It leaves the Boston College scans on their own site. The site uses the
+  derived OCR text of public-domain volumes and, as illustrations, a small
+  number of plates.
+
+## Plates
+
+`assets/plates/` holds page images cut from public-domain sources, registered
+with caption and credit in `data/plates.json`: illustrations the journal itself
+printed before 1931 (the Golden Jubilee number, vol. 49 no. 1, 1920; Dooley's
+*Woodstock and Its Makers*, vol. 56 no. 1, 1927) and details of G. M. Hopkins's
+*Atlas of Baltimore County* of 1877 from the Library of Congress. A faithful
+reproduction of a public-domain two-dimensional work adds nothing licensable
+(*Bridgeman v. Corel*), so the plates are as free as their sources; the
+captions and credits are CC0. Every plate names its source leaf or plate and
+links to it. No image is taken from an issue after 1930.

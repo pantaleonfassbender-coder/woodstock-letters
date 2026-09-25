@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+title: "Woodstock Letters: A Research Edition"
+message: "If you use this edition, please cite it as below, and cite the journal by volume, year and printed page for any passage you quote (WL 29 (1900): 46)."
+type: dataset
+authors:
+  - family-names: Fassbender
+    given-names: Pantaleon
+    orcid: "https://orcid.org/0000-0002-6683-3617"
+repository-code: "https://github.com/pantaleonfassbender-coder/woodstock-letters"
+url: "https://woodstock-letters.netlify.app/"
+abstract: >-
+  A research edition of the Woodstock Letters (1872-1969), the private house
+  journal of the Jesuits in North America printed at Woodstock College,
+  Maryland: the full text of the volumes in the public domain in the United
+  States, vols. 1-59 (1872-1930), 172 issues, 24,248 printed pages, 2,671
+  articles and some ten million words, built from the Boston College scans at
+  the Internet Archive. Every paragraph is cited by volume, year and printed
+  page and linked to its scan; page numbers are recomputed by consensus and
+  cross-checked against the Internet Archive's labels; articles are delimited
+  from running heads and volume indexes with authors from the indexes; the OCR
+  is repaired conservatively with every repair logged in a public QA report.
+  With a search index and concordance (Pagefind), a network atlas of the
+  journal's vocabulary, a person-to-person map with biodata from the Jesuit
+  Online Necrology, year-by-year discourse measures continuous with the
+  author's psycholinguistic study of the journal, and an introductory essay.
+  The later volumes (1931-1969) are catalogued but not reproduced pending
+  their clearance.
+keywords:
+  - Woodstock Letters
+  - Society of Jesus
+  - Jesuit studies
+  - Maryland Province
+  - American Catholic history
+  - digital edition
+  - concordance
+license: MIT
+version: 1.0.0
+date-released: 2026-09-25

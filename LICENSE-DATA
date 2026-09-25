@@ -21,6 +21,14 @@ WHICH FILES
   data/vol/*.json        pagination, article delimitation, authors, volume
                          index, and the editorial repairs of the OCR
   docs/qa/*.md           the QA reports listing every repair and override
+  data/atlas.json        term co-occurrence network
+  data/people.json       person-to-person network
+  data/necrology.json    matches to the Jesuit Online Necrology (the records
+                         themselves remain Boston College's)
+  data/discourse.json    word-list measures and register of every article
+  data/plates.json       captions and credits of the plates; the images in
+                         assets/plates/ are reproductions of public-domain
+                         works and are not the licensor's to dedicate
 
 Attribution is not required, and is appreciated.
 

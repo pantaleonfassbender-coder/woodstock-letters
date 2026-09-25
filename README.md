@@ -5,10 +5,15 @@ the Jesuits in North America, printed at Woodstock College, Maryland. It is a co
 [Ignatiana](https://ignatian-research.netlify.app/).
 
 The journal ran to 98 volumes, from 1872 to 1969. The edition gives the full text of the
-volumes in the public domain, vols. 1–59 (1872–1930): 172 issues, 24,248 pages, 2,672 articles and some
+volumes in the public domain, vols. 1–59 (1872–1930): 172 issues, 24,248 pages, 2,671 articles and some
 10 million words, each page linked to its scan at the Internet Archive. The later volumes are
 outside the public domain or not yet cleared, and are not part of the edition (see
 [RIGHTS.md](RIGHTS.md)).
+
+An [introductory essay](https://woodstock-letters.netlify.app/#/introduction) describes the journal,
+the source, the method and the apparatus, and how the work was divided between the human author and
+the language model; its manuscript is in `docs/` and is built from `data/introduction.json` by
+`tools/build_introduction_docx.js`.
 
 ## What it offers
 
@@ -36,13 +41,20 @@ outside the public domain or not yet cleared, and are not part of the edition (s
 - **Citation forms.** `WL 29 (1900): 46` for a page, `WL 54 (1925): 104*` for an asterisked
   folio, `WL 30 (1901): Suppl. vii` for a Supplement, `WL 30 (1901): insert after p. 332`
   for an unnumbered insert.
-- **Rights.** See [RIGHTS.md](RIGHTS.md).
+- **Plates.** The college as drawn in 1871 and photographed about 1920, the makers of Woodstock
+  from Dooley's history of 1927, and the place on the Patapsco from the county atlas of 1877
+  (Library of Congress): `assets/plates/`, registered with caption, credit and source leaf in
+  `data/plates.json`.
+- **Rights.** See [RIGHTS.md](RIGHTS.md). Legal notice and privacy: on the site under `#/imprint`.
 
 ## Layout
 
 ```
 index.html, app.js, style.css   the static site (no build step, no framework)
 net.js                          the atlas network renderer (canvas, no library)
+data/introduction.json          the introductory essay; docs/*.docx is built from it
+data/plates.json, assets/       plates cut from public-domain page images, with credits
+CITATION.cff, .zenodo.json      citation metadata for the release and its archiving
 data/atlas.json                 term co-occurrence network for the atlas
 data/people.json                person-to-person network
 data/necrology.json             biodata from the Jesuit Online Necrology, by person

@@ -45,6 +45,20 @@ Commit per batch with the volume numbers in the message, for example
 `Add vols. 30–34 (1901–1905)`. Record a summary in `docs/PROGRESS.md`:
 volumes, articles, pages, repairs, and open issues.
 
+## Plates, essay, legal notice
+
+- Plates live in `assets/plates/` (JPEG, 1600 px wide, with `_t` thumbnails) and are
+  registered in `data/plates.json` with caption, credit and source leaf. Only images
+  from issues published before 1931 or from other public-domain sources; each must
+  name its source. Never take an image from vols. 60–98.
+- The introductory essay is `data/introduction.json`; the site renders it at
+  `#/introduction` and `tools/build_introduction_docx.js` builds the manuscript in
+  `docs/`. Change the JSON, then rebuild the .docx, never the other way round.
+- The legal notice at `#/imprint` (in `app.js`, `viewImprint`) describes the site's
+  actual behaviour: no cookies, one localStorage key (`wlTheme`), no third-party
+  requests, Netlify's injected RUM script. Anything that changes that behaviour
+  must change the notice in the same commit.
+
 ## Conventions
 
 - Citation form: `WL <vol> (<year>): <page>`. Article ids: `<vol>-<first page>`.

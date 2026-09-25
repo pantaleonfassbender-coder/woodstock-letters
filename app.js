@@ -22,7 +22,8 @@ async function getJSON(url) {
   return r.json();
 }
 async function boot() {
-  [S.cat, S.man] = await Promise.all([getJSON("data/catalogue.json"), getJSON("data/manifest.json")]);
+  [S.cat, S.man, S.plates] = await Promise.all([getJSON("data/catalogue.json"), getJSON("data/manifest.json"),
+    getJSON("data/plates.json").catch(() => ({}))]);
   S.byVol = new Map();
   for (const i of S.cat.issues) {
     if (!S.byVol.has(i.vol)) S.byVol.set(i.vol, []);
@@ -52,6 +53,18 @@ function cite(v, a, page) {
 
 /* ------------------------------------------------------------------ views */
 
+// A plate cut from a public-domain page image (registry data/plates.json, files
+// assets/plates/ID.jpg with a _t thumbnail). The image links to its source: the
+// scan leaf in the IA viewer, or the atlas at the Library of Congress.
+function plate(id, cls = "", thumb = false) {
+  const p = (S.plates || {})[id];
+  if (!p) return "";
+  const href = p.href || (p.issue ? IA(p.issue, p.ia) : null);
+  const img = `<img src="assets/plates/${id}${thumb ? "_t" : ""}.jpg" alt="${esc(p.caption)}" loading="lazy">`;
+  return `<figure class="plate ${cls}">${href ? `<a class="zoom" href="${href}" target="_blank" rel="noopener" title="Open the source">${img}</a>` : img}
+    <figcaption><b>${esc(p.caption)}</b><br>${esc(p.credit).replace(/https?:\/\/\S+?(?=[.,]?(\s|$))/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`)}</figcaption></figure>`;
+}
+
 function viewHome() {
   const vols = [...S.built].sort((a, b) => a - b);
   const first = vols[0], last = vols.at(-1);
@@ -69,6 +82,9 @@ function viewHome() {
   letters from the frontier and from abroad. The journal ran to ${runVols} volumes, from 1872 to ${runLast}.
   This edition gives the full text of the volumes in the public domain, vols. ${first}–${last}
   (${S.byVol.get(first)[0].year}–${S.byVol.get(last).at(-1).year}), citable page by page, with every page linked to its scan.</p>
+  <p class="fine">New here? The <a href="#/introduction">introductory essay</a> describes the journal, the source,
+  the method and the apparatus, and can be downloaded as a manuscript.</p>
+  <div class="hero">${plate("college-1920")}${plate("map-1877")}</div>
   <div class="stats">
     <div class="stat"><b>${vols.length}</b><span>volumes in full text</span></div>
     <div class="stat"><b>${issues}</b><span>issues</span></div>
@@ -87,6 +103,126 @@ function viewHome() {
       <p>The text is Boston College's scan and OCR, repaired conservatively. Every repair, every overruled page number and
       every correction made by hand is listed in a public QA report, so nothing is silently changed.
       See <a href="#/about">About &amp; rights</a>.</p></div>
+  </div>
+  <h2 style="margin-top:2.4rem">The place and its makers</h2>
+  <p class="fine">Plates from the journal itself, the Golden Jubilee number of 1920 and Dooley's <i>Woodstock and Its Makers</i> of 1927,
+  and from the county atlas of 1877. Each opens its source; the whole set is on the <a href="#/plates">plates page</a>.</p>
+  <div class="gallery">${["college-1871", "map-county-1877", "community-chart", "disputation", "mortuary-chapel", "keller"].map(id => plate(id, "", true)).join("")}</div>`;
+}
+
+function viewPlates() {
+  const ids = Object.keys(S.plates || {}).filter(k => k !== "_note");
+  return `<div class="kicker">Plates</div><h1>Woodstock in pictures</h1>
+  <p class="lede">The illustrations the journal printed of its own house, and two maps: the college as drawn in 1871 and photographed
+  about 1920, the makers of Woodstock as Dooley's history portrayed them in 1927, the library, the cemetery, and the place on the
+  Patapsco as the county atlas of 1877 recorded it. Every plate is cut from a public-domain page image and links to its source.</p>
+  <div class="grid2">${ids.map(id => plate(id, ["keller", "mazzella", "pantanella", "pantanella-1920", "dooley-title"].includes(id) ? "portrait" : "")).join("")}</div>
+  <p class="fine" style="margin-top:1.6rem">Faithful reproduction of a public-domain two-dimensional work adds nothing licensable; the plates are as free as
+  their sources. The captions and credits are CC0. Sources leaf by leaf: <a href="data/plates.json">data/plates.json</a>.</p>`;
+}
+
+/* The introductory essay (data/introduction.json): the first mention of each
+   instrument links to it, so the essay doubles as a guided entrance. The same
+   file is the source of the downloadable manuscript in docs/. */
+const INTRO_LINKS = [
+  ["Golden Jubilee number", "#/vol/49"], ["Woodstock and Its Makers", "#/a/56-003"],
+  ["Search and concordance", "#/concordance"], ["Atlas", "#/atlas"], ["People", "#/people"], ["Discourse", "#/discourse"],
+  ["QA report", "docs/qa/vol029.md"], ["progress notes", "docs/PROGRESS.md"], ["validation report", "docs/discourse_validation.md"],
+  ["catalogue", "#/volumes"], ["plates", "#/plates"]
+];
+const emi = s => esc(s).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+const linkify = h => h.replace(/https?:\/\/[^\s<]+?(?=[.,;)]?(\s|$|<))/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+async function viewIntroduction() {
+  S.intro = S.intro || await getJSON("data/introduction.json");
+  const e = S.intro, used = new Set();
+  const fmt = s => {
+    let h = emi(s);
+    for (const [phrase, href] of INTRO_LINKS) {
+      if (used.has(phrase)) continue;
+      const i = h.indexOf(phrase);
+      if (i < 0) continue;
+      used.add(phrase);
+      h = h.slice(0, i) + `<a href="${href}">${phrase}</a>` + h.slice(i + phrase.length);
+    }
+    // the edition's own citation form opens the page cited
+    return h.replace(/WL (\d+) \((\d{4})\): (\d+)(?:–\d+)?/g, (m, v, y, p) => `<a href="#/a/${v}-${String(p).padStart(3, "0")}" title="Open in the edition">${m}</a>`);
+  };
+  const authors = e.authors.map(a => `${esc(a.name)}${a.orcid ? ` <a href="${a.orcid}" target="_blank" rel="noopener" class="fine">ORCID</a>` : ""} <span class="fine">(${esc(a.note)})</span>`).join(" · ");
+  return `<div class="essay">
+    <div class="kicker">Introductory essay</div>
+    <h1>${esc(e.title)}: ${esc(e.subtitle)}</h1>
+    <p class="note">${authors}<br>${esc(e.date)} · version ${esc(e.version)} · editorial matter of this site, CC BY 4.0 ·
+      <a href="docs/Fassbender-Claude-2026-Woodstock-Letters-Introduction.docx">manuscript (.docx, APA 7)</a></p>
+    <div class="abstract"><p><b>Abstract.</b> ${fmt(e.abstract)}</p><p><b>Keywords:</b> ${e.keywords.map(esc).join("; ")}</p></div>
+    ${e.sections.map(s => `${s.title ? `<h2>${esc(s.title)}</h2>` : ""}${s.paras.map(p => `<p>${fmt(p)}</p>`).join("")}`).join("")}
+    <figure class="plate">${plate("college-1871").replace(/^<figure class="plate ">|<\/figure>$/g, "")}</figure>
+    <h2>References</h2>
+    <div class="refs">${e.references.map(r => `<p>${linkify(emi(r))}</p>`).join("")}</div>
+    <p class="note" style="margin-top:1.6rem">${linkify(emi(e.note))}</p>
+    <div class="citebox">${esc(e.citation)}</div>
+  </div>`;
+}
+
+/* Legal notice and privacy: every statement below describes code in this
+   repository. Change the code, change this text. */
+function viewImprint() {
+  return `<div class="prose legal">
+  <div class="kicker">Legal notice &amp; privacy</div>
+  <h1>Who operates this site, and what it does with data</h1>
+  <div class="card"><h2>Operator</h2>
+    <p>Dr. Pantaleon Fassbender<br>16751 NE 5th Street<br>Williston, FL 32696<br>United States<br>
+    Email: <a href="mailto:pantaleonfassbender@gmail.com">pantaleonfassbender@gmail.com</a></p>
+    <p>This site is a personal research project, operated and hosted in the United States by a private individual, and not on
+    behalf of any institution, employer, publisher or religious order. It carries no advertising and no sponsorship.
+    Responsible for its content: Dr. Pantaleon Fassbender, at the address above.</p></div>
+  <div class="card"><h2>Rights in the texts</h2>
+    <p>The edition gives the volumes of the <i>Woodstock Letters</i> published before 1 January ${PD_CUTOFF + 1}, which are in the
+    public domain in the United States, from the scans Boston College Libraries placed in the Internet Archive. The later volumes
+    are listed but not reproduced. The plates are cut from public-domain page images and name their source leaf by leaf. If you hold
+    rights in any material shown here and consider its use to exceed what the public domain and scholarly citation permit, write to the
+    address above and it will be dealt with promptly. The full account is in <a href="RIGHTS.md">RIGHTS.md</a>.</p></div>
+  <div class="card"><h2>What this site is, technically</h2>
+    <p>A set of static files: HTML, CSS, JavaScript and JSON data, with a prebuilt search index. There are no user accounts, no login,
+    no contact form, no newsletter and no server function of the site's own. The site sets <b>no cookies</b>. It uses no analytics of its own,
+    no tag manager, no advertising and no session recording. It loads <b>nothing from third-party servers</b>: fonts are the system's, the
+    search library (Pagefind) and every data file are served from this site itself. Links to the Internet Archive, the Library of Congress,
+    the Jesuit Online Necrology, Zenodo, GitHub and ORCID are ordinary outbound links; nothing from those sites is embedded here, and they
+    receive a request only when you follow a link.</p></div>
+  <div class="card"><h2>Stored on your own device</h2>
+    <p>One value only: your choice of light or dark theme, kept in the browser's <span class="mono">localStorage</span> under the key
+    <span class="mono">wlTheme</span> so that the site opens the way you left it. It is not transmitted anywhere. Clearing site data for this
+    domain removes it. Nothing else is stored.</p></div>
+  <div class="card"><h2>Server logs and performance measurement</h2>
+    <p>The site is hosted by Netlify, Inc. (San Francisco, USA). Like any web server, Netlify records the requests it serves, typically the
+    IP address, the time, the URL, the status, the amount of data and the browser's user-agent and referrer strings. This is technically
+    unavoidable in delivering a website and is used to operate and secure the service; the operator does not analyse it. Retention follows
+    Netlify's own periods.</p>
+    <p>Netlify also injects a small script, <span class="mono">/.netlify/scripts/rum</span>, into the pages it serves for this site. It is
+    Netlify's real-user metrics: it measures how quickly the page loaded in your browser and reports those timings, with the page's URL and
+    coarse technical data, to Netlify, where the operator can see them aggregated. It sets no cookie and builds no profile. It is the one
+    thing on this site that is not the operator's own code, and it is stated here for that reason.</p>
+    <p>Where the General Data Protection Regulation applies to a reader, the legal basis for both is Article 6(1)(f), the legitimate interest in
+    delivering a functioning, secure website and knowing that it performs. The site is operated and hosted in the United States, so for readers
+    in the European Economic Area these request data are processed outside the EEA, by the operator and by Netlify as hosting provider.</p></div>
+  <div class="card"><h2>Rights of readers in the European Economic Area</h2>
+    <p>Where the GDPR applies, you have the rights of access, rectification, erasure, restriction, portability and objection
+    (Articles 15–21), and the right to lodge a complaint with a supervisory authority (Article 77). Requests go to the address above. In practice
+    the answer is short: apart from the server logs and metrics described, this site holds nothing about you. No representative in the Union
+    has been designated under Article 27; the operator relies on Article 27(2)(a), because the processing is occasional, involves no special
+    categories of data and is unlikely to result in a risk to the rights and freedoms of natural persons.</p></div>
+  <div class="card"><h2>Notice for California residents</h2>
+    <p>Under the California Online Privacy Protection Act: the only personally identifiable information collected is internet or network
+    activity information in the server logs and performance metrics described above. No name, address, email or other identifier is collected,
+    because the site has no field in which to enter one. The only third party with which such information is shared is the hosting provider,
+    Netlify, Inc. Nothing is sold, rented or shared for marketing. The site does not track visitors over time or across sites and therefore
+    does not respond to Do Not Track signals; there is no tracking to switch off.</p></div>
+  <div class="card"><h2>Liability, warranty, children</h2>
+    <p>External links were checked when set; their content is the responsibility of their operators, and any link will be removed promptly on
+    evidence of a problem. The edition is a research instrument offered free of charge and without warranty. Its text is a repaired OCR, its
+    article delimitation and its networks are editorial work that can be wrong, and its limits are set out under
+    <a href="#/about">About &amp; rights</a> and in the <a href="#/introduction">introduction</a>; verify anything you intend to publish against
+    the scans. The site is addressed to adult readers and knowingly collects no information from children.</p></div>
+  <p class="fine">Effective 25 September 2026. Where this notice and the site's behaviour diverge, the notice is wrong and will be corrected.</p>
   </div>`;
 }
 
@@ -813,7 +949,12 @@ function viewAbout() {
   <h2>Source</h2>
   <p>Boston College Libraries scanned the run in 2015. The scans and the ABBYY OCR are at the Internet Archive
   (collection <a href="https://archive.org/details/woodstockletters" target="_blank" rel="noopener">woodstockletters</a>).
-  This edition uses only the page-addressed OCR text and links to the scans. It does not copy any images.</p>
+  This edition uses the page-addressed OCR text and links to the scans. It does not mirror the scans; the only images it
+  reproduces are the <a href="#/plates">plates</a>, cut from public-domain issues and from the county atlas of 1877, each with its source.</p>
+  <h2>Introduction</h2>
+  <p>The <a href="#/introduction">introductory essay</a> describes the journal, the source and its rights, the method and the apparatus,
+  and states how the work was divided between the human author and the language model. It can be downloaded as a manuscript in APA style
+  (<a href="docs/Fassbender-Claude-2026-Woodstock-Letters-Introduction.docx">.docx</a>).</p>
   <h2>Method</h2>
   <ol>
     <li><b>Pages.</b> Running heads are stripped. Printed page numbers are recomputed by consensus over neighbouring
@@ -874,8 +1015,11 @@ function viewAbout() {
   </ul>
   <p>The edition itself:</p>
   <p class="citebox">Fassbender, Pantaleon. <i>Woodstock Letters: A Research Edition</i> (${new Date().getFullYear()}). ${SITE}</p>
+  <p>The introductory essay:</p>
+  <p class="citebox">Fassbender, P., &amp; Claude. (2026). The Woodstock Letters, 1872–1930: An introduction to a research edition. <i>Woodstock Letters: A Research Edition</i>. ${SITE}#/introduction</p>
   <p class="fine">A companion to <a href="https://ignatian-research.netlify.app/" target="_blank" rel="noopener">Ignatiana</a>
-  and to the psycholinguistic study of the Woodstock Letters corpora (replication package on <a href="https://zenodo.org/records/22697014" target="_blank" rel="noopener">Zenodo</a>).</p>
+  and to the psycholinguistic study of the Woodstock Letters corpora (replication package on <a href="https://zenodo.org/records/22697014" target="_blank" rel="noopener">Zenodo</a>).
+  Operator and privacy: <a href="#/imprint">legal notice</a>.</p>
   </div>`;
 }
 
@@ -904,6 +1048,9 @@ async function route() {
     else if (r === "people") out = await viewPeople(params);
     else if (r === "discourse") out = await viewDiscourse(params);
     else if (r === "about") out = viewAbout();
+    else if (r === "introduction") out = await viewIntroduction();
+    else if (r === "plates") out = viewPlates();
+    else if (r === "imprint" || r === "privacy") out = viewImprint();
     else out = `<h1>Not found</h1>`;
     view.innerHTML = typeof out === "string" ? out : out.html;
     Promise.resolve(out.init?.()).catch(e => {

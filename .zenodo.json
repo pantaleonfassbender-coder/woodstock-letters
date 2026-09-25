@@ -1,0 +1,23 @@
+{
+  "upload_type": "dataset",
+  "title": "Woodstock Letters: A Research Edition",
+  "creators": [
+    {"name": "Fassbender, Pantaleon", "orcid": "0000-0002-6683-3617"}
+  ],
+  "description": "<p>A research edition of the <em>Woodstock Letters</em> (1872&ndash;1969), the private house journal of the Jesuits in North America printed at Woodstock College, Maryland: the full text of the volumes in the public domain in the United States, vols. 1&ndash;59 (1872&ndash;1930), 172 issues, 24,248 printed pages, 2,671 articles and some ten million words, built from the Boston College scans at the Internet Archive. Every paragraph is cited by volume, year and printed page and linked to its scan; page numbers are recomputed by consensus and cross-checked against the Internet Archive's labels; articles are delimited from running heads and volume indexes, with authors from the indexes; the OCR is repaired conservatively, with every repair logged in a public QA report.</p><p>With a search index and concordance (Pagefind), a network atlas of the journal's vocabulary, a person-to-person map with biodata from the Jesuit Online Necrology, year-by-year discourse measures continuous with the author's psycholinguistic study of the journal (doi:10.5281/zenodo.22697014), plates from the journal and from the county atlas of 1877, and an introductory essay. The later volumes (1931&ndash;1969) are catalogued but not reproduced pending their clearance.</p><p>Licensing: source code MIT; editorial texts CC BY 4.0; derived data CC0 1.0; the journal's text is in the public domain. Live site: https://woodstock-letters.netlify.app</p>",
+  "license": "MIT",
+  "keywords": [
+    "Woodstock Letters",
+    "Society of Jesus",
+    "Jesuit studies",
+    "Maryland Province",
+    "American Catholic history",
+    "digital edition",
+    "concordance"
+  ],
+  "related_identifiers": [
+    {"identifier": "https://archive.org/details/woodstockletters", "relation": "isDerivedFrom", "resource_type": "publication"},
+    {"identifier": "10.5281/zenodo.22697014", "relation": "isSupplementTo", "resource_type": "dataset"},
+    {"identifier": "10.5281/zenodo.22682750", "relation": "references", "resource_type": "software"}
+  ]
+}

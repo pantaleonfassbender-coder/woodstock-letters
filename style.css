@@ -158,9 +158,37 @@ ul.plain li{margin:.15rem 0}
 
 .prose{max-width:46rem}
 .prose h2{margin-top:2rem}
+
+/* plates: page images cut from the public-domain scans (data/plates.json, assets/plates/) */
+.hero{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:1rem;margin:1.6rem 0 .4rem}
+.hero figure,.plate{margin:0}
+.plate img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--line);background:#fff}
+.plate figcaption{font-size:.78rem;color:var(--fg3);margin:.45rem 0 0;line-height:1.45}
+.plate figcaption b{color:var(--fg2);font-weight:500}
+.plate figcaption a{color:var(--fg3);text-decoration:underline dotted}
+.plate.portrait img{max-width:320px;margin:0 auto}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;margin:.6rem 0 1.6rem}
+.gallery .plate img{aspect-ratio:4/3;object-fit:cover;object-position:top}
+.gallery .plate figcaption{font-size:.74rem}
+.hero .plate img{aspect-ratio:16/10;object-fit:cover}
+.plate a.zoom{display:block}
+.plate a.zoom:hover img{border-color:var(--acc)}
+
+/* essay and legal pages */
+.essay{max-width:46rem}
+.essay p{font-family:var(--serif);font-size:1.06rem;line-height:1.7;text-align:justify;hyphens:auto}
+.essay h2{margin-top:2.2rem}
+.essay .abstract{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.2rem;margin:1.2rem 0 1.6rem}
+.essay .abstract p{font-family:var(--sans);font-size:.92rem;text-align:left;margin:0 0 .6em;hyphens:none}
+.essay .refs p{font-family:var(--sans);font-size:.84rem;text-align:left;padding-left:1.6rem;text-indent:-1.6rem;margin:0 0 .55em;hyphens:none;color:var(--fg2)}
+.essay .note{font-size:.84rem;color:var(--fg3);font-family:var(--sans);text-align:left;hyphens:none}
+.essay figure{margin:1.4rem 0}
+.legal .card h2{font-size:1.15rem;margin-top:0}
+.legal ul{color:var(--fg2);font-size:.93rem}
 footer{border-top:1px solid var(--line);color:var(--fg3);font-size:.78rem;padding:1.4rem;text-align:center}
 
 @media (max-width:820px){
+  .hero{grid-template-columns:1fr}
   .reader{grid-template-columns:1fr}
   .side{position:static}
   main{padding:1.4rem 16px 3rem}

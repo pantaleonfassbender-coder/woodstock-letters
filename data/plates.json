@@ -1,0 +1,99 @@
+{
+  "_note": "Plates cut from public-domain page images: the journal's own illustrations (published before 1931) and the 1877 Hopkins atlas (Library of Congress). Faithful reproduction of a public-domain two-dimensional work adds nothing licensable; captions and credits are CC0. Leaf numbers are the Internet Archive's scan leaves; the 'ia' field is the viewer index for a deep link.",
+  "college-1871": {
+    "caption": "Woodstock College in 1871, two years after it opened: the long front above the Patapsco, drawn by Arthur E. Jones, S.J., then a theologian in the house.",
+    "credit": "Woodstock Letters 56 (1927), no. 1, plate facing the title of P. J. Dooley's Woodstock and Its Makers. Internet Archive woodstockletters5611unse, leaf 9. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 8,
+    "kind": "drawing"
+  },
+  "college-1920": {
+    "caption": "Woodstock, about 1920: the college from the garden side, in the year of its golden jubilee.",
+    "credit": "Woodstock Letters 49 (1920), no. 1, the Golden Jubilee number, plate before p. 1. Internet Archive woodstockletters4911unse, leaf 12. Public domain.",
+    "issue": "woodstockletters4911unse",
+    "ia": 11,
+    "kind": "photograph"
+  },
+  "map-1877": {
+    "caption": "“Woodstock Cath. College” on the Patapsco, with Woodstock Station and Post Office on the Baltimore & Ohio, Granite, Marriottsville and the Howard County line across the river. Second District of Baltimore County, 1877, two inches to the mile.",
+    "credit": "G. M. Hopkins, Atlas of Baltimore County, Maryland (Philadelphia, 1877), plate 20 (detail). Library of Congress, Geography and Map Division, https://www.loc.gov/item/2018593339/. Public domain.",
+    "kind": "map",
+    "href": "https://www.loc.gov/item/2018593339/"
+  },
+  "map-county-1877": {
+    "caption": "Where the journal was made: Woodstock Station in the south-western corner of Baltimore County, twenty miles from Baltimore by the B. & O., on the county map of 1877.",
+    "credit": "G. M. Hopkins, Atlas of Baltimore County, Maryland (Philadelphia, 1877), county map (detail). Library of Congress, Geography and Map Division, https://www.loc.gov/item/2018593339/. Public domain.",
+    "kind": "map",
+    "href": "https://www.loc.gov/item/2018593339/"
+  },
+  "community-chart": {
+    "caption": "The community of Woodstock College, 1869–1919: faculty, theologians, philosophers and brothers, year by year, as the jubilee number drew them.",
+    "credit": "Woodstock Letters 49 (1920), no. 1, plate between pp. 12 and 13. Internet Archive woodstockletters4911unse, leaf 26. Public domain.",
+    "issue": "woodstockletters4911unse",
+    "ia": 25,
+    "kind": "chart"
+  },
+  "disputation": {
+    "caption": "The theological disputation in the library, at the golden jubilee of 1919.",
+    "credit": "Woodstock Letters 49 (1920), no. 1, plate facing p. 23. Internet Archive woodstockletters4911unse, leaf 38. Public domain.",
+    "issue": "woodstockletters4911unse",
+    "ia": 37,
+    "kind": "photograph"
+  },
+  "library": {
+    "caption": "The library, decorated for a celebration; the jubilee disputation of 1919 was held here.",
+    "credit": "Woodstock Letters 56 (1927), no. 1, plate between pp. 102 and 103 of P. J. Dooley's Woodstock and Its Makers. Internet Archive woodstockletters5611unse, leaf 125. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 124,
+    "kind": "photograph"
+  },
+  "mortuary-chapel": {
+    "caption": "The mortuary chapel in the cemetery above the college. The men buried around it fill the obituary section of the journal.",
+    "credit": "Woodstock Letters 56 (1927), no. 1, plate between pp. 64 and 65 of P. J. Dooley's Woodstock and Its Makers. Internet Archive woodstockletters5611unse, leaf 83. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 82,
+    "kind": "photograph"
+  },
+  "funeral": {
+    "caption": "A Jesuit funeral at Woodstock: the procession from the college to the cemetery.",
+    "credit": "Woodstock Letters 56 (1927), no. 1, plate between pp. 64 and 65 of P. J. Dooley's Woodstock and Its Makers. Internet Archive woodstockletters5611unse, leaf 83. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 82,
+    "kind": "photograph"
+  },
+  "keller": {
+    "caption": "Joseph E. Keller, S.J. (1827–1886), provincial, rector of Woodstock and founder of the Woodstock Letters.",
+    "credit": "Woodstock Letters 56 (1927), no. 1, plate facing p. 17 of P. J. Dooley's Woodstock and Its Makers. Internet Archive woodstockletters5611unse, leaf 29. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 28,
+    "kind": "portrait"
+  },
+  "mazzella": {
+    "caption": "Camillo Mazzella, S.J. (1833–1900), professor of dogma and first prefect of studies at Woodstock, later cardinal.",
+    "credit": "Woodstock Letters 56 (1927), no. 1, plate facing p. 33 of P. J. Dooley's Woodstock and Its Makers. Internet Archive woodstockletters5611unse, leaf 47. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 46,
+    "kind": "portrait"
+  },
+  "pantanella": {
+    "caption": "Dominic Pantanella, S.J. (1831–1922), of the first faculty of 1869, the “creator of Woodstock's beauty”: its gardens, terraces and walks.",
+    "credit": "Woodstock Letters 56 (1927), no. 1, plate facing p. 49 of P. J. Dooley's Woodstock and Its Makers. Internet Archive woodstockletters5611unse, leaf 65. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 64,
+    "kind": "portrait"
+  },
+  "pantanella-1920": {
+    "caption": "Dominic Pantanella, S.J., “sole survivor of the first faculty”, at the golden jubilee of 1919.",
+    "credit": "Woodstock Letters 49 (1920), no. 1, plate facing p. 45. Internet Archive woodstockletters4911unse, leaf 65. Public domain.",
+    "issue": "woodstockletters4911unse",
+    "ia": 64,
+    "kind": "portrait"
+  },
+  "dooley-title": {
+    "caption": "The title page of Patrick J. Dooley's Woodstock and Its Makers (The College Press, Woodstock 1927), the house history the journal printed in its 56th volume.",
+    "credit": "Woodstock Letters 56 (1927), no. 1. Internet Archive woodstockletters5611unse, leaf 11. Public domain.",
+    "issue": "woodstockletters5611unse",
+    "ia": 10,
+    "kind": "title page"
+  }
+}
