@@ -14,6 +14,7 @@
 | 2026-09-25 | 14–18 (1885–1889) | 276 | 1909 | 4691 | Pagination against IA labels: 14 406/406, 15 340/340, 16 329/329, 17 400/400, 18 392/392. No pagination gaps. Indexes (contents lists) for vols. 14 and 17 only. Obituaries split at their name lines where no index names them. Vols. 19–59 rebuilt: same pages; 34 more obituaries split out. Atlas, people map and search rebuilt over vols. 14–59. |
 | 2026-09-25 | 9–13 (1880–1884) | 179 | 1621 | 4100 | Pagination against IA labels: 9 223/223, 10 292/292, 11 313/313, 12 350/350, 13 416/416. No pagination gaps. Contents lists found for all five (vol. 11's heading misread as XL, vol. 13's as "Xllt."). Early running heads in italic title case are read. Vols. 14–59 rebuilt: same pages; one article change (vol. 19). Atlas, people map and search rebuilt over vols. 9–59. |
 | 2026-09-25 | 4–8 (1875–1879) | 130 | 1004 | 1427 | Pagination against IA labels: 4 189/191, 5 222/222, 6 179/187, 7 187/187, 8 183/183. The 10 differences are leaves bound out of order (vol. 4 no. 2, pp. 79–85; vol. 6 no. 2, pp. 97–104), where IA numbers the leaves as bound; read in printed order after checking the scans. No pagination gaps. Contents lists for all five (vol. 4's headed only "CONTENTS."). Vols. 9–59 rebuilt: two page changes, 37 articles newly split out, 838 leaked running-head lines dropped (below). Atlas, people map and search rebuilt over vols. 4–59. |
+| 2026-09-25 | 1–3 (1872–1874) | 81 | 674 | 235 | Pagination against IA labels: 1 199/199, 2 229/229, 3 213/213. No pagination gaps. Contents lists for all three ("CONTENTS.", "CONTENTS,", no volume named). Vol. 1's OCR is the poorest of the run (letter-spaced headings, `)'` for y, `<^` for g); repairs added for it. Vols. 4–59 rebuilt: pages unchanged; 7 articles newly split out, 102 titles or extents changed; 1,975 more repairs (h read as li). Atlas, people map and search rebuilt over vols. 1–59, the whole public-domain run. |
 
 ### Vols. 30–34: what the batch found
 
@@ -479,6 +480,69 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Vols. 1–3: what the batch found
+
+Per volume: 1 (1872) 30 articles, 205 pages, 139 repairs; 2 (1873) 27, 244, 62; 3 (1874) 24,
+225, 34. The public-domain run, vols. 1–59 (1872–1930), is now complete in full text.
+
+Pagination:
+
+- **Mastheads the OCR has spoiled** ("WOODSTOCK LETTEllS.", "W()oj)ST()(;k letters.", "VOL. II.,
+  No. 2.") are recognised. Vol. 1 no. 3 is bound with the volume's title page and the
+  unnumbered prospectus ("CIRCULAR", also bound before no. 1); both are front matter.
+- Vol. 2 no. 1: the unnumbered "References to the Map" after p. 40 (the map itself is not in the
+  scan) is kept as an insert. It had been counted as p. 41, making the real p. 41 a "bis". An insert
+  becomes a page only when it closes the issue.
+- **Seams:** vol. 1 no. 2 ends on p. 143 and no. 3 opens on p. 145; vol. 2 no. 1 ends on p. 83 and
+  no. 2 opens on p. 85; vol. 2 no. 2 ends on p. 167 (p. 168 is the contents) and no. 3 opens on
+  p. 169; vol. 3 no. 1 ends on p. 81 and no. 2 opens on p. 83. Every issue ends cleanly ("D. O. M."),
+  and no index cites the missing page. They are taken for blank versos.
+
+Index:
+
+- **Contents lists** at the back of vols. 1 (no. 3, two leaves), 2 (no. 2) and 3 (no. 3), headed
+  "CONTENTS.", "CONTENTS. / -:0:- / PAGE" or "CONTENTS,". A bare contents list now takes its
+  continuation leaves like any index.
+- **Entries broken over two lines** join when the second opens with a dash ("— Thunder Bay Station
+  25") or when the first fills the column and carries no page. They don't join after an issue's
+  numeral that lost its page ("… Province i"), before ditto marks, or before a person's entry.
+- **A column of names read as one line and its pages as the next** ("Br. Francis A. Heilers. Br.
+  John Kilcullin… / 123 122 428 …", vol. 21) is paired name by name.
+- A page figure glued to junk ("Md i;{2" for 132) and a quote after a figure ("45'") are
+  read as they should be.
+- Where the index names a page whose only heading in capitals shares a word with the entry, or is
+  letter-spaced ("L K T T V. R V ROM T H V. N () \' I T I A T V."), that heading opens the piece.
+
+Articles and titles:
+
+- **Garbled headings take the index's title.** A heading that is letter-spaced, strewn with stray
+  marks, or mostly unknown words ("G K( )RG KT( )WN C( ) L f.KG K", "The Lath Fal'hkr Maldonada")
+  takes the index entry for its page. That entry must not be inverted ("Holland, The Province of"),
+  garbled, over 80 characters or ditto-marked. Where two pieces share the page, it must also share
+  a word with the heading. Conversely, an inverted index entry no longer replaces a readable page
+  title in upper and lower case. That settles the open issue on inverted titles for most cases.
+- Footnote marks closing a title ("Two Irish Jubilarians/^>", "Notes from Vigan^^") are dropped.
+- A title page whose running heads abbreviate it ("FIFTIETH ANNIV'Y OF THE MISSOURI PROV.
+  CELEBRATION AT THE NOVITIATE" under "Fiftieth Anniversary of the Missouri Province", vol. 3
+  p. 43, which the index misprints as 48) opens an article.
+- Running heads as short as a place name ("Buffalo.", "St. Louis.", vol. 1) are stripped when they
+  repeat closely on the pages beside them.
+
+Repairs:
+
+- **h read as li**, and *he* as *lie* or *lic*: "tlie", "tliat", "Catliolic", "Wasliington",
+  "wliich". The reading must be a common word (zipf 3), and in capitals it is a capital: "FATliER"
+  gives FATHER. This recurs through the whole run: 1,975 repairs in vols. 4–59.
+- **g read as `<^` or `<;`, y as `)'`** ("voya<^e", "havin<;", "pra)'er", ")'our", "b)'"), where
+  the reading is a common word. A reading of two or three letters must be very common ("by",
+  "day", "you"), not a fragment such as "ing".
+
+Rebuilt vols. 4–59: pages unchanged. Articles 2,597 → 2,604. The 7 new ones are vol. 11 p. 279
+"Kansas", vol. 21 p. 267 (Mr. Remigius Vial), vol. 32 p. 168 (Jamaica), vol. 44 p. 9 (McElroy to
+Stonestreet), vol. 49 p. 302 (a false split, below), and vol. 55 pp. 168 and 170 (the retreat
+lists). 102 titles or extents change: garbled titles replaced from the index, inverted ones from
+the page, footnote marks dropped.
+
 ### Vols. 4–8: what the batch found
 
 Per volume: 4 (1875) 25 articles, 199 pages, 10 repairs; 5 (1876) 25, 230, 2; 6 (1877) 22,
@@ -571,8 +635,8 @@ Rebuilt vols. 9–59:
   vol. 38 p. 178 "The Ea K 7 Ho Ua Ke" (the Sicilian earthquake, split from p. 177)
   and p. 192 "Fl00t> Anb Gospel" (continues p. 189); vol. 39 p. 102 (two index
   entries run together) and p. 398 "Fa Ther Pa Trick Cle a Son".
-- Index entries in inverted form become titles where the page heading is not in
-  capitals ("Innsbruck, The Golden Jubilee of", "Kenny Father, Letter of").
+- Index entries in inverted form ("Innsbruck, The Golden Jubilee of") no longer replace a readable
+  page title (since vols. 1–3); they remain where the page gives none.
 - Undecided repairs, left as made: `supped` → `slipped`, `miilenium` → `millenium` (vol. 39).
 - Latin and Romance words repaired as English, once each (vols. 40–44): `iusta` → insta, and `Loius` → Loins (for Louis). There is no narrower rule
   that keeps the correct repairs of the same kind ("iucluding" → including).
@@ -612,6 +676,17 @@ Rebuilt vols. 9–59:
   `" " Rev. Fr. Provincial` (ditto marks of the index) and p. 322 "Exstinct^ Societati
   Me^^'^"; vol. 24 pp. 415–429, Hughes's "New Histories" split into its three parts by the
   index; repairs `tiines` → tunes (times, vol. 28) and `soiis` → soils (vol. 24).
+- Vols. 1–3, left as they are:
+  - vol. 1's OCR is the poorest of the run: some 100 short lines, most of them running heads too garbled to match their
+    neighbours stay in the text ("Ci 'orj^'i 'ton 7/ Col It \<^r."), and some titles keep their
+    misreadings ("Father White's Eelation", from the contents; "An Historical Sketch 01^^ Father
+    Andre W W H I T E");
+  - vol. 2's contents is badly read: pp. 85, 146, 161, 165 and 166 appear as "S5", "140", "101",
+    "105" and "100", so those entries don't link; vol. 2 p. 41's heading reads "Woodstock", the
+    subtitle "Its Surroundings and Its Associations";
+  - vol. 3 p. 43's title keeps the printed abbreviations ("Anniv'y", "Prov.").
+- Vol. 49 p. 302 "Itev West": a garbled running head splits Fr. Mareau's Key West hurricane
+  account (p. 299).
 - Vols. 4–8, left as they are:
   - vol. 4 p. 79: the issue-opening title is the first line of the subtitle ("Portage Des
     Sioux a Fragment of History, Or the"), since the OCR puts the title "Early Missions of
