@@ -58,7 +58,8 @@ MASTHEAD = re.compile(
 # vol. 54 has no index, only a front-matter "CONTENTS OF VOL. LIV." of the same form
 # and from vol. 57 in arabic figures: "INDEX TO VOLUME 57"
 # ("INDKX TO VOLUME XXV", vol. 25)
-INDEX_HEAD = re.compile(r"(?:IND[EK]X\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?VOL\w*\.?\s+([XVLI]+[a-z]*|\d{2})\b", re.I)
+# ("CONTENTS OF rOL. XVII.", vol. 17)
+INDEX_HEAD = re.compile(r"(?:IND[EK]X\s+TO|CONTENTS\s+OF)\s+(?:THE\s+)?[VvrY]OL\w*\.?\s+([XVLI]+[a-z]*|\d{2})\b", re.I)
 
 
 def index_numeral(s):
@@ -626,6 +627,9 @@ class Repair:
         for a, b, where in self.SUBS:
             if a not in core or (where == "start" and not core.startswith(a)) \
                     or (isinstance(where, int) and len(core) < where):
+                continue
+            # tl for tt only inside a word ("letler", "litlle"): "lovetl" is no "lovett" (vol. 15)
+            if (a, b) == ("tl", "tt") and core.endswith("tl"):
                 continue
             # the Latin dative and ablative plural: "in Indiis", "Dominiis" (vols. 24, 26)
             # (but "religioiis" is religious, "Jesiis" Jesus: only an -iis that is
@@ -1304,6 +1308,19 @@ def build(vol):
                      and difflib.SequenceMatcher(None, norm_head(t), s).ratio() >= 0.75), None)
 
     for i, (pg, p) in enumerate(flat):
+        # In the Obituary, each notice opens with its name on a line of its
+        # own, "Fr. John Cunningham." (vols. 15, 16, 18, which have no index to
+        # name the start pages): a new notice, if prose follows and it is no
+        # letter's signature
+        # (not the name line under the notice's own heading: "FR. CHARLES H.
+        # HEICHEMER" / "Father Charles H. Heichemer.", vol. 23)
+        if cur is not None and cur.get("section") == "Obituary" and pg["issue"] == cur["issue"] \
+                and cur.get("_body") \
+                and not p.get("start") and not p.get("h") and len(p["t"]) < 50 \
+                and re.fullmatch(r"(?:Father|Brother|F[rk]|B[rj]\^?|Mr)[.,]?\s+[A-Z][\w.'’ ^>-]{2,40}\.", p["t"].strip()) \
+                and i + 1 < len(flat) and not flat[i + 1][1].get("h") and len(flat[i + 1][1]["t"]) > 150 \
+                and not (i and flat[i - 1][1]["t"].rstrip().endswith(",")):
+            p["start"], p["h"] = "name", 1
         # From vol. 47 the Varia open under a running head ("VARIA 97" over the
         # title VARIA), or mid-page on unheaded pages (vol. 49 no. 1), so no
         # title-page rule sees them; a VARIA heading always opens the section,
@@ -1371,7 +1388,7 @@ def build(vol):
                     cur["_mark"] = True  # a numbered page all the same (vol. 54 no. 2)
             if p.get("_entry") and not is_upper(p["t"]):
                 cur["title"] = p["_entry"]["entry"]
-            if p.get("_entry") and p["_entry"]["section"] == "Obituary":
+            if (p.get("_entry") and p["_entry"]["section"] == "Obituary") or p["start"] == "name":
                 cur["section"] = "Obituary"
             sec = section_head(cur["title"])
             # (the Varia inside an asterisked section stay Varia, vol. 56 no. 1)
@@ -1388,7 +1405,8 @@ def build(vol):
                     cur["subtitle"] = rest or None
                 elif cur["title"].upper() == "OBITUARY" and k < len(flat):
                     # the name often follows in ordinary type: "Father Edward V. Boursaud."
-                    m = re.fullmatch(r"((?:Father|Brother|Fr\.|Br\.|Mr\.|Rev\.) [A-Z][\w.' -]{2,50}?)\.?",
+                    # ("Fk. John Clarke.", vol. 15)
+                    m = re.fullmatch(r"((?:Father|Brother|F[rk]\.|B[rj]\.|Mr\.|Rev\.) [A-Z][\w.' :-]{2,50}?)\.?",
                                      flat[k][1]["t"].strip())
                     if m:  # a fallback: the volume index, if it names him, wins
                         cur["title"], cur["name_line"] = m[1], True
