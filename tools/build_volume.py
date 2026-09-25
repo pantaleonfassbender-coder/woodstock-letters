@@ -52,6 +52,15 @@ _ov = pathlib.Path(__file__).with_name("page_overrides.json")
 OVERRIDES = {k: v for k, v in json.loads(_ov.read_text(encoding="utf-8")).items()
              if not k.startswith("_")} if _ov.exists() else {}
 
+# Corrections read by eye on the page, where a heuristic would do more harm
+# than good: articles merged, split, retitled; stray lines dropped; index
+# entries corrected; single repairs fixed or refused. Each is listed in the
+# volume's QA report.
+_ed = pathlib.Path(__file__).with_name("article_overrides.json")
+EDITS = json.loads(_ed.read_text(encoding="utf-8")) if _ed.exists() else {}
+REPAIR_FIX = EDITS.get("_repairs", {}).get("fix", {})
+REPAIR_KEEP = set(EDITS.get("_repairs", {}).get("keep", []))
+
 MASTHEAD = re.compile(
     r"^(A\.?\s*M\.?\s*D\.?\s*G\.?|THE|W(?:OODSTOC|\S{3,12})K\s+LETTE[RlI1]{1,2}S\.?|VOL\.?\s*[XVLI]+[.,]*\s*(No\.?\s*\w+\.?)?)$",  # ("VOL. II., No. 2.", vol. 2)
     re.I)
@@ -687,8 +696,11 @@ class Repair:
             # h read as li, and he as lie or lic: "tlie", "tlic", "wliich" (vols. 1–2)
             ("lic", "he", 4), ("li", "h", 4)]
 
-    def __init__(self, vocab):
+    def __init__(self, vocab, fix=None, keep=()):
         self.vocab = vocab
+        # corrections read by eye (tools/article_overrides.json): a reading to
+        # give, or a word to leave alone ("supped" is no "slipped")
+        self.fix, self.keep = {**REPAIR_FIX, **(fix or {})}, REPAIR_KEEP | set(keep)
         self.log = Counter()
 
     def known(self, w):
@@ -701,6 +713,12 @@ class Repair:
 
     def word(self, w):
         core = w.lstrip("(")
+        # corrections read by eye (tools/article_overrides.json)
+        if core in self.fix:
+            self.log[(core, self.fix[core])] += 1
+            return w.replace(core, self.fix[core])
+        if core in self.keep:
+            return w
         # a digit inside a word is never right: the ct ligature read as 6l
         # ordinals with 1 read as i or l and 0 as o: "io6th" 106th, "i6tli" 16th (vols. 46, 50)
         m = re.fullmatch(r"([iIl][iIlo]*\d[\dio]*)(th|tli|st|nd|rd)", core)
@@ -889,7 +907,8 @@ def parse_index(leaves, vol):
                     lines[-1:] = [f"{n.strip(' .')}, {pg}" for n, pg in zip(names, piece.split())]
                     raw[-1:] = [raw[-1]] * len(names)
                     continue
-                if lines and not re.search(r"\d[.,]?$", lines[-1]) \
+                # (a year in short form is no page: "… from May, '99" / "to April '00 • • 151", vol. 29)
+                if lines and (not re.search(r"\d[.,]?$", lines[-1]) or re.search(r"['’]\d\d$", lines[-1])) \
                         and piece.rstrip(".").upper() not in ("OBITUARY", "OBITUARIES", "VARIA") and (
                         re.match(r"[a-z(]", piece)
                         or re.search(r"\b(?:of|the|and|in|at|to|for)$", lines[-1])
@@ -897,6 +916,9 @@ def parse_index(leaves, vol):
                         # column ("Letter from Father Ponziglione to Very Rev.
                         # Father O'Neil / — Osage Mission, … 111", vol. 1)
                         or re.match(r"[—-]", piece)
+                        # or after an author's name cut at an initial ("… — Fr. J." /
+                        # "J- Ryan 94", vol. 30)
+                        or re.search(r"\s[A-Z]\.$", lines[-1]) and re.search(r"\d[.,]?$", piece)
                         or len(lines[-1]) >= 45 and re.search(r"\d[.,]?$", piece) and not re.search(r"\d", lines[-1])
                         # (not after an issue's numeral that lost its page, "… Province i",
                         # nor before ditto marks or a person's entry: vols. 21, 48)
@@ -969,7 +991,7 @@ def parse_index(leaves, vol):
             continue
         # (a year in the title is not a page: "The Natchez Indians in 1730, 21, 150", vol. 4)
         # (nor a figure glued to junk: "Frederick, Md i;{2" for 132, vol. 1)
-        m = re.match(r"^(.*?[A-Za-z].*?)[\s.,—]*(?<![\d;{}\[|])((?:\d{1,3}(?!\d),?\s*)+)\.?$", ln)
+        m = re.match(r"^(.*?[A-Za-z].*?)[\s.,—]*(?<![\d;{}\[|'’])((?:\d{1,3}(?!\d),?\s*)+)\.?$", ln)
         if not m:
             continue
         pages = [int(x) for x in re.findall(r"\d{1,3}", m[2])]
@@ -980,6 +1002,7 @@ def parse_index(leaves, vol):
             author = parts.pop()
             # "Mr. T. J. McGrath (concluded)": the serial's note is not the name
             author = re.sub(r"\s*\((?:concluded|(?:to be )?continued)\W*$", "", author, flags=re.I)
+            author = re.sub(r"\b([A-Z])- (?=[A-Z])", r"\1. ", author)  # "Fr. J. J- Ryan" (vol. 30)
         entries.append({"entry": " — ".join(parts), "author": author,
                         "pages": pages, "section": section, "_raw": r,
                         # ("Holland. 339": a full stop for the comma, but not a leader "Castillo.... 30")
@@ -1053,7 +1076,7 @@ def title_case(s):
     t = " ".join(out)
     t = re.sub(r"\b(S\.?\s*J|U\.?\s*S|N\.?\s*Y)\b\.?", lambda m: m[0].upper(), t, flags=re.I)
     t = re.sub(r"—([a-z])", lambda m: "—" + m[1].upper(), t)  # "Baltimore—Forty Hours' Devotion" (vol. 6)
-    return re.sub(r"\bMc([a-z])", lambda m: "Mc" + m[1].upper(), t).rstrip(".,—- ")  # ("WOODSTOCK, -", vol. 2)
+    return re.sub(r"\bMc([a-z])", lambda m: "Mc" + m[1].upper(), t).rstrip(".,—-:; ")  # ("WOODSTOCK, -", vol. 2)
 
 
 def build(vol):
@@ -1283,7 +1306,8 @@ def build(vol):
         for lf in leaves:
             for ln in lf["body"]:
                 vocab.update(w.lower() for w in re.findall(r"[A-Za-z]+", ln))
-    rep = Repair(vocab)
+    ed = EDITS.get(str(vol), {})
+    rep = Repair(vocab, ed.get("repairs", {}).get("fix"), ed.get("repairs", {}).get("keep", ()))
 
     # the index usually opens no. 1, but not always: vol. 31 has it before
     # no. 3, and the index to vol. 30 was bound at the back of vol. 29
@@ -1336,6 +1360,28 @@ def build(vol):
         e["entry"] = rep.para(e["entry"])
         if e["author"]:
             e["author"] = rep.para(e["author"])
+    edits_done = []
+    for fx in ed.get("index", []):
+        for e in index:
+            if e["entry"].startswith(fx["match"]):
+                if "pages" in fx:
+                    e["pages"] = fx["pages"]
+                for key in ("entry", "section", "author", "mark"):
+                    if key in fx:
+                        e[key] = fx[key]
+                edits_done.append(f"index entry “{fx['match']}” → " + ", ".join(
+                    f"{k} {v}" for k, v in fx.items() if k != "match"))
+                break
+        else:
+            edits_done.append(f"**index entry “{fx['match']}” not found**")
+    for fx in ed.get("index_add", []):
+        index.append({"entry": fx["entry"], "author": fx.get("author"), "pages": fx["pages"],
+                      "section": fx.get("section", "Articles")})
+        edits_done.append(f"index entry added: “{fx['entry']}” {fx['pages']}")
+    for m in ed.get("index_drop", []):
+        n = len(index)
+        index = [e for e in index if not e["entry"].startswith(m)]
+        edits_done.append(f"index entry “{m}” dropped" if len(index) < n else f"**index entry “{m}” not found**")
     # an index that cites misprinted numbers (vol. 55: see page_overrides.json)
     for iss in issues:
         fix = OVERRIDES.get(iss["id"], {}).get("index_add")
@@ -1483,6 +1529,42 @@ def build(vol):
                                                                   and len(norm_head(pg["paras"][0]["t"])) >= 5)
         for j, p in enumerate(pg["paras"][:2]))}
 
+    # the running heads of a volume whose OCR spoils them past matching (vol.
+    # 1), listed by eye: a short line opening a page that is like one of them,
+    # and a bare figure beside it, is no text
+    heads = [norm_head(h) for h in ed.get("running_heads", [])]
+    dropped = 0
+    for pg in text_pages if heads else []:
+        for q in list(pg["paras"][:3]):
+            nq = norm_head(q["t"])
+            # (never a heading in capitals: "LETTER FROM ST. LOUIS" opens a piece)
+            if q.get("start") or len(q["t"]) >= 70 or len(nq) < 4 or is_upper(q["t"]):
+                if re.fullmatch(r"[\W\dlIioOSsg]{1,5}", q["t"].strip()) and not q.get("start"):
+                    pg["paras"].remove(q)
+                    flat[:] = [(a, b) for a, b in flat if b is not q]
+                    dropped += 1
+                    continue
+                break
+            if any(difflib.SequenceMatcher(None, nq, h).ratio() >= 0.5 for h in heads):
+                pg["paras"].remove(q)
+                flat[:] = [(a, b) for a, b in flat if b is not q]
+                dropped += 1
+            else:
+                break
+    if heads:
+        edits_done.append(f"{dropped} lines dropped as the volume's running heads ({len(heads)} listed)")
+
+    # stray lines read by eye as running heads or marks (article_overrides.json)
+    for dr in ed.get("drop", []):
+        pg = next((q for q in text_pages if q["p"] == dr["p"] and bool(q.get("sec")) == bool(dr.get("sec"))), None)
+        hit = pg and next((q for q in pg["paras"] if q["t"].startswith(dr["text"])), None)
+        if hit:
+            pg["paras"].remove(hit)
+            flat[:] = [(a, b) for a, b in flat if b is not hit]
+            edits_done.append(f"p. {dr['p']}: line “{dr['text']}” dropped (a running head)")
+        else:
+            edits_done.append(f"**p. {dr['p']}: line “{dr['text']}” not found**")
+
     # 2. a title-page start that only repeats the running article is a
     #    continuation; a mid-page heading that the following running heads
     #    repeat (and the preceding ones do not) opens a new article
@@ -1512,7 +1594,11 @@ def build(vol):
     for e in index:
         if not e["pages"] or e["section"] == "Varia":
             continue
-        pg = next((q for q in text_pages if q["p"] == e["pages"][0] and not q.get("sec")), None)
+        # (an entry marked for the asterisked pages of an issue printed from a
+        # number the volume has already used: vol. 54 no. 2, article_overrides.json)
+        same = [q for q in text_pages if q["p"] == e["pages"][0] and not q.get("sec")]
+        marked = [q for q in same if str(q.get("pl", "")).endswith("*")]
+        pg = (marked if e.get("mark") else [q for q in same if q not in marked] or same or [None])[0] if same else None
         if pg is None:
             continue
         if any(p.get("start") for p in pg["paras"]):
@@ -1562,6 +1648,25 @@ def build(vol):
             hit["_entry"] = e
         else:
             unmatched.append(e)
+
+    # a piece that opens where no heading shows it, read by eye
+    # (article_overrides.json): the paragraph, or the rest of it, starts it
+    for sp in ed.get("split", []):
+        k = next((k for k, (pg, p) in enumerate(flat) if pg["p"] == sp["p"]
+                  and bool(pg.get("sec")) == bool(sp.get("sec")) and sp["at"].lower() in p["t"].lower()), None)
+        if k is None:
+            edits_done.append(f"**split at p. {sp['p']} “{sp['at']}”: not found**")
+            continue
+        pg, p = flat[k]
+        at = p["t"].lower().index(sp["at"].lower())
+        if at > 0:  # the piece opens inside the paragraph: split it there
+            q = {"t": p["t"][at:]}
+            p["t"] = p["t"][:at].rstrip()
+            pg["paras"].insert(pg["paras"].index(p) + 1, q)
+            flat.insert(k + 1, (pg, q))
+            p = q
+        p["start"], p["h"] = "edited", 1
+        edits_done.append(f"p. {pg['p']}: a piece opens at “{sp['at']}”")
 
     # 4. assign paragraphs to articles
     articles, cur = [], None
@@ -1716,6 +1821,34 @@ def build(vol):
         a.pop("pl0", None)
         a.pop("_body", None)
 
+    # 4b. corrections read by eye (tools/article_overrides.json)
+    def reach(aid):
+        ps = [pg for pg, p in flat if p.get("a") == aid]
+        return (ps[0]["p"], ps[-1]["p"]) if ps else (None, None)
+    for aid in ed.get("merge", []):
+        i = next((i for i, a in enumerate(articles) if a["id"] == aid), None)
+        if not i:
+            edits_done.append(f"**merge {aid}: not found**")
+            continue
+        prev = articles[i - 1]
+        for _, q in flat:
+            if q.get("a") == aid:
+                q["a"] = prev["id"]
+        del articles[i]
+        prev["p0"], prev["p1"] = reach(prev["id"])
+        edits_done.append(f"{aid} merged into {prev['id']} (“{prev['title']}”)")
+    for key in ("title", "section", "author"):
+        for aid, v in ed.get(key, {}).items():
+            a = next((a for a in articles if a["id"] == aid), None)
+            if a is None:
+                edits_done.append(f"**{key} of {aid}: not found**")
+                continue
+            edits_done.append(f"{aid}: {key} “{a.get(key)}” → “{v}”")
+            a[key] = v
+            if key == "title":
+                a["_edited"] = True
+                a["subtitle"] = ed.get("subtitle", {}).get(aid, a.get("subtitle"))
+
     # 5. authors: volume index by start page, else an end signature
     for a in articles:
         cands = [e for e in index if e["pages"] and e["pages"][0] == a["p0"] and ("pp" not in a or a.get("_mark"))
@@ -1733,14 +1866,14 @@ def build(vol):
         if not cands and ("pp" not in a or a.get("_mark")) and a["title"] not in ("Varia", "Obituary", "Supplement") and not any(zipf_frequency(w.lower(), "en") >= 3.0
                                                    for w in re.findall(r"[A-Za-z]{4,}", a["title"])):
             cands = [e for e in index if a["p0"] in e["pages"]][:1]
-            if cands:
+            if cands and not a.get("_edited"):
                 a["title"] = cands[0]["entry"]
         if cands:
             e = max(cands, key=lambda e: difflib.SequenceMatcher(
                 None, norm_head(e["entry"]), norm_head(a["title"])).ratio())
             a["indexEntry"] = e["entry"]
             a.setdefault("section", e["section"])
-            if a["title"] == "Obituary" or a.get("name_line"):
+            if (a["title"] == "Obituary" or a.get("name_line")) and not a.get("_edited"):
                 a["title"] = e["entry"]
             if e["author"]:
                 a["author"] = e["author"]
@@ -1753,6 +1886,7 @@ def build(vol):
                     a["authorFrom"] = "signature"
     for a in articles:
         a.pop("name_line", None)
+        a.pop("_edited", None)
         a.pop("_mark", None)
         a.pop("_t0", None)
 
@@ -1773,6 +1907,9 @@ def build(vol):
         report.append(f"- p. {a['p0']}–{a['p1']}  **{a['title']}** [{a['how']}]"
                       + (f" — {a['author']}" if a["author"] else " — *no author*")
                       + ("" if a.get("indexEntry") else "  ⚠ not in volume index"))
+    if edits_done:
+        report.append(f"\n## Corrections read by eye ({len(edits_done)}; tools/article_overrides.json)\n")
+        report.extend(f"- {x}" for x in edits_done)
     if unmatched:
         report.append(f"\n## Index entries without a detected article start ({len(unmatched)})\n")
         report.extend(f"- p. {e['pages'][0]} {e['entry']}" for e in unmatched)

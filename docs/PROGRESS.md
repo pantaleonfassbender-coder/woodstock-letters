@@ -15,6 +15,7 @@
 | 2026-09-25 | 9–13 (1880–1884) | 179 | 1621 | 4100 | Pagination against IA labels: 9 223/223, 10 292/292, 11 313/313, 12 350/350, 13 416/416. No pagination gaps. Contents lists found for all five (vol. 11's heading misread as XL, vol. 13's as "Xllt."). Early running heads in italic title case are read. Vols. 14–59 rebuilt: same pages; one article change (vol. 19). Atlas, people map and search rebuilt over vols. 9–59. |
 | 2026-09-25 | 4–8 (1875–1879) | 130 | 1004 | 1427 | Pagination against IA labels: 4 189/191, 5 222/222, 6 179/187, 7 187/187, 8 183/183. The 10 differences are leaves bound out of order (vol. 4 no. 2, pp. 79–85; vol. 6 no. 2, pp. 97–104), where IA numbers the leaves as bound; read in printed order after checking the scans. No pagination gaps. Contents lists for all five (vol. 4's headed only "CONTENTS."). Vols. 9–59 rebuilt: two page changes, 37 articles newly split out, 838 leaked running-head lines dropped (below). Atlas, people map and search rebuilt over vols. 4–59. |
 | 2026-09-25 | 1–3 (1872–1874) | 81 | 674 | 235 | Pagination against IA labels: 1 199/199, 2 229/229, 3 213/213. No pagination gaps. Contents lists for all three ("CONTENTS.", "CONTENTS,", no volume named). Vol. 1's OCR is the poorest of the run (letter-spaced headings, `)'` for y, `<^` for g); repairs added for it. Vols. 4–59 rebuilt: pages unchanged; 7 articles newly split out, 102 titles or extents changed; 1,975 more repairs (h read as li). Atlas, people map and search rebuilt over vols. 1–59, the whole public-domain run. |
+| 2026-09-25 | Open issues, vols. 1–59 | 2,685 → 2,672 | unchanged | 13 fixed or refused | The open issues fixed: 127 corrections read by eye in `tools/article_overrides.json` (merges, splits, titles, index entries, stray lines, repairs), and three index-parsing fixes in `build_volume.py`. Pages unchanged. Atlas, people map and search rebuilt. |
 
 ### Vols. 30–34: what the batch found
 
@@ -480,6 +481,45 @@ Index:
 
 Rebuilt vols. 14–59: pages unchanged; articles unchanged except vol. 19 (above).
 
+### Open issues fixed (2026-09-25)
+
+Most of the listed one-offs are fixed by hand. They are recorded as corrections read by eye in a new file,
+`tools/article_overrides.json`, which is to article structure what `page_overrides.json` is to pages.
+Every correction is listed in its volume's QA report, under "Corrections read by eye". A correction that no longer
+applies (a text not found) is shown there in bold. The file takes:
+
+- `merge`: an article joined to the one before it (vol. 38 pp. 178 and 192, vol. 45 p. 360, vol. 58
+  pp. 382, 606–607, the Curia articles of vols. 39 and 43, Hughes's "New Histories" in vol. 24, Digmann's
+  Dakota mission in vol. 31, the Varia items of vols. 21 and 25, and others);
+- `split`: a piece that opens where no heading shows it (Raby and Emig in vols. 39 and 19; the Fordham
+  Diamond Jubilee, vol. 45 p. 370; the Theological Disputation and the Banquet in vol. 49; the Varia after
+  the Father General's address, vol. 57 p. 483);
+- `title`, `subtitle`, `section`, `author` by article id: the garbled titles of vols. 1–59 read on the page
+  ("Fr. James Curley", "Father Patrick Cleason", "Statistics");
+- `drop`: a line on a page that is a spoiled running head;
+- `running_heads`: a volume's running heads, where the OCR spoils them past matching (vol. 1: 49 lines
+  dropped);
+- `index`, `index_add`, `index_drop`: the volume index corrected by the page (vol. 2's misread pages, the
+  swapped pages of vol. 54 no. 2, where `mark: "*"` sends an entry to the asterisked pages, Quirk and Jutz in
+  vol. 53, Weston in vol. 59);
+- `repairs`: a reading to give (`soiis` → sons, `tiines` → times, `Ciirls` → Girls, `Qu6en` → Queen,
+  `Loius` → Louis) or a word to leave (`supped`, which is right in all four volumes where it had been
+  "slipped"; `Baius`, `iusta`; `rning` and `perrn`, garbled beyond a safe reading).
+
+Code fixes:
+
+- An index line cut at an author's initial joins the next ("— Fr. J." / "J- Ryan 94", vol. 30: now
+  "Reminiscences of Some Distinguished Men of Science…" by Fr. J. J. Ryan). "J- " in an author's name is
+  "J.".
+- A year in short form ("May, '99") is not a page, so the entry goes on to its page on the next line
+  (vol. 29).
+- A closing colon or semicolon is dropped from titles.
+
+Left as they are:
+- `millenium` is the journal's own spelling.
+- Vol. 8 p. 44 (the Brief to Frs. Mazzella and de Augustinis) is printed within the account of Fr.
+  Mazzella's departure, as the page shows.
+
 ### Vols. 1–3: what the batch found
 
 Per volume: 1 (1872) 30 articles, 205 pages, 139 repairs; 2 (1873) 27, 244, 62; 3 (1874) 24,
@@ -619,100 +659,31 @@ Rebuilt vols. 9–59:
 
 ## Open issues
 
-- **Vol. 32 has no no. 3 and no index** in the Internet Archive collection
-  (items `woodstockletters3211unse`, `woodstockletters3332unse`, the second
-  catalogued by IA as "v.33[ie.32]"). Authors in vol. 32 come from signatures only.
-- **Citation form for Supplements and inserts** (`WL 30 (1901): Suppl. vii`,
-  `WL 30 (1901): insert after p. 332`) needs a decision before it goes into the
-  editorial notes.
-- Index lines that wrap onto the next line are joined when the continuation starts in
-  lower case (since vols. 40–44). Wraps that go on in capitals still lose their page
-  number (vol. 29: two entries; vol. 30: the article at p. 94 is titled "J- Ryan", and
-  two "Society in …" entries come out as p. 190).
-- One-off titles left as they are: vol. 30 p. 353 "A. M. D. G. Et B. V. M. H"
-  (a dedication line), vol. 34 p. 30 (garbled OCR), vol. 31 pp. 352–353 (Digmann's
-  mission among the Dakota, probably one article in two); vol. 36 p. 1 "Ibt Memory";
-  vol. 38 p. 178 "The Ea K 7 Ho Ua Ke" (the Sicilian earthquake, split from p. 177)
-  and p. 192 "Fl00t> Anb Gospel" (continues p. 189); vol. 39 p. 102 (two index
-  entries run together) and p. 398 "Fa Ther Pa Trick Cle a Son".
-- Index entries in inverted form ("Innsbruck, The Golden Jubilee of") no longer replace a readable
-  page title (since vols. 1–3); they remain where the page gives none.
-- Undecided repairs, left as made: `supped` → `slipped`, `miilenium` → `millenium` (vol. 39).
-- Latin and Romance words repaired as English, once each (vols. 40–44): `iusta` → insta, and `Loius` → Loins (for Louis). There is no narrower rule
-  that keeps the correct repairs of the same kind ("iucluding" → including).
-- Vol. 43 p. 1 and vol. 39 p. 1: the Curia articles are split at their subheadings
-  ("Habitat of the Curia", "Of Father General").
-- Vols. 45–49, left as they are: vol. 45 p. 360 "Fordtlam" splits the Fordham history
-  (the running head misread); vol. 45 p. 30 and p. 371 have garbled titles; vol. 47
-  p. 372, Mr. Hawkins's obituary, is not split (the index is a page out and his name is
-  not set as a heading); vol. 49 no. 1, the Jubilee number, keeps "The Scientific Academy"
-  as one piece over pp. 48–99, since its index entries ("Theological Disputation 23",
-  "Banquet, Addresses 85") name pages without headings.
-- Vols. 50–54, left as they are:
-  - vol. 50: p. 18 "Silver Jubllkk" and p. 304 "Detroit Uxivrrsitv" (the latter continues p. 303);
-  - vol. 51: p. 64 "Pj?03f Fields Afar" (continues p. 36);
-  - vol. 53: p. 385 "Father John F. Quirk", whom the index puts at p. 391;
-  - vol. 54: no. 2's "Father Himmel as a Missioner" and the philosophers' conference
-    stand at pp. 103* and 112*, where the contents gives 111 and 103;
-  - vol. 54: the In Memoriam of Fr. Woods ("June, No. 2") is bound at the end of no. 1
-    as two unnumbered leaves, kept as inserts after p. 161;
-  - vol. 51: `dalcy` → daley, half of the hyphenated "Martin-dale".
-- The asterisk citation is accepted (2026-09-25): `WL 54 (1925): 104*` for vol. 54 no. 2 and
-  `WL 56 (1927): 35*` for the asterisked section of vol. 56 no. 1. It should go into the
-  editorial notes; the Supplement and insert forms are still to be decided.
-- **Vol. 28 has nos. 1–2 only** in the Internet Archive collection, and no index; nor has
-  vol. 27. Their authors come from signatures only.
-- Vols. 9–13, left as they are: vol. 13 p. 224 "Pardow" (a garbled obituary title); Latin
-  fragments of the catalogues read as index entries in vol. 12 ("Julii", "V"); repair
-  `Qu6en` → Quéen (Queen, vol. 13).
-- Obituary titles taken from name lines keep the OCR's spelling where no index gives the
-  name ("Fr. Jamks Curivky", vol. 18; "Mr. John Jose^ph Mai^onk", vol. 21).
-- Vols. 15, 16 and 18 have no index in the scans; their authors come from signatures only.
-- Vols. 19–23, left as they are: vol. 21 p. 132, "Books in Press or in Preparation" (indexed as
-  an article) runs on through the rest of that Varia; garbled obituary titles in vol. 19
-  ("I Do" for Fr. Aloysius Masnata, p. 100; "Btogra Phtca L Sf Rppl Ement", p. 404).
-- Vols. 24–28, left as they are: vol. 25 p. 524 "Fr. Jogues" (a Varia item on St. Isaac
-  Jogues, taken for an obituary); vol. 24 p. 139 "Fr. Patrick S. Murphy, p"; vol. 26 p. 4
-  `" " Rev. Fr. Provincial` (ditto marks of the index) and p. 322 "Exstinct^ Societati
-  Me^^'^"; vol. 24 pp. 415–429, Hughes's "New Histories" split into its three parts by the
-  index; repairs `tiines` → tunes (times, vol. 28) and `soiis` → soils (vol. 24).
-- Vols. 1–3, left as they are:
-  - vol. 1's OCR is the poorest of the run: some 100 short lines, most of them running heads too garbled to match their
-    neighbours stay in the text ("Ci 'orj^'i 'ton 7/ Col It \<^r."), and some titles keep their
-    misreadings ("Father White's Eelation", from the contents; "An Historical Sketch 01^^ Father
-    Andre W W H I T E");
-  - vol. 2's contents is badly read: pp. 85, 146, 161, 165 and 166 appear as "S5", "140", "101",
-    "105" and "100", so those entries don't link; vol. 2 p. 41's heading reads "Woodstock", the
-    subtitle "Its Surroundings and Its Associations";
-  - vol. 3 p. 43's title keeps the printed abbreviations ("Anniv'y", "Prov.").
-- Vol. 49 p. 302 "Itev West": a garbled running head splits Fr. Mareau's Key West hurricane
-  account (p. 299).
-- Vols. 4–8, left as they are:
-  - vol. 4 p. 79: the issue-opening title is the first line of the subtitle ("Portage Des
-    Sioux a Fragment of History, Or the"), since the OCR puts the title "Early Missions of
-    Our Society in St. Charles Co., Mo." after the first paragraph;
-  - vol. 4 p. 110: a garbled head ("Brother yohii Dc Bn/yiL") is left in the text;
-  - vol. 6 p. 112 "The P:xecution of Charles H. Simpson…", p. 130 "Desckiption of the
-    Ceiling", p. 172 "Fr. Vax Assche": OCR in the titles;
-  - vol. 7 pp. 55 and 192, vol. 9 p. 68: the Varia under "Appendix" is titled "Appendix";
-  - vols. 7–8: "Indian Missions" is indexed a page after its heading (vol. 7 p. 93, vol. 8
-    p. 33), and "Our Colleges in the United States and Canada" is an unnumbered table;
-  - garbled "Varia" heads in vol. 8 ("}raria.", "VaiHa.") stay in the text.
-- Vols. 55–59, left as they are:
-  - vol. 58: pp. 606–607 "Gog Photograpiiinc the Eclipse" and "Atcebu, P. I" split Deppermann's
-    eclipse article (p. 604), and p. 382 "Hevision of Studrss" splits the Veruela article
-    (p. 377): misread running heads;
-  - vol. 59 p. 171 "St Ati St Ics" (STATISTICS in spaced capitals);
-  - vol. 57 p. 476: the Father General's address to the Procurators, printed within the
-    Varia, opens an article that runs on through the rest of the Varia to p. 566;
-  - vol. 59 no. 3's Weston College entry is indexed at p. 317, but the article is at p. 217;
-  - repairs: `Baius` → Bains (vol. 58, the theologian), `Ciirls` → Curls (vol. 59, for
-    Girls), `rning` → ming and `perrn` → perm (vol. 57, both garbled beyond reading).
-- Vol. 45 no. 2 and vol. 49 no. 1 differ from IA's page labels (see the table); ours are
-  checked on the scans. The IA labels are not corrected upstream.
-- Tables (mission statistics, retreat lists) are kept as paragraphs of OCR text where
-  they sit on numbered pages; unnumbered fold-out tables are left out like plates.
+- **Gaps in the scans, not to be filled here.**
+  - Vol. 32 has no no. 3 and no index in the Internet Archive collection (items `woodstockletters3211unse`,
+    `woodstockletters3332unse`, the second catalogued by IA as "v.33[ie.32]").
+  - Vol. 28 has nos. 1–2 only.
+  - Vols. 15, 16, 18, 27 and 28 have no index in the scans.
+  - The authors of these volumes come from signatures only.
+- **Citation form for Supplements and inserts** (`WL 30 (1901): Suppl. vii`, `WL 30 (1901): insert after
+  p. 332`) needs a decision before it goes into the editorial notes. The asterisk form is accepted
+  (2026-09-25): `WL 54 (1925): 104*` for vol. 54 no. 2, and `WL 56 (1927): 35*` for the asterisked section of
+  vol. 56 no. 1.
+- Index entries in inverted form ("Innsbruck, The Golden Jubilee of") remain as titles only where the page gives
+  no readable one.
+- Vol. 22 p. 565 is titled with its opening sentence ("The Following Is a Synopsis of the 'Missiones
+  Catholicae' in Regard to British Honduras").
+
+## Notes
+
+- Vol. 45 no. 2 and vol. 49 no. 1 differ from IA's page labels (see the table). Ours are checked on the scans;
+  the IA labels are not corrected upstream.
+- Tables (mission statistics, retreat lists) are kept as paragraphs of OCR text where they sit on numbered
+  pages. Unnumbered fold-out tables are left out like plates ("Our Colleges in the United States and Canada",
+  vols. 7–8; the *Ministeria spiritualia* of vols. 8 and 56).
+- Vol. 54: the In Memoriam of Fr. Woods ("June, No. 2") is bound at the end of no. 1 as two unnumbered leaves,
+  kept as inserts after p. 161.
 - Latin passages are not repaired except for the ligature rules, because the frequency gate is English.
-- Search and the concordance moved to Pagefind (2026-09-25). The concordance's
-  distribution now counts pages with a match rather than hits, and its lines load
-  50 pages at a time; words are matched with their inflected forms.
+- Search and the concordance moved to Pagefind (2026-09-25). The concordance's distribution now counts pages
+  with a match rather than hits, and its lines load 50 pages at a time; words are matched with their
+  inflected forms.
