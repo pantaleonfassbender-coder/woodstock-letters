@@ -5,7 +5,7 @@ house journal of the Jesuits in North America, printed at Woodstock College,
 Maryland. It is a companion to [Ignatiana](https://ignatian-research.netlify.app/).
 
 **Status: pilot.** The catalogue covers the full run (316 issues, 98 volumes).
-Volumes 24–59 (1895–1930) are in full text.
+Volumes 19–59 (1890–1930) are in full text.
 
 ## What it offers
 
