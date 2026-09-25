@@ -24,6 +24,9 @@ outside the public domain or not yet cleared, and are not part of the edition (s
   sentences more often than chance, coloured by the section they belong to.
 - **People.** A person-to-person network: Jesuits, prelates and others named in the
   same paragraphs, with each person's spread over the volumes, obituary and writings.
+  For the Jesuits it matches, it gives the dates and places of birth, entry and death from the
+  [Jesuit Online Necrology](https://jesuitonlinenecrology.bc.edu/) (Boston College Libraries),
+  with a link to the record.
 - **Citation forms.** `WL 29 (1900): 46` for a page, `WL 54 (1925): 104*` for an asterisked
   folio, `WL 30 (1901): Suppl. vii` for a Supplement, `WL 30 (1901): insert after p. 332`
   for an unnumbered insert.
@@ -36,6 +39,7 @@ index.html, app.js, style.css   the static site (no build step, no framework)
 net.js                          the atlas network renderer (canvas, no library)
 data/atlas.json                 term co-occurrence network for the atlas
 data/people.json                person-to-person network
+data/necrology.json             biodata from the Jesuit Online Necrology, by person
 pagefind/                       search index, built on deploy (git-ignored)
 data/catalogue.json             every issue 1872–1969 (metadata only)
 data/manifest.json              volumes built with full text
@@ -54,6 +58,7 @@ python tools/fetch_ia.py --vol 29        # fetch OCR for one volume (or --from 1
 python tools/build_volume.py 29          # build data/vol/029.json + docs/qa/vol029.md
 python tools/build_atlas.py              # rebuild data/atlas.json over all full-text volumes
 python tools/build_people.py             # rebuild data/people.json
+python tools/fetch_necrology.py          # match its Jesuits to the Jesuit Online Necrology (cached, 2 s apart)
 python tools/build_search.py             # build the search index into pagefind/ (git-ignored)
 python -m http.server 8765               # preview at http://localhost:8765
 ```
