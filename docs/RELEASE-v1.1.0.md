@@ -1,8 +1,9 @@
 # Release text for v1.1.0
 
 Use as the GitHub release title and body. Zenodo files it as a new version
-under the concept DOI of v1.0.0. After the release, put the version DOI into
-`CITATION.cff`.
+under the concept DOI of v1.0.0 (10.5281/zenodo.22967521). After the release,
+put the version DOI into `CITATION.cff` and bump `version` there and in the
+JSON-LD of `index.html`.
 
 ## Title
 

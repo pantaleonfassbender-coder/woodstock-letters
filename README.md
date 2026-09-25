@@ -1,5 +1,7 @@
 # Woodstock Letters: A Research Edition
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22967521.svg)](https://doi.org/10.5281/zenodo.22967521)
+
 A searchable, citable edition of the *Woodstock Letters*, the private house journal of
 the Jesuits in North America, printed at Woodstock College, Maryland. It is a companion to
 [Ignatiana](https://ignatian-research.netlify.app/).
@@ -129,6 +131,12 @@ How the build works, briefly:
 
 The pipeline is written to run unattended in Claude Code cloud sessions. See
 [docs/CLOUD.md](docs/CLOUD.md).
+
+## Citation
+
+Fassbender, P. (2026). *Woodstock Letters: A Research Edition* (Version 1.0.0) [Data set].
+Zenodo. https://doi.org/10.5281/zenodo.22967521 (concept DOI; v1.0.0: 10.5281/zenodo.22967522).
+See `CITATION.cff`. Cite the journal itself by volume, year and printed page (`WL 29 (1900): 46`).
 
 ## Licences
 
